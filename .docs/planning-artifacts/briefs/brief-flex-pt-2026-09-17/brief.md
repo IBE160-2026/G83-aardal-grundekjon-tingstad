@@ -1,6 +1,6 @@
 ---
 title: "Product Brief: Flex PT"
-status: draft
+status: final
 created: 2026-09-17
 updated: 2026-09-17
 ---
@@ -42,8 +42,6 @@ What sets Flex PT apart from many current alternatives is the combination of fle
 Compared to a standard program, users should not have to make every adjustment manually. Compared to several specialized apps, the goal is to reduce fragmentation. Compared to a general-purpose chatbot, relevant training information should persist over time, and changes should be incorporated directly into the training program. Flex PT therefore addresses the need for flexible, readily available support that makes it easier to fit training into the rest of everyday life.
 
 The solution is not intended to replace the professional and human follow-up a physical personal trainer can offer in every situation. It is primarily meant to be an accessible option for users who want structure and personal adaptation but prefer to organize and carry out their training on their own.
-
-*[ASSUMPTION] The brief does not name specific competing products (e.g., Freeletics, Fitbod, Strava, Future, or similar AI-coaching apps). For a course deliverable this framing by category may be sufficient, but naming 1-2 concrete comparables would sharpen the differentiation claim if time allows.*
 
 ## Who This Serves
 
@@ -93,8 +91,6 @@ Calendar integration, including importing appointments and exporting training se
 Later versions may also include specialized training programs related to the menstrual cycle and pregnancy, as well as features for nutrition tracking and planning. Such features require dedicated assessment of professional quality, safety, and handling of health data.
 
 Game mechanics, reward systems, and subscription management may be considered at a later stage, but are not required to demonstrate the core value of the product.
-
-*[ASSUMPTION] "Subscription management" being listed as out-of-scope implies a paid model is intended eventually, but no monetization approach (pricing, subscription tiers, free trial) is described anywhere in the brief. Worth a line noting this is deliberately undecided for the MVP, if that is accurate.*
 
 ## Vision
 
