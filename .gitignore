@@ -45,11 +45,9 @@ playwright-report/
 !.env.*.example
 *.log
 
-# BMAD: keep shared framework, skills, plans and documentation
-_bmad/config.user.toml
-_bmad/custom/*.user.toml
-_bmad/render/
-.claude/settings.local.json
+# BMAD: local tooling, not tracked in this repo
+_bmad/
+.claude/
 
 # Operating system / editors
 .DS_Store
