@@ -31,7 +31,8 @@ Briefen er skrevet på engelsk; tilbakemeldingen er på norsk.
 
 - **Vanskelig**
 
-**Sammenlignbart med:** Mer krevende enn 7) Kurs-FAQ-chatbot (middels). Flex PT har en chatbot med hukommelse på tvers av samtaler, men i tillegg skal samtalen endre en strukturert treningsplan, og planen skal genereres og progresjoneres ut fra logget aktivitet. Fem kjernefunksjoner som henger tett sammen, faglige krav til treningsplanene og innlogging med persistent profil gjør at v1 slik den er beskrevet, ligger i nedre del av «vanskelig».
+**Sammenlignbart med:** Mer krevende enn 7) Kurs-FAQ-chatbot (middels). Flex PT har en chatbot med hukommelse på tvers av samtaler, men i tillegg skal samtalen endre en strukturert treningsplan, og planen skal genereres og progresjoneres ut fra logget aktivitet. Fem kjernefunksjoner som henger tett sammen, faglige krav til 
+treningsplanene og innlogging med persistent profil gjør at v1 slik den er beskrevet, ligger i nedre del av «vanskelig».
 
 **Begrunnelse:**
 
