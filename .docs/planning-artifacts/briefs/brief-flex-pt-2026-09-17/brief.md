@@ -70,7 +70,7 @@ The solution will be validated through a user test based on four predefined test
 | --- | --- | --- |
 | 1 | Run a first 5 km | Running |
 | 2 | Complete a half marathon | Running |
-| 3 | Get stronger in basic lifts | Strength |
+| 3 | Get started on my fitness journey | Strength |
 | 4 | Achieve a first pull-up | Strength |
 
 The profiles differ in experience level and available days, so that the rule set is tested with different training volumes. Each profile has a documented expected training plan that generated plans can be compared against.
