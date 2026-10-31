@@ -10,10 +10,10 @@ Finne kilder og anbefalte verdier for treningsreglene R1–R11 i PRD-en, som gru
 - Kontrollere kjernefunn og kildehenvisninger før rapporten ferdigstilles.
 
 ### Resultat
-- Rapport med prosesslogg og søkenotater ligger i `.docs/planning-artifacts/research/academic-lit-treningsregler-r1-r11-2026-10-31/`, ikke committet.
+- Rapport med prosesslogg og søkenotater ligger i `.docs/planning-artifacts/research/academic-lit-treningsregler-r1-r11-2026-10-31/`, committet i 12ba2f0.
 - Anbefaling: endre R6, R7, R8 og R11, fjerne malen for 6 økter i R4, og merke øvrige regler som gruppens valg eller konvensjon.
 - Kildekontrollen fant avvik i [3], [5], [6], [13], [18] og [21], som er rettet.
-- PRD-en er oppdatert til v0.2 med anbefalingene, ikke committet. Verdier merket «team to set» i R7 og R8 er ikke satt.
+- PRD-en er oppdatert til v0.2 med anbefalingene, committet i 12ba2f0. Verdier merket «team to set» i R7 og R8 er ikke satt.
 - Motstemmeprøve, HTML-oppsummering og dokumentgjennomgang i BMAD ble ikke kjørt.
 
 ### Åpne punkter
