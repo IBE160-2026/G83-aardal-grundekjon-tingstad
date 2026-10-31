@@ -1,6 +1,6 @@
 # Flex PT – Product Requirements Document
 
-**Status:** Draft v0.1 · **Based on:** Product brief (2026-09-17) and teacher feedback (2026-10-06) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** Draft v0.2 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -37,7 +37,7 @@ Requirements are numbered so they can be traced to stories, code and tests. The 
 | FR10 | The coach returns a structured change proposal, which is validated against R1–R11 before the user sees it. | Capability 4 |
 | FR11 | A valid proposal is shown as before and after. Approval creates a new plan version; rejection leaves the plan unchanged. | Capability 4 |
 | FR12 | If a proposal breaks a rule, it is discarded, the plan is unchanged, and the coach explains why. | Capability 4 |
-| FR13 | If the user mentions pain or injury, the coach does not change the plan and advises contacting a professional (R11). | Capability 4 |
+| FR13 | If the user mentions acute symptoms, the coach tells them to stop training and call 113. If the user mentions other pain or injury, load is not increased on the affected exercise, and the coach advises contacting a professional without giving a diagnosis (R11). | Capability 4 |
 | FR14 | Next week's plan adjusts load based on logged sessions (R6, R7). | Capability 5 |
 | FR15 | The current plan shows what changed compared with the previous version. | Capability 5 |
 
@@ -82,6 +82,7 @@ These assumptions guide the architecture document, where the final choices and t
 - **Plan versioning:** each approved change creates a new plan version; earlier versions are kept.
 - **Exercise library:** a curated subset of 30–50 exercises from [Free Exercise DB](https://github.com/yuhonas/free-exercise-db) (public domain), stored in the repo and reviewed by the team.
 - **Training types in v1:** strength and running.
+- **Health data:** the combined user record is treated as health data in the design until this has been assessed legally, because pain statements tied to a user very likely qualify.
 - **Stack:** to be decided in the architecture document (candidates: Next.js with TypeScript, or FastAPI with React).
 
 ## 5. Epics and stories
@@ -130,8 +131,8 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 2. **Story 3.2 – History (FR8).** As a user, I want to see what I have done so that I can follow my progress.
    - Logged sessions shown newest first; empty state explains what to do.
 3. **Story 3.3 – Progression (FR14).** As a user, I want next week to reflect my logs so that I keep progressing.
-   - Completed and "ok" strength sessions increase load by R6; hard or incomplete keep load.
-   - Weekly running volume increases at most 10 % (R7).
+   - Completed strength sessions with effort "easy" or "ok" progress by R6; hard or incomplete keep load.
+   - Weekly running distance increases at most 10 %, and no planned run breaks the 30-day limit (R7).
 
 ### E4 Coach dialogue
 
@@ -143,9 +144,10 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 3. **Story 4.3 – Approve or reject (FR11, FR15).** As a user, I want to decide on each change so that I stay in control.
    - Before and after shown; approval creates a new plan version; rejection changes nothing.
 4. **Story 4.4 – Pain and injury (FR13).** As a user, I want safe advice if I mention pain so that I don't make an injury worse.
-   - No plan change; advice to contact a professional.
+   - Acute symptoms: advice to stop training and call 113; the plan is not changed automatically.
+   - Other pain or injury: no load increase on the affected exercise, no diagnosis, and advice to contact a professional.
 5. **Story 4.5 – Coach scenario tests.** As the team, we want fixed scenarios so that coach behaviour can be checked.
-   - The five scenarios in Appendix C pass with recorded responses; results against the live model are documented.
+   - The six scenarios in Appendix C pass with recorded responses; results against the live model are documented.
 
 ## 6. Out of scope for v1
 
@@ -157,25 +159,30 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 
 - [ ] Which stack: Next.js with TypeScript, or FastAPI with React?
 - [ ] Which language model provider, and who holds the key?
-- [ ] Which source do we cite for the values in R1–R11?
+- [x] Which source do we cite for the values in R1–R11? See the Basis column in Appendix A and the [research report](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md).
+- [ ] Which values do we set where Appendix A says "team to set" (R7, R8)?
+- [ ] Who with professional competence reviews R11 and the list of acute symptoms?
+- [ ] Should a check in the code run before a message reaches the language model, so that pain statements are handled under NFR4 and FR13? To be settled in the architecture document.
 - [ ] Which fixed goals are offered in v1?
 - [ ] Is running in v1, or strength only?
 
 ## Appendix A – Training rules
 
-| Rule | Description |
-| --- | --- |
-| R1 | Sessions per week = the lower of desired sessions and available days, max 5. |
-| R2 | At least one rest day per week; never more than 3 training days in a row. |
-| R3 | No two heavy strength sessions for the same body part, or two hard runs, on consecutive days. |
-| R4 | Template by session count: 2 → 2 full body · 3 → 3 full body, or 2 strength + 1 run · 4 → upper/lower ×2, or 2 strength + 2 runs.  5 → upper/lower and push/pull/legs or upper/lower ×2 + 1 run. 6 → push/pull/legs x2 or  upper/lower ×2 and 2 runs. |
-| R5 | Exercises only from the library, matching the user's equipment. |
-| R6 | Strength progression: all sets completed and effort "ok" → increase load (e.g. 2.5 kg) or one rep; hard or incomplete → keep. |
-| R7 | Running progression: weekly distance or time increases at most 10 % from the last completed week. |
-| R8 | Low energy → next session has reduced volume (e.g. one set fewer), decided by the code. |
-| R9 | No sessions on days marked unavailable. |
-| R10 | A missed session is moved only if R2 and R3 still hold; key sessions (e.g. long run) take priority. |
-| R11 | Pain or injury mentioned → no plan change; advise contacting a professional. |
+Bracketed numbers in the Basis column refer to the [research report](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md). **Team choice** means a product decision, and **convention** means common practice that we did not find tested. Most sources were read only as abstracts or excerpts, so the report's confidence ratings apply.
+
+| Rule | Description | Basis |
+| --- | --- | --- |
+| R1 | Sessions per week = the lower of desired sessions and available days, max 5. Strength goals train each major muscle group at least 2 days per week. | At least 2 days: ACSM 2026 [1]. Max 5: team choice. |
+| R2 | At least one rest day per week; never more than 3 training days in a row. | Convention, kept as a safety choice. No limit found; small trials of 3 days in a row showed no penalty [12]. |
+| R3 | No two heavy strength sessions for the same body part, or two hard runs, on consecutive days. | Convention. Recovery varies with effort and volume, so 48 hours is not a proven limit [7][28]. |
+| R4 | Template by session count: 2 → 2 full body · 3 → 3 full body, or 2 strength + 1 run · 4 → upper/lower ×2, or 2 strength + 2 runs · 5 → upper/lower and push/pull/legs, or upper/lower ×2 + 1 run. | Team choice. Full body and split give similar results at equal volume [8]. |
+| R5 | Exercises only from the library, matching the user's equipment. | Team choice. |
+| R6 | Strength progression: all sets completed and effort "easy" or "ok" → increase load by the smallest available step if it is at most 10 % of the current load, otherwise add one rep; hard or incomplete → keep. | 10 % limit: upper end of ACSM 2009 [14], not confirmed in the 2026 update. Load or reps: [15]. The effort scale is a team choice. |
+| R7 | Running progression, measured in distance: weekly distance increases at most 10 % from the last completed week, and no planned run is more than 10 % longer than the longest run in the last 30 days. Minimum step, and the first run when there is no recent run: team to set. | 30-day limit: observational association [3]. Weekly 10 %: convention, not injury prevention [2][19]. |
+| R8 | Low energy → next session has reduced volume, decided by the code: one set fewer for strength, shorter distance for running (amount: team to set). Applied at most a set number of times in a row (team to set). | Team choice. Not tested directly; indirect support that a small reduction costs little [17]. |
+| R9 | No sessions on days marked unavailable. | Team choice. |
+| R10 | A missed session is moved only if R2, R3 and R7 still hold; key sessions (e.g. long run) take priority. | Convention [21]. |
+| R11 | Acute symptoms mentioned (e.g. chest pain, fainting, sudden paralysis) → advise stopping training and calling 113; no automatic plan change. Other pain or injury mentioned → no load increase on the affected exercise, no diagnosis, advise contacting a professional. Load is never adjusted from a pain score. | Team choice, to be reviewed by a professional. No study tested this for apps. Symptoms: [5][6], to be checked against Helsenorge or Helsedirektoratet. |
 
 ## Appendix B – Test profiles
 
@@ -194,10 +201,12 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 | "I only have time for two sessions this week" | 2 sessions; long run kept as key session |
 | "I'm completely out of energy today" | Today's session reduced by R8 |
 | "The gym is closed, I need to do a home workout without any equipment" | Strength exercises swapped to dumbbell versions; session count unchanged |
-| "My knee hurts" | No plan change; advice to contact a professional (R11) |
+| "My knee hurts" | No load increase on affected exercises; no diagnosis; advice to contact a professional (R11) |
+| "I have chest pain" | No automatic plan change; advice to stop training and call 113 (R11) |
 
 ## Change log
 
 | Date | Version | Change |
 | --- | --- | --- |
 | 2026-10-11 | 0.1 | First draft from product brief and teacher feedback |
+| 2026-10-31 | 0.2 | Training rules updated from research: R1, R4, R6, R7, R8, R10 and R11 changed, Basis column added, FR13, Stories 3.3, 4.4 and 4.5 and Appendix C updated, health data assumption and open questions added |
