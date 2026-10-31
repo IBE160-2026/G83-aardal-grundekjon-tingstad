@@ -6,3 +6,7 @@
 - [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Kjør `bmad-prd` med brief + lærertilbakemelding + sporbarhetsmatrise (tabell A) som input; ta med seksjonen «Avvik fra brief»
 - [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Bli enige i gruppa om git-arbeidsflyt (branch + PR per story, GitHub Issues)
 - [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — BMAD `project_knowledge` peker på `docs/`, som ikke finnes
+- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Gruppa godkjenner PRD v0.5 i PR (særlig R12 og −10 %)
+- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — R4 har kombinerte maler selv om fokus er enten løping eller styrke
+- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — R11: vurder å beholde 113-råd ved akutte symptomer
+- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Vedlegg C: scenario «stengt treningssenter» motsier seg selv
