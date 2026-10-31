@@ -17,7 +17,7 @@ Definere hvordan opplevd anstrengelse (easy, ok, hard) skal påvirke progresjone
   - Ny regel R12: steg tilbake med −10 % etter to «hard» eller ikke fullført på rad.
   - Vedlegg A har fått en anstrengelsesskala med ankerpunkter og en progresjonstabell.
   - FR4, FR7, FR10, FR14, loggskjermen og Story 2.2, 3.1 og 3.3 er oppdatert, og endringsloggen har fått en linje for v0.5.
-- Branchen er ikke pushet, og det er ikke laget noen PR.
+- Branchen er pushet, og PR [#7](https://github.com/IBE160-2026/G83-aardal-grundekjon-tingstad/pull/7) mot `main` er opprettet. Claude Code stoppet et forsøk på å flette PR-en uten gjennomgang. Knut valgte at noen i gruppa skal godkjenne og flette den.
 
 ### Åpne punkter
 - Gruppa må se over og godkjenne v0.5 i en PR, særlig R12 og verdien på 10 % for steg tilbake. Det er et produktvalg som ikke er testet i studier.
