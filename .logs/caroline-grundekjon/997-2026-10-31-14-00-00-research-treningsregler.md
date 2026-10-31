@@ -15,6 +15,7 @@ Finne kilder og anbefalte verdier for treningsreglene R1–R11 i PRD-en, som gru
 - Kildekontrollen fant avvik i [3], [5], [6], [13], [18] og [21], som er rettet.
 - PRD-en er oppdatert til v0.2 med anbefalingene, committet i 12ba2f0. Verdier merket «team to set» i R7 og R8 er ikke satt.
 - Motstemmeprøve, HTML-oppsummering og dokumentgjennomgang i BMAD ble ikke kjørt.
+- Grenen `test` er pushet til GitHub.
 
 ### Åpne punkter
 - Få R11 vurdert av fagperson, og sjekk symptomlisten mot Helsenorge eller Helsedirektoratet.
