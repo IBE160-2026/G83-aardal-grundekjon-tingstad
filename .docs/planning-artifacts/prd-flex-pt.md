@@ -1,6 +1,6 @@
 # Flex PT – Product Requirements Document
 
-**Status:** Draft v0.3 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** Draft v0.4 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -26,7 +26,7 @@ Requirements are numbered so they can be traced to stories, code and tests. The 
 | ID | Requirement | Source |
 | --- | --- | --- |
 | FR1 | A user can register with email and password, log in and log out. | Capability 1 |
-| FR2 | During onboarding, the user sets a goal (from a fixed list), experience level, desired sessions per week, available days and equipment. A user with a running goal also enters their longest run so far (R7). | Capability 1 |
+| FR2 | During onboarding, the user first chooses a focus: running or strength. **Running:** the user picks a goal (first 5 km, 10 km or half marathon), enters how far they can already run (their longest run, R7) and how many sessions per week they want. **Strength:** the user picks how many days per week to train, a main focus (upper body, lower body or full body) and gym experience (beginner or experienced). For both, the user also sets available days and equipment. | Capability 1 |
 | FR3 | The user can edit the profile later. A changed profile produces a new plan version after the user confirms. | Capability 1 |
 | FR4 | The system generates a weekly plan from the profile using the rule-based plan engine (R1–R11). | Capability 2 |
 | FR5 | The plan shows each session with day, type and content: exercises with sets, reps and load, or run duration and distance. | Capability 2 |
@@ -61,7 +61,7 @@ The interface should make the next session obvious and make changes feel safe: n
 | Screen | Purpose | Requirements |
 | --- | --- | --- |
 | Sign up and log in | Create an account or log in | FR1 |
-| Onboarding | Short step-by-step form for goal, experience, sessions, days and equipment | FR2 |
+| Onboarding | Short step-by-step form: focus (running or strength), then the questions for that focus (FR2), then days and equipment | FR2 |
 | Week plan (home) | This week's sessions per day, next session highlighted, changes since last version marked | FR4, FR5, FR15 |
 | Session detail and log | Exercises for the session, where the user can write down their weight and number of reps per set or their run statistics. | FR5, FR7 |
 | Coach chat | Conversation with the coach; a proposal card with before and after, and Approve and Reject buttons | FR9–FR13 |
@@ -111,7 +111,7 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
    - Profile is unchanged after logging out and in again.
 4. **Story 1.4 – Demo mode and seed data (NFR1).** As a reviewer, I want to run the app without a key so that I can test it.
    - `COACH_MODE=demo` uses recorded coach responses.
-   - A test user with profile C, a plan and some logs is created at start-up.
+   - A test user with profile C (running), a plan and some logs is created at start-up.
 
 ### E2 Plan engine and weekly plan
 
@@ -164,8 +164,8 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 - [x] Which values do we set where Appendix A said "team to set" (R7, R8)? Set in Appendix A.
 - [x] Who reviews R11 and the list of acute symptoms? No longer needed: R11 gives a fixed reply and no medical advice.
 - [ ] Should a check in the code run before a message reaches the language model, so that pain statements are handled under NFR4 and FR13? To be settled in the architecture document.
-- [ ] Which fixed goals are offered in v1?
-- [ ] Is running in v1, or strength only?
+- [x] Which fixed goals are offered in v1? Running (first 5 km, 10 km, half marathon) and strength (focus upper body, lower body or full body). See FR2.
+- [x] Is running in v1, or strength only? Both.
 
 ## Appendix A – Training rules
 
@@ -176,7 +176,7 @@ Bracketed numbers in the Basis column refer to the [research report](research/ac
 | R1 | Sessions per week = the lower of desired sessions and available days, max 5. Strength goals train each major muscle group at least 2 days per week. | At least 2 days: ACSM 2026 [1]. Max 5: team choice. |
 | R2 | At least one rest day per week; never more than 3 training days in a row. | Convention, kept as a safety choice. No limit found; small trials of 3 days in a row showed no penalty [12]. |
 | R3 | No two heavy strength sessions for the same body part, or two hard runs, on consecutive days. | Convention. Recovery varies with effort and volume, so 48 hours is not a proven limit [7][28]. |
-| R4 | Template by session count: 2 → 2 full body · 3 → 3 full body, or 2 strength + 1 run · 4 → upper/lower ×2, or 2 strength + 2 runs · 5 → upper/lower and push/pull/legs, or upper/lower ×2 + 1 run. | Team choice. Full body and split give similar results at equal volume [8]. |
+| R4 | Template by session count: 2 → 2 full body · 3 → 3 full body, or 2 strength + 1 run · 4 → upper/lower ×2, or 2 strength + 2 runs · 5 → upper/lower and push/pull/legs, or upper/lower ×2 + 1 run. Running focus: all sessions are runs, one of them long and the rest easy (to be refined). Strength focus: the chosen main focus gets extra volume. | Team choice. Full body and split give similar results at equal volume [8]. |
 | R5 | Exercises only from the library, matching the user's equipment. | Team choice. |
 | R6 | Strength progression: all sets completed and effort "easy" or "ok" → increase load by the smallest available step if it is at most 10 % of the current load, otherwise add one rep; hard or incomplete → keep. | 10 % limit: upper end of ACSM 2009 [14], not confirmed in the 2026 update. Load or reps: [15]. The effort scale is a team choice. |
 | R7 | Running progression, measured in distance: weekly distance increases at most 10 % from the last completed week, and no planned run is more than 10 % longer than the longest run in the last 30 days. The first run, and any run when there is no recent run, is based on the longest run the user entered themselves (at most 10 % above it). | 30-day limit: observational association [3]. Weekly 10 %: convention, not injury prevention [2][19]. |
@@ -189,21 +189,21 @@ Bracketed numbers in the Basis column refer to the [research report](research/ac
 
 | Profile | Goal and experience | Days and equipment | Expected weekly plan |
 | --- | --- | --- | --- |
-| A | Get stronger · beginner | Tue, Thu · bodyweight | 2 full-body sessions: Tue, Thu |
-| B | First pull-up · beginner | Mon, Wed, Fri · dumbbells, doorway bar | 3 full-body sessions with pulling focus: Mon, Wed, Fri |
-| C | Half marathon · intermediate | Mon, Wed, Fri, Sun · gym | 2 strength (Mon, Fri) + 2 runs (Wed easy, Sun long) |
-| D | Build muscle · experienced · wants to work out every day | Mon, Tue, Wed, Thu, Fri, Sat, Sun | 5 sessions: Mon lower, Tue upper, Thu push; Fri pull; Sat legs; Wed and sun rest; app explains why |
+| A | Strength · beginner at the gym · full body | 2 sessions per week · Tue, Thu · gym | 2 full-body sessions: Tue, Thu |
+| B | Strength · experienced at the gym · full body | 5 sessions per week · all days available · gym | 5 sessions: Mon lower, Tue upper, Thu push, Fri pull, Sat legs; Wed and Sun rest; app explains why |
+| C | Running · beginner · goal 10 km · can run 3 km | 3 sessions per week · Mon, Wed, Sat | 3 runs: Mon easy, Wed easy, Sat long |
+| D | Running · experienced · goal half marathon · can run 15 km | 4 sessions per week · Mon, Wed, Fri, Sun | 4 runs: Mon, Wed, Fri easy, Sun long |
 
-## Appendix C – Coach scenarios (profile C)
+## Appendix C – Coach scenarios
 
-| User message | Expected plan change |
-| --- | --- |
-| "I'm away Thursday to Sunday" | No sessions Thu–Sun; at most one session moved earlier |
-| "I only have time for two sessions this week" | 2 sessions; long run kept as key session |
-| "I'm completely out of energy today" | Today's session reduced by R8 |
-| "The gym is closed, I need to do a home workout without any equipment" | Strength exercises swapped to dumbbell versions; session count unchanged |
-| "My knee hurts" | No automatic plan change; fixed reply from R11 |
-| "I have chest pain" | No automatic plan change; fixed reply from R11 |
+| Profile | User message | Expected plan change |
+| --- | --- | --- |
+| D | "I'm away Thursday to Sunday" | No sessions Thu–Sun; at most one session moved earlier |
+| D | "I only have time for two sessions this week" | 2 sessions; long run kept as key session |
+| D | "I'm completely out of energy today" | Today's session reduced by R8 |
+| B | "The gym is closed, I need to do a home workout without any equipment" | Strength exercises swapped to dumbbell versions; session count unchanged |
+| B | "My knee hurts" | No automatic plan change; fixed reply from R11 |
+| B | "I have chest pain" | No automatic plan change; fixed reply from R11 |
 
 ## Change log
 
@@ -211,4 +211,5 @@ Bracketed numbers in the Basis column refer to the [research report](research/ac
 | --- | --- | --- |
 | 2026-10-11 | 0.1 | First draft from product brief and teacher feedback |
 | 2026-10-31 | 0.2 | Training rules updated from research: R1, R4, R6, R7, R8, R10 and R11 changed, Basis column added, FR13, Stories 3.3, 4.4 and 4.5 and Appendix C updated, health data assumption and open questions added |
+| 2026-10-31 | 0.4 | Fixed goals and onboarding flow defined (FR2); test profiles A–D replaced (two strength, two running); Appendix C scenarios assigned to profiles; open questions on fixed goals and running closed |
 | 2026-10-31 | 0.3 | Open questions answered: stack Next.js, model Claude; R7 uses the user's own longest run; R8 set to 25 % less distance or one set fewer, not carried forward; R11, FR13, Story 4.4 and Appendix C changed to a fixed reply for medical conditions |
