@@ -5,3 +5,4 @@
 - [ ] 2026-10-31 [prd-aapne-sporsmaal](999-2026-10-31-14-47-55-prd-aapne-sporsmaal.md) — avklar hvem som holder API-nøkkelen til Claude
 - [ ] 2026-10-31 [prd-fixed-goals-testprofiler](998-2026-10-31-15-10-00-prd-fixed-goals-testprofiler.md) — bekreft maraton vs. halvmaraton for profil D
 - [ ] 2026-10-31 [prd-fixed-goals-testprofiler](998-2026-10-31-15-10-00-prd-fixed-goals-testprofiler.md) — R4 for løping/styrkefokus og forventede planer i Appendix B må detaljeres
+- [ ] 2026-11-08 [prd-appendix-c](997-2026-11-08-12-00-00-prd-appendix-c.md) — valgfritt: legg Google-innlogging og Google Calendar under «Later versions»
