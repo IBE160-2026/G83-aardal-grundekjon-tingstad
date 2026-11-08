@@ -1,6 +1,6 @@
 # Flex PT – Product Requirements Document
 
-**Status:** Draft v0.5 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** Draft v0.6 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -37,7 +37,7 @@ Requirements are numbered so they can be traced to stories, code and tests. The 
 | FR10 | The coach returns a structured change proposal, which is validated against R1–R12 before the user sees it. | Capability 4 |
 | FR11 | A valid proposal is shown as before and after. Approval creates a new plan version; rejection leaves the plan unchanged. | Capability 4 |
 | FR12 | If a proposal breaks a rule, it is discarded, the plan is unchanged, and the coach explains why. | Capability 4 |
-| FR13 | If the user mentions a medical condition (symptoms, pain or injury), the coach gives the fixed reply: "Vi kan beklageligvis ikke bistå med medisinsk rådgivning. Anbefaler deg å ta kontakt med legen eller annen hjelp for videre oppfølging." It gives no diagnosis and no advice about the condition (R11). | Capability 4 |
+| FR13 | If the user mentions a medical condition (symptoms, pain or injury), the coach gives the fixed reply: "Vi kan beklageligvis ikke bistå med medisinsk rådgivning. Anbefaler deg å ta kontakt med legen eller annen hjelp for videre oppfølging." It gives no diagnosis and no advice about the condition (R11). If the message concerns pain in a specific exercise or body part, the coach also asks whether the user wants to swap to another exercise; a swap is a normal change proposal that the user approves or rejects. | Capability 4 |
 | FR14 | Next week's plan adjusts load based on logged sessions and perceived effort (R6, R7, R12). | Capability 5 |
 | FR15 | The current plan shows what changed compared with the previous version. | Capability 5 |
 
@@ -150,7 +150,7 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
    - Before and after shown; approval creates a new plan version; rejection changes nothing.
 4. **Story 4.4 – Pain and injury (FR13).** As a user, I want safe advice if I mention pain so that I don't make an injury worse.
    - Any mention of a medical condition gives the fixed reply from R11; no diagnosis is given.
-   - The plan is not changed automatically.
+   - The plan is not changed automatically. For pain in a specific exercise, the coach asks if the user wants another exercise; a swap needs approval.
 5. **Story 4.5 – Coach scenario tests.** As the team, we want fixed scenarios so that coach behaviour can be checked.
    - The six scenarios in Appendix C pass with recorded responses; results against the live model are documented.
 
@@ -230,8 +230,8 @@ What a logged result means for the next session of the same exercise or run type
 | D | "I'm away Thursday to Sunday" | No sessions Thu–Sun; at most one session moved earlier |
 | D | "I only have time for two sessions this week" | 2 sessions; long run kept as key session |
 | D | "I'm completely out of energy today" | Today's session reduced by R8 |
-| B | "The gym is closed, I need to do a home workout without any equipment" | Strength exercises swapped to dumbbell versions; session count unchanged |
-| B | "My knee hurts" | No automatic plan change; fixed reply from R11 |
+| B | "The gym is closed, I need to do a home workout without any equipment" | Strength exercises swapped to bodyweight exercises; session count unchanged |
+| B | "My knee hurts" | Fixed reply from R11, then the coach asks whether the user wants to swap the affected exercise for another one. No change unless the user approves the proposal |
 | B | "I have chest pain" | No automatic plan change; fixed reply from R11 |
 
 ## Change log
@@ -243,3 +243,4 @@ What a logged result means for the next session of the same exercise or run type
 | 2026-10-31 | 0.4 | Fixed goals and onboarding flow defined (FR2); test profiles A–D replaced (two strength, two running); Appendix C scenarios assigned to profiles; open questions on fixed goals and running closed |
 | 2026-10-31 | 0.3 | Open questions answered: stack Next.js, model Claude; R7 uses the user's own longest run; R8 set to 25 % less distance or one set fewer, not carried forward; R11, FR13, Story 4.4 and Appendix C changed to a fixed reply for medical conditions |
 | 2026-10-31 | 0.5 | Perceived effort defined: R6 clarified (session effort applies to all exercises, "easy" = "ok"), R7 uses effort and progresses easy runs and the long run separately, new R12 step back after two "hard" or not-completed results in a row; effort scale with anchors and progression table added to Appendix A; FR4, FR7, FR10, FR14, the log screen and Stories 2.2, 3.1 and 3.3 updated |
+| 2026-11-08 | 0.6 | Appendix C: home workout without equipment now swaps to bodyweight exercises; "knee hurts" gives the fixed reply plus a question about swapping the exercise (FR13, Story 4.4) |
