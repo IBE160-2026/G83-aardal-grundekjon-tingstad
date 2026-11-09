@@ -17,17 +17,17 @@ Dette er krav til selve appen. De skal inn i PRD (FR/NFR), UX og arkitektur, og 
 
 | Krit. | Krav fra sensorveiledningen | Hvor det skal ivaretas | Status/bevis |
 |---|---|---|---|
-| 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | ⬜ |
-| 2 | Omfang med reell kompleksitet (datalagring, ikke-trivielle regler, integrasjoner) | PRD: scope; arkitektur: datamodell | ⬜ |
-| 2 | Stabil ved feil input og gjentatte handlinger | PRD: NFR robusthet; AC i stories | ⬜ |
-| 2 | Avvik fra brief/proposal er beskrevet og begrunnet | PRD-seksjon «Avvik fra brief»; `bmad-correct-course` ved endringer | ⬜ |
-| 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | ⬜ |
+| 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | 🟨 PRD v0.7: FR1–FR16, stories med AC i seksjon 5 |
+| 2 | Omfang med reell kompleksitet (datalagring, ikke-trivielle regler, integrasjoner) | PRD: scope; arkitektur: datamodell | 🟨 PRD: regler R1–R12, planversjoner, språkmodell; datamodell gjenstår |
+| 2 | Stabil ved feil input og gjentatte handlinger | PRD: NFR robusthet; AC i stories | 🟨 PRD NFR9; AC i Story 3.1 og 4.3 |
+| 2 | Avvik fra brief/proposal er beskrevet og begrunnet | PRD-seksjon «Avvik fra brief»; `bmad-correct-course` ved endringer | 🟨 PRD seksjon 7 |
+| 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | 🟨 PRD NFR6, profiler A–D, progresjonstabell; testrammeverk gjenstår |
 | 3 | Manuelle testplaner der automatikk ikke passer | `.docs/implementation-artifacts/` testplan | ⬜ |
-| 3 | Feilhåndtering, inputvalidering, sikkerhetsbevissthet | PRD: NFR sikkerhet; arkitektur | ⬜ |
+| 3 | Feilhåndtering, inputvalidering, sikkerhetsbevissthet | PRD: NFR sikkerhet; arkitektur | 🟨 PRD NFR2–NFR4, NFR7, NFR9, FR16 |
 | 4 | Konsistent visuelt uttrykk (farger, typografi, komponenter) | `bmad-ux` → DESIGN.md | ⬜ |
-| 4 | Tydelig navigasjon, tilbakemeldinger, feilmeldinger, tomtilstander | `bmad-ux` → EXPERIENCE.md; AC i stories | ⬜ |
-| 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | ⬜ |
-| 4 | Tilpasning til skjermstørrelser (mobil/desktop) | PRD: NFR responsivitet; UX | ⬜ |
+| 4 | Tydelig navigasjon, tilbakemeldinger, feilmeldinger, tomtilstander | `bmad-ux` → EXPERIENCE.md; AC i stories | ⬜ Skal dekkes i EXPERIENCE.md (PRD seksjon 3) |
+| 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | 🟨 PRD NFR8 |
+| 4 | Tilpasning til skjermstørrelser (mobil/desktop) | PRD: NFR responsivitet; UX | 🟨 PRD NFR8 (mobilbredde) |
 | 4 | Spor av designarbeid (skisser, wireframes, UX-beskrivelser) | `bmad-ux`-dokumentene | ⬜ |
 | 5 | Mappestruktur som samsvarer med beskrevet arkitektur | `bmad-architecture`; README-oversikt | ⬜ |
 | 5 | Lesbar kode, lite duplisering, ingen død kode/KI-rester | `bmad-code-review` per story | ⬜ |
@@ -40,12 +40,12 @@ Dette er krav til hvordan dere jobber, og de bygges ikke inn i appen. De ivareta
 
 | Krit. | Krav fra sensorveiledningen | Hvordan det ivaretas | Status/bevis |
 |---|---|---|---|
-| 1 | BMAD-dokumenter brukes og **oppdateres**, ikke bare genereres én gang | Oppdater PRD/arkitektur ved endringer (`bmad-correct-course`); endringslogg i dokumentene | 🟨 brief + lærertilbakemelding |
+| 1 | BMAD-dokumenter brukes og **oppdateres**, ikke bare genereres én gang | Oppdater PRD/arkitektur ved endringer (`bmad-correct-course`); endringslogg i dokumentene | 🟨 brief + lærertilbakemelding; PRD v0.1–v0.7 med endringslogg |
 | 1 | Kode kan spores til krav og stories | Story-ID i branch-navn, commit-meldinger og PR-titler | ⬜ |
 | 1 | Jevn commit-historikk, små commits med beskrivende meldinger | Commit per avgrenset endring, gjennom hele perioden | 🟨 |
 | 1 | Branches, pull requests, issues | Én branch + PR per story; GitHub Issues for åpne punkter | 🟨 PR #2 |
 | 1 | Lagrede prompts og KI-økter | `.logs/<bruker>/` via `sesjonslogg` | 🟨 påbegynt |
-| 1 | Eksempler på at KI-forslag er presisert, avvist eller rettet | Egen seksjon i sesjonsloggen: «KI-forslag vi avviste/rettet» | ⬜ |
+| 1 | Eksempler på at KI-forslag er presisert, avvist eller rettet | Egen seksjon i sesjonsloggen: «KI-forslag vi avviste/rettet» | 🟨 `.logs/knut-aardal/` (PRD v0.7) |
 | 1 | Dokumenterte beslutninger med begrunnelse | Arkitekturdokumentet (beslutninger + begrunnelse) | ⬜ |
 | 1 | Samarbeid over tid | Alle medlemmer committer/PR-er; co-author ved parprogrammering | 🟨 |
 | 3 | Spor av kodegjennomgang og retting av KI-kode | PR-kommentarer; `bmad-code-review`-funn lagret | ⬜ |

@@ -2,11 +2,14 @@
 
 - [x] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — Confirm with the team whether deleting the PRD was intentional (restore from `e2d3bc8` if not) (løst 2026-10-31: intentional, fresh start)
 - [ ] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — `_bmad/config.toml` project_name is "blind_sensur", should probably be "flexpt"
-- [ ] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — Create a new PRD from the brief (fresh start)
-- [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Kjør `bmad-prd` med brief + lærertilbakemelding + sporbarhetsmatrise (tabell A) som input; ta med seksjonen «Avvik fra brief»
+- [x] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — Create a new PRD from the brief (fresh start) (løst 2026-11-09: PRD v0.7 finnes)
+- [x] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Kjør `bmad-prd` med brief + lærertilbakemelding + sporbarhetsmatrise (tabell A) som input; ta med seksjonen «Avvik fra brief» (løst 2026-11-09: PRD v0.7 seksjon 7)
 - [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Bli enige i gruppa om git-arbeidsflyt (branch + PR per story, GitHub Issues)
 - [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — BMAD `project_knowledge` peker på `docs/`, som ikke finnes
-- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Gruppa godkjenner PRD v0.5 i PR (særlig R12 og −10 %)
-- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — R4 har kombinerte maler selv om fokus er enten løping eller styrke
+- [x] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Gruppa godkjenner PRD v0.5 i PR (særlig R12 og −10 %) (løst 2026-11-09: PR #7 flettet)
+- [x] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — R4 har kombinerte maler selv om fokus er enten løping eller styrke (løst 2026-11-09: fjernet i PRD v0.7)
 - [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — R11: vurder å beholde 113-råd ved akutte symptomer
-- [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Vedlegg C: scenario «stengt treningssenter» motsier seg selv
+- [x] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Vedlegg C: scenario «stengt treningssenter» motsier seg selv (løst 2026-11-09: rettet i PRD v0.6)
+- [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Bestem fast distanse for rask kort tur (forslag: lik rolig kort tur i første planuke)
+- [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PRD v0.7 i PR (tre løpetyper, energi bare i chat)
+- [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Vurder om loggskjermen skal forklare at anstrengelse på rask kort tur ikke påvirker progresjonen
