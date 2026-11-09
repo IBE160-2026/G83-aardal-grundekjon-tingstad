@@ -1,6 +1,6 @@
 # Flex PT – Product Requirements Document
 
-**Status:** Draft v0.7 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** v1.0 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06) and [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -266,3 +266,4 @@ What a logged result means for the next session of the same exercise or run type
 | 2026-10-31 | 0.5 | Perceived effort defined: R6 clarified (session effort applies to all exercises, "easy" = "ok"), R7 uses effort and progresses easy runs and the long run separately, new R12 step back after two "hard" or not-completed results in a row; effort scale with anchors and progression table added to Appendix A; FR4, FR7, FR10, FR14, the log screen and Stories 2.2, 3.1 and 3.3 updated |
 | 2026-11-08 | 0.6 | Appendix C: home workout without equipment now swaps to bodyweight exercises; "knee hurts" gives the fixed reply plus a question about swapping the exercise (FR13, Story 4.4) |
 | 2026-11-09 | 0.7 | Gaps before implementation closed: starting load from the first logged session and 0.5 kg rounding (R6), bodyweight exercises add one rep; energy removed from the session log and given only in the chat (FR7, FR9, R8); combined templates removed from R4 and three run types added (easy long, easy short, fast short with fixed distance equal to the first week's easy short run and an explanation on the log screen, R3, R4, R7, R12, Appendix B); Monday–Sunday plan week and replanning after profile change (FR3, FR4); full body clarified (FR2); new FR16 delete account, NFR9 robustness and NFR10 Norwegian UI; seed users for profiles A–D (Story 1.4) and new Story 1.5; section 7 Deviations from the brief; change log order fixed |
+| 2026-11-09 | 1.0 | Version 1.0: baseline for UX, architecture, and epics and stories. Later changes go through `bmad-correct-course` and are recorded here |
