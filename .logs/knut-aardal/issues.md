@@ -11,5 +11,6 @@
 - [ ] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — R11: vurder å beholde 113-råd ved akutte symptomer
 - [x] 2026-10-31 [prd-anstrengelse-progresjon](997-2026-10-31-15-12-16-prd-anstrengelse-progresjon.md) — Vedlegg C: scenario «stengt treningssenter» motsier seg selv (løst 2026-11-09: rettet i PRD v0.6)
 - [x] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Bestem fast distanse for rask kort tur (forslag: lik rolig kort tur i første planuke) (løst 2026-11-09: lik rolig kort tur i uke 1)
-- [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PRD v0.7 i PR (tre løpetyper, energi bare i chat)
+- [x] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PRD v0.7 i PR (tre løpetyper, energi bare i chat) (løst 2026-11-09: PR #9 flettet)
+- [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PR #10 (rask kort tur og PRD v1.0)
 - [x] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Vurder om loggskjermen skal forklare at anstrengelse på rask kort tur ikke påvirker progresjonen (løst 2026-11-09: kort forklaring på loggskjermen)
