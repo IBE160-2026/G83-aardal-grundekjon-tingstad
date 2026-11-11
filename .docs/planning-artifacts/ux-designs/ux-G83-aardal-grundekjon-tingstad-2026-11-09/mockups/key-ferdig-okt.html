@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key screen Ferdig økt</title>
+<style>
+/*
+Key screen: Fullfør økt (anstrengelse og notat) og popup-done. Mock, ikke kontrakt. Spines vinner.
+EXPERIENCE.md: Component Patterns (effort-card, effort-card-selected, note-field, popup-done); State Patterns (Redusert bevegelse, Økt fullført); Accessibility Floor (konfetti aldri eneste signal); Key Flows 1 (steg 9-12); Voice and Tone (ankertekster, motivasjonssitat); Avvik B2, B3, B4, C4, C7, F10.
+DESIGN.md: Components (effort-card, note-field, popup-done, button-primary); Elevation & Depth (scrim: background med 60 % dekning).
+Avvik fra wireframe (f): ankertekstene er fra PRD/spine, ikke skissens «Du hadde mye igjen». Ikke spesifisert: utseendet på «rolig, statisk markering» ved redusert bevegelse (vist som ✓ i success-ring, plassholder) og konfettiens form (statiske biter). Fane-linjen er skjult.
+*/
+:root{--background:#FFF8F3;--surface:#FFFFFF;--text:#2B1710;--text-muted:#6E5448;--primary:#C93A0E;--on-primary:#FFFFFF;--accent:#9A5B00;--success:#1B7A3E;--warning:#8F5A00;--error:#B3261E;--border:#E8D3C6;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.dark{--background:#17100D;--surface:#241A15;--text:#FFF1E8;--text-muted:#CDB3A5;--primary:#FF7A45;--on-primary:#2B0F03;--accent:#FFC247;--success:#5FD38A;--warning:#FFB547;--error:#FF8A80;--border:#4A372E}
+*{box-sizing:border-box}
+body{margin:0;background:#FFF8F3;color:#2B1710;font-family:var(--font);font-size:1.0625rem;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+.stage{display:flex;flex-wrap:wrap;gap:36px;padding:32px;justify-content:center;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:14px;align-items:center}
+.cap{width:390px;font-size:.9375rem;line-height:1.4;color:#6E5448;margin:0;text-align:center}
+.phone{width:390px;min-height:800px;background:var(--background);color:var(--text);border:10px solid #2B1710;border-radius:44px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.screen{flex:1;padding:24px 20px 20px;display:flex;flex-direction:column;gap:14px;position:relative}
+.display{font-size:1.75rem;font-weight:600;line-height:1.2;margin:0}
+.title{font-size:1.25rem;font-weight:600;line-height:1.3;margin:0}
+.body{font-size:1.0625rem;font-weight:400;line-height:1.5;margin:0}
+.label{font-size:.9375rem;font-weight:500;line-height:1.4}
+.meta{font-size:.9375rem;font-weight:400;line-height:1.4;color:var(--text-muted)}
+.muted{color:var(--text-muted)}
+.row{display:flex;align-items:center;gap:12px}
+.between{justify-content:space-between}
+.spacer{flex:1}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:68px;border-radius:34px;font-size:1.1875rem;font-weight:600;line-height:1.2}
+.btn-primary{background:var(--primary);color:var(--on-primary)}
+.btn-secondary{background:var(--surface);color:var(--primary);border:2px solid var(--primary)}
+.btn-text{display:inline-flex;align-items:center;min-height:44px;color:var(--primary);font-size:.9375rem;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:20px}
+.pb{height:12px;border-radius:9999px;background:var(--border);overflow:hidden}
+.pb i{display:block;height:100%;border-radius:9999px;background:var(--primary)}
+.day{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}
+.day.today{border:2px solid var(--primary);padding:20px}
+.day.rest{color:var(--text-muted)}
+.ok{color:var(--success);font-weight:500}
+.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--text-muted);border-radius:9999px;padding:2px 12px;font-size:.9375rem;line-height:1.4;white-space:nowrap}
+.banner{background:var(--surface);border:2px solid var(--accent);border-radius:28px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.hint{background:var(--surface);border:2px solid var(--accent);border-radius:24px;padding:16px;display:flex;gap:8px;align-items:flex-start}
+.x{flex:none;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.25rem}
+.tabs{display:flex;height:68px;background:var(--surface);border-top:1px solid var(--border)}
+.tab{flex:1;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:var(--text-muted);font-size:.9375rem;font-weight:500;line-height:1.2;position:relative}
+.tab b{display:flex;height:24px;margin-bottom:2px}
+.tab.on{color:var(--primary)}
+.tab.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;background:var(--primary);border-radius:0 0 3px 3px}
+.sb{flex:none;width:56px;height:56px;border-radius:9999px;border:1px solid var(--text-muted);background:var(--background);color:var(--text);font-size:1.75rem;font-weight:500;display:flex;align-items:center;justify-content:center;line-height:1}
+.sb.plus{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.sv{flex:1;min-width:0;height:56px;border:1px solid var(--text-muted);border-radius:24px;background:var(--surface);color:var(--text);font-size:2.25rem;font-weight:500;line-height:54px;text-align:center}
+.stepper{display:flex;align-items:center;gap:8px}
+.choice{background:var(--surface);border:2px solid var(--text-muted);border-radius:28px;padding:20px;position:relative}
+.choice.sel,.effort.sel{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.choice.sel .title,.choice.sel .body,.choice.sel .label,.effort.sel .title,.effort.sel .body{color:var(--on-primary)}
+.choice.sel .tick,.effort.sel .tick{background:var(--on-primary);color:var(--primary);width:28px;height:28px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:1rem;top:12px}
+.choice .tick,.effort .tick{position:absolute;top:14px;right:16px;color:var(--primary);font-weight:600;font-size:1.25rem}
+.effort{background:var(--surface);border:2px solid var(--text-muted);border-radius:28px;padding:16px;min-height:68px;position:relative}
+.note{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;padding:16px;min-height:88px;color:var(--text-muted)}
+.chip{width:68px;height:68px;border-radius:9999px;border:1px solid var(--text-muted);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:600;position:relative}
+.chip.sel{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.chip.sel::after{content:"✓";position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:9999px;background:var(--surface);color:var(--primary);border:1px solid var(--primary);font-size:.8125rem;display:flex;align-items:center;justify-content:center}
+.bubble{border-radius:28px;padding:16px;max-width:85%}
+.b-coach{background:var(--surface);border:1px solid var(--border);align-self:flex-start}
+.b-user{background:var(--primary);color:var(--on-primary);align-self:flex-end}
+.proposal{background:var(--surface);border:2px solid var(--accent);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.proposal.appr{border-color:var(--success)}
+.chg{display:flex;gap:8px;align-items:center;border-top:1px solid var(--border);padding-top:8px}
+.chg:first-of-type{border-top:0;padding-top:0}
+.input{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;min-height:56px;padding:0 8px 0 16px;display:flex;align-items:center;justify-content:space-between;color:var(--text-muted)}
+.scrim{position:absolute;inset:0;background:color-mix(in srgb,var(--background) 60%,transparent);display:flex;align-items:center;justify-content:center;padding:20px}
+.popup{background:var(--surface);border-radius:34px;padding:24px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;width:100%}
+.popup>*{position:relative;z-index:1}
+.msg{border-left:4px solid var(--accent);padding:8px 12px;background:var(--background);border-radius:0 12px 12px 0}
+.conf{position:absolute!important;z-index:0!important;width:9px;height:14px;border-radius:3px}
+.c1{background:var(--primary)}.c2{background:var(--accent)}.c3{background:var(--success)}
+.noanim *{animation:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<main class="stage">
+<figure class="col" style="margin:0"><div class="phone"><div class="screen"><div class="row"><button class="btn-text">‹ Øktoversikt</button></div><h1 class="display">Hvor anstrengende var økta?</h1>
+<div class="effort"><h2 class="title" style="margin:0">Lett</h2><p class="body" style="margin:0">Jeg kunne gjort 4 eller flere reps til</p></div>
+<div class="effort sel"><span class="tick" aria-hidden="true">✓</span><h2 class="title" style="margin:0">Passe</h2><p class="body" style="margin:0;padding-right:28px">Jeg hadde 2–3 reps igjen</p></div>
+<div class="effort"><h2 class="title" style="margin:0">Tung</h2><p class="body" style="margin:0">Jeg hadde 0–1 reps igjen, eller teknikken røk</p></div>
+<div><div class="row between"><span class="label">Noe du vil huske?</span><span class="meta">valgfritt</span></div><div class="note">Skriv her …</div></div>
+<div class="spacer"></div><button class="btn btn-primary">Fullfør</button></div></div><figcaption class="cap">Fullfør økt: Lett, Passe, Tung med PRD-ankertekster (styrke), Passe valgt, valgfritt notat. (Lys)</figcaption></figure>
+<figure class="col" style="margin:0"><div class="phone"><div class="screen" aria-hidden="true"><div class="row"><button class="btn-text">‹ Øktoversikt</button></div><h1 class="display">Hvor anstrengende var økta?</h1>
+<div class="effort"><h2 class="title" style="margin:0">Lett</h2><p class="body" style="margin:0">Jeg kunne gjort 4 eller flere reps til</p></div>
+<div class="effort sel"><span class="tick" aria-hidden="true">✓</span><h2 class="title" style="margin:0">Passe</h2><p class="body" style="margin:0;padding-right:28px">Jeg hadde 2–3 reps igjen</p></div>
+<div class="effort"><h2 class="title" style="margin:0">Tung</h2><p class="body" style="margin:0">Jeg hadde 0–1 reps igjen, eller teknikken røk</p></div>
+<div><div class="row between"><span class="label">Noe du vil huske?</span><span class="meta">valgfritt</span></div><div class="note">Skriv her …</div></div>
+<div class="spacer"></div><button class="btn btn-primary">Fullfør</button></div><div class="scrim"><div class="popup" role="dialog" aria-modal="true" aria-labelledby="t"><i class="conf c1" style="top:10px;left:30px;transform:rotate(20deg)"></i><i class="conf c2" style="top:30px;left:90px;transform:rotate(-30deg)"></i><i class="conf c3" style="top:8px;left:170px;transform:rotate(50deg)"></i><i class="conf c1" style="top:26px;left:240px;transform:rotate(-15deg)"></i><i class="conf c2" style="top:12px;left:300px;transform:rotate(35deg)"></i><i class="conf c3" style="top:60px;left:14px;transform:rotate(-45deg)"></i><i class="conf c1" style="top:70px;left:310px;transform:rotate(15deg)"></i><i class="conf c2" style="top:54px;left:210px;transform:rotate(60deg)"></i><h2 class="display" id="t" style="margin:0">Bra jobba, Mari!</h2><div class="body">5 øvelser · 9 sett · Fullført</div><div class="msg"><p class="body" style="margin:0">Du løftet 2,5 kg mer i knebøy enn sist. Sterk økt!</p></div><div class="meta">Én økt til er alt som skal til.</div><div class="body"><span class="label">Neste økt:</span> Fredag, Fullkropp</div><button class="btn btn-primary">Ferdig</button></div></div></div><figcaption class="cap">Pop-up etter Fullfør: oppsummering, motiverende melding, sitat, neste økt og konfetti som dekorlag over scrim.</figcaption></figure>
+<figure class="col" style="margin:0"><div class="phone noanim"><div class="screen" aria-hidden="true"><div class="row"><button class="btn-text">‹ Øktoversikt</button></div><h1 class="display">Hvor anstrengende var økta?</h1>
+<div class="effort"><h2 class="title" style="margin:0">Lett</h2><p class="body" style="margin:0">Jeg kunne gjort 4 eller flere reps til</p></div>
+<div class="effort sel"><span class="tick" aria-hidden="true">✓</span><h2 class="title" style="margin:0">Passe</h2><p class="body" style="margin:0;padding-right:28px">Jeg hadde 2–3 reps igjen</p></div>
+<div class="effort"><h2 class="title" style="margin:0">Tung</h2><p class="body" style="margin:0">Jeg hadde 0–1 reps igjen, eller teknikken røk</p></div>
+<div><div class="row between"><span class="label">Noe du vil huske?</span><span class="meta">valgfritt</span></div><div class="note">Skriv her …</div></div>
+<div class="spacer"></div><button class="btn btn-primary">Fullfør</button></div><div class="scrim"><div class="popup" role="dialog" aria-modal="true" aria-labelledby="t"><div aria-hidden="true" style="width:56px;height:56px;border-radius:9999px;border:2px solid var(--success);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:1.75rem;font-weight:600">✓</div><h2 class="display" id="t" style="margin:0">Bra jobba, Mari!</h2><div class="body">5 øvelser · 9 sett · Fullført</div><div class="msg"><p class="body" style="margin:0">Du løftet 2,5 kg mer i knebøy enn sist. Sterk økt!</p></div><div class="meta">Én økt til er alt som skal til.</div><div class="body"><span class="label">Neste økt:</span> Fredag, Fullkropp</div><button class="btn btn-primary">Ferdig</button></div></div></div><figcaption class="cap">Redusert bevegelse: ingen konfetti, melding og oppsummering i tekst, rolig statisk markering.</figcaption></figure>
+<figure class="col" style="margin:0"><div class="phone dark"><div class="screen" aria-hidden="true"><div class="row"><button class="btn-text">‹ Øktoversikt</button></div><h1 class="display">Hvor anstrengende var økta?</h1>
+<div class="effort"><h2 class="title" style="margin:0">Lett</h2><p class="body" style="margin:0">Jeg kunne gjort 4 eller flere reps til</p></div>
+<div class="effort sel"><span class="tick" aria-hidden="true">✓</span><h2 class="title" style="margin:0">Passe</h2><p class="body" style="margin:0;padding-right:28px">Jeg hadde 2–3 reps igjen</p></div>
+<div class="effort"><h2 class="title" style="margin:0">Tung</h2><p class="body" style="margin:0">Jeg hadde 0–1 reps igjen, eller teknikken røk</p></div>
+<div><div class="row between"><span class="label">Noe du vil huske?</span><span class="meta">valgfritt</span></div><div class="note">Skriv her …</div></div>
+<div class="spacer"></div><button class="btn btn-primary">Fullfør</button></div><div class="scrim"><div class="popup" role="dialog" aria-modal="true" aria-labelledby="t"><i class="conf c1" style="top:10px;left:30px;transform:rotate(20deg)"></i><i class="conf c2" style="top:30px;left:90px;transform:rotate(-30deg)"></i><i class="conf c3" style="top:8px;left:170px;transform:rotate(50deg)"></i><i class="conf c1" style="top:26px;left:240px;transform:rotate(-15deg)"></i><i class="conf c2" style="top:12px;left:300px;transform:rotate(35deg)"></i><i class="conf c3" style="top:60px;left:14px;transform:rotate(-45deg)"></i><i class="conf c1" style="top:70px;left:310px;transform:rotate(15deg)"></i><i class="conf c2" style="top:54px;left:210px;transform:rotate(60deg)"></i><h2 class="display" id="t" style="margin:0">Bra jobba, Mari!</h2><div class="body">5 øvelser · 9 sett · Fullført</div><div class="msg"><p class="body" style="margin:0">Du løftet 2,5 kg mer i knebøy enn sist. Sterk økt!</p></div><div class="meta">Én økt til er alt som skal til.</div><div class="body"><span class="label">Neste økt:</span> Fredag, Fullkropp</div><button class="btn btn-primary">Ferdig</button></div></div></div><figcaption class="cap">Pop-up i mørk modus.</figcaption></figure>
+</main>
+</body>
+</html>
