@@ -48,6 +48,21 @@ Skriv i §6 hvorfor B1–B4 ikke regnes som gamification, og at B5–B6 er stage
 2. Hva er et «nytt program» i praksis etter 8 uker, og kan brukeren endre fokus eller antall dager da?
 3. Hva skjer når et løpemål er nådd?
 
+## D2. Endringer lagt til under Finalize (2026-11-11)
+
+| # | Endring | Gjelder |
+|---|---|---|
+| F1 | **Onboarding i fem steg, uten «tilgjengelige dager»:** fokus, fokusspesifikke spørsmål, antall økter i uka (2–5), «Hvor trener du?» (På treningssenter / Hjemme, bare for styrke), plan genereres. Planmotoren velger dagene selv. | FR2, R1, R9, Appendix B (A og C bruker dager i fixtures) |
+| F2 | **Ny-uke-banner** øverst på ukeplanen fra første åpning i ny uke til første registrerte økt. Justering av dager og fravær skjer via coachen (FR9–FR12). Ingen blaing mellom uker i V1. | FR4, FR5, FR9 |
+| F3 | **Logg ut** i Profil. | FR1, FR3 |
+| F4 | **Demomodus:** knappen «Prøv demo» på innloggingen og et «Demo»-merke i toppen. | NFR1 |
+| F5 | **Tilgjengelighet:** WCAG 2.2 AA som mål, støtte for redusert bevegelse og tekststørrelse opp til 200 %. | NFR8 |
+| F6 | **Forslagskort** viser bare endrede linjer, med før→etter per linje. | FR11 |
+| F7 | **Løpelogging:** to felt, distanse (km) og tid (min:sek), begge med −/+ og skrivefelt. Anstrengelse én gang etter «Fullfør økt», som for styrke. | FR7 |
+| F8 | **Pace på ukeplanen (løping):** hver løpeøkt viser pace (min:sek per km) fra forrige gang samme økttype. Rask kort løpetur viser en ekstra motiverende melding med forrige pace og oppfordring til å slå den (R7). Første gang vises ingenting. | FR5, R7 |
+| F9 | **Ingen endringsmarkering på ukeplanen.** Endringen vises på forslagskortet (før→etter) når brukeren godkjenner. Presiser eller svekk FR15 («gjeldende plan viser hva som er endret siden forrige versjon»). | FR15 |
+| F10 | **Notat** er et valgfritt tekstfelt på «Fullfør økt»-skjermen (styrke og løping). | FR7 |
+
 ## E. Når PRD-en er oppdatert
 
 - Legg til linje i endringsloggen (v1.1) med begrunnelse.
