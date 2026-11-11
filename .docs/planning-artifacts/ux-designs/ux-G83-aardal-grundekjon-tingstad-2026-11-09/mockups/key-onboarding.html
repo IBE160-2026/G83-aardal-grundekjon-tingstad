@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key screen Onboarding</title>
+<style>
+/*
+Key screen: Onboarding-steg. Mock, ikke kontrakt. Spines vinner.
+EXPERIENCE.md: Component Patterns (choice-card, choice-card-selected, number-chip, number-chip-selected, progress-bar, button-text); Key Flows 2 (steg 2 og 4); Information Architecture (Onboarding, 5 steg, ett spørsmål per skjerm); åpent punkt 2 (Steg N av M, M er 5 for styrke).
+DESIGN.md: Components (choice-card, choice-card-selected, number-chip, number-chip-selected, progress-bar); Do's and Don'ts (✓ i tillegg til farge).
+Ikke i spinene: skjermoverskriftene til steg 1 og forklaringene på valgkortene er plassholdere (spinen har bare «Fokus» og «heiende forklaring»). «Hvor mange økter i uka?» er fra Flow 2. Tilbake-målet på steg 1 er ikke spesifisert. Ingen fane-linje i onboarding.
+*/
+:root{--background:#FFF8F3;--surface:#FFFFFF;--text:#2B1710;--text-muted:#6E5448;--primary:#C93A0E;--on-primary:#FFFFFF;--accent:#9A5B00;--success:#1B7A3E;--warning:#8F5A00;--error:#B3261E;--border:#E8D3C6;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.dark{--background:#17100D;--surface:#241A15;--text:#FFF1E8;--text-muted:#CDB3A5;--primary:#FF7A45;--on-primary:#2B0F03;--accent:#FFC247;--success:#5FD38A;--warning:#FFB547;--error:#FF8A80;--border:#4A372E}
+*{box-sizing:border-box}
+body{margin:0;background:#FFF8F3;color:#2B1710;font-family:var(--font);font-size:1.0625rem;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+.stage{display:flex;flex-wrap:wrap;gap:36px;padding:32px;justify-content:center;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:14px;align-items:center}
+.cap{width:390px;font-size:.9375rem;line-height:1.4;color:#6E5448;margin:0;text-align:center}
+.phone{width:390px;min-height:800px;background:var(--background);color:var(--text);border:10px solid #2B1710;border-radius:44px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.screen{flex:1;padding:24px 20px 20px;display:flex;flex-direction:column;gap:14px;position:relative}
+.display{font-size:1.75rem;font-weight:600;line-height:1.2;margin:0}
+.title{font-size:1.25rem;font-weight:600;line-height:1.3;margin:0}
+.body{font-size:1.0625rem;font-weight:400;line-height:1.5;margin:0}
+.label{font-size:.9375rem;font-weight:500;line-height:1.4}
+.meta{font-size:.9375rem;font-weight:400;line-height:1.4;color:var(--text-muted)}
+.muted{color:var(--text-muted)}
+.row{display:flex;align-items:center;gap:12px}
+.between{justify-content:space-between}
+.spacer{flex:1}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:68px;border-radius:34px;font-size:1.1875rem;font-weight:600;line-height:1.2}
+.btn-primary{background:var(--primary);color:var(--on-primary)}
+.btn-secondary{background:var(--surface);color:var(--primary);border:2px solid var(--primary)}
+.btn-text{display:inline-flex;align-items:center;min-height:44px;color:var(--primary);font-size:.9375rem;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:20px}
+.pb{height:12px;border-radius:9999px;background:var(--border);overflow:hidden}
+.pb i{display:block;height:100%;border-radius:9999px;background:var(--primary)}
+.day{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}
+.day.today{border:2px solid var(--primary);padding:20px}
+.day.rest{color:var(--text-muted)}
+.ok{color:var(--success);font-weight:500}
+.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--text-muted);border-radius:9999px;padding:2px 12px;font-size:.9375rem;line-height:1.4;white-space:nowrap}
+.banner{background:var(--surface);border:2px solid var(--accent);border-radius:28px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.hint{background:var(--surface);border:2px solid var(--accent);border-radius:24px;padding:16px;display:flex;gap:8px;align-items:flex-start}
+.x{flex:none;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.25rem}
+.tabs{display:flex;height:68px;background:var(--surface);border-top:1px solid var(--border)}
+.tab{flex:1;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:var(--text-muted);font-size:.9375rem;font-weight:500;line-height:1.2;position:relative}
+.tab b{display:flex;height:24px;margin-bottom:2px}
+.tab.on{color:var(--primary)}
+.tab.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;background:var(--primary);border-radius:0 0 3px 3px}
+.sb{flex:none;width:56px;height:56px;border-radius:9999px;border:1px solid var(--text-muted);background:var(--background);color:var(--text);font-size:1.75rem;font-weight:500;display:flex;align-items:center;justify-content:center;line-height:1}
+.sb.plus{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.sv{flex:1;min-width:0;height:56px;border:1px solid var(--text-muted);border-radius:24px;background:var(--surface);color:var(--text);font-size:2.25rem;font-weight:500;line-height:54px;text-align:center}
+.stepper{display:flex;align-items:center;gap:8px}
+.choice{background:var(--surface);border:2px solid var(--text-muted);border-radius:28px;padding:20px;position:relative}
+.choice.sel,.effort.sel{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.choice.sel .title,.choice.sel .body,.choice.sel .label,.effort.sel .title,.effort.sel .body{color:var(--on-primary)}
+.choice.sel .tick,.effort.sel .tick{background:var(--on-primary);color:var(--primary);width:28px;height:28px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:1rem;top:12px}
+.choice .tick,.effort .tick{position:absolute;top:14px;right:16px;color:var(--primary);font-weight:600;font-size:1.25rem}
+.effort{background:var(--surface);border:2px solid var(--text-muted);border-radius:28px;padding:16px;min-height:68px;position:relative}
+.note{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;padding:16px;min-height:88px;color:var(--text-muted)}
+.chip{width:68px;height:68px;border-radius:9999px;border:1px solid var(--text-muted);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:600;position:relative}
+.chip.sel{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.chip.sel::after{content:"✓";position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:9999px;background:var(--surface);color:var(--primary);border:1px solid var(--primary);font-size:.8125rem;display:flex;align-items:center;justify-content:center}
+.bubble{border-radius:28px;padding:16px;max-width:85%}
+.b-coach{background:var(--surface);border:1px solid var(--border);align-self:flex-start}
+.b-user{background:var(--primary);color:var(--on-primary);align-self:flex-end}
+.proposal{background:var(--surface);border:2px solid var(--accent);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.proposal.appr{border-color:var(--success)}
+.chg{display:flex;gap:8px;align-items:center;border-top:1px solid var(--border);padding-top:8px}
+.chg:first-of-type{border-top:0;padding-top:0}
+.input{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;min-height:56px;padding:0 8px 0 16px;display:flex;align-items:center;justify-content:space-between;color:var(--text-muted)}
+.scrim{position:absolute;inset:0;background:color-mix(in srgb,var(--background) 60%,transparent);display:flex;align-items:center;justify-content:center;padding:20px}
+.popup{background:var(--surface);border-radius:34px;padding:24px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;width:100%}
+.popup>*{position:relative;z-index:1}
+.msg{border-left:4px solid var(--accent);padding:8px 12px;background:var(--background);border-radius:0 12px 12px 0}
+.conf{position:absolute!important;z-index:0!important;width:9px;height:14px;border-radius:3px}
+.c1{background:var(--primary)}.c2{background:var(--accent)}.c3{background:var(--success)}
+.noanim *{animation:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<main class="stage">
+<figure class="col" style="margin:0"><div class="phone"><div class="screen" style="gap:16px"><div class="row"><button class="btn-text" aria-label="Tilbake">‹ Tilbake</button></div><div><div class="label" style="margin-bottom:4px">Steg 1 av 5</div><div class="pb" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1" aria-label="Steg 1 av 5"><i style="width:20%"></i></div></div><h1 class="display" style="margin-top:8px">Hva vil du fokusere på?</h1>
+<div class="choice sel"><span class="tick" aria-hidden="true">✓</span><h2 class="title" style="margin:0 0 4px">Styrke</h2><p class="body" style="margin:0;padding-right:28px">Bygg kraft og form, økt for økt.</p></div>
+<div class="choice"><h2 class="title" style="margin:0 0 4px">Løping</h2><p class="body" style="margin:0">Løp lenger og gladere, steg for steg.</p></div></div></div><figcaption class="cap">Onboarding steg 1, Fokus: valgkort med Styrke valgt (✓ og primærkant), horisontal progress bar, Tilbake. (Lys)</figcaption></figure>
+<figure class="col" style="margin:0"><div class="phone"><div class="screen" style="gap:16px"><div class="row"><button class="btn-text" aria-label="Tilbake">‹ Tilbake</button></div><div><div class="label" style="margin-bottom:4px">Steg 3 av 5</div><div class="pb" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="3" aria-label="Steg 3 av 5"><i style="width:60%"></i></div></div><h1 class="display" style="margin-top:8px">Hvor mange økter i uka?</h1>
+<div class="row" style="justify-content:space-between;margin-top:8px"><div class="chip" aria-label="2 økter">2</div><div class="chip" aria-label="3 økter">3</div><div class="chip sel" aria-label="4 økter, valgt">4</div><div class="chip" aria-label="5 økter">5</div></div></div></div><figcaption class="cap">Steg 3, antall økter: runde tallknapper 2 til 5 (R1), 4 valgt med ✓.</figcaption></figure>
+<figure class="col" style="margin:0"><div class="phone dark"><div class="screen" style="gap:16px"><div class="row"><button class="btn-text" aria-label="Tilbake">‹ Tilbake</button></div><div><div class="label" style="margin-bottom:4px">Steg 1 av 5</div><div class="pb" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1" aria-label="Steg 1 av 5"><i style="width:20%"></i></div></div><h1 class="display" style="margin-top:8px">Hva vil du fokusere på?</h1>
+<div class="choice sel"><span class="tick" aria-hidden="true">✓</span><h2 class="title" style="margin:0 0 4px">Styrke</h2><p class="body" style="margin:0;padding-right:28px">Bygg kraft og form, økt for økt.</p></div>
+<div class="choice"><h2 class="title" style="margin:0 0 4px">Løping</h2><p class="body" style="margin:0">Løp lenger og gladere, steg for steg.</p></div></div></div><figcaption class="cap">Steg 1 i mørk modus.</figcaption></figure>
+</main>
+</body>
+</html>

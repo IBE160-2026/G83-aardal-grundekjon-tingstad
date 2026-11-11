@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flex PT – designretninger (Pulsslag)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#FFF8F3;color:#2B1710;padding:24px 16px 48px;line-height:1.4}
+.page{max-width:1180px;margin:0 auto}
+h1{font-size:28px;font-weight:800;margin-bottom:6px}
+.intro{color:#6E5448;max-width:70ch;margin-bottom:28px;font-size:16px}
+.dir{border-top:2px solid #E8D3C6;padding-top:24px;margin-top:32px}
+.dir h2{font-size:22px;margin-bottom:6px}
+.dir .why{max-width:75ch;font-size:16px;color:#2B1710;margin-bottom:6px}
+.dir .meta{color:#6E5448;font-size:14px;margin-bottom:16px}
+.modus{font-size:14px;font-weight:700;color:#9A5B00;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px}
+.grid{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.cap{font-size:13px;color:#6E5448;margin-bottom:6px}
+/* ===== Pulsslag tokens (nøyaktige hex fra color-themes-1.html) =====
+ LYS:  bg #FFF8F3, surface #FFFFFF, text #2B1710, muted #6E5448, primary #C93A0E, onprimary #FFFFFF, accent #9A5B00, success #1B7A3E, warning #8F5A00, error #B3261E, border #E8D3C6
+ MØRK: bg #17100D, surface #241A15, text #FFF1E8, muted #CDB3A5, primary #FF7A45, onprimary #2B0F03, accent #FFC247, success #5FD38A, warning #FFB547, error #FF8A80, border #4A372E */
+.L{--bg:#FFF8F3;--sf:#FFFFFF;--tx:#2B1710;--mu:#6E5448;--pr:#C93A0E;--on:#FFFFFF;--ac:#9A5B00;--ok:#1B7A3E;--wa:#8F5A00;--er:#B3261E;--bd:#E8D3C6}
+.D{--bg:#17100D;--sf:#241A15;--tx:#FFF1E8;--mu:#CDB3A5;--pr:#FF7A45;--on:#2B0F03;--ac:#FFC247;--ok:#5FD38A;--wa:#FFB547;--er:#FF8A80;--bd:#4A372E}
+.ph{width:360px;min-height:720px;background:var(--bg);color:var(--tx);border:2px solid var(--bd);border-radius:34px;overflow:hidden;padding:20px 16px 24px;display:flex;flex-direction:column;gap:14px}
+.ph .sb,.ph input,.ph .btn{font-family:inherit}
+.sbar{display:flex;justify-content:space-between;font-size:13px;color:var(--mu);margin:-6px 4px 0}
+.mu{color:var(--mu)}.ac{color:var(--ac)}.ok{color:var(--ok)}
+.row{display:flex;gap:8px;align-items:stretch}
+.sb{flex:0 0 64px;height:64px;font-size:32px;line-height:1;cursor:pointer}
+.ph input{flex:1;min-width:0;height:64px;text-align:center;background:var(--sf);color:var(--tx)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;border:0;background:var(--pr);color:var(--on);font-size:20px;cursor:pointer}
+.tag{display:inline-block;font-size:13px;padding:2px 10px;border:1px solid currentColor}
+
+/* ===== D1 Kraftpuls: tung, kantete former, vekt 800 ===== */
+.d1{--r:8px}
+.d1 .t{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mu)}
+.d1 h3{font-size:34px;font-weight:900;text-transform:uppercase;line-height:1.05;letter-spacing:-.01em}
+.d1 .card{background:var(--sf);border:2px solid var(--bd);border-left:8px solid var(--pr);border-radius:var(--r);padding:12px 14px}
+.d1 .sb{background:var(--pr);color:var(--on);border:0;border-radius:var(--r);font-weight:900}
+.d1 input{border:3px solid var(--tx);border-radius:var(--r);font-size:44px;font-weight:900}
+.d1 .lbl{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.d1 .btn{height:76px;border-radius:var(--r);font-weight:900;text-transform:uppercase;letter-spacing:.08em;font-size:22px}
+.d1 .set{display:flex;justify-content:space-between;padding:10px 14px;border:2px solid var(--bd);border-radius:var(--r);background:var(--sf);font-weight:800;font-size:17px}
+.d1 .set.todo{border-style:dashed;color:var(--mu);font-weight:700}
+.d1 .day{display:flex;align-items:center;gap:12px;padding:12px 14px;border:2px solid var(--bd);border-radius:var(--r);background:var(--sf);font-weight:800;font-size:17px}
+.d1 .day.today{background:var(--pr);color:var(--on);border-color:var(--pr);font-size:20px;padding:18px 14px}
+.d1 .seg{display:flex;gap:6px}.d1 .seg i{flex:1;height:14px;border-radius:3px;background:var(--bd)}.d1 .seg i.on{background:var(--pr)}
+.d1 .big{font-size:56px;font-weight:900;line-height:1}
+.d1 .quote{border-left:8px solid var(--ac);padding:4px 0 4px 12px;font-weight:700;font-size:17px}
+
+/* ===== D2 Rolig flyt: luftig, myke former, vekt 500 ===== */
+.d2{--r:28px}
+.d2 .ph,.ph.d2{gap:18px;padding:24px 20px 28px}
+.d2 .t{font-size:15px;color:var(--mu)}
+.d2 h3{font-size:28px;font-weight:600;line-height:1.2}
+.d2 .card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:20px}
+.d2 .sb{border-radius:50%;background:var(--sf);color:var(--pr);border:2px solid var(--pr);font-weight:400}
+.d2 input{border:1px solid var(--bd);border-radius:32px;font-size:36px;font-weight:500}
+.d2 .lbl{font-size:15px;color:var(--mu);margin:0 0 6px 12px}
+.d2 .btn{height:68px;border-radius:34px;font-weight:600;font-size:19px}
+.d2 .set{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-radius:24px;background:var(--sf);border:1px solid var(--bd);font-size:17px}
+.d2 .set.todo{color:var(--mu);background:transparent}
+.d2 .day{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:24px;background:var(--sf);border:1px solid var(--bd);font-size:17px}
+.d2 .day.today{border:2px solid var(--pr);padding:22px 20px}
+.d2 .ring{width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--pr) 0 50%,var(--bd) 50% 100%);display:flex;align-items:center;justify-content:center}
+.d2 .ring b{width:72px;height:72px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600}
+.d2 .tag{border-radius:20px}
+.d2 .note{background:var(--sf);border:1px dashed var(--ac);border-radius:var(--r);padding:16px 18px;font-size:16px}
+
+/* ===== D3 Datalogg: kompakt, rader uten kort, vekt 600, tabulartall ===== */
+.d3{--r:4px}
+.ph.d3{gap:10px;padding:16px 14px 20px}
+.d3 .t{font-size:13px;color:var(--mu);font-weight:600}
+.d3 h3{font-size:24px;font-weight:700;line-height:1.15}
+.d3 .card{border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:10px 0}
+.d3 .sb{flex:0 0 60px;height:56px;border:1px solid var(--tx);background:var(--sf);color:var(--tx);border-radius:var(--r);font-weight:600;font-size:28px}
+.d3 input{height:56px;border:1px solid var(--tx);border-radius:var(--r);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;font-family:ui-monospace,"Cascadia Mono",Consolas,monospace}
+.d3 .lbl{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:3px}
+.d3 .btn{height:60px;border-radius:var(--r);font-weight:700;font-size:18px}
+.d3 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:16px}
+.d3 td,.d3 th{padding:9px 4px;border-bottom:1px solid var(--bd);text-align:left;font-weight:600}
+.d3 th{font-size:13px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}
+.d3 tr.todo td{color:var(--mu);font-weight:500}
+.d3 .day{display:grid;grid-template-columns:44px 1fr auto;gap:8px;align-items:center;padding:13px 6px;border-bottom:1px solid var(--bd);font-weight:600;font-size:16px}
+.d3 .day.today{background:var(--sf);border-left:5px solid var(--pr);padding-left:8px;font-weight:700}
+.d3 .bar{height:6px;background:var(--bd)}.d3 .bar i{display:block;height:6px;width:50%;background:var(--pr)}
+.d3 .hint{font-size:14px;color:var(--mu)}
+.d3 .tag{border-radius:2px;font-size:12px;padding:1px 6px}
+
+/* ===== D4 Arena: sporty, piller, kjempetall, vekt 900 kursiv, farget toppfelt ===== */
+.d4{--r:999px}
+.ph.d4{padding:0 0 24px;gap:14px}
+.d4 .band{background:var(--pr);color:var(--on);padding:20px 18px 22px;border-radius:0 0 40px 40px}
+.d4 .band .sbar{color:var(--on);margin:0 0 10px}
+.d4 .band h3{font-size:30px;font-weight:900;font-style:italic;line-height:1.1}
+.d4 .band .s{font-size:15px;font-weight:600;margin-top:4px}
+.d4 .in{padding:0 16px;display:flex;flex-direction:column;gap:14px}
+.d4 .pill{display:inline-block;border:2px solid var(--on);border-radius:999px;padding:3px 12px;font-size:14px;font-weight:700}
+.d4 .sb{border-radius:50%;background:var(--sf);color:var(--pr);border:3px solid var(--pr);font-weight:900}
+.d4 input{border:0;background:transparent;font-size:64px;font-weight:900;font-style:italic;height:72px}
+.d4 .sb{flex-basis:68px;height:68px}
+.d4 .lbl{text-align:center;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--mu)}
+.d4 .btn{height:72px;border-radius:999px;font-weight:900;font-style:italic;font-size:22px}
+.d4 .chips{display:flex;gap:8px;flex-wrap:wrap}
+.d4 .chip{border:2px solid var(--bd);background:var(--sf);border-radius:999px;padding:8px 14px;font-weight:800;font-size:15px}
+.d4 .chip.todo{color:var(--mu);border-style:dashed;font-weight:600}
+.d4 .day{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:999px;background:var(--sf);border:2px solid var(--bd);font-weight:700;font-size:16px}
+.d4 .day.today{border:4px solid var(--pr);padding:18px 20px;font-size:19px;font-weight:900;font-style:italic}
+.d4 .dots{display:flex;gap:10px;margin-top:10px}.d4 .dots i{width:26px;height:26px;border-radius:50%;border:3px solid var(--on)}.d4 .dots i.on{background:var(--on)}
+.d4 .huge{font-size:64px;font-weight:900;font-style:italic;line-height:1}
+.d4 .quote{background:var(--sf);border:2px solid var(--bd);border-radius:28px;padding:16px 20px;font-style:italic;font-size:17px;font-weight:600}
+.d4 .startbtn{display:inline-block;background:var(--pr);color:var(--on);border-radius:999px;padding:6px 16px;font-size:15px;font-weight:900;font-style:normal}
+</style></head>
+<body><div class="page">
+<h1>Flex PT: fire designretninger</h1>
+<p class="intro">Samme øvelseslogg midt i økta og samme ukeplan, i fire ulike personligheter med fargepaletten Pulsslag i lys og mørk modus. Telefonrammer er ca. 360 px brede.</p>
+<section class="dir" id="d1"><h2>Retning 1 · Kraftpuls</h2><p class="why">Tung, tett og tydelig: vekt 800–900, rette hjørner (8 px), versaler på etiketter og tykke kanter på kortene. Tonen er kort og direkte («Gi alt!», «Kjør på»). Passer en bruker som vil se tallene fra to meter unna i et travelt treningsstudio, og som liker at appen heier høyt.</p><p class="meta">Hjørner 8 px · vekt 800–900 · kort med venstrekant · tone: rop og heiarop</p><div class="modus">Lys modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d1 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · Øvelse 1 av 5</div><h3>Knebøy</h3></div>
+<div class="card"><div class="t">Forrige: 60 kg · Anbefalt: <span class="ac">62,5 kg</span></div><div style="font-weight:800;font-size:17px;margin-top:2px">Sett 2 av 3. Gi alt!</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="t" style="margin-top:2px">Loggede sett</div>
+<div class="set"><span>Sett 1</span><span>62,5 kg × 10</span></div>
+<div class="set todo"><span>Sett 3</span><span>Venter</span></div></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d1 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Uke 46</div><h3>Kjør på, Mari</h3></div>
+<div class="card"><div class="big">2 av 4 <span style="font-size:22px;font-weight:800">økter</span></div><div class="seg" style="margin-top:10px"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+<div class="day"><span class="ok">✓</span><span>Man · Overkropp</span></div>
+<div class="day"><span class="ok">✓</span><span>Ons · Rygg og skuldre</span></div>
+<div class="day today"><span>▶</span><span>I dag · Underkropp<br><span style="font-size:15px;font-weight:700">5 øvelser · ca. 40 min</span></span></div>
+<div class="day"><span class="mu">○</span><span>Søn · Helkropp</span></div></div></div><div><div class="cap">Tilstand: økt ferdig + «5 kg tyngre enn sist!»</div><div class="ph d1 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Økt ferdig · Underkropp</div><h3>Ferdig!</h3></div>
+<div class="card"><div class="big ac" style="font-size:40px">5 kg tyngre enn sist!</div><div style="font-weight:700;margin-top:6px">Knebøy: 65 kg mot 60 kg sist. Det var et løft.</div></div>
+<div class="set"><span>Økter denne uken</span><span>3 av 4</span></div>
+<div class="set"><span>Sett logget</span><span>14 av 15</span></div>
+<div class="quote">«Du trenger ikke være best. Du må bare møte opp.»</div>
+<button class="btn" style="margin-top:auto">Se neste økt</button></div></div></div><div class="modus">Mørk modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d1 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · Øvelse 1 av 5</div><h3>Knebøy</h3></div>
+<div class="card"><div class="t">Forrige: 60 kg · Anbefalt: <span class="ac">62,5 kg</span></div><div style="font-weight:800;font-size:17px;margin-top:2px">Sett 2 av 3. Gi alt!</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="t" style="margin-top:2px">Loggede sett</div>
+<div class="set"><span>Sett 1</span><span>62,5 kg × 10</span></div>
+<div class="set todo"><span>Sett 3</span><span>Venter</span></div></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d1 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Uke 46</div><h3>Kjør på, Mari</h3></div>
+<div class="card"><div class="big">2 av 4 <span style="font-size:22px;font-weight:800">økter</span></div><div class="seg" style="margin-top:10px"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+<div class="day"><span class="ok">✓</span><span>Man · Overkropp</span></div>
+<div class="day"><span class="ok">✓</span><span>Ons · Rygg og skuldre</span></div>
+<div class="day today"><span>▶</span><span>I dag · Underkropp<br><span style="font-size:15px;font-weight:700">5 øvelser · ca. 40 min</span></span></div>
+<div class="day"><span class="mu">○</span><span>Søn · Helkropp</span></div></div></div><div><div class="cap">Tilstand: økt ferdig + «5 kg tyngre enn sist!»</div><div class="ph d1 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Økt ferdig · Underkropp</div><h3>Ferdig!</h3></div>
+<div class="card"><div class="big ac" style="font-size:40px">5 kg tyngre enn sist!</div><div style="font-weight:700;margin-top:6px">Knebøy: 65 kg mot 60 kg sist. Det var et løft.</div></div>
+<div class="set"><span>Økter denne uken</span><span>3 av 4</span></div>
+<div class="set"><span>Sett logget</span><span>14 av 15</span></div>
+<div class="quote">«Du trenger ikke være best. Du må bare møte opp.»</div>
+<button class="btn" style="margin-top:auto">Se neste økt</button></div></div></div></section><section class="dir" id="d2"><h2>Retning 2 · Rolig flyt</h2><p class="why">Luftig og vennlig: vekt 500–600, store runde former (24–34 px), rause marginer og myke kort. Tonen er støttende og lavmælt («Ta det i ditt tempo»). Passer brukere som synes trening er litt skummelt og trenger ro rundt tallene, uten at tapp-flatene blir mindre.</p><p class="meta">Hjørner 24–34 px · vekt 500–600 · runde steppere · tone: varm og støttende</p><div class="modus">Lys modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d2 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · Øvelse 1 av 5</div><h3>Knebøy</h3></div>
+<div class="card"><div class="mu" style="font-size:16px">Forrige: 60 kg · Anbefalt: <span class="ac" style="font-weight:600">62,5 kg</span></div><div style="margin-top:6px;font-size:17px">Sett 2 av 3. Ta det i ditt tempo.</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="t">Loggede sett</div>
+<div class="set"><span>Sett 1</span><span>62,5 kg × 10</span></div>
+<div class="set todo"><span>Sett 3</span><span>Kommer</span></div></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d2 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div style="display:flex;align-items:center;gap:16px"><div class="ring"><b>2/4</b></div><div><div class="t">Uke 46</div><div style="font-size:24px;font-weight:600;line-height:1.2">2 av 4 økter</div><div class="mu" style="font-size:15px">Fin rytme. To igjen.</div></div></div>
+<div class="day"><span class="ok">✓</span><span>Man · Overkropp</span></div>
+<div class="day"><span class="ok">✓</span><span>Ons · Rygg og skuldre</span></div>
+<div class="day today"><span style="flex:1"><span class="tag ac">I dag</span><br><span style="font-size:22px;font-weight:600">Underkropp</span><br><span class="mu" style="font-size:15px">5 øvelser · ca. 40 min</span></span></div>
+<div class="day"><span class="mu">○</span><span>Søn · Helkropp</span></div></div></div><div><div class="cap">Tilstand: første gang, uten anbefalt vekt</div><div class="ph d2 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Helkropp · Øvelse 3 av 5</div><h3>Bulgarsk utfall</h3></div>
+<div class="note"><b>Første gang.</b> Vi har ingen forrige vekt ennå. Velg en vekt som kjennes trygg, så husker vi den til neste gang.</div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="12" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="8" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="t">Loggede sett</div>
+<div class="set todo"><span>Sett 1 av 3</span><span>Ikke logget</span></div></div></div></div><div class="modus">Mørk modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d2 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · Øvelse 1 av 5</div><h3>Knebøy</h3></div>
+<div class="card"><div class="mu" style="font-size:16px">Forrige: 60 kg · Anbefalt: <span class="ac" style="font-weight:600">62,5 kg</span></div><div style="margin-top:6px;font-size:17px">Sett 2 av 3. Ta det i ditt tempo.</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="t">Loggede sett</div>
+<div class="set"><span>Sett 1</span><span>62,5 kg × 10</span></div>
+<div class="set todo"><span>Sett 3</span><span>Kommer</span></div></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d2 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div style="display:flex;align-items:center;gap:16px"><div class="ring"><b>2/4</b></div><div><div class="t">Uke 46</div><div style="font-size:24px;font-weight:600;line-height:1.2">2 av 4 økter</div><div class="mu" style="font-size:15px">Fin rytme. To igjen.</div></div></div>
+<div class="day"><span class="ok">✓</span><span>Man · Overkropp</span></div>
+<div class="day"><span class="ok">✓</span><span>Ons · Rygg og skuldre</span></div>
+<div class="day today"><span style="flex:1"><span class="tag ac">I dag</span><br><span style="font-size:22px;font-weight:600">Underkropp</span><br><span class="mu" style="font-size:15px">5 øvelser · ca. 40 min</span></span></div>
+<div class="day"><span class="mu">○</span><span>Søn · Helkropp</span></div></div></div><div><div class="cap">Tilstand: første gang, uten anbefalt vekt</div><div class="ph d2 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Helkropp · Øvelse 3 av 5</div><h3>Bulgarsk utfall</h3></div>
+<div class="note"><b>Første gang.</b> Vi har ingen forrige vekt ennå. Velg en vekt som kjennes trygg, så husker vi den til neste gang.</div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="12" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="8" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="t">Loggede sett</div>
+<div class="set todo"><span>Sett 1 av 3</span><span>Ikke logget</span></div></div></div></div></section><section class="dir" id="d3"><h2>Retning 3 · Datalogg</h2><p class="why">Kompakt og presis: fire-pikslers hjørner, rader i stedet for kort, tabulartall og vekt 600–700. Tonen er saklig og rolig («Hold flyten»). Passer den erfarne løfteren som vil se hele loggen på én skjerm og stoler mer på tall enn på tilrop.</p><p class="meta">Hjørner 4 px · rader uten kort · mono-tall · tone: saklig coach</p><div class="modus">Lys modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d3 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · 1/5</div><h3>Knebøy</h3></div>
+<div class="card"><div class="hint">Forrige: 60 kg · Anbefalt: <b class="ac">62,5 kg</b> · Sett 2/3. Hold flyten.</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<table><tr><th>Sett</th><th>Vekt</th><th>Reps</th></tr><tr><td>1</td><td>62,5 kg</td><td>10</td></tr><tr class="todo"><td>2</td><td colspan="2">Aktiv nå</td></tr><tr class="todo"><td>3</td><td colspan="2">Venter</td></tr></table></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d3 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Uke 46</div><div style="display:flex;justify-content:space-between;align-items:baseline"><h3>2 av 4 økter</h3><span class="hint">50 %</span></div></div>
+<div class="bar"><i></i></div>
+<div class="day"><span class="mu">Man</span><span>Overkropp</span><span class="ok">✓</span></div>
+<div class="day"><span class="mu">Ons</span><span>Rygg og skuldre</span><span class="ok">✓</span></div>
+<div class="day today"><span class="ac">Fre</span><span>Underkropp<br><span class="hint" style="font-weight:500">5 øvelser · ca. 40 min</span></span><span class="tag ac">I dag</span></div>
+<div class="day"><span class="mu">Søn</span><span>Helkropp</span><span class="mu">–</span></div>
+<button class="btn" style="margin-top:auto">Start Underkropp</button></div></div><div><div class="cap">Tilstand: første gang, uten historikk</div><div class="ph d3 L"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · 2/5</div><h3>Markløft</h3></div>
+<div class="card"><div class="hint"><b>Ingen historikk.</b> Første loggede last blir startlast. Sett 1/3.</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="40" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="8" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<table><tr><th>Sett</th><th>Vekt</th><th>Reps</th></tr><tr class="todo"><td>1</td><td colspan="2">Aktiv nå</td></tr><tr class="todo"><td>2</td><td colspan="2">Venter</td></tr><tr class="todo"><td>3</td><td colspan="2">Venter</td></tr></table></div></div></div><div class="modus">Mørk modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d3 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · 1/5</div><h3>Knebøy</h3></div>
+<div class="card"><div class="hint">Forrige: 60 kg · Anbefalt: <b class="ac">62,5 kg</b> · Sett 2/3. Hold flyten.</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<table><tr><th>Sett</th><th>Vekt</th><th>Reps</th></tr><tr><td>1</td><td>62,5 kg</td><td>10</td></tr><tr class="todo"><td>2</td><td colspan="2">Aktiv nå</td></tr><tr class="todo"><td>3</td><td colspan="2">Venter</td></tr></table></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d3 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Uke 46</div><div style="display:flex;justify-content:space-between;align-items:baseline"><h3>2 av 4 økter</h3><span class="hint">50 %</span></div></div>
+<div class="bar"><i></i></div>
+<div class="day"><span class="mu">Man</span><span>Overkropp</span><span class="ok">✓</span></div>
+<div class="day"><span class="mu">Ons</span><span>Rygg og skuldre</span><span class="ok">✓</span></div>
+<div class="day today"><span class="ac">Fre</span><span>Underkropp<br><span class="hint" style="font-weight:500">5 øvelser · ca. 40 min</span></span><span class="tag ac">I dag</span></div>
+<div class="day"><span class="mu">Søn</span><span>Helkropp</span><span class="mu">–</span></div>
+<button class="btn" style="margin-top:auto">Start Underkropp</button></div></div><div><div class="cap">Tilstand: første gang, uten historikk</div><div class="ph d3 D"><div class="sbar"><span>09:41</span><span>Flex PT</span></div>
+<div><div class="t">Underkropp · 2/5</div><h3>Markløft</h3></div>
+<div class="card"><div class="hint"><b>Ingen historikk.</b> Første loggede last blir startlast. Sett 1/3.</div></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="40" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="8" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<table><tr><th>Sett</th><th>Vekt</th><th>Reps</th></tr><tr class="todo"><td>1</td><td colspan="2">Aktiv nå</td></tr><tr class="todo"><td>2</td><td colspan="2">Venter</td></tr><tr class="todo"><td>3</td><td colspan="2">Venter</td></tr></table></div></div></div></section><section class="dir" id="d4"><h2>Retning 4 · Arena</h2><p class="why">Sporty og stor: farget toppfelt, piller, kjempetall i kursiv vekt 900 og sirkulære steppere. Tonen er energisk og litt leken («Unnagjort», «Du løftet deg selv»). Gir mest følelse av fremdrift per skjermbilde, og passer best til uketelleren og feiringen etter økta.</p><p class="meta">Hjørner 999 px (piller) · kursiv 900 · fargebånd øverst · tone: sportsreportasje</p><div class="modus">Lys modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d4 L"><div class="band"><div class="sbar"><span>09:41</span><span>Flex PT</span></div><h3>Knebøy</h3><div class="s">Underkropp · Øvelse 1 av 5</div><div style="margin-top:10px"><span class="pill">Sett 2 av 3</span></div></div>
+<div class="in">
+<div style="text-align:center;font-size:16px;font-weight:700" class="mu">Forrige: 60 kg · Anbefalt: <span class="ac">62,5 kg</span></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="chips"><span class="chip">1 · 62,5 kg × 10</span><span class="chip todo">2 · aktiv</span><span class="chip todo">3 · venter</span></div>
+</div></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d4 L"><div class="band"><div class="sbar"><span>09:41</span><span>Flex PT</span></div><div class="s">Uke 46 · Hei, Mari!</div><div class="huge">2 av 4</div><div class="s">økter er unnagjort</div><div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+<div class="in">
+<div class="day"><span class="ok">✓</span><span>Man · Overkropp</span></div>
+<div class="day"><span class="ok">✓</span><span>Ons · Rygg og skuldre</span></div>
+<div class="day today"><span style="flex:1">I dag: Underkropp<br><span style="font-size:14px;font-weight:700;font-style:normal" class="mu">5 øvelser · ca. 40 min</span></span><span class="startbtn">Start</span></div>
+<div class="day"><span class="mu">○</span><span>Søn · Helkropp</span></div>
+</div></div></div><div><div class="cap">Tilstand: økt ferdig + «5 kg tyngre enn sist!»</div><div class="ph d4 L"><div class="band"><div class="sbar"><span>09:41</span><span>Flex PT</span></div><div class="s">Underkropp · fullført</div><div class="huge" style="font-size:44px;margin-top:6px">5 kg tyngre enn sist!</div><div class="s">Knebøy 65 kg. Du løftet deg selv i dag.</div></div>
+<div class="in">
+<div class="chips"><span class="chip">3 av 4 økter</span><span class="chip">14 sett</span><span class="chip">ca. 38 min</span></div>
+<div class="quote">«Små steg hver dag blir til store løft over tid.»</div>
+<button class="btn" style="margin-top:8px">Se neste økt</button>
+</div></div></div></div><div class="modus">Mørk modus</div><div class="grid"><div><div class="cap">Hero: øvelseslogg (sett 2 av 3)</div><div class="ph d4 D"><div class="band"><div class="sbar"><span>09:41</span><span>Flex PT</span></div><h3>Knebøy</h3><div class="s">Underkropp · Øvelse 1 av 5</div><div style="margin-top:10px"><span class="pill">Sett 2 av 3</span></div></div>
+<div class="in">
+<div style="text-align:center;font-size:16px;font-weight:700" class="mu">Forrige: 60 kg · Anbefalt: <span class="ac">62,5 kg</span></div>
+<div class="fld"><div class="lbl">Vekt (kg)</div><div class="row"><button class="sb" aria-label="Minus Vekt (kg)">−</button><input type="text" inputmode="decimal" value="62,5" aria-label="Vekt (kg)"><button class="sb" aria-label="Pluss Vekt (kg)">+</button></div></div><div class="fld"><div class="lbl">Reps</div><div class="row"><button class="sb" aria-label="Minus Reps">−</button><input type="text" inputmode="decimal" value="10" aria-label="Reps"><button class="sb" aria-label="Pluss Reps">+</button></div></div>
+<button class="btn">Logg sett</button>
+<div class="chips"><span class="chip">1 · 62,5 kg × 10</span><span class="chip todo">2 · aktiv</span><span class="chip todo">3 · venter</span></div>
+</div></div></div><div><div class="cap">Ukeplan / hjem</div><div class="ph d4 D"><div class="band"><div class="sbar"><span>09:41</span><span>Flex PT</span></div><div class="s">Uke 46 · Hei, Mari!</div><div class="huge">2 av 4</div><div class="s">økter er unnagjort</div><div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+<div class="in">
+<div class="day"><span class="ok">✓</span><span>Man · Overkropp</span></div>
+<div class="day"><span class="ok">✓</span><span>Ons · Rygg og skuldre</span></div>
+<div class="day today"><span style="flex:1">I dag: Underkropp<br><span style="font-size:14px;font-weight:700;font-style:normal" class="mu">5 øvelser · ca. 40 min</span></span><span class="startbtn">Start</span></div>
+<div class="day"><span class="mu">○</span><span>Søn · Helkropp</span></div>
+</div></div></div><div><div class="cap">Tilstand: økt ferdig + «5 kg tyngre enn sist!»</div><div class="ph d4 D"><div class="band"><div class="sbar"><span>09:41</span><span>Flex PT</span></div><div class="s">Underkropp · fullført</div><div class="huge" style="font-size:44px;margin-top:6px">5 kg tyngre enn sist!</div><div class="s">Knebøy 65 kg. Du løftet deg selv i dag.</div></div>
+<div class="in">
+<div class="chips"><span class="chip">3 av 4 økter</span><span class="chip">14 sett</span><span class="chip">ca. 38 min</span></div>
+<div class="quote">«Små steg hver dag blir til store løft over tid.»</div>
+<button class="btn" style="margin-top:8px">Se neste økt</button>
+</div></div></div></div></section>
+</div></body></html>

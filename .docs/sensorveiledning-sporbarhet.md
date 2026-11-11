@@ -28,7 +28,7 @@ Dette er krav til selve appen. De skal inn i PRD (FR/NFR), UX og arkitektur, og 
 | 4 | Tydelig navigasjon, tilbakemeldinger, feilmeldinger, tomtilstander | `bmad-ux` → EXPERIENCE.md; AC i stories | ⬜ Skal dekkes i EXPERIENCE.md (PRD seksjon 3) |
 | 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | 🟨 PRD NFR8 |
 | 4 | Tilpasning til skjermstørrelser (mobil/desktop) | PRD: NFR responsivitet; UX | 🟨 PRD NFR8 (mobilbredde) |
-| 4 | Spor av designarbeid (skisser, wireframes, UX-beskrivelser) | `bmad-ux`-dokumentene | ⬜ |
+| 4 | Spor av designarbeid (skisser, wireframes, UX-beskrivelser) | `bmad-ux`-dokumentene | ✅ `DESIGN.md`, `EXPERIENCE.md`, `mockups/` og `wireframes/` i `.docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/` (status final 2026-11-11; validering utsatt) |
 | 5 | Mappestruktur som samsvarer med beskrevet arkitektur | `bmad-architecture`; README-oversikt | ⬜ |
 | 5 | Lesbar kode, lite duplisering, ingen død kode/KI-rester | `bmad-code-review` per story | ⬜ |
 | 5 | Linter/formatter for konsekvent stil | Arkitektur: verktøyvalg; prosjektoppsett | ⬜ |

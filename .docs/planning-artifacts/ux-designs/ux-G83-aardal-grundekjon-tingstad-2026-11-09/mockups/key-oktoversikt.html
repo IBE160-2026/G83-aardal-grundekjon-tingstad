@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key screen oktoversikt</title>
+<style>
+/*
+Key screen: Øktoversikt (Maris underkroppsøkt etter godkjent forslag). Mock, ikke kontrakt. Spines vinner.
+EXPERIENCE.md: Component Patterns (exercise-row, status-tag, button-primary); Key Flows 1 (steg 4-9); Information Architecture (Øktoversikt, fane-linjen skjules); State Patterns (Økt fullført, Aktiv økt gjenopprettes); Avvik C1 (alle øvelser, fri rekkefølge).
+DESIGN.md: Components (exercise-row, status-tag, button-primary); Colors (success på ✓ og «Ferdig», warning på «Kortere økt foreslått»).
+Merk: Component Patterns bruker exercise-row (ikke exercise-card) for øktoversikten. Sett per øvelse (Hamstringcurl, Vadehev 3 sett uendret) er plassholder; kun Knebøy, Utfall, Leg press og Markløft er endret i Flow 1. Utfall viser «1 av 2 sett» (2 sett etter forslaget). Rekkefølgen er brukerens egen. Ikke spesifisert: om statusen «N av M sett» også vises ved 0 reps.
+*/
+:root{--background:#FFF8F3;--surface:#FFFFFF;--text:#2B1710;--text-muted:#6E5448;--primary:#C93A0E;--on-primary:#FFFFFF;--accent:#9A5B00;--success:#1B7A3E;--warning:#8F5A00;--error:#B3261E;--border:#E8D3C6;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.dark{--background:#17100D;--surface:#241A15;--text:#FFF1E8;--text-muted:#CDB3A5;--primary:#FF7A45;--on-primary:#2B0F03;--accent:#FFC247;--success:#5FD38A;--warning:#FFB547;--error:#FF8A80;--border:#4A372E}
+*{box-sizing:border-box}
+body{margin:0;background:#FFF8F3;color:#2B1710;font-family:var(--font);font-size:1.0625rem;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+.stage{display:flex;flex-wrap:wrap;gap:36px;padding:32px;justify-content:center;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:14px;align-items:center}
+.cap{width:390px;font-size:.9375rem;line-height:1.4;color:#6E5448;margin:0;text-align:center}
+.phone{width:390px;min-height:800px;background:var(--background);color:var(--text);border:10px solid #2B1710;border-radius:44px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.screen{flex:1;padding:24px 20px 20px;display:flex;flex-direction:column;gap:14px;position:relative}
+.display{font-size:1.75rem;font-weight:600;line-height:1.2;margin:0}
+.title{font-size:1.25rem;font-weight:600;line-height:1.3;margin:0}
+.body{font-size:1.0625rem;font-weight:400;line-height:1.5;margin:0}
+.label{font-size:.9375rem;font-weight:500;line-height:1.4}
+.meta{font-size:.9375rem;font-weight:400;line-height:1.4;color:var(--text-muted)}
+.muted{color:var(--text-muted)}
+.row{display:flex;align-items:center;gap:12px}
+.between{justify-content:space-between}
+.spacer{flex:1}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:68px;border-radius:34px;font-size:1.1875rem;font-weight:600;line-height:1.2}
+.btn-primary{background:var(--primary);color:var(--on-primary)}
+.btn-secondary{background:var(--surface);color:var(--primary);border:2px solid var(--primary)}
+.btn-text{display:inline-flex;align-items:center;min-height:44px;color:var(--primary);font-size:.9375rem;font-weight:500}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:20px}
+.pb{height:12px;border-radius:9999px;background:var(--border);overflow:hidden}
+.pb i{display:block;height:100%;border-radius:9999px;background:var(--primary)}
+.day{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}
+.day.today{border:2px solid var(--primary);padding:20px}
+.day.rest{color:var(--text-muted)}
+.ok{color:var(--success);font-weight:500}
+.tag{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--text-muted);border-radius:9999px;padding:2px 12px;font-size:.9375rem;line-height:1.4;white-space:nowrap}
+.banner{background:var(--surface);border:2px solid var(--accent);border-radius:28px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.hint{background:var(--surface);border:2px solid var(--accent);border-radius:24px;padding:16px;display:flex;gap:8px;align-items:flex-start}
+.x{flex:none;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.25rem}
+.tabs{display:flex;height:68px;background:var(--surface);border-top:1px solid var(--border)}
+.tab{flex:1;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;color:var(--text-muted);font-size:.9375rem;font-weight:500;line-height:1.2;position:relative}
+.tab b{display:flex;height:24px;margin-bottom:2px}
+.tab.on{color:var(--primary)}
+.tab.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;background:var(--primary);border-radius:0 0 3px 3px}
+.sb{flex:none;width:56px;height:56px;border-radius:9999px;border:1px solid var(--text-muted);background:var(--background);color:var(--text);font-size:1.75rem;font-weight:500;display:flex;align-items:center;justify-content:center;line-height:1}
+.sb.plus{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.sv{flex:1;min-width:0;height:56px;border:1px solid var(--text-muted);border-radius:24px;background:var(--surface);color:var(--text);font-size:2.25rem;font-weight:500;line-height:54px;text-align:center}
+.stepper{display:flex;align-items:center;gap:8px}
+.choice{background:var(--surface);border:2px solid var(--text-muted);border-radius:28px;padding:20px;position:relative}
+.choice.sel,.effort.sel{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.choice.sel .title,.choice.sel .body,.choice.sel .label,.effort.sel .title,.effort.sel .body{color:var(--on-primary)}
+.choice.sel .tick,.effort.sel .tick{background:var(--on-primary);color:var(--primary);width:28px;height:28px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:1rem;top:12px}
+.choice .tick,.effort .tick{position:absolute;top:14px;right:16px;color:var(--primary);font-weight:600;font-size:1.25rem}
+.effort{background:var(--surface);border:2px solid var(--text-muted);border-radius:28px;padding:16px;min-height:68px;position:relative}
+.note{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;padding:16px;min-height:88px;color:var(--text-muted)}
+.chip{width:68px;height:68px;border-radius:9999px;border:1px solid var(--text-muted);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:600;position:relative}
+.chip.sel{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.chip.sel::after{content:"✓";position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:9999px;background:var(--surface);color:var(--primary);border:1px solid var(--primary);font-size:.8125rem;display:flex;align-items:center;justify-content:center}
+.bubble{border-radius:28px;padding:16px;max-width:85%}
+.b-coach{background:var(--surface);border:1px solid var(--border);align-self:flex-start}
+.b-user{background:var(--primary);color:var(--on-primary);align-self:flex-end}
+.proposal{background:var(--surface);border:2px solid var(--accent);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.proposal.appr{border-color:var(--success)}
+.chg{display:flex;gap:8px;align-items:center;border-top:1px solid var(--border);padding-top:8px}
+.chg:first-of-type{border-top:0;padding-top:0}
+.input{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;min-height:56px;padding:0 8px 0 16px;display:flex;align-items:center;justify-content:space-between;color:var(--text-muted)}
+.scrim{position:absolute;inset:0;background:color-mix(in srgb,var(--background) 60%,transparent);display:flex;align-items:center;justify-content:center;padding:20px}
+.popup{background:var(--surface);border-radius:34px;padding:24px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;width:100%}
+.popup>*{position:relative;z-index:1}
+.msg{border-left:4px solid var(--accent);padding:8px 12px;background:var(--background);border-radius:0 12px 12px 0}
+.conf{position:absolute!important;z-index:0!important;width:9px;height:14px;border-radius:3px}
+.c1{background:var(--primary)}.c2{background:var(--accent)}.c3{background:var(--success)}
+.noanim *{animation:none!important;transition:none!important}
+
+.demo{display:inline-flex;align-items:center;background:var(--accent);color:var(--surface);border-radius:9999px;padding:2px 12px;font-size:.9375rem;font-weight:500;line-height:1.4}
+.field{display:flex;flex-direction:column;gap:4px}
+.inp{background:var(--surface);border:1px solid var(--text-muted);border-radius:24px;min-height:68px;padding:0 16px;display:flex;align-items:center;font-size:1.0625rem;color:var(--text)}
+.inp.err{border:2px solid var(--error)}
+.inp.ph{color:var(--text-muted)}
+.errmsg{color:var(--error);font-size:.9375rem;line-height:1.4;display:flex;gap:6px;align-items:flex-start}
+.btn-destructive{background:var(--surface);color:var(--error);border:2px solid var(--error)}
+.b-pain{background:var(--background);border:1px solid var(--text-muted);align-self:flex-start;color:var(--text)}
+.b-err{background:var(--surface);border:2px solid var(--error);align-self:flex-start;color:var(--text)}
+.b-err .h{color:var(--error);font-weight:600;display:flex;gap:8px;align-items:center}
+.send{flex:none;height:48px;padding:0 20px;border-radius:9999px;background:var(--primary);color:var(--on-primary);font-weight:600;display:flex;align-items:center}
+.chat{flex:1;display:flex;flex-direction:column;gap:12px}
+.split{display:flex;gap:12px}.split>.btn{flex:1;width:auto}
+.xrow{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}
+.opt3{display:flex;gap:8px}.opt3>.choice{flex:1;padding:12px 8px;text-align:center;border-radius:28px}
+.opt3 .tick{top:-10px;right:8px;font-size:.9375rem;background:var(--surface);border:1px solid var(--primary);border-radius:9999px;width:24px;height:24px;display:flex;align-items:center;justify-content:center}
+.dlg{background:var(--surface);border-radius:34px;padding:24px;display:flex;flex-direction:column;gap:14px;width:100%}
+.dim{opacity:1}
+.lbl2{color:var(--text-muted)}
+</style>
+</head>
+<body>
+<main class="stage">
+<figure class="col" style="margin:0"><div class="phone"><div class="screen">
+<div><button class="btn-text">‹ Uke</button></div>
+<div><h1 class="display">Underkropp</h1><div class="meta">Onsdag 11. november · 6 øvelser</div></div>
+<div><span class="tag" style="border-color:var(--warning);color:var(--warning)"><span aria-hidden="true">◷</span> Kortere økt foreslått</span></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Knebøy</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Utfall</div><div class="row"><span class="label">◐ 1 av 2 sett</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Leg press</div><div class="row"><span class="meta">○ Ikke startet</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Hamstringcurl</div><div class="row"><span class="meta">○ Ikke startet</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Vadehev</div><div class="row"><span class="meta">○ Ikke startet</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Markløft</div><div class="row"><span class="meta">○ Ikke startet</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="spacer"></div>
+<div class="meta" style="text-align:center">Velg øvelsene i den rekkefølgen som passer deg.</div>
+<button class="btn btn-primary">Fullfør økt</button></div></div><figcaption class="cap">Øktoversikt midt i økta: statuser per øvelse, fri rekkefølge, «Fullfør økt». Fane-linjen er skjult. (Lys)</figcaption></figure>
+<figure class="col" style="margin:0"><div class="phone dark"><div class="screen">
+<div><button class="btn-text">‹ Uke</button></div>
+<div><h1 class="display">Underkropp</h1><div class="meta">Onsdag 11. november · 6 øvelser</div></div>
+<div><span class="tag" style="border-color:var(--warning);color:var(--warning)"><span aria-hidden="true">◷</span> Kortere økt foreslått</span></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Knebøy</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Utfall</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Leg press</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Hamstringcurl</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Vadehev</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="xrow"><div class="title" style="font-size:1.25rem">Markløft</div><div class="row"><span class="ok">✓ Ferdig</span><span aria-hidden="true" class="title muted">›</span></div></div>
+<div class="spacer"></div>
+<div class="meta" style="text-align:center">Alle øvelsene er ferdige. Nå kan du fullføre økta.</div>
+<button class="btn btn-primary">Fullfør økt</button></div></div><figcaption class="cap">Alle øvelser ferdig, klar for «Fullfør økt». (Mørk)</figcaption></figure>
+</main>
+</body>
+</html>
