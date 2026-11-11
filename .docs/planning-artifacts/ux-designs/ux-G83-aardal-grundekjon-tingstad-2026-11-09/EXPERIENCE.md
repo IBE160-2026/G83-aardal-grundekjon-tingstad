@@ -1,7 +1,7 @@
 ---
 version: 0.1
 name: Flex PT
-status: draft
+status: final
 updated: 2026-11-11
 sources:
   - ../../prd-flex-pt.md
@@ -11,7 +11,7 @@ designRef: DESIGN.md
 
 # Flex PT – Experience Spine
 
-> Utkast. PRD v1.0 er kilden for krav (FR, NFR, R-ID) og dupliseres ikke her. Der UX forutsetter noe som ikke står i PRD v1.0, er det merket **[PRD v1.1]** og samlet under «Avvik og avtaler mot PRD v1.0». Merkene `[ASSUMPTION]` og `[NOTE FOR UX]` er samlet under «Åpne punkter». Bare det memloggen har bestemt er spesifisert. Alt annet er merket, ikke designet.
+> PRD v1.0 er kilden for krav (FR, NFR, R-ID) og dupliseres ikke her. Der UX forutsetter noe som ikke står i PRD v1.0, er det merket **[PRD v1.1]** og samlet under «Avvik og avtaler mot PRD v1.0». Bekreftede antakelser og `[NOTE FOR UX]` er samlet under «Åpne punkter». Bare det memloggen har bestemt er spesifisert. Alt annet er merket, ikke designet.
 
 ## Foundation
 
@@ -19,9 +19,9 @@ Mobil-først web, én primær form-faktor: en telefon i stående format, brukt m
 
 Brukere i V1 er testpersoner og sensor, ikke en offentlig lansering. Briefen nevner ingen aldersgruppe; primærbrukeren er en trenings-interessert person med travel og skiftende hverdag, komfortabel med digitale tjenester.
 
-Visuelle referanser (skisser, spines vinner ved konflikt): `.working/ia-2026-11-11.excalidraw` (informasjonsarkitektur, er ikke oppdatert med ny-uke-banneret) og `.working/flow-mari-oekt-2026-11-11.excalidraw` (Maris økt, skjermene a til g). Fargetema og retning: `.working/color-themes-1.html` (Pulsslag) og `.working/directions-1.html` (Rolig flyt).
+Visuelle referanser (spinene vinner ved konflikt). Skisser: [IA](wireframes/ia-2026-11-11.excalidraw) (er ikke oppdatert med ny-uke-banneret) og [Maris økt](wireframes/flow-mari-oekt-2026-11-11.excalidraw) (skjermene a til g). Fargetema og retning: [Pulsslag](mockups/color-themes-1.html) og [Rolig flyt](mockups/directions-1.html). Mocks av alle flater (lys og mørk): [Uke](mockups/key-uke.html), [Øktoversikt](mockups/key-oktoversikt.html), [Øvelseslogg](mockups/key-ovelseslogg.html), [Løpelogging](mockups/key-lopelogging.html), [Fullfør økt og pop-up](mockups/key-ferdig-okt.html), [Coach med forslagskort](mockups/key-forslagskort.html), [Coach-varianter](mockups/key-coach-varianter.html), [Onboarding](mockups/key-onboarding.html), [Historikk](mockups/key-historikk.html), [Profil](mockups/key-profil.html) og [Innlogging](mockups/key-innlogging.html). Layout for Profil og Innlogging er forslag. Ikoner utenom fane-linjen, konfetti og chat-input er plassholdere i mockene.
 
-Tilbake-pil (‹) og ikoner er ikke bestemt i detalj. Ikonsett er ikke valgt. [NOTE FOR UX]
+Tilbake-pil (‹) og ikoner er ikke bestemt i detalj. Fane-ikoner er valgt: Uke = kalender, Coach = chatboble, Historikk = klokke med pil, Profil = menneske (strek-ikoner, 24 px). Øvrige ikoner er ikke valgt. [NOTE FOR UX]
 
 ## Information Architecture
 
@@ -113,23 +113,23 @@ Oppførsel. Visuelle spesifikasjoner ligger i `DESIGN.md`, Components, med samme
 | Komponent | Bruk | Oppførselsregler |
 |---|---|---|
 | stepper-button, stepper-button-plus, stepper-value (stepper for vekt og reps) | Øvelseslogg | Verdien kan skrives direkte i midten. − og + endrer faste steg: vekt 0,5 kg (samsvarer med R6-avrunding), reps 1. Hold inne gir raskere endring. Forhåndsutfylt med anbefalt vekt når den finnes. Reps kan ikke bli negativt (feil i klartekst). Verdi, − og + ligger på én linje også ved 200 % tekst. Gjelder både vekt og reps. |
-| exercise-card | Øvelseslogg | Viser øvelsesnavn, «Sett N av M», forrige og anbefalt vekt (bare hvis øvelsen er logget før), stepper for vekt og reps, «Logg sett», og liste over loggede sett. Sett logges ett om gangen. Under aktiv økt kan et logget sett trykkes og endres eller fjernes (✕). Å registrere 0 reps er tillatt for sett som ikke ble gjort. Når alle sett er logget går appen automatisk videre til neste øvelse (eller tilbake til øktoversikten hvis ingen er igjen; **[ASSUMPTION]** hvilken av de to). |
+| exercise-card | Øvelseslogg | Viser øvelsesnavn, «Sett N av M», forrige og anbefalt vekt (bare hvis øvelsen er logget før), stepper for vekt og reps, «Logg sett», og liste over loggede sett. Sett logges ett om gangen. Under aktiv økt kan et logget sett trykkes og endres eller fjernes (✕). Å registrere 0 reps er tillatt for sett som ikke ble gjort. Når alle sett er logget går appen automatisk videre til neste øvelse (eller tilbake til øktoversikten hvis ingen er igjen; hvilken av de to). |
 | stepper-button, stepper-button-plus, stepper-value (løping) | Løpelogg | To steppere på samme skjerm: Distanse (km) og Tid (min:sek), begge med − og + og skrivefelt, som styrke-stepperen (samme tapp-flater, hold-inne og 200 %-regel). Tid skrives som min:sek. Ingen «Logg sett»: «Fullfør økt» er primærhandlingen. Verdiene kan endres fritt til «Fullfør økt» er trykket. |
-| effort-card, effort-card-selected | Fullfør økt | Tre valg, Lett, Passe, Tung, med ankertekst (styrke eller løping etter øktype) synlig. Ett valg, påkrevd før «Fullfør». Valgt vises også med ✓. |
+| effort-card, effort-card-selected | Fullfør økt | Tre valg, Lett, Passe, Tung, med ankertekst (styrke eller løping etter øktype) synlig. Ett valg, påkrevd før «Fullfør». Valgt vises som fylt primærflate med ✓, ikke bare farge. |
 | note-field | Fullfør økt | Valgfritt tekstfelt «Noe du vil huske?» under anstrengelsesvalget, for styrke og løping. Ett notat per økt, ikke per øvelse. Kan stå tomt. |
 | pace-line | Uke (day-row for løpeøkt) | Viser «Sist: min:sek/km» fra forrige gang samme økttype. Pace = tid / distanse. Vises ikke første gang. |
 | program-card | Uke | Vises øverst ved første åpning i uke 9 for styrke: «8 uker unnagjort! Vil du ha et nytt program?» med «Ja, nytt program» og «Fortsett med dette». Erstatter banner den uka. |
 | loading-state | Etter onboarding steg 5 | «Lager planen din …» med rolig indikator, så direkte til Uke. |
 | exercise-row | Øktoversikt | Hver rad åpner øvelsen. Status per øvelse: Ikke startet, «N av M sett», Ferdig. Rekkefølgen velges fritt av brukeren. Alle øvelsene i dagens økt vises (C1). |
 | day-row, day-row-today | Uke | I dag er uthevet og åpner økta. Fullførte dager viser ✓. Rader for andre dager viser økt og type; løpeøkter viser pace-line. Ingen blaing til andre uker, og ingen endringsmerke (FR15, se Avvik). |
-| progress-bar | Uketeller på Uke, onboarding | Horisontal. På Uke: «X av Y økter» (Y fra planen). I onboarding: «Steg N av M» (steg 4, «Hvor trener du?», hoppes over for løping, så M er 4 for løping og 5 for styrke; **[ASSUMPTION]**). Ingen animasjon ved redusert bevegelse. |
-| proposal-card, proposal-card-approved | Coach | Vises bare når et forslag er gyldig. Viser bare endrede linjer, hver som før → etter («Knebøy 3 → 2 sett»), med «Avvis» og «Godkjenn». Etter «Godkjenn»: kortet blir «Godkjent ✓» og knappen «Se dagens økt» fører til økta. Brukeren blir i chatten til hun trykker. Dobbelttrykk på «Godkjenn» gir ingen ekstra effekt (NFR9). Etter «Avvis» er planen uendret. Et forslag basert på en eldre planversjon avvises med en klar melding (NFR9). Knappene deaktiveres så snart de er trykket. |
+| progress-bar | Uketeller på Uke, onboarding | Horisontal. På Uke: «X av Y økter» (Y fra planen). I onboarding: «Steg N av M» (steg 4, «Hvor trener du?», hoppes over for løping, så M er 4 for løping og 5 for styrke;). Ingen animasjon ved redusert bevegelse. |
+| proposal-card, proposal-card-approved | Coach | Vises bare når et forslag er gyldig. Viser bare endrede linjer, hver som før → etter («Knebøy 3 → 2 sett»), med «Avvis» og «Godkjenn». Etter «Godkjenn»: kortet blir «Godkjent ✓» og den røde primærknappen «Se dagens økt» fører til økta. Brukeren blir i chatten til hun trykker. Dobbelttrykk på «Godkjenn» gir ingen ekstra effekt (NFR9). Etter «Avvis» er planen uendret. Et forslag basert på en eldre planversjon avvises med en klar melding (NFR9). Knappene deaktiveres så snart de er trykket. |
 | chat-bubble-coach | Coach | Alle vanlige coach-svar og regelbrudd-forklaring (FR12): ingen forslagskort, ingen Godkjenn, planen uendret. |
 | chat-bubble-user | Coach | Brukerens fritekst. Inndata er bare fritekst-felt nederst (FR9). Ingen hurtigknapper i V1. |
 | chat-bubble-pain | Coach | Fast svar (FR13/R11) i rolig, dempet boble. Ved smerte i en bestemt øvelse følger «Vil du bytte øvelse?» med «Nei» og «Ja, bytt». «Ja, bytt» gir et vanlig forslagskort som må godkjennes. Ved akutte symptomer (f.eks. brystsmerte): samme faste svar uten bytte-spørsmål (R11). Planen endres aldri automatisk. |
 | chat-bubble-error | Coach | Teknisk feil eller timeout (NFR7): «Noe gikk galt. Planen er uendret.» og «Prøv igjen». «Prøv igjen» sender den siste meldingen på nytt. Flere raske trykk gir én sending (NFR9). |
-| tab-bar, tab-bar-item-active | Hovedapp | Fire faner. Skjules under aktiv øktlogging. Aktiv fane har `aria-current`. Å bytte fane mister ikke tekst i chatfeltet. **[ASSUMPTION]** |
-| choice-card, choice-card-selected | Onboarding, steg 1, 2 og 4 | Ett valg per skjerm. Trykk velger og går videre; alle felt er påkrevd og bare definerte valg finnes (Story 1.3). Forklaring i heiende tone. Tilbake-knapp øverst. |
+| tab-bar, tab-bar-item-active | Hovedapp | Fire faner. Skjules under aktiv øktlogging. Aktiv fane har `aria-current`. Å bytte fane mister ikke tekst i chatfeltet. |
+| choice-card, choice-card-selected | Onboarding, steg 1, 2 og 4 | Ett valg per skjerm. Trykk velger og går videre; alle felt er påkrevd og bare definerte valg finnes (Story 1.3). Valgt kort vises som fylt primærflate med ✓. Forklaring i heiende tone. Tilbake-knapp øverst. |
 | number-chip, number-chip-selected | Onboarding, steg 3 (antall økter 2 til 5) | Runde tallknapper, ett valg. 2 til 5 følger R1 (minst 2, maks 5). |
 | banner | Uke | Ny-uke-banner. Vises øverst fra første åpning i ny uke til første økt er registrert den uka, og forsvinner da. Kan ikke lukkes manuelt. Ingen egen coach-knapp (Coach ligger i fane-linjen). Planen er allerede laget ved første åpning (FR4). Erstattes av program-card første uke etter 8-ukers programmet. |
 | hint-card | Uke (velkomst), første logg | Vises én gang og kan lukkes. Lukkingen huskes. |
@@ -148,26 +148,26 @@ Oppførsel. Visuelle spesifikasjoner ligger i `DESIGN.md`, Components, med samme
 | Tom: ingen økter | Historikk | Forklaring og knapp «Gå til Uke» (Story 3.2). |
 | Første gang uten anbefalt vekt | Øvelseslogg | Ingen «Forrige/Anbefalt». Bare sett og reps. Hint-card om å velge en vekt du kan løfte kontrollert (R6, **[PRD v1.1: C2]**). |
 | Laster: plan genereres | Etter onboarding steg 5 | Kort lastetilstand (loading-state) «Lager planen din …», så direkte til Uke. Ingen oppsummeringsskjerm. |
-| Laster: coach tenker | Coach | Rolig indikator i en coach-boble. Sendefeltet kan ikke sende på nytt før svaret er kommet (NFR9). **[ASSUMPTION]** |
-| Laster: andre skjermer | Uke, Historikk | Skjelett-innhold uten bevegelse ved redusert bevegelse. **[ASSUMPTION]** |
+| Laster: coach tenker | Coach | Rolig indikator i en coach-boble. Sendefeltet kan ikke sende på nytt før svaret er kommet (NFR9). |
+| Laster: andre skjermer | Uke, Historikk | Skjelett-innhold uten bevegelse ved redusert bevegelse. |
 | Validering | Felt | Feilmelding i klartekst under feltet, koblet til feltet, `error`-farge pluss ikon (farge aldri eneste signal). Verdier valideres også på serveren (NFR9). |
 | Regelbrudd | Coach | Vanlig coach-boble med forklaring, ingen forslagskort, planen uendret (FR12). |
 | Teknisk feil/timeout | Coach | Feilboble med «Prøv igjen» og beskjed om at planen er uendret (NFR7). |
-| Teknisk feil ved lagring av sett | Øvelseslogg | Melding «Kunne ikke lagre settet. Prøv igjen.» og verdiene blir stående. Samme sett kan ikke lagres to ganger (NFR9). **[ASSUMPTION]** |
+| Teknisk feil ved lagring av sett | Øvelseslogg | Melding «Kunne ikke lagre settet. Prøv igjen.» og verdiene blir stående. Samme sett kan ikke lagres to ganger (NFR9). |
 | Smerte | Coach | Dempet fast svar (chat-bubble-pain), se Component Patterns. |
 | Foreldet forslag | Coach | Forslag basert på eldre planversjon avvises med klar melding (NFR9). |
 | Første gang: velkomst | Uke | Hint-card, vises én gang, kan lukkes. |
 | Ny uke | Uke | Banner øverst fra første åpning i ny uke til første økt er registrert den uka. Kan ikke lukkes. Planen lages ved første åpning (FR4). |
-| 8-ukers program | Uke | Første åpning i uke 9 (styrke): program-card øverst, erstatter ny-uke-banner den uka. «Fortsett med dette» beholder planen. Hva «Ja, nytt program» innebærer er åpent (PRD). **[ASSUMPTION]** at kortet forsvinner når et valg er gjort. |
+| 8-ukers program | Uke | Første åpning i uke 9 (styrke): program-card øverst, erstatter ny-uke-banner den uka. «Fortsett med dette» beholder planen. Hva «Ja, nytt program» innebærer er åpent (PRD). kortet forsvinner når et valg er gjort. |
 | Løpemål nådd | Ferdig-økt | Feiring i oppsummeringen og melding om at brukeren kan sette nytt mål under Profil (FR3). Ingen kort på Uke, planen fortsetter uendret. «Nådd» = én logget løpetur på minst målavstanden (forslag til PRD, D3). |
 | Første løpetur av en økttype | Uke, Ferdig-økt | Ingen pace-line og ingen pace-melding. |
 | Økt fullført | Øktoversikt, Løpelogg | Økta er låst (ingen redigering i V1). Under aktiv økt kan loggede sett endres eller fjernes. |
 | Demo | Hele appen | Demo-merke i toppen. Coach-svar er innspilte. «Prøv demo» logger inn en seedet testbruker (NFR1). |
 | Redusert bevegelse | Hele appen | Appen respekterer telefonens «reduser bevegelse» (prefers-reduced-motion): ingen konfetti, bare motiverende melding og en rolig, statisk markering. Progress-bar og overganger uten animasjon. |
-| Aktiv økt gjenopprettes | Øktoversikt, Øvelseslogg | Etter skjermlås eller at appen lukkes åpnes samme økt, øvelse og sett. Ikke lagrede verdier i stepperen gjenopprettes ikke med mindre de er logget. **[ASSUMPTION]** Ingen pausetimer. [PRD v1.1: C6] |
-| Ukeplan: ingen økt i dag | Uke | Ingen «dagens økt»-kort. Neste økt og dag vises i stedet. **[ASSUMPTION]** |
+| Aktiv økt gjenopprettes | Øktoversikt, Øvelseslogg | Etter skjermlås eller at appen lukkes åpnes samme økt, øvelse og sett. Ikke lagrede verdier i stepperen gjenopprettes ikke med mindre de er logget. Ingen pausetimer. [PRD v1.1: C6] |
+| Ukeplan: ingen økt i dag | Uke | Ingen «dagens økt»-kort. Neste økt og dag vises i stedet. |
 | Fokus | Alle skjermer | Synlig fokusring (se DESIGN.md, Elevation & Depth). |
-| Tastatur åpent | Øvelseslogg, Coach | Primærhandlingen og feltet blir synlige. **[ASSUMPTION]** |
+| Tastatur åpent | Øvelseslogg, Coach | Primærhandlingen og feltet blir synlige. |
 
 ## Interaction Primitives
 
@@ -213,7 +213,7 @@ Utgangspunkt: forrige økt (overkropp) er fullført, i dag, onsdag, er det under
 11. **Klimaks:** pop-up (popup-done) med «Bra jobba, Mari!», oppsummering («5 øvelser · 9 sett · Fullført»), og den motiverende meldingen som sammenligner med forrige økt: «Du løftet 2,5 kg mer i knebøy enn sist. Sterk økt!», et tilfeldig motivasjonssitat fra den faste listen, og konfetti. Ved redusert bevegelse: ingen konfetti, bare melding og statisk markering.
 12. Hun trykker «Ferdig» og landing er Uke. Uketelleren viser «3 av 4 økter», og «Neste økt: Fredag, Fullkropp» vises. Hun lukker appen.
 
-Feilbaner: (a) Teknisk feil i coachen etter steg 2: feilboble «Noe gikk galt. Planen er uendret.» med «Prøv igjen». (b) Coachen foreslår noe som bryter en regel: vanlig boble med forklaring, ingen kort, planen uendret. (c) Mari dobbelttrykker «Godkjenn»: ingen ekstra effekt. (d) Mari gjorde ikke siste sett: hun fjerner det med ✕ eller logger 0 reps. Logget feil vekt: hun trykker på det loggede settet og endrer eller fjerner det (bare under aktiv økt). (e) Første gang hun logger en øvelse: ingen anbefalt vekt, bare sett og reps og et engangshint. (f) Mari skrur på reduser bevegelse: ingen konfetti. (g) Mari har ikke gjort alle øvelsene og trykker «Fullfør økt»: status blir delvis ut fra loggede sett. [ASSUMPTION: ingen ekstra bekreftelse]
+Feilbaner: (a) Teknisk feil i coachen etter steg 2: feilboble «Noe gikk galt. Planen er uendret.» med «Prøv igjen». (b) Coachen foreslår noe som bryter en regel: vanlig boble med forklaring, ingen kort, planen uendret. (c) Mari dobbelttrykker «Godkjenn»: ingen ekstra effekt. (d) Mari gjorde ikke siste sett: hun fjerner det med ✕ eller logger 0 reps. Logget feil vekt: hun trykker på det loggede settet og endrer eller fjerner det (bare under aktiv økt). (e) Første gang hun logger en øvelse: ingen anbefalt vekt, bare sett og reps og et engangshint. (f) Mari skrur på reduser bevegelse: ingen konfetti. (g) Mari har ikke gjort alle øvelsene og trykker «Fullfør økt»: status blir delvis ut fra loggede sett. Ingen ekstra bekreftelse (bekreftet antakelse 10).
 
 ### Flow 2 – Onboarding (Mari, første gang)
 
@@ -239,7 +239,7 @@ Feilbane: registreringsfeil (ugyldig e-post, for kort passord) gir en klartekstm
 
 Variant: «Jeg har brystsmerter». Samme faste svar, uten bytte-spørsmål og uten planendring (R11). Ingen røde farger og ingen heiende tekst.
 
-Feilbane: teknisk feil → feilboble. Smerte uten bestemt øvelse (f.eks. «Jeg har vondt i ryggen»): bare det faste svaret. **[ASSUMPTION]** (PRD FR13 sier bytte-spørsmål bare ved «en bestemt øvelse eller kroppsdel».)
+Feilbane: teknisk feil → feilboble. Smerte uten bestemt øvelse (f.eks. «Jeg har vondt i ryggen»): bare det faste svaret. (PRD FR13 sier bytte-spørsmål bare ved «en bestemt øvelse eller kroppsdel».)
 
 ### Flow 4 – Ny uke (Mari, mandag)
 
@@ -264,7 +264,7 @@ Utgangspunkt: Jonas valgte Løping i onboarding (steg 4 hoppet over). Han har lo
 5. **Klimaks:** pop-up med oppsummering (distanse, tid, pace), motiverende melding og motivasjonssitat. Hvis han har logget én løpetur på minst målavstanden: feiring («Du klarte 10 km!») og melding om at han kan sette nytt mål under Profil. Ingen kort på Uke, planen fortsetter uendret.
 6. Han trykker «Ferdig» og lander på Uke. Økta er låst.
 
-Feilbaner: første løpetur av en økttype: ingen pace. Teknisk feil ved lagring: «Kunne ikke lagre økta. Prøv igjen.» og verdiene blir stående (se Åpne punkter, [ASSUMPTION] 16).
+Feilbaner: første løpetur av en økttype: ingen pace. Teknisk feil ved lagring: «Kunne ikke lagre økta. Prøv igjen.» og verdiene blir stående (se Åpne punkter, bekreftet antakelse 16).
 
 ### Flow 5 – Historikk, profil og utlogging (Mari, helg)
 
@@ -326,7 +326,7 @@ Merk: F1 til F10 står i `prd-endringer-fra-ux.md`, avsnitt D2. Åpne PRD-spørs
 
 ## Åpne punkter
 
-### [ASSUMPTION]
+### Bekreftede antakelser (besluttet 2026-11-11)
 
 1. Tilbake til øktoversikten eller neste øvelse etter siste sett: auto-videre til neste øvelse, eller til øktoversikten når ingen er igjen (Component Patterns, exercise-card).
 2. Onboarding-fremdrift: «Steg N av M» der M er 4 for løping (steg 4 hoppes over) og 5 for styrke.
@@ -347,7 +347,7 @@ Merk: F1 til F10 står i `prd-endringer-fra-ux.md`, avsnitt D2. Åpne PRD-spørs
 
 ### [NOTE FOR UX]
 
-1. Ikonsett og tilbake-pil er ikke valgt.
+1. Tilbake-pil og øvrige ikoner er ikke valgt (fane-ikoner er valgt).
 2. Stepper: hold inne gir raskere endring, men hastighet og terskel er ikke bestemt.
 3. Deaktivert primærknapp: kontrast ikke beregnet (DESIGN.md).
 4. Motiverende melding når det ikke finnes en forrige økt å sammenligne med (første økt): eksempelet i Voice and Tone er et utkast.

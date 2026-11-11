@@ -2,7 +2,7 @@
 version: 0.1
 name: Flex PT
 description: Mobil-først treningsapp med KI-coach. Varm, energisk og rolig. Runde former, horisontale fremdriftsbarer og store tapp-flater for bruk med én hånd i treningssenteret.
-status: draft
+status: final
 updated: 2026-11-11
 colors:
   background: '#FFF8F3'
@@ -228,8 +228,8 @@ components:
     rounded: '{rounded.lg}'
     padding: '{spacing.5}'
   choice-card-selected:
-    backgroundColor: '{colors.surface}'
-    textColor: '{colors.text}'
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.on-primary}'
     borderColor: '{colors.primary}'
     rounded: '{rounded.lg}'
   number-chip:
@@ -273,8 +273,8 @@ components:
     padding: '{spacing.4}'
     height: '{spacing.tap-button}'
   effort-card-selected:
-    backgroundColor: '{colors.surface}'
-    textColor: '{colors.text}'
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.on-primary}'
     borderColor: '{colors.primary}'
     rounded: '{rounded.lg}'
   note-field:
@@ -383,7 +383,7 @@ Bredder: innholdet har maksbredde 480 px og sentreres på bredere skjermer. Inge
 
 ## Elevation & Depth
 
-Flatt og luftig. Dybde skapes med tonelag (`background`, `surface`) og en kantlinje i `{colors.border}`, ikke med skygge. Skygger brukes ikke på kort eller bobler. Unntaket er pop-upen for ferdig økt: den ligger over en dempet bakgrunn (scrim). Scrim er `{colors.background}` med 60 % dekning. [ASSUMPTION] Verdien 60 % er et valg her, ikke bestemt i memloggen.
+Flatt og luftig. Dybde skapes med tonelag (`background`, `surface`) og en kantlinje i `{colors.border}`, ikke med skygge. Skygger brukes ikke på kort eller bobler. Unntaket er pop-upen for ferdig økt: den ligger over en dempet bakgrunn (scrim). Scrim er `{colors.background}` med 60 % dekning. Verdien 60 % er et valg her, ikke bestemt i memloggen.
 
 Fokusring er synlig og ligger utenfor elementet: 3 px i `{colors.primary}` med 2 px avstand. `primary` har minst 4,88:1 mot `background` og 5,13:1 mot `surface` i lys, 7,28:1 og 6,58:1 i mørk, som oppfyller 3:1 for fokusindikator.
 
@@ -399,27 +399,27 @@ Visuelle spesifikasjoner. Oppførsel ligger i EXPERIENCE.md, Component Patterns.
 
 - **button-primary**: `{colors.primary}` med tekst i `{colors.on-primary}`, `{rounded.xl}`, høyde `{spacing.tap-button}`, full bredde. Maks én per skjerm. Deaktivert: `{colors.border}` flate og `{colors.text-muted}` tekst, med ordet «utilgjengelig» for skjermleser. [NOTE FOR UX] Kontrast for deaktivert tekst er unntatt fra WCAG, men er ikke beregnet her.
 - **button-secondary**: `{colors.surface}`, `{colors.primary}` tekst og 2 px kant, samme form som primær. Brukes for «Avvis», «Avbryt», «Tilbake til Uke».
-- **button-text**: tekst i `{colors.primary}`, minst `{spacing.tap-min}` høy. Brukes for «Prøv igjen» og «Se dagens økt» som sekundær lenke.
+- **button-text**: tekst i `{colors.primary}`, minst `{spacing.tap-min}` høy. Brukes for «Prøv igjen» og «Send» som sekundær lenke.
 - **button-destructive**: `{colors.surface}` med `{colors.error}` tekst og 2 px kant. Brukes for «Slett konto» og «Slett» i dialog. Aldri fylt rød.
 - **input-field**: `{colors.surface}`, 1 px kant i `{colors.text-muted}`, `{rounded.md}`. Etikett over i `{typography.label}` (alltid synlig, aldri bare plassholder). Feil: kanten blir 2 px i `{colors.error}`, og meldingen står under feltet i `{colors.error}` med et feilikon foran.
-- **stepper-button** (−): runde `{rounded.full}`, `{spacing.tap-stepper}` kvadrat, `{colors.background}` flate, kant i `{colors.text-muted}`, symbol i `{colors.text}`. **stepper-button-plus** (+): `{colors.primary}` flate, symbol i `{colors.on-primary}`. Tegnet − og + er store og tydelige (ikke bindestrek). Trykket tilstand: flaten mørkner/lysner ett trinn mot `{colors.text}`. [ASSUMPTION] Trykket tilstand er ikke spesifisert i memloggen.
+- **stepper-button** (−): runde `{rounded.full}`, `{spacing.tap-stepper}` kvadrat, `{colors.background}` flate, kant i `{colors.text-muted}`, symbol i `{colors.text}`. **stepper-button-plus** (+): `{colors.primary}` flate, symbol i `{colors.on-primary}`. Tegnet − og + er store og tydelige (ikke bindestrek). Trykket tilstand: flaten mørkner/lysner ett trinn mot `{colors.text}`. Trykket tilstand er ikke spesifisert i memloggen.
 - **stepper-value**: tekstfelt med `{typography.value-input}`, sentrert, `{rounded.md}`, kant i `{colors.text-muted}`. Etikett («Vekt (kg)», «Reps») over feltet. Stepper = −, verdi og + på én linje. Samme komponent brukes i løpelogg: «Distanse (km)» og «Tid (min:sek)», to steppere over hverandre.
 - **progress-bar**: horisontal, høyde `{spacing.3}`, `{rounded.full}`. Spor i `{colors.border}`, fyll i `{colors.primary}`. Tekstverdi står alltid ved siden av eller over («2 av 4 økter», «Steg 2 av 4»). Brukes som uketeller på Uke og som fremdrift i onboarding.
 - **exercise-card**: `{colors.surface}`, 1 px `{colors.border}`, `{rounded.lg}`, padding `{spacing.5}`. Øvelsesnavn i `{typography.title}`. Under: «Forrige: 60 kg · Anbefalt: 62,5 kg», der anbefalt vekt er i `{colors.accent}` og `{typography.label}`. Viser stepper for vekt og reps, `button-primary` «Logg sett» og listen «Loggede sett» (hver rad kan trykkes for å endre og har ✕-knapp for å fjerne, minst `{spacing.tap-min}`). Første gang en øvelse logges mangler «Forrige/Anbefalt»-linjen.
 - **exercise-row** (øktoversikt): `{colors.surface}`, `{rounded.md}`, høyde minst `{spacing.tap-button}`. Navn til venstre, status til høyre med ikon og tekst: «○ Ikke startet», «◐ 1 av 2 sett», «✓ Ferdig» (`{colors.success}` på ✓ og «Ferdig»), og chevron.
 - **day-row** og **day-row-today** (ukeplan): rad per dag med dagnavn, øktnavn og status. I dag har 2 px kant i `{colors.primary}` og mer padding. Fullført dag har ✓ og teksten «Fullført». Hviledag er dempet i `{colors.text-muted}` og har tekst «Hviledag».
 - **status-tag**: pille med ikon eller tekst, kant i `{colors.text-muted}` eller statusfarge. Eksempler: «Fullført» (`{colors.success}`), «Kortere økt foreslått» (`{colors.warning}`). Farge er aldri eneste bærer.
-- **proposal-card**: `{colors.surface}`, 2 px kant i `{colors.accent}`, `{rounded.lg}`. Tittel «Forslag: endringer». Én linje per endring i formen «Knebøy 3 → 2 sett», der pilen er et tegn og begge verdier står som tekst. Under: `button-secondary` «Avvis» og `button-primary` «Godkjenn» side om side. Etter godkjenning: **proposal-card-approved** med `{colors.success}` kant og «Godkjent ✓», endringslinjene beholdes, og `button-text` «Se dagens økt» vises. Etter avvisning: kortet blir en dempet linje «Avvist. Planen er uendret.»
+- **proposal-card**: `{colors.surface}`, 2 px kant i `{colors.accent}`, `{rounded.lg}`. Tittel «Forslag: endringer». Én linje per endring i formen «Knebøy 3 → 2 sett», der pilen er et tegn og begge verdier står som tekst. Under: `button-secondary` «Avvis» og `button-primary` «Godkjenn» side om side. Etter godkjenning: **proposal-card-approved** med `{colors.success}` kant og «Godkjent ✓», endringslinjene beholdes, og `button-primary` «Se dagens økt» vises (ingen annen primærknapp er på kortet). Etter avvisning: kortet blir en dempet linje «Avvist. Planen er uendret.»
 - **chat-bubble-coach**: `{colors.surface}`, 1 px `{colors.border}`, `{rounded.lg}`, venstrejustert, maks 85 % bredde. Brukes for alle vanlige coach-svar, inkludert regelbrudd-forklaring.
 - **chat-bubble-user**: `{colors.primary}` flate, `{colors.on-primary}` tekst, høyrejustert.
 - **chat-bubble-pain** (dempet smerte-boble): `{colors.background}` flate, 1 px kant i `{colors.text-muted}`, tekst i `{colors.text}`. Ingen fargeaksent, ingen utropstegn, ikke rød. Ved siden av ligger bare de to valgene «Nei» og «Ja, bytt» som `button-secondary` når bytte-spørsmålet vises.
 - **chat-bubble-error**: `{colors.surface}`, 2 px kant i `{colors.error}`, tekst i `{colors.text}`, med feilikon og overskriften «Noe gikk galt» i `{colors.error}`. `button-text` «Prøv igjen» i boblen. Rolig, ikke alarmerende.
 - **tab-bar**: `{colors.surface}`, 1 px `{colors.border}` over, høyde `{spacing.tap-button}`. Fire faner (Uke, Coach, Historikk, Profil) med ikon og tekst, jevnt fordelt, hver minst `{spacing.tap-min}`. **tab-bar-item-active**: ikon og tekst i `{colors.primary}` pluss en 3 px strek over ikonet. Inaktive faner i `{colors.text-muted}`.
-- **choice-card** (onboarding): `{colors.surface}`, 2 px kant i `{colors.text-muted}`, `{rounded.lg}`, tittel i `{typography.title}` og en kort heiende forklaring i `{typography.body}`. **choice-card-selected**: 2 px kant i `{colors.primary}` pluss et ✓-ikon, så valget ikke bare vises med farge.
+- **choice-card** (onboarding): `{colors.surface}`, 2 px kant i `{colors.text-muted}`, `{rounded.lg}`, tittel i `{typography.title}` og en kort heiende forklaring i `{typography.body}`. **choice-card-selected**: fylt `{colors.primary}`-flate med tekst i `{colors.on-primary}` og et ✓ i en sirkel, så valget er tydelig og ikke bare vises med farge.
 - **number-chip** (antall økter 2 til 5): rund, `{spacing.tap-button}` kvadrat, `{typography.title}`, kant i `{colors.text-muted}`. **number-chip-selected**: `{colors.primary}` flate med `{colors.on-primary}` tall og ✓ i hjørnet.
 - **banner** (ny-uke): `{colors.surface}`, 2 px kant i `{colors.accent}`, `{rounded.lg}`, tekst i `{colors.text}` med ikon. Ingen lukk-knapp. Ligger øverst på ukeplanen, over uketelleren.
 - **hint-card** (førstegangs-hint): som banner, `{rounded.md}`, med en lukk-knapp (✕, minst `{spacing.tap-min}`).
-- **effort-card** (Lett, Passe, Tung): `{colors.surface}`, 2 px kant i `{colors.text-muted}`, `{rounded.lg}`, minst `{spacing.tap-button}` høy. Navnet i `{typography.title}` med ankerteksten under i `{typography.body}`. **effort-card-selected**: 2 px kant i `{colors.primary}` pluss ✓-ikon.
+- **effort-card** (Lett, Passe, Tung): `{colors.surface}`, 2 px kant i `{colors.text-muted}`, `{rounded.lg}`, minst `{spacing.tap-button}` høy. Navnet i `{typography.title}` med ankerteksten under i `{typography.body}`. **effort-card-selected**: fylt `{colors.primary}`-flate med tekst i `{colors.on-primary}` og ✓ i en sirkel. Samme valgt-stil gjelder alle tilsvarende valgbokser (for eksempel Utseende i Profil).
 - **note-field**: flerlinjers tekstfelt som input-field, `{rounded.md}`, etikett «Noe du vil huske?» alltid synlig, markert «valgfritt».
 - **pace-line**: én linje i `{typography.meta}` og `{colors.text-muted}` i day-row for løpeøkt, f.eks. «Sist: 5:42 min/km». Tallet står som tekst, ikke bare i farge.
 - **program-card** (uke 9): som banner, 2 px kant i `{colors.accent}`, `{rounded.lg}`, padding `{spacing.5}`. Under teksten: `button-primary` «Ja, nytt program» og `button-secondary` «Fortsett med dette». Ingen lukk-knapp.
@@ -441,3 +441,7 @@ Visuelle spesifikasjoner. Oppførsel ligger i EXPERIENCE.md, Component Patterns.
 | Hold flatene luftige med `{rounded.lg}` og rause marginer | Legg på skygger, harde kanter eller tunge skriftvekter (over 600) |
 | Bruk `rem` så alt skalerer til 200 % | Fest tekst i px eller avkort tekst på knapper |
 | La konfetti være et dekorlag som kan utelates | Gjør konfetti eller animasjon til eneste måte å vise et resultat |
+
+## Visuelle referanser
+
+Spinene vinner ved konflikt. Mocks (lys og mørk): [fargetema Pulsslag](mockups/color-themes-1.html), [designretning Rolig flyt](mockups/directions-1.html) og mocks av alle flater, listet i EXPERIENCE.md under Foundation (mappen `mockups/`).
