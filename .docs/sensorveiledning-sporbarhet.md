@@ -18,10 +18,10 @@ Dette er krav til selve appen. De skal inn i PRD (FR/NFR), UX og arkitektur, og 
 | Krit. | Krav fra sensorveiledningen | Hvor det skal ivaretas | Status/bevis |
 |---|---|---|---|
 | 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | 🟨 PRD v1.1: FR1–FR17, stories med AC i seksjon 5 |
-| 2 | Omfang med reell kompleksitet (datalagring, ikke-trivielle regler, integrasjoner) | PRD: scope; arkitektur: datamodell | 🟨 PRD v1.1: regler R1–R14, planversjoner, 8-ukersprogram, språkmodell; datamodell gjenstår |
+| 2 | Omfang med reell kompleksitet (datalagring, ikke-trivielle regler, integrasjoner) | PRD: scope; arkitektur: datamodell | 🟨 PRD v1.1: regler R1–R14, planversjoner, 8-ukersprogram, språkmodell; datamodell og miljøer i arkitekturen (AD-7, AD-8, AD-17, ER-diagram) |
 | 2 | Stabil ved feil input og gjentatte handlinger | PRD: NFR robusthet; AC i stories | 🟨 PRD NFR9; AC i Story 3.1 og 4.3 |
 | 2 | Avvik fra brief/proposal er beskrevet og begrunnet | PRD-seksjon «Avvik fra brief»; `bmad-correct-course` ved endringer | 🟨 PRD seksjon 7 (to avvik i v1.1); endringer fra UX gikk gjennom `bmad-correct-course` ([endringsforslag](planning-artifacts/sprint-change-proposal-2026-11-16.md)) |
-| 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | 🟨 PRD NFR6, profiler A–D, progresjonstabell; testrammeverk gjenstår |
+| 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | 🟨 PRD NFR6, profiler A–D, progresjonstabell; arkitektur AD-18: Vitest (motor, coach, integrasjon) og Playwright |
 | 3 | Manuelle testplaner der automatikk ikke passer | `.docs/implementation-artifacts/` testplan | ⬜ |
 | 3 | Feilhåndtering, inputvalidering, sikkerhetsbevissthet | PRD: NFR sikkerhet; arkitektur | 🟨 PRD NFR2–NFR4, NFR7, NFR9, FR16 |
 | 4 | Konsistent visuelt uttrykk (farger, typografi, komponenter) | `bmad-ux` → DESIGN.md | ⬜ |
@@ -29,10 +29,10 @@ Dette er krav til selve appen. De skal inn i PRD (FR/NFR), UX og arkitektur, og 
 | 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | 🟨 PRD NFR8 (WCAG 2.2 AA, redusert bevegelse, 200 % tekst) |
 | 4 | Tilpasning til skjermstørrelser (mobil/desktop) | PRD: NFR responsivitet; UX | 🟨 PRD NFR8 (mobilbredde) |
 | 4 | Spor av designarbeid (skisser, wireframes, UX-beskrivelser) | `bmad-ux`-dokumentene | ✅ `DESIGN.md`, `EXPERIENCE.md`, `mockups/` og `wireframes/` i `.docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/` (status final 2026-11-11; validering utsatt) |
-| 5 | Mappestruktur som samsvarer med beskrevet arkitektur | `bmad-architecture`; README-oversikt | ⬜ |
+| 5 | Mappestruktur som samsvarer med beskrevet arkitektur | `bmad-architecture`; README-oversikt | 🟨 Mappestruktur og avhengighetsregler i arkitekturen (AD-1, Structural Seed); koden gjenstår |
 | 5 | Lesbar kode, lite duplisering, ingen død kode/KI-rester | `bmad-code-review` per story | ⬜ |
-| 5 | Linter/formatter for konsekvent stil | Arkitektur: verktøyvalg; prosjektoppsett | ⬜ |
-| 5 | Fornuftig håndtering av konfigurasjon og avhengigheter | Arkitektur; `.env.example` | ⬜ |
+| 5 | Linter/formatter for konsekvent stil | Arkitektur: verktøyvalg; prosjektoppsett | 🟨 Valgt i arkitekturen: ESLint (med grenseregel for snitt) og Prettier; oppsett gjenstår |
+| 5 | Fornuftig håndtering av konfigurasjon og avhengigheter | Arkitektur; `.env.example` | 🟨 Arkitektur AD-17 (miljøvariabler, `.env.example`, miljøtabell) og låste versjoner i Stack |
 
 ## B. Prosesskrav (kriterium 1, 6, 7 og deler av 3, 45 %+)
 
@@ -46,7 +46,7 @@ Dette er krav til hvordan dere jobber, og de bygges ikke inn i appen. De ivareta
 | 1 | Branches, pull requests, issues | Én branch + PR per story; GitHub Issues for åpne punkter | 🟨 PR #2 |
 | 1 | Lagrede prompts og KI-økter | `.logs/<bruker>/` via `sesjonslogg` | 🟨 påbegynt |
 | 1 | Eksempler på at KI-forslag er presisert, avvist eller rettet | Egen seksjon i sesjonsloggen: «KI-forslag vi avviste/rettet» | 🟨 `.logs/knut-aardal/` (PRD v0.7), `.logs/caroline-grundekjon/` (PRD v1.1) |
-| 1 | Dokumenterte beslutninger med begrunnelse | Arkitekturdokumentet (beslutninger + begrunnelse) | ⬜ |
+| 1 | Dokumenterte beslutninger med begrunnelse | Arkitekturdokumentet (beslutninger + begrunnelse) | 🟨 `architecture/architecture-G83-…-2026-11-16/`: 18 beslutninger (AD-1–AD-18) i spinen, begrunnelser og forkastede alternativer i `.memlog.md`, kontroller i `reviews/` |
 | 1 | Samarbeid over tid | Alle medlemmer committer/PR-er; co-author ved parprogrammering | 🟨 |
 | 3 | Spor av kodegjennomgang og retting av KI-kode | PR-kommentarer; `bmad-code-review`-funn lagret | ⬜ |
 | 6 | README: hva appen er, for hvem, skjermbilde | README.md | ⬜ |
