@@ -76,6 +76,10 @@ UX-arbeidet (`ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/`, final 1
 | App. B | Dagene følger R9; kolonnen heter «Sessions and equipment» | F1 |
 | Endringslogg | v1.1 | E |
 
+## Tillegg (2026-11-16): database
+
+Under arkitekturarbeidet valgte Caroline PostgreSQL i stedet for SQLite (samme database lokalt, hos sensor og i publisert versjon). NFR5 og §4 i PRD v1.1 er rettet tilsvarende og lagt til i samme pull request (#12), etter Carolines valg.
+
 ## 6. Overlevering
 
 - **Omfang:** moderat. PM-oppgave (PRD) nå, deretter arkitekt.
