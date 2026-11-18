@@ -7,7 +7,7 @@ paradigm: 'Vertical slices over a shared core, with a functional-core plan engin
 scope: 'The whole Flex PT v1 (MVP) web app: accounts, onboarding, plan engine, logging and progression, coach dialogue, profile, environments'
 status: final
 created: '2026-11-16'
-updated: '2026-11-16'
+updated: '2026-11-18'
 binds: [FR1, FR2, FR3, FR4, FR5, FR6, FR7, FR8, FR9, FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, NFR1, NFR2, NFR3, NFR4, NFR5, NFR6, NFR7, NFR8, NFR9, NFR10, NFR11, E1, E2, E3, E4]
 sources:
   - ../../prd-flex-pt.md (v1.1, PR #12)
@@ -108,7 +108,7 @@ flowchart TD
 
 - **Binds:** FR3, FR5, FR7, FR17, NFR9, NFR11
 - **Prevents:** logs pointing at a session that a newer version no longer contains, sessions logged twice, and counters counting against the wrong version
-- **Rule:** Each planned session in a week is a **session slot** with an id that stays the same in every version of that week. What the session contains in a given version (day, type, exercises, sets, reps, loads, distance, R8 reduction) is a **version session** row (version, slot, content), so older versions never change. A moved, reduced or swapped session keeps its slot id and gets new content in the new version; a slot gets a new id only when a session is added. Logs reference the slot, never a version. A slot that is logged or lies in the past is never changed or removed by a new version. One session log per slot, enforced by a unique key, and one set log per (session log, exercise, set number); repeating the same request returns the existing row. A session log is `in_progress` from the first logged set until «Fullfør økt», then `finished`; the server rejects changes to a finished log. Each set is saved when it is logged, so an active session is restored from the database (NFR11).
+- **Rule:** Each planned session in a week is a **session slot** with an id that stays the same in every version of that week. What the session contains in a given version (day, type, exercises, sets, reps, loads, distance, R8 reduction) is a **version session** row (version, slot, content), so older versions never change. A moved, reduced or swapped session keeps its slot id and gets new content in the new version; a slot gets a new id only when a session is added. Logs reference the slot, never a version. A slot that is logged or lies in the past is never changed or removed by a new version. One session log per slot, enforced by a unique key, and one set log per (session log, exercise, set number); repeating the same request returns the existing row. A session log is `in_progress` from the first logged set until «Fullfør økt», then `finished`; the server rejects changes to a finished log. A log still `in_progress` after midnight (Europe/Oslo) at the end of the day it was started counts as finished without effort or note (PRD v1.2, FR7); this is a read-time rule computed by the engine from the logged day and today's date, with no background job and no write on page render, and the server rejects changes to such a log as for a finished one. Each set is saved when it is logged, so an active session is restored from the database (NFR11).
 
 ### AD-9 — The coach is one interface with a Live and a Demo provider [ADOPTED]
 

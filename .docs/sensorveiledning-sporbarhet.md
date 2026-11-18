@@ -17,16 +17,16 @@ Dette er krav til selve appen. De skal inn i PRD (FR/NFR), UX og arkitektur, og 
 
 | Krit. | Krav fra sensorveiledningen | Hvor det skal ivaretas | Status/bevis |
 |---|---|---|---|
-| 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | 🟨 PRD v1.1: FR1–FR17, stories med AC i seksjon 5 |
+| 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | 🟨 PRD v1.2: FR1–FR17; [epics.md](planning-artifacts/epics.md): 4 epics, 26 stories med Given/When/Then-AC, alle FR dekket |
 | 2 | Omfang med reell kompleksitet (datalagring, ikke-trivielle regler, integrasjoner) | PRD: scope; arkitektur: datamodell | 🟨 PRD v1.1: regler R1–R14, planversjoner, 8-ukersprogram, språkmodell; datamodell og miljøer i arkitekturen (AD-7, AD-8, AD-17, ER-diagram) |
-| 2 | Stabil ved feil input og gjentatte handlinger | PRD: NFR robusthet; AC i stories | 🟨 PRD NFR9; AC i Story 3.1 og 4.3 |
+| 2 | Stabil ved feil input og gjentatte handlinger | PRD: NFR robusthet; AC i stories | 🟨 PRD NFR9; AC for dobbeltklikk, serverside Zod-validering og foreldede forslag i epics.md (bl.a. Story 1.2, 2.3, 3.1, 3.3, 4.3) |
 | 2 | Avvik fra brief/proposal er beskrevet og begrunnet | PRD-seksjon «Avvik fra brief»; `bmad-correct-course` ved endringer | 🟨 PRD seksjon 7 (to avvik i v1.1); endringer fra UX gikk gjennom `bmad-correct-course` ([endringsforslag](planning-artifacts/sprint-change-proposal-2026-11-16.md)) |
-| 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | 🟨 PRD NFR6, profiler A–D, progresjonstabell; arkitektur AD-18: Vitest (motor, coach, integrasjon) og Playwright |
+| 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | 🟨 PRD NFR6, profiler A–D, progresjonstabell; arkitektur AD-18: Vitest (motor, coach, integrasjon) og Playwright; testkrav i AC i epics.md (én test per profil A–D, per rad i progresjonstabellen, per planendringstype og per coach-scenario) |
 | 3 | Manuelle testplaner der automatikk ikke passer | `.docs/implementation-artifacts/` testplan | ⬜ |
 | 3 | Feilhåndtering, inputvalidering, sikkerhetsbevissthet | PRD: NFR sikkerhet; arkitektur | 🟨 PRD NFR2–NFR4, NFR7, NFR9, FR16 |
 | 4 | Konsistent visuelt uttrykk (farger, typografi, komponenter) | `bmad-ux` → DESIGN.md | ⬜ |
-| 4 | Tydelig navigasjon, tilbakemeldinger, feilmeldinger, tomtilstander | `bmad-ux` → EXPERIENCE.md; AC i stories | ⬜ Skal dekkes i EXPERIENCE.md (PRD seksjon 3) |
-| 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | 🟨 PRD NFR8 (WCAG 2.2 AA, redusert bevegelse, 200 % tekst) |
+| 4 | Tydelig navigasjon, tilbakemeldinger, feilmeldinger, tomtilstander | `bmad-ux` → EXPERIENCE.md; AC i stories | 🟨 EXPERIENCE.md (State Patterns, Voice and Tone); feilmeldinger, tomtilstander og tilbakemeldinger som AC i epics.md (UX-DR14–UX-DR27) |
+| 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | 🟨 PRD NFR8 (WCAG 2.2 AA, redusert bevegelse, 200 % tekst); AC for tastatur, etiketter, fokus og axe-sjekk i begge tema i epics.md (UX-DR28, Story 1.2, 1.3) |
 | 4 | Tilpasning til skjermstørrelser (mobil/desktop) | PRD: NFR responsivitet; UX | 🟨 PRD NFR8 (mobilbredde) |
 | 4 | Spor av designarbeid (skisser, wireframes, UX-beskrivelser) | `bmad-ux`-dokumentene | ✅ `DESIGN.md`, `EXPERIENCE.md`, `mockups/` og `wireframes/` i `.docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/` (status final 2026-11-11; validering utsatt) |
 | 5 | Mappestruktur som samsvarer med beskrevet arkitektur | `bmad-architecture`; README-oversikt | 🟨 Mappestruktur og avhengighetsregler i arkitekturen (AD-1, Structural Seed); koden gjenstår |
