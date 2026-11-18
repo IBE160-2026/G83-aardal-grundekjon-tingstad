@@ -14,3 +14,6 @@
 - [x] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PRD v0.7 i PR (tre løpetyper, energi bare i chat) (løst 2026-11-09: PR #9 flettet)
 - [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PR #10 (rask kort tur og PRD v1.0)
 - [x] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Vurder om loggskjermen skal forklare at anstrengelse på rask kort tur ikke påvirker progresjonen (løst 2026-11-09: kort forklaring på loggskjermen)
+- [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Avklar hvem som har Anthropic-API-nøkkelen (PRD §8); trengs i Story 4.5
+- [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Story 2.2: bestem sett/reps per erfaring og fordeling av løpedistanse i uke 1, og skriv det inn i PRD-ens vedlegg A
+- [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Gruppa godkjenner epics.md, PRD v1.2 og AD-8 i PR fra docs/epics-v1
