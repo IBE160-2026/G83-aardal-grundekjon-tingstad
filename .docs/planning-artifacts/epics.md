@@ -2,7 +2,7 @@
 stepsCompleted: [1, 2, 3, 4]
 inputDocuments:
   - .docs/planning-artifacts/prd-flex-pt.md (v1.1; v1.2 adds the midnight rule found in this work)
-  - .docs/planning-artifacts/architecture/architecture-G83-aardal-grundekjon-tingstad-2026-11-16/ARCHITECTURE-SPINE.md (final, AD-1–AD-18; AD-19 added 2026-11-22 with Story 1.7)
+  - .docs/planning-artifacts/architecture/architecture-G83-aardal-grundekjon-tingstad-2026-11-16/ARCHITECTURE-SPINE.md (final, AD-1–AD-18; AD-19 added 2026-11-22 with Story 1.7, both deferred to version 2)
   - .docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/DESIGN.md (final, 2026-11-11)
   - .docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/EXPERIENCE.md (final, 2026-11-11)
   - .docs/sensorveiledning-sporbarhet.md (table A, used as an acceptance-criteria checklist only)
@@ -37,7 +37,7 @@ FR14: Next week's plan adjusts load based on logged sessions and perceived effor
 FR15: Plan changes are shown as before → after on the proposal card before approval (FR11). The week plan does not mark changed sessions.
 FR16: The user can delete their account. After confirmation, profile, plans, logs and messages are deleted permanently.
 FR17: After a finished session the app shows a summary, a motivational message compared with the previous session of the same type (plain encouragement the first time), a quote from a fixed list, a celebration when a running goal is reached (R14), and the next planned session with its day. Confetti is should-have and never shown with reduced motion.
-FR18: A user who has forgotten their password can ask for a reset link by email from the login screen. Same reply whether or not the address has an account; the link works once and for one hour and sets a new password with the registration rules; requests limited per email and per IP; demo users cannot reset.
+FR18 (moved to version 2, not in v1): A user who has forgotten their password can ask for a reset link by email from the login screen. Same reply whether or not the address has an account; the link works once and for one hour and sets a new password with the registration rules; requests limited per email and per IP; demo users cannot reset.
 
 ### NonFunctional Requirements
 
@@ -76,7 +76,7 @@ From the architecture spine (AD-1–AD-19). **No starter template is named**; Ep
 - **Demo seeding (AD-16):** `src/seed` builds demo users A–D through slices' `api.ts` with relative dates and generated ids. "Prøv demo" lets the visitor pick a profile and creates a fresh demo user per visit; demo users older than 24 h are deleted when the next is created. Demo users can't change email/password, always use Demo provider, always show the badge. Same code creates e2e fixtures.
 - **Environments (AD-17):** config only from env vars; `.env.example` lists all. Local/examiner: `docker compose up` with Next.js standalone image, `postgres:18` with volume and healthcheck, one-off migrate service before app start, `COACH_MODE=demo` default. Dev: `npm run dev` + compose PostgreSQL + `npm run db:migrate`. Published: Vercel from `main` only, Supabase PostgreSQL, `COACH_MODE=live` with daily limit; previews not connected to a DB.
 - **Testing (AD-18):** Vitest `tests/engine` (profiles A–D vs Appendix B, one test per progression-table row, each plan-change type); `tests/coach` (`classifyMedical` incl. two medical Appendix C scenarios; non-medical scenarios against Demo provider); `tests/integration` against a test DB (transactions, idempotency, account-deletion cascade); Playwright `tests/e2e` main flows in demo mode.
-- **Mail and password reset (AD-19):** Better Auth's reset flow (`sendResetPassword`, one-hour single-use token, `revokeSessionsOnPasswordReset`). `shared/mail` has one `sendMail` interface chosen by `MAIL_MODE`: `console` (default locally and for the examiner, link in the server log), `live` (Resend, `RESEND_API_KEY`, `MAIL_FROM`), `memory` (outbox for tests). Same reply whether or not the address exists; no mail for unknown or demo addresses. Better Auth rate limiter with database storage; reset request at most 3 per email and 5 per IP per hour, 429 above.
+- **Mail and password reset (AD-19, deferred to version 2 with FR18; nothing of it is built in v1):** Better Auth's reset flow (`sendResetPassword`, one-hour single-use token, `revokeSessionsOnPasswordReset`). `shared/mail` has one `sendMail` interface chosen by `MAIL_MODE`: `console` (default locally and for the examiner, link in the server log), `live` (Resend, `RESEND_API_KEY`, `MAIL_FROM`), `memory` (outbox for tests). Same reply whether or not the address exists; no mail for unknown or demo addresses. Better Auth rate limiter with database storage; reset request at most 3 per email and 5 per IP per hour, 429 above.
 - **Conventions:** code, identifiers and commits in English, UI text in bokmål; kebab-case files, PascalCase components/types, snake_case tables/columns; UUIDs for app tables; km with one decimal, durations in whole seconds, loads in kg rounded to 0.5 (`null` = bodyweight); server actions return `{ ok: true, data }` / `{ ok: false, code, message }` with Norwegian message, no stack traces to the browser; Next.js 16 request APIs awaited; account deletion via FK cascade with a test that nothing remains; ESLint + Prettier pass before every PR.
 - **Deferred items assigned to stories:** exercise library file format → Story 2.1; medical word list and body-part map → Story 4.4.
 
@@ -105,7 +105,7 @@ UX-DR13: Modal pattern for `popup-done` and confirmation dialogs: traps focus, m
 
 **Screens and behaviour**
 
-UX-DR14: Login screen with «Logg inn», «Registrer ny bruker» and «Prøv demo» (demo profile choice per AD-16); registration errors (invalid email, short password) in plain text under the field. «Glemt passord?» `button-text` leads to Glemt passord and Nytt passord with the texts and states in EXPERIENCE.md (Voice and Tone, State Patterns, Flow 7).
+UX-DR14: Login screen with «Logg inn», «Registrer ny bruker» and «Prøv demo» (demo profile choice per AD-16); registration errors (invalid email, short password) in plain text under the field. No «Glemt passord?» in v1 (FR18 moved to version 2).
 UX-DR15: Onboarding: one question per screen, progress bar «Steg N av M» (M = 4 running, 5 strength), back button that keeps previous answers, tap-to-select-and-advance, `loading-state` «Lager planen din …» then straight to Uke (no summary screen).
 UX-DR16: Uke (home): progress counter, today's session highlighted as `day-row-today` (opens the session), `day-row` per day with status (✓ Fullført, «Hviledag» muted), `pace-line` «Sist: m:ss min/km» on runs (hidden first time), «Neste økt: [dag], [økt]» when no session today, welcome `hint-card` first time, new-week `banner` until first logged session, `program-card` replacing the banner in week 9 (strength). No week browsing, no change markers.
 UX-DR17: Øktoversikt: all exercises as `exercise-row` with status (○ Ikke startet, ◐ N av M sett, ✓ Ferdig), free order, «Fullfør økt» with no extra confirmation when sets are missing.
@@ -144,7 +144,7 @@ FR14: Epic 3 - Progression R6, R7, R12
 FR15: Epic 4 - Before → after on the proposal card only
 FR16: Epic 1 - Delete account with cascade
 FR17: Epic 3 - Finished-session popup (confetti as a separate should-have story, UX-DR29)
-FR18: Epic 1 - Forgotten password by email (Story 1.7)
+FR18: Not in v1 - moved to version 2 (see "Version 2" at the end)
 
 NFR1: Epic 1 (demo login, badge), grown in Epics 2–4 (plan, logs, recorded coach answers)
 NFR2, NFR3, NFR5: Epic 1
@@ -157,8 +157,8 @@ NFR11: Epic 3
 ## Epic List
 
 ### Epic 1: Sign in, try the demo and own your account
-A visitor can register, log in and out, reset a forgotten password, try the demo with one click, pick light or dark theme, and delete their account. The app runs locally with one command and has its design tokens and app shell in place.
-**FRs covered:** FR1, FR3 (theme), FR16, FR18 · **NFRs:** NFR1 (demo login, badge), NFR2, NFR3, NFR5, NFR8, NFR10
+A visitor can register, log in and out, try the demo with one click, pick light or dark theme, and delete their account. The app runs locally with one command and has its design tokens and app shell in place.
+**FRs covered:** FR1, FR3 (theme), FR16 · **NFRs:** NFR1 (demo login, badge), NFR2, NFR3, NFR5, NFR8, NFR10
 
 ### Epic 2: Get a personal weekly plan
 After onboarding the user gets a rule-based weekly plan that is shown clearly, follows the 8-week program, and is replanned when the profile changes.
@@ -385,66 +385,6 @@ So that the deployment works long before the deadline and can be shown at any ti
 **Given** the README
 **When** a reader looks for the published app
 **Then** it gives the URL and notes that a free Supabase project pauses after a week without use and must be resumed before a demonstration
-
-### Story 1.7: Reset a forgotten password by email
-
-As a user who has forgotten my password,
-I want to get a link by email where I choose a new password,
-So that I can get back to my plan and logs without a new account.
-
-**Acceptance Criteria:**
-
-**Given** I am on the login screen
-**When** I press «Glemt passord?» (`button-text` under «Logg inn»)
-**Then** «Glemt passord» opens with the ingress, a labelled email `input-field`, the `button-primary` «Send lenke» and the link «Til innlogging» (UX-DR6, UX-DR7, UX-DR14)
-
-**Given** the Glemt passord form
-**When** I submit an address that is a valid email
-**Then** the form is replaced by «Hvis adressen har en konto, har vi sendt en lenke. Lenken virker i én time.» with «Til innlogging» under it, whether or not the address has an account (FR18)
-**And** a mail with the reset link is sent only when the address belongs to a non-demo account, through Better Auth's `sendResetPassword` and `shared/mail` (AD-6, AD-19)
-**And** an invalid email gives a plain-text message under the field, and the same check runs on the server with Zod (AD-4)
-
-**Given** `MAIL_MODE=console`, the default locally and for the examiner
-**When** a reset link is requested for an existing account
-**Then** no mail is sent and the link is written to the server log, so the flow works with no keys (NFR1, NFR5)
-**And** with `MAIL_MODE=live` the mail is sent through Resend with `RESEND_API_KEY` and `MAIL_FROM`, and the mail contains only the subject, the text from EXPERIENCE.md and the link
-
-**Given** the reset request
-**When** the same email address asks more than 3 times, or the same IP address more than 5 times, within an hour
-**Then** the endpoint answers 429 and the form shows «For mange forespørsler. Prøv igjen om en time.» under the field, which keeps its value
-**And** the limits are stored in the database so they hold across serverless instances (AD-19)
-
-**Given** a valid reset link
-**When** I open it
-**Then** «Velg nytt passord» opens with a labelled «Nytt passord» field and the `button-primary` «Lagre passord»
-
-**Given** the Nytt passord form
-**When** I save a password of at least 8 characters
-**Then** the password is changed and hashed, the link can no longer be used, every session of my account ends, and I land on the login screen with «Passordet er endret. Logg inn med det nye passordet.» (NFR3)
-**And** I can log in with the new password and not with the old one
-**And** pressing «Lagre passord» twice changes the password once and shows no error page (NFR9)
-**And** a short password gives the same message as registration, and nothing is changed
-
-**Given** a reset link that is older than one hour or already used
-**When** I open it or submit the form
-**Then** I see «Lenken er utløpt eller allerede brukt.» with the link «Be om en ny lenke», and the password is unchanged
-
-**Given** a demo user's address
-**When** a reset is requested for it
-**Then** the same neutral reply is shown and no mail or link is created (AD-16)
-
-**Given** `.env.example` and the README
-**When** a reader looks for the mail settings
-**Then** `.env.example` lists `MAIL_MODE`, `RESEND_API_KEY` and `MAIL_FROM` with no real values, and the README explains that the app runs without a mail key and where the reset link appears locally (NFR3, NFR5)
-
-**Given** the full flow
-**When** it is done with keyboard only and with text at 200 %
-**Then** every field, button and link is reachable in reading order with a visible focus ring, and nothing is cut off or scrolls sideways at 320 px width (NFR8, UX-DR28)
-
-**Given** the tests
-**When** they run with `MAIL_MODE=memory`
-**Then** an integration test covers the neutral reply for an unknown address, no mail for a demo user, the 429 limit, and an expired and a used token
-**And** a Playwright test covers Glemt passord → link from the memory outbox → new password → log in with the new password
 
 ## Epic 2: Get a personal weekly plan
 
@@ -1126,3 +1066,67 @@ So that coach behaviour can be checked without an API key.
 **Given** a team member with an API key and `COACH_MODE=live`
 **When** the same scenarios are run against the live model
 **Then** the results are documented in `.docs/implementation-artifacts/` with date and model id, including any scenario where the live model differs from the recording
+
+## Version 2 (not in v1)
+
+Moved out of v1 on 2026-11-22: sending reset links by email to any user needs a verified sender domain, and the team does not buy one for v1 (PRD v1.5, §6). The story is kept as written so it can be picked up in version 2. It has no story number and is not tracked in `sprint-status.yaml`.
+
+### V2: Reset a forgotten password by email (former Story 1.7)
+
+As a user who has forgotten my password,
+I want to get a link by email where I choose a new password,
+So that I can get back to my plan and logs without a new account.
+
+**Acceptance Criteria:**
+
+**Given** I am on the login screen
+**When** I press «Glemt passord?» (`button-text` under «Logg inn»)
+**Then** «Glemt passord» opens with the ingress, a labelled email `input-field`, the `button-primary` «Send lenke» and the link «Til innlogging» (UX-DR6, UX-DR7, UX-DR14)
+
+**Given** the Glemt passord form
+**When** I submit an address that is a valid email
+**Then** the form is replaced by «Hvis adressen har en konto, har vi sendt en lenke. Lenken virker i én time.» with «Til innlogging» under it, whether or not the address has an account (FR18)
+**And** a mail with the reset link is sent only when the address belongs to a non-demo account, through Better Auth's `sendResetPassword` and `shared/mail` (AD-6, AD-19)
+**And** an invalid email gives a plain-text message under the field, and the same check runs on the server with Zod (AD-4)
+
+**Given** `MAIL_MODE=console`, the default locally and for the examiner
+**When** a reset link is requested for an existing account
+**Then** no mail is sent and the link is written to the server log, so the flow works with no keys (NFR1, NFR5)
+**And** with `MAIL_MODE=live` the mail is sent through Resend with `RESEND_API_KEY` and `MAIL_FROM`, and the mail contains only the subject, the text from EXPERIENCE.md and the link
+
+**Given** the reset request
+**When** the same email address asks more than 3 times, or the same IP address more than 5 times, within an hour
+**Then** the endpoint answers 429 and the form shows «For mange forespørsler. Prøv igjen om en time.» under the field, which keeps its value
+**And** the limits are stored in the database so they hold across serverless instances (AD-19)
+
+**Given** a valid reset link
+**When** I open it
+**Then** «Velg nytt passord» opens with a labelled «Nytt passord» field and the `button-primary` «Lagre passord»
+
+**Given** the Nytt passord form
+**When** I save a password of at least 8 characters
+**Then** the password is changed and hashed, the link can no longer be used, every session of my account ends, and I land on the login screen with «Passordet er endret. Logg inn med det nye passordet.» (NFR3)
+**And** I can log in with the new password and not with the old one
+**And** pressing «Lagre passord» twice changes the password once and shows no error page (NFR9)
+**And** a short password gives the same message as registration, and nothing is changed
+
+**Given** a reset link that is older than one hour or already used
+**When** I open it or submit the form
+**Then** I see «Lenken er utløpt eller allerede brukt.» with the link «Be om en ny lenke», and the password is unchanged
+
+**Given** a demo user's address
+**When** a reset is requested for it
+**Then** the same neutral reply is shown and no mail or link is created (AD-16)
+
+**Given** `.env.example` and the README
+**When** a reader looks for the mail settings
+**Then** `.env.example` lists `MAIL_MODE`, `RESEND_API_KEY` and `MAIL_FROM` with no real values, and the README explains that the app runs without a mail key and where the reset link appears locally (NFR3, NFR5)
+
+**Given** the full flow
+**When** it is done with keyboard only and with text at 200 %
+**Then** every field, button and link is reachable in reading order with a visible focus ring, and nothing is cut off or scrolls sideways at 320 px width (NFR8, UX-DR28)
+
+**Given** the tests
+**When** they run with `MAIL_MODE=memory`
+**Then** an integration test covers the neutral reply for an unknown address, no mail for a demo user, the 429 limit, and an expired and a used token
+**And** a Playwright test covers Glemt passord → link from the memory outbox → new password → log in with the new password

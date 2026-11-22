@@ -1,5 +1,6 @@
 # Flex PT – Product Requirements Document
 
+**Status:** v1.5 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
 **Status:** v1.4 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
@@ -42,7 +43,7 @@ Requirements are numbered so they can be traced to stories, code and tests. The 
 | FR15 | Changes to the plan are shown as before → after on the proposal card before the user approves them (FR11). The week plan does not mark changed sessions. | Capability 5 |
 | FR16 | The user can delete their account. After confirmation, the profile, plans, logs and messages are deleted permanently. | Privacy (health data, section 4) |
 | FR17 | After a session is finished, the app shows a summary of the session, a motivational message that compares with the previous session of the same type (heavier load or longer distance than last time; plain encouragement the first time), a motivational quote from a fixed list, a celebration when a running goal is reached (R14), and the next planned session with its day. A small confetti celebration should be shown if time allows (should-have), and never when the phone is set to reduce motion. | Capability 5 |
-| FR18 | A user who has forgotten their password can ask for a reset link by email from the login screen. The reply is the same whether or not the address has an account. The link works once and for one hour and sets a new password with the same rules as registration. Requests are limited per email address and per IP address. Demo users cannot reset a password. | Capability 1 (account security) |
+| FR18 | **Moved to version 2 (2026-11-22), not built in v1; see §6.** A user who has forgotten their password can ask for a reset link by email from the login screen. The reply is the same whether or not the address has an account. The link works once and for one hour and sets a new password with the same rules as registration. Requests are limited per email address and per IP address. Demo users cannot reset a password. | Capability 1 (account security) |
 
 ### Non-functional requirements
 
@@ -66,7 +67,7 @@ The interface should make the next session obvious and make changes feel safe: n
 
 | Screen | Purpose | Requirements |
 | --- | --- | --- |
-| Sign up and log in | Create an account, log in, try the demo, or reset a forgotten password by email | FR1, FR18, NFR1 |
+| Sign up and log in | Create an account, log in, or try the demo | FR1, NFR1 |
 | Onboarding | Five steps, one question per screen (FR2) | FR2 |
 | Week plan (home) | This week's sessions per day, next session highlighted, session counter, new-week banner, 8-week program card (R13) | FR4, FR5 |
 | Session overview and log | All exercises of the session in the order the user chooses; sets logged one at a time, with previous and recommended load; runs logged with distance and time. For a fast short run, the pace from the previous fast short run is shown as a target to beat, with a short note that the run should feel hard and that the distance is fixed | FR5, FR7, NFR11 |
@@ -98,7 +99,7 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 
 | Epic | Goal | Requirements |
 | --- | --- | --- |
-| E1 Foundation and accounts | Runnable project, login, forgotten password, profile, demo data, theme, account deletion | FR1–FR3, FR16, FR18, NFR1–NFR5, NFR8, NFR10 |
+| E1 Foundation and accounts | Runnable project, login, profile, demo data, theme, account deletion | FR1–FR3, FR16, NFR1–NFR5, NFR8, NFR10 |
 | E2 Plan engine and weekly plan | Rule-based plan from the profile, shown clearly; 8-week program and running goal | FR4–FR6, NFR6 |
 | E3 Logging and progression | Log sessions, finish them and adjust next week | FR7, FR8, FR14, FR17, NFR11 |
 | E4 Coach dialogue | Chat that proposes validated changes the user approves | FR9–FR13, FR15, NFR4, NFR7, NFR9 |
@@ -128,7 +129,7 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 6. **Story 1.6 – Theme (FR3, NFR8).** As a user, I want light or dark mode so that the app is comfortable to use.
    - Profile offers light, dark and system; the choice is kept the next time the app is opened.
    - Contrast meets NFR8 in both themes.
-7. **Story 1.7 – Forgotten password (FR18, NFR3).** As a user, I want to set a new password by email so that I can get back into my account.
+7. **Story 1.7 – Forgotten password (FR18, NFR3). Moved to version 2; see §6.** As a user, I want to set a new password by email so that I can get back into my account.
    - «Glemt passord?» on the login screen leads to a form that sends a reset link; the reply never reveals whether the address has an account.
    - The link works once and for one hour; too many requests give a clear message.
    - The app still runs locally without keys: the link is written to the server log instead of being sent.
@@ -194,6 +195,7 @@ Four epics cover v1, built in order. Each story becomes one branch, one pull req
 
 - **Stage 2:** selectable coaching style, visible plan history, more change types (equipment, new goal), weekly streak (at least one logged session every week), personal records (heaviest load per exercise).
 - **Stage 3:** coach memory across conversations, more training types and goals.
+- **Version 2: forgotten password (FR18, former Story 1.7).** Sending the reset link by email to any user needs a verified sender domain, and the team does not buy one for v1. The requirements, texts and flow (EXPERIENCE.md Flow 7) and the architecture decision (AD-19) are kept for v2. In v1 a user who has forgotten the password must register a new account.
 - **Later versions:** combined running and strength plans; Strava, Apple Health and Garmin import; calendar integration; nutrition; cycle and pregnancy programs; gamification; subscriptions.
 
 **Feedback is not gamification.** The session counter, the motivational message after a session, the motivational quote and the confetti celebration (FR5, FR17) are feedback on the user's own training. They have no points, levels, rewards or competition, so they are not the game mechanics or reward systems the brief leaves out of v1. Streaks and personal records track achievements over time and are moved to stage 2.
@@ -368,4 +370,5 @@ Profile E is used only in the plan engine tests, not as a demo user. It is the o
 | 2026-11-16 | 1.1 | Changes from the UX work, through `bmad-correct-course` ([sprint change proposal](sprint-change-proposal-2026-11-16.md)): five-step onboarding without available days and with two equipment options (FR2, R1, R5, new fixed day patterns in R9, Appendix B); 8-week strength program (new R13) and running goal (new R14) with Story 2.4; week counter, new-week banner, previous and recommended load and pace (FR4, FR5); set-by-set logging with status derived from sets and a set counted from 1 rep (FR7, R6, progression table); time-limited session added to R8; proposal card shows only changed lines and FR15 rewritten so the week plan has no change markers (FR11, FR15); new FR17 finished session with confetti as should-have, Story 3.4; theme choice and Story 1.6 (FR3); demo button and badge (NFR1); WCAG 2.2 AA, reduced motion and 200 % text (NFR8); Norwegian effort names and tone (NFR10); new NFR11 restore active session; §6 explains why feedback is not gamification and moves streaks and personal records to stage 2; §7 new deviation for available days; §8 new questions answered; database changed from SQLite to PostgreSQL after the architecture choice (NFR5, §4) |
 | 2026-11-18 | 1.2 | Found while writing epics and stories: a started session that is not finished is finished automatically at midnight (Europe/Oslo) at the end of the day it was started, without effort or note, and locked (FR7); new row in the progression table: such a session gives no increase, and only its not-completed parts count towards R12 |
 | 2026-11-22 | 1.3 | New FR18 forgotten password and Story 1.7, after comparing with the lecturer's reference stories for login («Reset a forgotten password by email»). The lecturer's other login stories (roles, invitations, admin area, institutions, audit log) do not fit an app with one user type and open registration and were left out. UI table and E1 updated; email provider in architecture AD-19 |
+| 2026-11-22 | 1.5 | Forgotten password (FR18, Story 1.7) moved to version 2: reset links by email to any user need a verified sender domain, which the team does not buy for v1. FR18 is kept for v2 and marked as moved; §5, §6 and the capability table updated. Decided by Knut, approved by the group in the pull request |
 | 2026-11-22 | 1.4 | Starting volume for the first plan week added to Appendix A (sets, reps and exercises per session by experience and template; long run, easy short run and fast short run distances), session slots by movement pattern, and a 1–50 km limit on the longest run; expected first-week volume for profiles A–D and a new engine-only profile E (beginner, home, upper-body focus) added to Appendix B; R6 caps bodyweight exercises at 20 reps per set; R5 assumes a bar, table edge or similar to pull on at home. Needed by Stories 2.1, 2.2, 2.4 and 3.4; proposed by Knut and approved by the group in the pull request |

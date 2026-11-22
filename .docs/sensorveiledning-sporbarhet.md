@@ -17,13 +17,13 @@ Dette er krav til selve appen. De skal inn i PRD (FR/NFR), UX og arkitektur, og 
 
 | Krit. | Krav fra sensorveiledningen | Hvor det skal ivaretas | Status/bevis |
 |---|---|---|---|
-| 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | 🟨 PRD v1.3: FR1–FR18; [epics.md](planning-artifacts/epics.md): 4 epics, 27 stories med Given/When/Then-AC, alle FR dekket. FR18 glemt passord (Story 1.7) lagt til etter sammenligning med foreleserens referanse-stories for innlogging |
+| 2 | Kjerneflytene fra brief/proposal fungerer fra start til slutt | PRD: kjerneflyter som FR; stories med AC | 🟨 PRD v1.5: FR1–FR17 i v1; [epics.md](planning-artifacts/epics.md): 4 epics, 26 stories med Given/When/Then-AC, alle FR i v1 dekket. FR18 glemt passord (tidligere Story 1.7) ble lagt til etter sammenligning med foreleserens referanse-stories, men flyttet til versjon 2 fordi gruppa ikke kjøper avsenderdomene for e-post (PRD §6) |
 | 2 | Omfang med reell kompleksitet (datalagring, ikke-trivielle regler, integrasjoner) | PRD: scope; arkitektur: datamodell | 🟨 PRD v1.1: regler R1–R14, planversjoner, 8-ukersprogram, språkmodell; datamodell og miljøer i arkitekturen (AD-7, AD-8, AD-17, ER-diagram) |
 | 2 | Stabil ved feil input og gjentatte handlinger | PRD: NFR robusthet; AC i stories | 🟨 PRD NFR9; AC for dobbeltklikk, serverside Zod-validering og foreldede forslag i epics.md (bl.a. Story 1.2, 2.3, 3.1, 3.3, 4.3) |
 | 2 | Avvik fra brief/proposal er beskrevet og begrunnet | PRD-seksjon «Avvik fra brief»; `bmad-correct-course` ved endringer | 🟨 PRD seksjon 7 (to avvik i v1.1); endringer fra UX gikk gjennom `bmad-correct-course` ([endringsforslag](planning-artifacts/sprint-change-proposal-2026-11-16.md)) |
 | 3 | Automatiserte tester av meningsfull logikk, kjørbare via README | Arkitektur: testrammeverk; stories: testkrav i AC | 🟨 PRD NFR6, profiler A–D, progresjonstabell; arkitektur AD-18: Vitest (motor, coach, integrasjon) og Playwright; testkrav i AC i epics.md (én test per profil A–D, per rad i progresjonstabellen, per planendringstype og per coach-scenario) |
 | 3 | Manuelle testplaner der automatikk ikke passer | `.docs/implementation-artifacts/` testplan | ⬜ |
-| 3 | Feilhåndtering, inputvalidering, sikkerhetsbevissthet | PRD: NFR sikkerhet; arkitektur | 🟨 PRD NFR2–NFR4, NFR7, NFR9, FR16, FR18; arkitektur AD-19 (engangslenke i én time, samme svar uansett om adressen finnes, rate limit med 429) |
+| 3 | Feilhåndtering, inputvalidering, sikkerhetsbevissthet | PRD: NFR sikkerhet; arkitektur | 🟨 PRD NFR2–NFR4, NFR7, NFR9, FR16; arkitektur AD-4 (Zod på alle skriveoperasjoner), AD-6 (Better Auth), AD-12 (dataminimering mot språkmodellen). AD-19 (glemt passord med rate limit) er utsatt til versjon 2 |
 | 4 | Konsistent visuelt uttrykk (farger, typografi, komponenter) | `bmad-ux` → DESIGN.md | ⬜ |
 | 4 | Tydelig navigasjon, tilbakemeldinger, feilmeldinger, tomtilstander | `bmad-ux` → EXPERIENCE.md; AC i stories | 🟨 EXPERIENCE.md (State Patterns, Voice and Tone); feilmeldinger, tomtilstander og tilbakemeldinger som AC i epics.md (UX-DR14–UX-DR27) |
 | 4 | Tilgjengelighet: kontrast, tastatur, alt-tekst, skjemaetiketter | PRD: NFR universell utforming; AC i stories | 🟨 PRD NFR8 (WCAG 2.2 AA, redusert bevegelse, 200 % tekst); AC for tastatur, etiketter, fokus og axe-sjekk i begge tema i epics.md (UX-DR28, Story 1.2, 1.3) |
@@ -46,7 +46,7 @@ Dette er krav til hvordan dere jobber, og de bygges ikke inn i appen. De ivareta
 | 1 | Branches, pull requests, issues | Én branch + PR per story; GitHub Issues for åpne punkter | 🟨 PR #2 |
 | 1 | Lagrede prompts og KI-økter | `.logs/<bruker>/` via `sesjonslogg` | 🟨 påbegynt |
 | 1 | Eksempler på at KI-forslag er presisert, avvist eller rettet | Egen seksjon i sesjonsloggen: «KI-forslag vi avviste/rettet» | 🟨 `.logs/knut-aardal/` (PRD v0.7), `.logs/caroline-grundekjon/` (PRD v1.1) |
-| 1 | Dokumenterte beslutninger med begrunnelse | Arkitekturdokumentet (beslutninger + begrunnelse) | 🟨 `architecture/architecture-G83-…-2026-11-16/`: 19 beslutninger (AD-1–AD-19) i spinen, begrunnelser og forkastede alternativer i `.memlog.md`, kontroller i `reviews/` |
+| 1 | Dokumenterte beslutninger med begrunnelse | Arkitekturdokumentet (beslutninger + begrunnelse) | 🟨 `architecture/architecture-G83-…-2026-11-16/`: 19 beslutninger i spinen (AD-1–AD-18 gjelder v1, AD-19 er utsatt til versjon 2), begrunnelser og forkastede alternativer i `.memlog.md`, kontroller i `reviews/` |
 | 1 | Samarbeid over tid | Alle medlemmer committer/PR-er; co-author ved parprogrammering | 🟨 |
 | 3 | Spor av kodegjennomgang og retting av KI-kode | PR-kommentarer; `bmad-code-review`-funn lagret | ⬜ |
 | 6 | README: hva appen er, for hvem, skjermbilde | README.md | ⬜ |
