@@ -114,7 +114,7 @@ Skissen har andre undertekster («Du hadde mye igjen» osv.). Ankertekstene over
 
 ### Motivasjonssitat
 
-Fast liste i appen med 20 til 30 korte engelske setninger i heiende og støttende tone. Sitatene er bevisst på engelsk, selv om resten av appen er på norsk (teamets beslutning 2026-11-22). Ett vises tilfeldig i oppsummeringen etter økta. Ingen KI-kall, så NFR4 og NFR7 berøres ikke, og det fungerer i demomodus.
+Fast liste i appen med 20 til 30 korte engelske setninger i heiende og støttende tone. Sitatene er bevisst på engelsk, selv om resten av appen er på norsk (teamets beslutning 2026-11-22). Sitatet merkes med `lang="en"`, så skjermlesere leser det med engelsk uttale (WCAG 3.1.2). Ett vises tilfeldig i oppsummeringen etter økta. Ingen KI-kall, så NFR4 og NFR7 berøres ikke, og det fungerer i demomodus.
 
 ## Component Patterns
 
