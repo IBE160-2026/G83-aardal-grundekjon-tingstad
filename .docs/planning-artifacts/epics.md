@@ -488,18 +488,18 @@ So that I can trust that the plan is realistic and safe.
 
 **Given** test profiles A–D (Appendix B)
 **When** the engine generates their first full week
-**Then** each plan has the sessions, types and days given in Appendix B and the R9 day patterns, verified by one Vitest test per profile (NFR6)
+**Then** each plan has the sessions, types, days and first-week volume given in Appendix B and the R9 day patterns, verified by one Vitest test per profile (NFR6)
 
 **Given** a strength profile
 **When** the plan is generated
 **Then** the R4 template for the session count is used, each major muscle group is trained at least twice a week (R1), the main focus gets extra volume, and only exercises allowed by where the user trains are used (R5)
-**And** sets and reps per exercise for beginner and experienced are team-chosen constants in the engine, documented in the code and added to PRD Appendix A in this story's pull request
+**And** sets, reps and exercises per session follow PRD Appendix A, Starting volume, as named constants in the engine, including one extra set for exercises in the main focus
 **And** no load is set before the exercise has been logged (R6)
 
 **Given** a running profile
 **When** the plan is generated
 **Then** the R4 run types are used, the long run is on the last training day, no planned run is more than 10 % above the user's longest run (R7), and the fast short run's fixed distance is set once to the easy short run's distance in this first week and stored on the program
-**And** how the first week's distances are split between the run types is a team-chosen rule in the engine, documented in the code and added to PRD Appendix A in this story's pull request
+**And** the first week's distances follow PRD Appendix A, Starting volume: long run = longest run capped at the goal distance, easy short run = 50 % of it (at least 2 km, never longer than the long run), all rounded down to 0.5 km
 
 **Given** any generated plan
 **When** the engine's validator checks it
