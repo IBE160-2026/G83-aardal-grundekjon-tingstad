@@ -469,7 +469,8 @@ So that plans only use real exercises that fit where the user trains.
 **Given** the R4 templates and the two places to train
 **When** a Vitest test checks coverage
 **Then** for gym and for home every movement pattern used in the Session slots table has at least two exercises (one plus an alternative), so that R13 new programs and exercise swaps (Epic 4) have something to choose from
-**And** a pattern with no home exercise (for example vertical pull without equipment) is listed in the test as a known gap that uses the fallback in Appendix A, and every other gap fails the test
+**And** home exercises may use a bar, a sturdy table edge or similar to pull on (R5), so vertical and horizontal pull have home exercises such as pull-ups and rows under a table
+**And** a pattern with no home exercise is listed in the test as a known gap that uses the fallback in Appendix A, and every other gap fails the test
 
 **Given** the library
 **When** a teammate reviews it
