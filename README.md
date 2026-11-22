@@ -12,7 +12,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 ## API-nøkler
 
-Appen kan kjøres lokalt uten API-nøkler. To eksterne tjenester kan kreve nøkkel: språkmodellen bak coachen (Claude fra Anthropic) og e-posttjenesten som sender lenker for glemt passord (Resend). Begge er av som standard.
+Appen kan kjøres lokalt uten API-nøkler. Bare én ekstern tjeneste kan kreve nøkkel: språkmodellen bak coachen (Claude fra Anthropic). Den er av som standard.
 
 ### Coachen
 
@@ -42,16 +42,8 @@ Verken brukere eller sensor logger inn hos Anthropic. Det er serveren som kaller
 
 Modell-id-en er en konfigurasjonsverdi (standard `claude-haiku-5-5`). Hver bruker kan sende inntil 20 coachmeldinger per døgn (norsk tid), slik at forbruket holdes nede.
 
-### E-post for glemt passord
+### E-post
 
-E-posten styres av `MAIL_MODE`:
-
-| Modus | Hva skjer med lenken | Nøkkel |
-|---|---|---|
-| `console` (standard) | Lenken skrives i serverloggen, og ingen e-post sendes | Ingen |
-| `live` | Lenken sendes på e-post via Resend | `RESEND_API_KEY` og `MAIL_FROM` |
-| `memory` | Lenken legges i en innboks i minnet (brukes av testene) | Ingen |
-
-Lokalt finner du lenken i terminalen der appen kjører, eller med `docker compose logs app`. Uten et verifisert domene sender Resend bare til e-postadressen som eier Resend-kontoen.
+Versjon 1 sender ingen e-post. «Glemt passord» er flyttet til versjon 2, fordi det krever et verifisert avsenderdomene for e-post (se PRD-en, kapittel 6).
 
 `.env` er ignorert av git. Nøkler skal aldri committes.
