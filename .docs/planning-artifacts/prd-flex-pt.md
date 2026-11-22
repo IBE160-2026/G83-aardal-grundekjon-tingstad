@@ -1,6 +1,7 @@
 # Flex PT – Product Requirements Document
 
 **Status:** v1.5 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** v1.4 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -235,8 +236,8 @@ Bracketed numbers in the Basis column refer to the [research report](research/ac
 | R2 | At least one rest day per week; never more than 3 training days in a row. | Convention, kept as a safety choice. No limit found; small trials of 3 days in a row showed no penalty [12]. |
 | R3 | No two heavy strength sessions for the same body part, or two hard runs, on consecutive days. The long run and the fast short run count as hard runs. If the available days make this impossible, a fast short run becomes an easy short run. | Convention. Recovery varies with effort and volume, so 48 hours is not a proven limit [7][28]. |
 | R4 | Template by focus and session count. **Strength:** 2 → 2 full body · 3 → 3 full body · 4 → upper/lower ×2 · 5 → upper/lower and push/pull/legs. Every template trains both upper and lower body during the week; the chosen main focus gets extra volume. **Running** uses three run types – easy long run, easy short run and fast short run: 2 → long + easy short · 3 → long + easy short + fast short · 4 → long + 2 easy short + fast short · 5 → long + 2 easy short + 2 fast short. The long run is placed on the last training day of the week. Running and strength are not combined in v1. | Team choice. Full body and split give similar results at equal volume [8]. Run types: team choice. |
-| R5 | Exercises only from the library, matching where the user trains: at the gym, or at home with bodyweight. | Team choice. |
-| R6 | Strength progression, per exercise: all sets completed and session effort "easy" or "ok" → increase load by up to 10 %, rounded to the nearest 0.5 kg; if rounding gives no increase, add one rep instead. Bodyweight exercises always add one rep. Effort "hard" or exercise not completed → keep. A set counts as completed when it is logged with at least 1 rep; an exercise is completed when all its planned sets are completed. The starting load is the load the user logs the first time they do the exercise; until then the plan shows sets and reps only. The session effort applies to every exercise in the session. "Easy" and "ok" are treated the same in v1. | 10 % limit: upper end of ACSM 2009 [14], not confirmed in the 2026 update. Load or reps: [15]. The effort scale, treating "easy" like "ok", and counting a set from 1 rep: team choice. Counting from 1 rep means load can increase even when fewer reps than planned were done. |
+| R5 | Exercises only from the library, matching where the user trains: at the gym, or at home with bodyweight. Home assumes a bar, a sturdy table edge or similar to pull on, so pull-ups and rows can be done at home. | Team choice. |
+| R6 | Strength progression, per exercise: all sets completed and session effort "easy" or "ok" → increase load by up to 10 %, rounded to the nearest 0.5 kg; if rounding gives no increase, add one rep instead. Bodyweight exercises add one rep, up to 20 reps per set; at 20 the reps are kept, and a harder variant comes only with a new program (R13) or a swap. Effort "hard" or exercise not completed → keep. A set counts as completed when it is logged with at least 1 rep; an exercise is completed when all its planned sets are completed. The starting load is the load the user logs the first time they do the exercise; until then the plan shows sets and reps only. The session effort applies to every exercise in the session. "Easy" and "ok" are treated the same in v1. | 10 % limit: upper end of ACSM 2009 [14], not confirmed in the 2026 update. Load or reps: [15]. The effort scale, treating "easy" like "ok", and counting a set from 1 rep: team choice. Counting from 1 rep means load can increase even when fewer reps than planned were done. |
 | R7 | Running progression, measured in distance: weekly distance increases at most 10 % from the last completed week, and no planned run is more than 10 % longer than the longest run in the last 30 days. The first run, and any run when there is no recent run, is based on the longest run the user entered themselves (at most 10 % above it). Easy short runs and the long run progress separately: a completed run with effort "easy" or "ok" allows an increase for that run type; "hard", partly completed or not completed → keep the distance for that run type. The fast short run keeps a fixed distance, set once to the distance of the easy short run in the user's first plan week; instead of progressing, the app shows the pace from the previous fast short run and encourages the user to beat it. | 30-day limit: observational association [3]. Weekly 10 %: convention, not injury prevention [2][19]. Effort for running, separate run types and the fixed fast run: team choice. |
 | R8 | Low energy or a time limit for a session, told to the coach in the chat → the coach proposes a reduced volume for that day's session, or for the next planned session if there is none that day. The code sets the reduction: one set fewer per exercise for strength, running distance 25 % shorter. The reduction applies only to that session and is not carried forward: if the plan says 4 sets and the user is tired on Monday and Tuesday, both sessions get 3 sets. Energy is not asked for in the session log. | Team choice. Not tested directly; indirect support that a small reduction costs little [17]. |
 | R9 | Sessions are placed on fixed day patterns by session count: 2 → Tue, Thu · 3 → Mon, Wed, Sat · 4 → Mon, Wed, Fri, Sun · 5 → Mon, Tue, Thu, Fri, Sat. No sessions on days the user has told the coach they cannot train; moving sessions away from such days follows R2, R3 and R10. | Team choice. The patterns spread the sessions over the week and match the test profiles in Appendix B. |
@@ -272,6 +273,51 @@ What a logged result means for the next session of the same exercise or run type
 | Finished automatically at midnight, no effort (FR7) | Completed exercises keep; not completed exercises keep | Keep | Only for the parts not completed |
 | Second "hard" or not completed in a row | −10 % (R12) | −10 % (R12) | Count resets |
 
+### Starting volume (R4, R7)
+
+The volume of the first plan week, before anything is logged. Later weeks follow the progression table. The values are constants in the plan engine and each one has an automated test (NFR6).
+
+**Strength**
+
+| | Beginner | Experienced |
+| --- | --- | --- |
+| Sets per exercise | 3 | 4 |
+| Reps per set, with load | 10 | 8 |
+| Reps per set, bodyweight | 10 | 12 |
+| Exercises per session: full body | 4 | 5 |
+| Exercises per session: upper or lower | 4 | 5 |
+| Exercises per session: push, pull or legs | 3 | 4 |
+
+- Main focus (R4): exercises for the chosen body part (upper or lower) get one extra set. Full body as main focus gives no extra set.
+- Reps are a fixed number, not a range, so "add one rep" in R6 is well defined.
+- At least 3 sets, so a session reduced by R8 (one set fewer) still has at least 2 sets per exercise.
+
+**Session slots.** Every exercise in the library has one movement pattern. A session is filled slot by slot, in this order, with one exercise per slot that matches the pattern and where the user trains (R5). Beginners get the first slots up to their exercise count; experienced users also get the last one.
+
+| Template | Slots for beginners | Extra slot for experienced users |
+| --- | --- | --- |
+| Full body | squat · hinge · horizontal push · horizontal pull | main focus upper → vertical pull; lower → single-leg; full body → core |
+| Upper | horizontal push · horizontal pull · vertical push · vertical pull | biceps or triceps, alternating between upper sessions |
+| Lower | squat · hinge · single-leg · core | calf |
+| Push | horizontal push · vertical push · triceps | a second horizontal push |
+| Pull | vertical pull · horizontal pull · biceps | a second horizontal pull |
+| Legs | squat · hinge · single-leg | calf |
+
+- Movement patterns: squat, hinge, single-leg, calf (lower body); horizontal push, vertical push, horizontal pull, vertical pull, biceps, triceps (upper body); core (neither, so it never gets the main-focus extra set).
+- Sessions of the same template in the same week use the same exercises.
+- When no exercise for a pattern exists where the user trains (for example calf at home), the slot uses the other pattern of the same kind in the same body part: vertical ↔ horizontal, biceps → horizontal pull, triceps → horizontal push, calf → single-leg. If none exists either, the slot is left out. The library (Story 2.1) records which patterns this affects.
+
+**Running**
+
+- Long run = the longest run the user entered (R7), but never longer than the goal distance, rounded down to 0.5 km.
+- Easy short run = 50 % of the long run, rounded down to 0.5 km, at least 2 km but never longer than the long run.
+- Fast short run = the easy short run's distance (R7), fixed for the rest of the program.
+- The longest run entered in onboarding or Profil must be between 1 and 50 km, so the rounding above never gives a run of 0 km.
+
+The long run is not set 10 % above the longest run in the first week. This keeps the first week on distances the user has already run, and R12 protects against an overestimated longest run. Capping the long run at the goal distance keeps the goal from being reached by the first plan (R14).
+
+**Basis:** team choice. The research report does not cover sets, reps or how distance is split between run types.
+
 ## Appendix B – Test profiles
 
 | Profile | Goal and experience | Sessions and equipment | Expected weekly plan |
@@ -282,6 +328,21 @@ What a logged result means for the next session of the same exercise or run type
 | D | Running · experienced · goal half marathon · can run 15 km | 4 sessions per week | 4 runs: Mon easy short, Wed fast short, Fri easy short, Sun long |
 
 The days follow the day patterns in R9.
+
+Starting volume in the first week (Appendix A, Starting volume):
+
+| Profile | First week |
+| --- | --- |
+| A | 2 full-body sessions · 4 exercises each · 3 sets × 10 reps · no extra set (full body) · no load until logged (R6) |
+| B | Lower and upper: 5 exercises; push, pull and legs: 4 exercises · 4 sets × 8 reps · no extra set (full body) · no load until logged (R6) |
+| C | Easy short 2 km · fast short 2 km · long 3 km · 7 km in total |
+| D | Easy short 7.5 km · fast short 7.5 km · easy short 7.5 km · long 15 km · 37.5 km in total |
+
+Profile E is used only in the plan engine tests, not as a demo user. It is the only profile that tests the main-focus extra set and training at home.
+
+| Profile | Goal and experience | Sessions and equipment | Expected weekly plan and first week |
+| --- | --- | --- | --- |
+| E | Strength · beginner at home · main focus upper body | 3 sessions per week · home (bodyweight) | 3 full-body sessions: Mon, Wed, Sat · each with squat, hinge, horizontal push and horizontal pull as bodyweight exercises · horizontal push and pull 4 × 10, squat and hinge 3 × 10 · no load (bodyweight) |
 
 ## Appendix C – Coach scenarios
 
@@ -310,3 +371,4 @@ The days follow the day patterns in R9.
 | 2026-11-18 | 1.2 | Found while writing epics and stories: a started session that is not finished is finished automatically at midnight (Europe/Oslo) at the end of the day it was started, without effort or note, and locked (FR7); new row in the progression table: such a session gives no increase, and only its not-completed parts count towards R12 |
 | 2026-11-22 | 1.3 | New FR18 forgotten password and Story 1.7, after comparing with the lecturer's reference stories for login («Reset a forgotten password by email»). The lecturer's other login stories (roles, invitations, admin area, institutions, audit log) do not fit an app with one user type and open registration and were left out. UI table and E1 updated; email provider in architecture AD-19 |
 | 2026-11-22 | 1.5 | Forgotten password (FR18, Story 1.7) moved to version 2: reset links by email to any user need a verified sender domain, which the team does not buy for v1. FR18 is kept for v2 and marked as moved; §5, §6 and the capability table updated. Decided by Knut, approved by the group in the pull request |
+| 2026-11-22 | 1.4 | Starting volume for the first plan week added to Appendix A (sets, reps and exercises per session by experience and template; long run, easy short run and fast short run distances), session slots by movement pattern, and a 1–50 km limit on the longest run; expected first-week volume for profiles A–D and a new engine-only profile E (beginner, home, upper-body focus) added to Appendix B; R6 caps bodyweight exercises at 20 reps per set; R5 assumes a bar, table edge or similar to pull on at home. Needed by Stories 2.1, 2.2, 2.4 and 3.4; proposed by Knut and approved by the group in the pull request |
