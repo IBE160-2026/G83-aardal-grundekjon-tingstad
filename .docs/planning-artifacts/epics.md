@@ -574,7 +574,7 @@ So that I get a plan that fits my goal right away.
 
 **Given** onboarding
 **When** I go through it
-**Then** I see one question per screen: (1) Styrke or Løping as `choice-card`s; (2) for running: goal (første 5 km, 10 km, halvmaraton) and longest run so far, for strength: main focus (overkropp, underkropp, hele kroppen) and experience (nybegynner, erfaren); (3) sessions per week 2–5 as `number-chip`s; (4) only for strength: «Hvor trener du?» with «På treningssenter» or «Hjemme», where «Hjemme» has the subtext «Du trenger en stang eller et solid bord for trekkøvelser.» in `meta` style, read as part of the card's accessible name (R5) (FR2, UX-DR10, UX-DR15)
+**Then** I see one question per screen: (1) Styrke or Løping as `choice-card`s; (2) for running: goal (første 5 km, 10 km, halvmaraton) and longest run so far, for strength: main focus (overkropp, underkropp, hele kroppen) and experience (nybegynner, erfaren); (3) sessions per week 2–5 as `number-chip`s; (4) only for strength: «Hvor trener du?» with «På treningssenter» or «Hjemme» (FR2, UX-DR10, UX-DR15)
 **And** the progress bar shows «Steg N av M», with M = 4 for running and 5 for strength
 
 **Given** any step
