@@ -23,6 +23,7 @@ Installere designskillen Impeccable (pbakaus/impeccable) på maskinen. Deretter 
   - Impeccable ga bare fem ærlige retninger. Den sjette fila er dagens design (Pulsslag) som referanse, ikke en oppdiktet sjette retning.
   - Observasjon: dagens Pulsslag (krem og terrakotta) er ett av uttrykkene Impeccable advarer mot som typisk KI-generert.
 
+- **KI-forslag avvist:** gruppa vil ikke bruke noen av de fem nye retningene (O-kart, Timeplan, Kassettomslag, Grafittkonsoll, Kategoristandard) og beholder dagens design, Pulsslag. Beslutningen er notert i README-en i forslagsmappa. Den er også lagt inn som Brand Commitment i `PRODUCT.md`, slik at senere Impeccable-økter forbedrer Pulsslag i stedet for å erstatte det.
+
 ### Åpne punkter
-- Gruppa velger designretning blant forslagene. Valget skal enten oppdatere DESIGN.md eller la Pulsslag stå.
 - Vurder om Impeccables globale hook i `~/.claude/settings.json` skal beholdes. Den kjører i alle prosjekter.
