@@ -69,7 +69,7 @@ Mikrotekst. Visuell merkevare ligger i `DESIGN.md`, Brand & Style. Norsk bokmål
 | 8-ukers program (uke 9) | «8 uker unnagjort! Vil du ha et nytt program?» med «Ja, nytt program» og «Fortsett med dette» | Heiende |
 | Løpemål nådd (oppsummering) | «Du klarte 10 km! Vil du sette et nytt mål? Du finner det under Profil.» | Heiende |
 | Notat, felt | «Noe du vil huske?» (valgfritt) | Støttende |
-| Motivasjonssitat | Tilfeldig kort setning fra fast liste, f.eks. «Én økt til er alt som skal til.» | Heiende |
+| Motivasjonssitat | Tilfeldig kort setning fra fast liste, på engelsk, f.eks. «Strong today, stronger tomorrow.» | Heiende |
 | Hint ved første logg | «Velg en vekt du kan løfte kontrollert. Neste gang foreslår vi en vekt til deg.» | Støttende |
 | Logg sett, knapp | «Logg sett» | Nøytral |
 | Sett logget | «Sett 1 logget. Neste!» | Heiende |
@@ -114,7 +114,7 @@ Skissen har andre undertekster («Du hadde mye igjen» osv.). Ankertekstene over
 
 ### Motivasjonssitat
 
-Fast liste i appen med 20 til 30 korte, egne norske setninger i heiende og støttende tone. Ett vises tilfeldig i oppsummeringen etter økta. Ingen KI-kall, så NFR4 og NFR7 berøres ikke, og det fungerer i demomodus.
+Fast liste i appen med 20 til 30 korte engelske setninger i heiende og støttende tone. Sitatene er bevisst på engelsk, selv om resten av appen er på norsk (teamets beslutning 2026-11-22). Ett vises tilfeldig i oppsummeringen etter økta. Ingen KI-kall, så NFR4 og NFR7 berøres ikke, og det fungerer i demomodus.
 
 ## Component Patterns
 
@@ -322,7 +322,7 @@ UX forutsetter følgende. Alle er avtalt i UX-arbeidet, men står ikke i PRD v1.
 | A3 | Lys/mørk/følg system, bryter i Profil. | FR3/NFR8 |
 | B1 | Uketeller «X av Y økter» øverst på Uke. | FR4, FR5, §6 |
 | B2 | Motiverende melding etter fullført økt som sammenligner med forrige økt, vist etter at anstrengelse er registrert. Første gang uten sammenligning: enkel heiing. | §6 |
-| B3 | Motivasjonssitat etter registrert økt: fast liste i appen (20 til 30 egne norske setninger), tilfeldig, ingen KI-kall. | §6 |
+| B3 | Motivasjonssitat etter registrert økt: fast liste i appen (20 til 30 korte engelske setninger), tilfeldig, ingen KI-kall. | §6 |
 | B4 | Konfetti eller liten feiring som pop-up (V1 hvis billig, ellers V2). | §6 |
 | B5, B6 | Ukes-streak og personlig rekord er V2. | §6 |
 | C1 | Dagens økt viser alle øvelser, fri rekkefølge. | FR5 |
