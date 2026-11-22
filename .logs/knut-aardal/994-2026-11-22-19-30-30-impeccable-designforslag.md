@@ -24,6 +24,7 @@ Installere designskillen Impeccable (pbakaus/impeccable) på maskinen. Deretter 
   - Observasjon: dagens Pulsslag (krem og terrakotta) er ett av uttrykkene Impeccable advarer mot som typisk KI-generert.
 
 - **KI-forslag avvist:** gruppa vil ikke bruke noen av de fem nye retningene (O-kart, Timeplan, Kassettomslag, Grafittkonsoll, Kategoristandard) og beholder dagens design, Pulsslag. Beslutningen er notert i README-en i forslagsmappa. Den er også lagt inn som Brand Commitment i `PRODUCT.md`, slik at senere Impeccable-økter forbedrer Pulsslag i stedet for å erstatte det.
+- Branchen er pushet, og PR #16 mot main er opprettet: https://github.com/IBE160-2026/G83-aardal-grundekjon-tingstad/pull/16
 
 ### Åpne punkter
 - Vurder om Impeccables globale hook i `~/.claude/settings.json` skal beholdes. Den kjører i alle prosjekter.
