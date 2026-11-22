@@ -2,7 +2,7 @@
 version: 0.1
 name: Flex PT
 status: final
-updated: 2026-11-11
+updated: 2026-11-22
 sources:
   - ../../prd-flex-pt.md
   - ../../briefs/brief-flex-pt-2026-09-17/brief.md
@@ -29,7 +29,9 @@ Nedre fane-linje med fire faner: **Uke**, **Coach**, **Historikk**, **Profil**. 
 
 | Skjerm | Nås fra | Formål | Krav | Journey |
 |---|---|---|---|---|
-| Innlogging (Logg inn, Registrer ny bruker, Prøv demo) | Appstart uten innlogging, utlogging, slettet konto | Komme inn, eller starte demo med seedet testbruker | FR1, NFR1 | Flow 2, Flow 5 |
+| Innlogging (Logg inn, Registrer ny bruker, Prøv demo, Glemt passord?) | Appstart uten innlogging, utlogging, slettet konto | Komme inn, eller starte demo med seedet testbruker | FR1, NFR1 | Flow 2, Flow 5 |
+| Glemt passord | «Glemt passord?» på Innlogging | Be om lenke for å velge nytt passord | FR18 | Flow 7 |
+| Nytt passord | Lenken i e-posten | Velge nytt passord, så tilbake til Innlogging | FR18 | Flow 7 |
 | Onboarding, ett spørsmål per skjerm (5 steg) | Etter registrering | Fortelle appen hvem du er, så planen kan lages | FR2, Story 1.3 | Flow 2 |
 | Uke (hjem) | Etter onboarding, innlogging, fane | Uketeller, dagens økt, ukens plan (løpeøkter viser pace fra forrige gang), ny-uke-banner eller program-kort i uke 9 | FR4, FR5, R7 | Flow 1, Flow 4, Flow 6 |
 | Øktoversikt | Uke (dagens økt), «Se dagens økt» i Coach | Alle øvelser i økta, velg rekkefølge selv, «Fullfør økt» | FR5, C1 | Flow 1 |
@@ -87,6 +89,14 @@ Mikrotekst. Visuell merkevare ligger i `DESIGN.md`, Brand & Style. Norsk bokmål
 | Plan genereres | «Lager planen din …» | Heiende |
 | Slett konto, dialog | «Vil du slette kontoen? Profil, planer, logger og meldinger slettes for alltid.» med «Avbryt» og «Slett» | Nøkternt |
 | Demo | «Demo» (merke), «Prøv demo» (knapp) | Nøytral |
+| Glemt passord, lenke på Innlogging | «Glemt passord?» | Nøytral |
+| Glemt passord, ingress | «Skriv e-postadressen til kontoen din. Du får en lenke der du velger nytt passord.» med knapp «Send lenke» og lenke «Til innlogging» | Nøkternt |
+| Glemt passord, sendt | «Hvis adressen har en konto, har vi sendt en lenke. Lenken virker i én time.» | Nøkternt |
+| Glemt passord, for mange forespørsler | «For mange forespørsler. Prøv igjen om en time.» | Nøkternt |
+| Nytt passord | Overskrift «Velg nytt passord», felt «Nytt passord», knapp «Lagre passord» | Nøytral |
+| Nytt passord, lagret | «Passordet er endret. Logg inn med det nye passordet.» (på Innlogging) | Nøkternt |
+| Nytt passord, lenken virker ikke | «Lenken er utløpt eller allerede brukt.» med lenke «Be om en ny lenke» | Nøkternt |
+| E-post, emne og tekst | Emne «Nytt passord til Flex PT». Tekst: «Trykk på lenken for å velge nytt passord. Lenken virker i én time. Har du ikke bedt om dette, kan du se bort fra e-posten.» | Nøkternt |
 
 Merknad om samsvar med PRD: den faste teksten ved smerte er ordrett FR13/R11 og endres ikke.
 
@@ -168,6 +178,9 @@ Oppførsel. Visuelle spesifikasjoner ligger i `DESIGN.md`, Components, med samme
 | Ukeplan: ingen økt i dag | Uke | Ingen «dagens økt»-kort. Neste økt og dag vises i stedet. |
 | Fokus | Alle skjermer | Synlig fokusring (se DESIGN.md, Elevation & Depth). |
 | Tastatur åpent | Øvelseslogg, Coach | Primærhandlingen og feltet blir synlige. |
+| Glemt passord: sendt | Glemt passord | Skjemaet erstattes av sendt-linjen mellom to tynne streker, og «Til innlogging» står under. Samme tekst uansett om adressen har en konto (FR18). |
+| Glemt passord: for mange forespørsler | Glemt passord | Feilmelding under e-postfeltet som ved validering. Feltet beholder verdien. |
+| Nytt passord: utløpt eller brukt lenke | Nytt passord | Ingen passordfelt, bare meldingen og «Be om en ny lenke». |
 
 ## Interaction Primitives
 
@@ -274,6 +287,15 @@ Feilbaner: første løpetur av en økttype: ingen pace. Teknisk feil ved lagring
 4. **Klimaks:** hun trykker «Logg ut» og kommer til innlogging.
 
 Variant for sensor: på innloggingen trykker sensor «Prøv demo», logges inn som seedet testbruker og ser «Demo»-merket. Variant for sletting: «Slett konto» åpner dialog (Avbryt/Slett). Etter sletting er brukeren tilbake på innlogging og kan ikke logge inn (FR16). Tom historikk: se State Patterns.
+
+### Flow 7 – Glemt passord (Mari, etter ferien)
+
+1. På Innlogging husker ikke Mari passordet. Hun trykker «Glemt passord?».
+2. Hun skriver e-postadressen og trykker «Send lenke». Skjemaet byttes ut med «Hvis adressen har en konto, har vi sendt en lenke. Lenken virker i én time.»
+3. Hun åpner e-posten og trykker lenken. «Velg nytt passord» åpnes, og hun skriver et nytt passord på minst 8 tegn.
+4. **Klimaks:** hun trykker «Lagre passord», kommer til Innlogging med «Passordet er endret. Logg inn med det nye passordet.» og logger inn.
+
+Feilbaner: for kort passord gir samme feilmelding som ved registrering. En gammel eller brukt lenke gir «Lenken er utløpt eller allerede brukt.» med «Be om en ny lenke». Mange forsøk på kort tid gir «For mange forespørsler. Prøv igjen om en time.» Lokalt og hos sensor sendes ingen e-post: lenken skrives i serverloggen (AD-19).
 
 ## Responsive & Platform
 

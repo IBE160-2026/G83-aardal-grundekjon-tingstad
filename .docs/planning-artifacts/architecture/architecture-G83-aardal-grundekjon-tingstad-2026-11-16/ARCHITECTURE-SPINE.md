@@ -7,8 +7,8 @@ paradigm: 'Vertical slices over a shared core, with a functional-core plan engin
 scope: 'The whole Flex PT v1 (MVP) web app: accounts, onboarding, plan engine, logging and progression, coach dialogue, profile, environments'
 status: final
 created: '2026-11-16'
-updated: '2026-11-18'
-binds: [FR1, FR2, FR3, FR4, FR5, FR6, FR7, FR8, FR9, FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, NFR1, NFR2, NFR3, NFR4, NFR5, NFR6, NFR7, NFR8, NFR9, NFR10, NFR11, E1, E2, E3, E4]
+updated: '2026-11-22'
+binds: [FR1, FR2, FR3, FR4, FR5, FR6, FR7, FR8, FR9, FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, FR18, NFR1, NFR2, NFR3, NFR4, NFR5, NFR6, NFR7, NFR8, NFR9, NFR10, NFR11, E1, E2, E3, E4]
 sources:
   - ../../prd-flex-pt.md (v1.1, PR #12)
   - ../../ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/DESIGN.md
@@ -27,7 +27,7 @@ companions: [.memlog.md]
 | --- | --- | --- |
 | Routes | `src/app/` | Thin Next.js route files that render a slice's page or call a slice's server code. No business logic. |
 | Feature slices | `src/features/<slice>/` | `account`, `onboarding`, `plan`, `logging`, `coach`, `profile`. Each has an `api.ts` (its only public surface), UI components, server actions and queries. |
-| Shared core | `src/shared/` | `engine/` (pure plan engine, rules R1–R14, plan-change types), `db/` (Drizzle schema, client, migrations), `auth/`, `coach-provider/` (Live and Demo), `ui/` (design-system components and tokens), `lib/` (dates, validation, errors) |
+| Shared core | `src/shared/` | `engine/` (pure plan engine, rules R1–R14, plan-change types), `db/` (Drizzle schema, client, migrations), `auth/`, `coach-provider/` (Live and Demo), `mail/` (console, live, memory), `ui/` (design-system components and tokens), `lib/` (dates, validation, errors) |
 | Composition | `src/seed/` | Demo seeding (AD-16). The only code outside `src/app/` that may call several slices' `api.ts`. |
 
 ## Invariants & Rules
@@ -92,7 +92,7 @@ flowchart TD
 
 ### AD-6 — Better Auth owns identity and sessions [ADOPTED]
 
-- **Binds:** FR1, FR16, NFR1, NFR2, NFR3
+- **Binds:** FR1, FR16, FR18, NFR1, NFR2, NFR3
 - **Prevents:** a hand-written password or session scheme beside the library
 - **Rule:** Registration, login, logout and sessions use Better Auth with its Drizzle adapter, with the `nextCookies()` plugin last so Server Actions can set cookies. Server code gets the current user only through a `shared/auth` helper that returns the user id or rejects the request. "Prøv demo" signs in as a seeded demo user through Better Auth; there is no bypass of authentication.
 
@@ -170,6 +170,8 @@ flowchart TD
 | Development without Docker for the app | `npm run dev` | the compose PostgreSQL | as above | `npm run db:migrate` |
 | Published | Vercel, deployed from `main` only | Supabase PostgreSQL (transaction pooler; direct URL for migrations) | `COACH_MODE=live` with the daily limit; demo users always on Demo | Run with the direct URL before a deploy that needs them |
 
+Email follows the same pattern as the coach (AD-19): `MAIL_MODE=console` locally and for the examiner, `live` in the published app.
+
 Vercel preview deployments are not connected to a database. A free Supabase project pauses after a week without use and must be resumed before a demonstration.
 
 ### AD-18 — Rules are tested in the engine, flows end to end [ADOPTED]
@@ -177,6 +179,12 @@ Vercel preview deployments are not connected to a database. A free Supabase proj
 - **Binds:** NFR6, Story 4.5
 - **Prevents:** rule tests spread through UI tests, and untested progression rows
 - **Rule:** Vitest tests the engine directly (`tests/engine`): profiles A–D against Appendix B, one test per progression-table row, and each plan-change type. `tests/coach` covers `classifyMedical` (including the two medical Appendix C scenarios) and the non-medical Appendix C scenarios against the Demo provider. `tests/integration` runs against a test database for transactions, idempotency and the account-deletion cascade. Playwright (`tests/e2e`) covers the main flows in demo mode.
+
+### AD-19 — Email goes through one mail interface, and password reset is rate limited [ADOPTED]
+
+- **Binds:** FR18, NFR1, NFR3, NFR5, Story 1.7
+- **Prevents:** a reset flow that needs the team's keys to run locally, a hand-written token scheme beside Better Auth, and a public form that can be used to flood an inbox or probe which addresses have accounts
+- **Rule:** Password reset uses Better Auth's built-in reset flow: `sendResetPassword` sends the link, the token expires after one hour and works once, and `revokeSessionsOnPasswordReset` ends every session of that user. `shared/mail` exposes one `sendMail` interface with three implementations chosen by `MAIL_MODE`: `console` (default locally and for the examiner) writes the link to the server log and sends nothing; `live` sends through Resend with `RESEND_API_KEY` and `MAIL_FROM`; `memory` keeps sent mails in an in-memory outbox for tests. The reset request always returns the same reply, and no mail is sent when the address has no account or belongs to a demo user. Better Auth's rate limiter is on, with database storage so it works across serverless instances, and a stricter rule for the reset request: at most 3 requests per email address and 5 per IP address per hour; over the limit the endpoint answers 429. Email text is Norwegian (NFR10) and contains only the link, never other account data.
 
 ## Consistency Conventions
 
@@ -261,6 +269,7 @@ flex-pt/
       db/                # Drizzle schema (incl. Better Auth), client, migrations
       auth/              # Better Auth setup and current-user helper
       coach-provider/    # interface, Live (Anthropic SDK), Demo (recorded files)
+      mail/              # sendMail interface: console, live (Resend), memory (tests)
       ui/                # design-system components and Tailwind tokens
       lib/               # dates (Europe/Oslo), validation helpers, errors
     seed/                # demo users A–D through the slices' api.ts
@@ -282,6 +291,7 @@ flex-pt/
 | Capability / Area | Lives in | Governed by |
 | --- | --- | --- |
 | FR1, FR16, NFR1 demo login | `features/account`, `shared/auth` | AD-4, AD-6, AD-16 |
+| FR18 forgotten password | `features/account`, `shared/auth`, `shared/mail` | AD-6, AD-19 |
 | FR2 onboarding | `features/onboarding` | AD-3, AD-4, AD-13 |
 | FR3 profile, theme, running goal | `features/profile`, `features/plan` | AD-7, AD-8, AD-14 |
 | FR4, FR5, FR6, FR14, FR15 week plan and progression | `features/plan`, `shared/engine` | AD-2, AD-7, AD-8, AD-13 |
@@ -297,7 +307,8 @@ flex-pt/
 - **Supabase PostgreSQL version:** not verified; the app uses nothing beyond PostgreSQL 15, so a version gap with the local `postgres:18` does not matter.
 - **Exercise library file format:** decided in Story 2.1, within `data/exercises/` and the gym/home marking from R5.
 - **The medical word list and body-part map:** written and tested in Story 4.4, under AD-11.
-- **Rate limiting beyond the coach, monitoring and backups:** not needed for a course MVP; revisit before any real launch.
+- **Rate limiting beyond the coach and the password reset (AD-19), monitoring and backups:** not needed for a course MVP; revisit before any real launch.
+- **Resend SDK version and sender domain:** locked in Story 1.7; without a verified domain Resend only delivers to the account owner's own address, which is enough for a demonstration.
 - **CI pipeline:** tests run locally and before pull requests; a GitHub Actions workflow can be added without changing any AD.
 - **Who holds the Anthropic API key:** a team decision (PRD §8); the app needs `ANTHROPIC_API_KEY` only when `COACH_MODE=live`.
 - **Combined running and strength, stage 2 and 3 features:** out of scope for v1 (PRD §6).
