@@ -1,0 +1,75 @@
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when its first story starts (via build's sprint sync)
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates the next story after the previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; the status view surfaces open ones
+generated: 11-22-2026 20:09
+last_updated: 11-22-2026 20:09
+project: flexpt
+project_key: NOKEY
+tracking_system: file-system
+story_location: .docs/implementation-artifacts
+development_status:
+  epic-1: backlog
+  1-1-runnable-project-skeleton: backlog
+  1-2-register-log-in-and-log-out: backlog
+  1-3-choose-light-dark-or-system-theme: backlog
+  1-4-try-the-demo: backlog
+  1-5-delete-my-account: backlog
+  1-6-publish-the-app: backlog
+  1-7-reset-a-forgotten-password-by-email: backlog
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-exercise-library: backlog
+  2-2-plan-engine-generates-the-first-week: backlog
+  2-3-see-this-week-s-plan: backlog
+  2-4-onboarding: backlog
+  2-5-a-new-week-starts: backlog
+  2-6-edit-my-profile-and-running-goal: backlog
+  2-7-the-8-week-strength-program: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-log-a-strength-session: backlog
+  3-2-log-a-run: backlog
+  3-3-finish-a-session: backlog
+  3-4-next-week-builds-on-my-logs: backlog
+  3-5-see-previous-and-recommended-load-and-pace: backlog
+  3-6-the-finished-session-popup: backlog
+  3-7-training-history: backlog
+  3-8-confetti-when-a-session-is-finished-should-have: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-talk-to-the-coach: backlog
+  4-2-the-coach-proposes-a-valid-change: backlog
+  4-3-approve-or-reject-a-proposal: backlog
+  4-4-pain-and-injury-get-a-safe-reply: backlog
+  4-5-coach-scenarios-work-in-demo-mode: backlog
+  epic-4-retrospective: optional
