@@ -464,11 +464,12 @@ So that plans only use real exercises that fit where the user trains.
 
 **Given** each exercise in the library
 **When** it is validated by a Zod schema in a Vitest test
-**Then** it has a stable id, a Norwegian display name (NFR10), its English source name, muscle groups, a body part used for upper/lower and push/pull/legs, a marking for gym, home (bodyweight) or both (R5), and a bodyweight flag (load `null`)
+**Then** it has a stable id, a Norwegian display name (NFR10), its English source name, muscle groups, one movement pattern from PRD Appendix A, Session slots (squat, hinge, single-leg, calf, horizontal push, vertical push, horizontal pull, vertical pull, biceps, triceps, core), a marking for gym, home (bodyweight) or both (R5), and a bodyweight flag (load `null`)
 
 **Given** the R4 templates and the two places to train
 **When** a Vitest test checks coverage
-**Then** for gym and for home there are enough exercises for every template slot (full body, upper, lower, push, pull, legs) and at least one alternative per slot, so that R13 new programs and exercise swaps (Epic 4) have something to choose from
+**Then** for gym and for home every movement pattern used in the Session slots table has at least two exercises (one plus an alternative), so that R13 new programs and exercise swaps (Epic 4) have something to choose from
+**And** a pattern with no home exercise (for example vertical pull without equipment) is listed in the test as a known gap that uses the fallback in Appendix A, and every other gap fails the test
 
 **Given** the library
 **When** a teammate reviews it
@@ -486,7 +487,7 @@ So that I can trust that the plan is realistic and safe.
 **When** it is called
 **Then** it takes the profile, the exercise library, the program start and today's date as plain data and returns the week's sessions, with no database, clock, network or framework access (AD-2)
 
-**Given** test profiles A–D (Appendix B)
+**Given** test profiles A–E (Appendix B; E is for engine tests only)
 **When** the engine generates their first full week
 **Then** each plan has the sessions, types, days and first-week volume given in Appendix B and the R9 day patterns, verified by one Vitest test per profile (NFR6)
 
@@ -494,6 +495,7 @@ So that I can trust that the plan is realistic and safe.
 **When** the plan is generated
 **Then** the R4 template for the session count is used, each major muscle group is trained at least twice a week (R1), the main focus gets extra volume, and only exercises allowed by where the user trains are used (R5)
 **And** sets, reps and exercises per session follow PRD Appendix A, Starting volume, as named constants in the engine, including one extra set for exercises in the main focus
+**And** exercises are chosen slot by slot from the Session slots table, with the same exercises for sessions of the same template in a week, and the home fallback when a pattern has no exercise, tested in Vitest
 **And** no load is set before the exercise has been logged (R6)
 
 **Given** a running profile
@@ -580,7 +582,7 @@ So that I get a plan that fits my goal right away.
 
 **Given** the answers
 **When** they are submitted
-**Then** the server validates them with Zod against the defined options only, the longest run is a positive distance within a sane maximum with a plain-text error under the field if not, and a request with a missing or unknown value is rejected (NFR9, AD-4)
+**Then** the server validates them with Zod against the defined options only, the longest run is between 1 and 50 km (PRD Appendix A, Starting volume) with a plain-text error under the field if not, and a request with a missing or unknown value is rejected (NFR9, AD-4)
 
 **Given** valid answers
 **When** I finish the last step
@@ -824,7 +826,7 @@ So that I keep progressing without getting overloaded.
 
 **Given** strength progression
 **When** tests run
-**Then** they also cover: the first logged load becomes the starting load, increases of up to 10 % rounded to 0,5 kg, one more rep when rounding gives no increase, bodyweight exercises adding one rep, and Lett and Passe treated the same (R6)
+**Then** they also cover: the first logged load becomes the starting load, increases of up to 10 % rounded to 0,5 kg, one more rep when rounding gives no increase, bodyweight exercises adding one rep up to 20 reps per set and keeping 20 after that, and Lett and Passe treated the same (R6)
 
 **Given** running progression
 **When** tests run
