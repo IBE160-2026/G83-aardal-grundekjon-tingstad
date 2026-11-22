@@ -558,7 +558,7 @@ So that I never have to plan the week myself.
 
 **Given** the engine
 **When** it builds the next week
-**Then** it is a pure function of the previous week, the profile, the library and the logs passed in (none until Epic 3), so Story 3.3 can add progression without changing the week-creation code
+**Then** it is a pure function of the previous week, the profile, the library and the logs passed in (none until Epic 3), so Story 3.4 can add progression without changing the week-creation code
 
 ### Story 2.6: Edit my profile and running goal
 
