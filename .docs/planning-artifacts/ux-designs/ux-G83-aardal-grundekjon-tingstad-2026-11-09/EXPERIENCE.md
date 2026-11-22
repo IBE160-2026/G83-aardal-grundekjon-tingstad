@@ -234,7 +234,7 @@ Feilbaner: (a) Teknisk feil i coachen etter steg 2: feilboble «Noe gikk galt. P
 2. Steg 1, Fokus: to valgkort, «Styrke» eller «Løping», hver med kort heiende forklaring. Hun velger Styrke.
 3. Steg 2, spørsmål etter fokus: for styrke «Hovedfokus» (overkropp, underkropp eller hele kroppen) og «Erfaring» (nybegynner eller erfaren), som valgkort. (Løping: «Mål» og «Lengste løpetur».)
 4. Steg 3, «Hvor mange økter i uka?»: runde tallknapper 2 til 5. Hun velger 4.
-5. Steg 4, «Hvor trener du?»: «På treningssenter» eller «Hjemme». Stilles bare for styrke; løping hopper over steget.
+5. Steg 4, «Hvor trener du?»: «På treningssenter» eller «Hjemme». Valgkortet «Hjemme» har undertekst i `meta`-stil: «Du trenger en stang eller et solid bord for trekkøvelser.» (R5). Underteksten er en del av kortets tilgjengelige navn. Stilles bare for styrke; løping hopper over steget.
 6. Steg 5: planen genereres. Kort lastetilstand («Lager planen din …»).
 7. **Klimaks:** Mari lander rett på Uke med den ferdige planen, velkomst-hinten og uketelleren «0 av 4 økter». Ingen oppsummeringsskjerm.
 
