@@ -1,6 +1,6 @@
 # Flex PT – Product Requirements Document
 
-**Status:** v1.3 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** v1.4 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -271,6 +271,35 @@ What a logged result means for the next session of the same exercise or run type
 | Finished automatically at midnight, no effort (FR7) | Completed exercises keep; not completed exercises keep | Keep | Only for the parts not completed |
 | Second "hard" or not completed in a row | −10 % (R12) | −10 % (R12) | Count resets |
 
+### Starting volume (R4, R7)
+
+The volume of the first plan week, before anything is logged. Later weeks follow the progression table. The values are constants in the plan engine and each one has an automated test (NFR6).
+
+**Strength**
+
+| | Beginner | Experienced |
+| --- | --- | --- |
+| Sets per exercise | 3 | 4 |
+| Reps per set, with load | 10 | 8 |
+| Reps per set, bodyweight | 10 | 12 |
+| Exercises per session: full body | 4 | 5 |
+| Exercises per session: upper or lower | 4 | 5 |
+| Exercises per session: push, pull or legs | 3 | 4 |
+
+- Main focus (R4): exercises for the chosen body part (upper or lower) get one extra set. Full body as main focus gives no extra set.
+- Reps are a fixed number, not a range, so "add one rep" in R6 is well defined.
+- At least 3 sets, so a session reduced by R8 (one set fewer) still has at least 2 sets per exercise.
+
+**Running**
+
+- Long run = the longest run the user entered (R7), but never longer than the goal distance, rounded down to 0.5 km.
+- Easy short run = 50 % of the long run, rounded down to 0.5 km, at least 2 km but never longer than the long run.
+- Fast short run = the easy short run's distance (R7), fixed for the rest of the program.
+
+The long run is not set 10 % above the longest run in the first week. This keeps the first week on distances the user has already run, and R12 protects against an overestimated longest run. Capping the long run at the goal distance keeps the goal from being reached by the first plan (R14).
+
+**Basis:** team choice. The research report does not cover sets, reps or how distance is split between run types.
+
 ## Appendix B – Test profiles
 
 | Profile | Goal and experience | Sessions and equipment | Expected weekly plan |
@@ -281,6 +310,15 @@ What a logged result means for the next session of the same exercise or run type
 | D | Running · experienced · goal half marathon · can run 15 km | 4 sessions per week | 4 runs: Mon easy short, Wed fast short, Fri easy short, Sun long |
 
 The days follow the day patterns in R9.
+
+Starting volume in the first week (Appendix A, Starting volume):
+
+| Profile | First week |
+| --- | --- |
+| A | 2 full-body sessions · 4 exercises each · 3 sets × 10 reps · no extra set (full body) · no load until logged (R6) |
+| B | Lower and upper: 5 exercises; push, pull and legs: 4 exercises · 4 sets × 8 reps · no extra set (full body) · no load until logged (R6) |
+| C | Easy short 2 km · fast short 2 km · long 3 km · 7 km in total |
+| D | Easy short 7.5 km · fast short 7.5 km · easy short 7.5 km · long 15 km · 37.5 km in total |
 
 ## Appendix C – Coach scenarios
 
@@ -308,3 +346,4 @@ The days follow the day patterns in R9.
 | 2026-11-16 | 1.1 | Changes from the UX work, through `bmad-correct-course` ([sprint change proposal](sprint-change-proposal-2026-11-16.md)): five-step onboarding without available days and with two equipment options (FR2, R1, R5, new fixed day patterns in R9, Appendix B); 8-week strength program (new R13) and running goal (new R14) with Story 2.4; week counter, new-week banner, previous and recommended load and pace (FR4, FR5); set-by-set logging with status derived from sets and a set counted from 1 rep (FR7, R6, progression table); time-limited session added to R8; proposal card shows only changed lines and FR15 rewritten so the week plan has no change markers (FR11, FR15); new FR17 finished session with confetti as should-have, Story 3.4; theme choice and Story 1.6 (FR3); demo button and badge (NFR1); WCAG 2.2 AA, reduced motion and 200 % text (NFR8); Norwegian effort names and tone (NFR10); new NFR11 restore active session; §6 explains why feedback is not gamification and moves streaks and personal records to stage 2; §7 new deviation for available days; §8 new questions answered; database changed from SQLite to PostgreSQL after the architecture choice (NFR5, §4) |
 | 2026-11-18 | 1.2 | Found while writing epics and stories: a started session that is not finished is finished automatically at midnight (Europe/Oslo) at the end of the day it was started, without effort or note, and locked (FR7); new row in the progression table: such a session gives no increase, and only its not-completed parts count towards R12 |
 | 2026-11-22 | 1.3 | New FR18 forgotten password and Story 1.7, after comparing with the lecturer's reference stories for login («Reset a forgotten password by email»). The lecturer's other login stories (roles, invitations, admin area, institutions, audit log) do not fit an app with one user type and open registration and were left out. UI table and E1 updated; email provider in architecture AD-19 |
+| 2026-11-22 | 1.4 | Starting volume for the first plan week added to Appendix A (sets, reps and exercises per session by experience and template; long run, easy short run and fast short run distances), and expected first-week volume for profiles A–D added to Appendix B. Needed by Story 2.2; proposed by Knut and approved by the group in the pull request |
