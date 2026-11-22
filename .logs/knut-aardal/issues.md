@@ -17,3 +17,5 @@
 - [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Avklar hvem som har Anthropic-API-nøkkelen (PRD §8); trengs i Story 4.5
 - [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Story 2.2: bestem sett/reps per erfaring og fordeling av løpedistanse i uke 1, og skriv det inn i PRD-ens vedlegg A
 - [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Gruppa godkjenner epics.md, PRD v1.2 og AD-8 i PR fra docs/epics-v1
+- [ ] 2026-11-22 [impeccable-designforslag](994-2026-11-22-19-30-30-impeccable-designforslag.md) — Gruppa velger designretning blant Impeccable-forslagene (oppdatere DESIGN.md eller beholde Pulsslag)
+- [ ] 2026-11-22 [impeccable-designforslag](994-2026-11-22-19-30-30-impeccable-designforslag.md) — Vurder om Impeccables globale hook i ~/.claude/settings.json skal beholdes
