@@ -1,6 +1,6 @@
 # Flex PT – Product Requirements Document
 
-**Status:** v1.5 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
+**Status:** v1.6 · **Based on:** Product brief (2026-09-17), teacher feedback (2026-10-06), [research on the training rules](research/academic-lit-treningsregler-r1-r11-2026-10-31/research.md) (2026-10-31) and the [UX documents](ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/) (2026-11-11) · **Scope:** Version 1 (MVP, stage 1)
 
 ## 1. Goals and background
 
@@ -57,7 +57,7 @@ Requirements are numbered so they can be traced to stories, code and tests. The 
 | NFR7 | If the language model fails or times out, the user sees a clear message and the plan is unchanged. |
 | NFR8 | Accessibility: WCAG 2.2 AA as the target, in both light and dark theme; labelled form fields, keyboard navigation, readable contrast, and a layout that works on mobile width. The app respects the phone's reduce-motion setting and supports text size up to 200 % without a broken layout. |
 | NFR9 | Robustness: all input is validated on the server; repeating an action (for example double-clicking Approve or logging the same session twice) has no extra effect; a change proposal based on an older plan version is rejected with a clear message. |
-| NFR10 | The user interface and the coach use Norwegian (bokmål), including the effort names and anchor texts (Lett, Passe, Tung; see EXPERIENCE.md). The coach and the microcopy use one encouraging, supportive tone; the fixed medical reply (FR13) stays neutral. Code and planning documents may be in English. |
+| NFR10 | The user interface and the coach use Norwegian (bokmål), including the effort names and anchor texts (Lett, Passe, Tung; see EXPERIENCE.md). Exception: the motivational quotes after a finished session (FR17) are in English, a team decision of 2026-11-22; they are marked with `lang="en"` so screen readers pronounce them correctly (NFR8). The coach and the microcopy use one encouraging, supportive tone; the fixed medical reply (FR13) stays neutral. Code and planning documents may be in English. |
 | NFR11 | An active session is restored when the user locks the phone or leaves the app and comes back: same session, exercise and set. |
 
 ## 3. UI design goals
@@ -371,3 +371,4 @@ Profile E is used only in the plan engine tests, not as a demo user. It is the o
 | 2026-11-22 | 1.3 | New FR18 forgotten password and Story 1.7, after comparing with the lecturer's reference stories for login («Reset a forgotten password by email»). The lecturer's other login stories (roles, invitations, admin area, institutions, audit log) do not fit an app with one user type and open registration and were left out. UI table and E1 updated; email provider in architecture AD-19 |
 | 2026-11-22 | 1.4 | Starting volume for the first plan week added to Appendix A (sets, reps and exercises per session by experience and template; long run, easy short run and fast short run distances), session slots by movement pattern, and a 1–50 km limit on the longest run; expected first-week volume for profiles A–D and a new engine-only profile E (beginner, home, upper-body focus) added to Appendix B; R6 caps bodyweight exercises at 20 reps per set; R5 assumes a bar, table edge or similar to pull on at home. Needed by Stories 2.1, 2.2, 2.4 and 3.4; proposed by Knut and approved by the group in the pull request |
 | 2026-11-22 | 1.5 | Forgotten password (FR18, Story 1.7) moved to version 2: reset links by email to any user need a verified sender domain, which the team does not buy for v1. FR18 is kept for v2 and marked as moved; §5, §6 and the capability table updated. Decided by Knut, approved by the group in the pull request |
+| 2026-11-22 | 1.6 | NFR10 gets an exception: the motivational quotes (FR17) are in English, following the team decision in PR #21, and are marked with `lang="en"` for screen readers (NFR8, WCAG 3.1.2) |
