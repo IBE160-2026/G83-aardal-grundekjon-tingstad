@@ -1,5 +1,7 @@
 # Designforslag fra Impeccable (2026-11-22)
 
+> **Beslutning 2026-11-22:** Gruppa avviste alle fem nye retningene (01–05) og beholder dagens design, Pulsslag, slik det står i `DESIGN.md`. Filene er beholdt som dokumentasjon av et vurdert og avvist KI-forslag.
+
 Seks SVG-er av samme skjerm, **Uke** (startsiden), med samme innhold: persona Mari (syntetiske demodata), styrke 4 økter i uka, onsdag i uke 47, 1 av 4 økter gjort. Kun retning, ikke vedtatt. `DESIGN.md` i UX-mappa gjelder til gruppa velger noe annet.
 
 Skjermen er en Operate-flate: navigasjon (fanelinje), økter og knapper er standard. Hver retning bidrar bare med typografi, palett, tetthet og ett signaturgrep.

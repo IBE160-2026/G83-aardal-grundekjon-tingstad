@@ -50,6 +50,7 @@ Flex PT is a personal trainer that adapts to everyday life. It combines a person
 - Language: Norwegian bokmål in the UI and coach, "du" form.
 - Voice: cheering, supportive and motivating, short sentences, a bit playful; no pressure or guilt about missed sessions. Pain, medical and technical-error messages switch to a calm, neutral tone: no exclamation marks, no cheering, no red alarm.
 - Effort names Lett, Passe, Tung with fixed anchor texts.
+- Visual identity: the team keeps the existing "Pulsslag" design in `.docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/DESIGN.md` (decided 2026-11-22, after rejecting five alternative directions). Design work refines this world; it does not replace it.
 
 ## Evidence on Hand
 
