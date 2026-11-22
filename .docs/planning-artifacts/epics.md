@@ -50,7 +50,7 @@ NFR6: Plan engine and validation are covered by automated tests, with test profi
 NFR7: If the language model fails or times out, the user sees a clear message and the plan is unchanged.
 NFR8: WCAG 2.2 AA in light and dark theme: labelled fields, keyboard navigation, readable contrast, mobile-width layout, respects reduce-motion, text size up to 200 % without broken layout.
 NFR9: All input validated on the server; repeated actions (double-click Approve, logging the same session twice) have no extra effect; a proposal based on an older plan version is rejected with a clear message.
-NFR10: UI and coach in Norwegian bokmål, including effort names and anchor texts; one encouraging, supportive tone; the fixed medical reply stays neutral. Code and planning documents may be in English.
+NFR10: UI and coach in Norwegian bokmål, including effort names and anchor texts, except the motivational quotes, which are in English and marked `lang="en"`; one encouraging, supportive tone; the fixed medical reply stays neutral. Code and planning documents may be in English.
 NFR11: An active session is restored after the phone is locked or the app is left: same session, exercise and set.
 
 ### Additional Requirements
@@ -112,7 +112,7 @@ UX-DR17: Øktoversikt: all exercises as `exercise-row` with status (○ Ikke sta
 UX-DR18: Øvelseslogg (`exercise-card`): name, «Sett N av M», «Forrige: X kg · Anbefalt: Y kg» (accent, only when logged before), steppers, «Logg sett», «Sett N logget. Neste!», list of logged sets (tap to edit, ✕ to remove, only while active), one-time hint first time an exercise is logged, auto-advance to next exercise or back to overview, save error «Kunne ikke lagre settet. Prøv igjen.» keeping the values.
 UX-DR19: Løpelogg: one screen with Distanse (km) and Tid (min:sek) steppers, «Fullfør økt» as primary; for the fast short run show «Sist løp du denne på m:ss per km. Klarer du å slå det i dag?» and the note that it should feel hard and the distance is fixed; save error «Kunne ikke lagre økta. Prøv igjen.».
 UX-DR20: Fullfør økt: «Hvor anstrengende var økta?», three effort cards with strength or running anchors by session type, required; optional note; «Fullfør» locks the session.
-UX-DR21: `popup-done`: «Bra jobba, [navn]!», summary line(s) (exercises · sets · status, or distance · time · pace), motivational message in an accent-bordered field, quote from a fixed list of 20–30 English lines, running-goal celebration «Du klarte X km!» with pointer to Profil, next session with day, «Ferdig» → Uke. The popup is complete and fully usable without confetti (see UX-DR29).
+UX-DR21: `popup-done`: «Bra jobba, [navn]!», summary line(s) (exercises · sets · status, or distance · time · pace), motivational message in an accent-bordered field, quote from a fixed list of 20–30 English lines marked with `lang="en"`, running-goal celebration «Du klarte X km!» with pointer to Profil, next session with day, «Ferdig» → Uke. The popup is complete and fully usable without confetti (see UX-DR29).
 UX-DR22: Coach chat: free-text input only (no quick replies), user bubbles right in primary, coach bubbles left (max 85 % width), calm thinking indicator in a coach bubble and send disabled until the reply arrives, input text kept when switching tabs, new replies announced to screen readers.
 UX-DR23: `proposal-card`: title «Forslag: endringer», only changed lines «X → Y», «Avvis» + «Godkjenn» (disabled once pressed); approved → `proposal-card-approved` «Godkjent ✓» (announced) with «Se dagens økt»; rejected → muted line «Avvist. Planen er uendret.»; stale → clear message.
 UX-DR24: Coach special bubbles: `chat-bubble-pain` (muted, no accent, no exclamation marks) with the fixed R11 text and, when applicable, «Vil du bytte øvelse?» with «Nei» / «Ja, bytt»; `chat-bubble-error` «Noe gikk galt. Planen er uendret.» with «Prøv igjen» (resends last message once); rule break as a normal coach bubble «Det får jeg dessverre ikke til å passe. [grunn]. …».
@@ -558,7 +558,7 @@ So that I never have to plan the week myself.
 
 **Given** the engine
 **When** it builds the next week
-**Then** it is a pure function of the previous week, the profile, the library and the logs passed in (none until Epic 3), so Story 3.3 can add progression without changing the week-creation code
+**Then** it is a pure function of the previous week, the profile, the library and the logs passed in (none until Epic 3), so Story 3.4 can add progression without changing the week-creation code
 
 ### Story 2.6: Edit my profile and running goal
 
@@ -838,6 +838,7 @@ So that I feel the progress and want to come back.
 **Given** the quote
 **When** the popup opens
 **Then** one quote is taken at random from a fixed list of 20–30 short English lines in the code, with no language-model call
+**And** the quote element has `lang="en"`, so screen readers read it with English pronunciation while the rest of the popup stays `nb` (WCAG 2.2 SC 3.1.2, NFR8, NFR10)
 
 **Given** a run that reached the running goal (Story 3.3)
 **When** the popup opens

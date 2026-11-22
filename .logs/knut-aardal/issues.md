@@ -15,9 +15,9 @@
 - [ ] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Gruppa godkjenner PR #10 (rask kort tur og PRD v1.0)
 - [x] 2026-11-09 [prd-v0-7](996-2026-11-09-20-52-14-prd-v0-7.md) — Vurder om loggskjermen skal forklare at anstrengelse på rask kort tur ikke påvirker progresjonen (løst 2026-11-09: kort forklaring på loggskjermen)
 - [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Avklar hvem som har Anthropic-API-nøkkelen (PRD §8); trengs i Story 4.5
-- [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Story 2.2: bestem sett/reps per erfaring og fordeling av løpedistanse i uke 1, og skriv det inn i PRD-ens vedlegg A
-- [ ] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Gruppa godkjenner epics.md, PRD v1.2 og AD-8 i PR fra docs/epics-v1
+- [x] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Story 2.2: bestem sett/reps per erfaring og fordeling av løpedistanse i uke 1, og skriv det inn i PRD-ens vedlegg A (løst 2026-11-22: PRD v1.4, PR #19 flettet)
+- [x] 2026-11-18 [epics-og-stories-v1](995-2026-11-18-20-56-53-epics-og-stories-v1.md) — Gruppa godkjenner epics.md, PRD v1.2 og AD-8 i PR fra docs/epics-v1 (løst 2026-11-22: PR #15 flettet)
 - [x] 2026-11-22 [impeccable-designforslag](994-2026-11-22-19-30-30-impeccable-designforslag.md) — Gruppa velger designretning blant Impeccable-forslagene (oppdatere DESIGN.md eller beholde Pulsslag) (løst 2026-11-22: beholder Pulsslag)
 - [ ] 2026-11-22 [impeccable-designforslag](994-2026-11-22-19-30-30-impeccable-designforslag.md) — Vurder om Impeccables globale hook i ~/.claude/settings.json skal beholdes
-- [ ] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Gruppa godkjenner at glemt passord (FR18, Story 1.7, AD-19) flyttes til versjon 2, i PR fra docs/v2-glemt-passord
-- [ ] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Kjør bmad-sprint-planning på nytt når PR-ene for startvolum, v2-glemt-passord og sprint-planning er flettet (Story 1.7 skal ut av sprint-status.yaml)
+- [x] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Gruppa godkjenner at glemt passord (FR18, Story 1.7, AD-19) flyttes til versjon 2, i PR fra docs/v2-glemt-passord (løst 2026-11-22: PR #20 flettet)
+- [x] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Kjør bmad-sprint-planning på nytt når PR-ene for startvolum, v2-glemt-passord og sprint-planning er flettet (Story 1.7 skal ut av sprint-status.yaml) (løst 2026-11-22: 26 stories, Story 1.7 fjernet)
