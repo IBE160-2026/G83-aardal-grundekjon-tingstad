@@ -22,7 +22,7 @@ const PATTERNS = [
 ];
 
 // Kjente hull hjemme (Story 2.1): disse mønstrene bruker fallback i PRD Appendix A.
-const KNOWN_HOME_GAPS = new Set(["biceps"]);
+const KNOWN_HOME_GAPS = new Set([]);
 
 // location: gym = kun treningssenter, both = gym og hjemme (kroppsvekt; stang/benk/trinn
 // kan brukes til å trekke eller stå på, jf. R5).
@@ -38,8 +38,8 @@ const CURATED = [
   ["Romanian_Deadlift", "Rumensk markløft", "hinge", "gym"],
   ["Barbell_Deadlift", "Markløft", "hinge", "gym"],
   ["Stiff-Legged_Dumbbell_Deadlift", "Strakbent markløft med manualer", "hinge", "gym"],
-  ["Butt_Lift_Bridge", "Hoftehev (glutebro)", "hinge", "both"],
-  ["Single_Leg_Glute_Bridge", "Enbens hoftehev", "hinge", "both"],
+  ["Butt_Lift_Bridge", "Glute bridge (hoftehev på gulv)", "hinge", "both"],
+  ["Single_Leg_Glute_Bridge", "Enbens glute bridge", "hinge", "both"],
   // single-leg
   ["Dumbbell_Lunges", "Utfall med manualer", "single-leg", "gym"],
   ["Split_Squat_with_Dumbbells", "Splittknebøy med manualer", "single-leg", "gym"],
@@ -48,11 +48,9 @@ const CURATED = [
   // calf
   ["Standing_Calf_Raises", "Stående tåhev i maskin", "calf", "gym"],
   ["Seated_Calf_Raise", "Sittende tåhev", "calf", "gym"],
-  ["Standing_Dumbbell_Calf_Raise", "Tåhev med manualer", "calf", "gym"],
   // horizontal push
   ["Barbell_Bench_Press_-_Medium_Grip", "Benkpress med stang", "horizontal-push", "gym"],
   ["Dumbbell_Bench_Press", "Benkpress med manualer", "horizontal-push", "gym"],
-  ["Machine_Bench_Press", "Brystpress i maskin", "horizontal-push", "gym"],
   ["Pushups", "Armhevinger", "horizontal-push", "both"],
   ["Incline_Push-Up", "Armhevinger med hendene hevet", "horizontal-push", "both"],
   ["Push-Ups_With_Feet_Elevated", "Armhevinger med føttene hevet", "horizontal-push", "both"],
@@ -67,18 +65,15 @@ const CURATED = [
   ["Inverted_Row", "Omvendt roing (under bord eller stang)", "horizontal-pull", "both"],
   // vertical pull
   ["Wide-Grip_Lat_Pulldown", "Nedtrekk med bredt grep", "vertical-pull", "gym"],
-  ["Close-Grip_Front_Lat_Pulldown", "Nedtrekk med smalt grep", "vertical-pull", "gym"],
   ["Pullups", "Pullups", "vertical-pull", "both"],
-  ["Chin-Up", "Chins", "vertical-pull", "both"],
+  ["Chin-Up", "Chinups", "vertical-pull", "both"],
   // biceps
   ["Dumbbell_Bicep_Curl", "Bicepscurl med manualer", "biceps", "gym"],
-  ["Barbell_Curl", "Bicepscurl med stang", "biceps", "gym"],
   ["Hammer_Curls", "Hammercurl", "biceps", "gym"],
   // triceps
   ["Triceps_Pushdown", "Tricepspress i kabel", "triceps", "gym"],
   ["Standing_Dumbbell_Triceps_Extension", "Tricepsekstensjon over hodet med manual", "triceps", "gym"],
   ["Bench_Dips", "Dips med hendene på en stol", "triceps", "both"],
-  ["Standing_Towel_Triceps_Extension", "Tricepsekstensjon med håndkle", "triceps", "both"],
   // core
   ["Cable_Crunch", "Magecrunch i kabel", "core", "gym"],
   ["Sit-Up", "Sit-ups", "core", "both"],
@@ -92,9 +87,39 @@ const CUSTOM = [
   ["custom-bodyweight-calf-raise", "Tåhev på kroppsvekt", "Bodyweight Calf Raise", "calf", ["calves"], [], "beginner"],
   ["custom-single-leg-calf-raise", "Enbens tåhev", "Single-Leg Calf Raise", "calf", ["calves"], [], "beginner"],
   ["custom-bent-knee-inverted-row", "Omvendt roing med bøyde knær", "Bent-Knee Inverted Row", "horizontal-pull", ["middle back"], ["lats", "biceps"], "beginner"],
+  ["custom-assisted-pull-up", "Pullups med føttene på en stol", "Assisted Pull-Up, Feet on Chair", "vertical-pull", ["lats"], ["biceps", "middle back"], "beginner"],
+  ["custom-bottle-row", "Roing med flasker", "Bottle Row", "horizontal-pull", ["middle back"], ["lats", "biceps"], "beginner"],
+  ["custom-bottle-biceps-curl", "Bicepscurl med flasker", "Bottle Biceps Curl", "biceps", ["biceps"], ["forearms"], "beginner"],
+  ["custom-bottle-hammer-curl", "Hammercurl med flasker", "Bottle Hammer Curl", "biceps", ["biceps"], ["forearms"], "beginner"],
+  ["custom-bottle-skullcrusher", "Skullcrusher med flasker", "Bottle Skullcrusher", "triceps", ["triceps"], [], "beginner"],
   ["custom-pike-push-up", "Pike push-up", "Pike Push-Up", "vertical-push", ["shoulders"], ["triceps", "chest"], "intermediate"],
   ["custom-pike-push-up-feet-elevated", "Pike push-up med føttene hevet", "Pike Push-Up, Feet Elevated", "vertical-push", ["shoulders"], ["triceps", "chest"], "intermediate"],
 ];
+
+// Nivå der vi er uenige med kilden.
+const LEVEL_OVERRIDES = { Freehand_Jump_Squat: "beginner" };
+
+// Norske navn på muskelgrupper (forslag, skal gjennomgås). Nøklene er kildens engelske navn og brukes
+// som stabile nøkler i `primaryMuscles`/`secondaryMuscles` (og i kroppsdel-kartet i Story 4.4).
+const MUSCLE_NAMES_NO = {
+  abdominals: "Mage",
+  abductors: "Utsiden av hoften",
+  adductors: "Innsiden av låret",
+  biceps: "Biceps",
+  calves: "Legger",
+  chest: "Bryst",
+  forearms: "Underarmer",
+  glutes: "Rumpe",
+  hamstrings: "Baksiden av låret",
+  lats: "Brede ryggmuskler",
+  "lower back": "Korsrygg",
+  "middle back": "Midtre rygg",
+  neck: "Nakke",
+  quadriceps: "Forsiden av låret",
+  shoulders: "Skuldre",
+  traps: "Trapezius (nakke og øvre rygg)",
+  triceps: "Triceps",
+};
 
 // Utstyr i kilden som er greit for «both» (kroppsvekt, stang/benk/trinn man har tilgang til).
 const HOME_OK_EQUIPMENT = new Set(["body only", "other", null]);
@@ -133,7 +158,7 @@ const library = CURATED.map(([id, nameNo, pattern, location]) => {
     primaryMuscles: src.primaryMuscles,
     secondaryMuscles: src.secondaryMuscles,
     sourceEquipment: src.equipment,
-    level: src.level,
+    level: LEVEL_OVERRIDES[id] ?? src.level,
   };
 }).filter(Boolean);
 
@@ -162,6 +187,12 @@ if (library.length < 30 || library.length > 50) {
   errors.push(`Biblioteket har ${library.length} øvelser, forventet 30–50`);
 }
 
+for (const e of library) {
+  for (const m of [...e.primaryMuscles, ...e.secondaryMuscles]) {
+    if (!MUSCLE_NAMES_NO[m]) errors.push(`${e.id}: mangler norsk navn for muskelgruppen «${m}»`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);
@@ -170,6 +201,7 @@ if (errors.length) {
 const output = {
   source: "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense), pluss egne øvelser merket source: custom",
   knownHomeGaps: [...KNOWN_HOME_GAPS],
+  muscleNamesNo: MUSCLE_NAMES_NO,
   exercises: library,
 };
 mkdirSync(dirname(OUT), { recursive: true });

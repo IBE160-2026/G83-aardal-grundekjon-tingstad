@@ -1,8 +1,8 @@
 # Øvelsesbibliotek (Story 2.1)
 
-`exercises.json` er et kuratert utvalg på 50 øvelser: 45 fra [Free Exercise DB](https://github.com/yuhonas/free-exercise-db)
-(public domain, Unlicense) og 5 egne kroppsvektøvelser (`source: "custom"`) som databasen ikke har: tåhev, enbens tåhev, omvendt roing med bøyde knær
-og to varianter av pike push-up. Vi forutsetter ikke utstyr som strikk hjemme. Vi har valgt ut øvelsene for hånd, oversatt navnene til norsk (NFR10) og
+`exercises.json` er et kuratert utvalg på 50 øvelser: 40 fra [Free Exercise DB](https://github.com/yuhonas/free-exercise-db)
+(public domain, Unlicense) og 10 egne hjemmeøvelser (`source: "custom"`) som databasen ikke har: tåhev, enbens tåhev, omvendt roing med bøyde knær,
+pullups med føttene på en stol, to varianter av pike push-up og fem øvelser med vannflasker eller brusflasker (roing, bicepscurl, hammercurl og skullcrusher). Vi forutsetter ikke utstyr som strikk hjemme. Vi har valgt ut øvelsene for hånd, oversatt navnene til norsk (NFR10) og
 gruppert dem etter bevegelsesmønster (PRD Appendix A).
 
 ## Lag filen på nytt
@@ -25,17 +25,15 @@ mønster mangler øvelser, hvis en «both»-øvelse trenger utstyr, eller hvis a
 | `pattern` | `squat`, `hinge`, `single-leg`, `calf`, `horizontal-push`, `vertical-push`, `horizontal-pull`, `vertical-pull`, `biceps`, `triceps`, `core` |
 | `location` | `gym` (bare treningssenter) eller `both` (gym og hjemme, kroppsvekt) |
 | `bodyweight` | `true` hvis belastningen er kroppsvekt (vekt = `null` i loggen) |
-| `primaryMuscles` / `secondaryMuscles` | Muskelgrupper fra kilden (engelsk) |
+| `primaryMuscles` / `secondaryMuscles` | Muskelgrupper med kildens engelske navn som stabile nøkler. Norske navn står i `muscleNamesNo` øverst i filen |
 | `sourceEquipment` / `level` | Utstyr og nivå slik kilden oppgir dem |
 
-Hjemmeøvelser kan bruke en stang, kanten på et solid bord, en benk eller et trinn (R5), for eksempel pullups og
-omvendt roing.
+Hjemmeøvelser kan bruke en stang, kanten på et solid bord, en stol, en benk eller et trinn (R5), for eksempel pullups og
+omvendt roing. Øvelser med flasker er merket som kroppsvekt (`bodyweight: true`), så vekten loggføres ikke.
 
 ## Kjente hull hjemme
 
-Bare `biceps` har ingen hjemmeøvelse (databasen har ingen uten utstyr). Planmotoren bruker da fallbacken i
-PRD Appendix A: biceps → horizontal pull. Calf og vertical push er dekket av de egne øvelsene.
-Listen står også i `knownHomeGaps` i `exercises.json`.
+Ingen. Alle 11 mønstrene har minst to hjemmeøvelser. `knownHomeGaps` i `exercises.json` er tom, og testen i Story 2.1 skal feile hvis et nytt hull oppstår.
 
 ## Ikke gjort ennå
 

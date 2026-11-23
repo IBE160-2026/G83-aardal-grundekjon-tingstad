@@ -1,8 +1,25 @@
 {
   "source": "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense), pluss egne øvelser merket source: custom",
-  "knownHomeGaps": [
-    "biceps"
-  ],
+  "knownHomeGaps": [],
+  "muscleNamesNo": {
+    "abdominals": "Mage",
+    "abductors": "Utsiden av hoften",
+    "adductors": "Innsiden av låret",
+    "biceps": "Biceps",
+    "calves": "Legger",
+    "chest": "Bryst",
+    "forearms": "Underarmer",
+    "glutes": "Rumpe",
+    "hamstrings": "Baksiden av låret",
+    "lats": "Brede ryggmuskler",
+    "lower back": "Korsrygg",
+    "middle back": "Midtre rygg",
+    "neck": "Nakke",
+    "quadriceps": "Forsiden av låret",
+    "shoulders": "Skuldre",
+    "traps": "Trapezius (nakke og øvre rygg)",
+    "triceps": "Triceps"
+  },
   "exercises": [
     {
       "id": "Barbell_Squat",
@@ -98,7 +115,7 @@
         "hamstrings"
       ],
       "sourceEquipment": "body only",
-      "level": "intermediate"
+      "level": "beginner"
     },
     {
       "id": "Romanian_Deadlift",
@@ -164,7 +181,7 @@
     {
       "id": "Butt_Lift_Bridge",
       "source": "free-exercise-db",
-      "nameNo": "Hoftehev (glutebro)",
+      "nameNo": "Glute bridge (hoftehev på gulv)",
       "nameEn": "Butt Lift (Bridge)",
       "pattern": "hinge",
       "location": "both",
@@ -181,7 +198,7 @@
     {
       "id": "Single_Leg_Glute_Bridge",
       "source": "free-exercise-db",
-      "nameNo": "Enbens hoftehev",
+      "nameNo": "Enbens glute bridge",
       "nameEn": "Single Leg Glute Bridge",
       "pattern": "hinge",
       "location": "both",
@@ -300,21 +317,6 @@
       "level": "beginner"
     },
     {
-      "id": "Standing_Dumbbell_Calf_Raise",
-      "source": "free-exercise-db",
-      "nameNo": "Tåhev med manualer",
-      "nameEn": "Standing Dumbbell Calf Raise",
-      "pattern": "calf",
-      "location": "gym",
-      "bodyweight": false,
-      "primaryMuscles": [
-        "calves"
-      ],
-      "secondaryMuscles": [],
-      "sourceEquipment": "dumbbell",
-      "level": "intermediate"
-    },
-    {
       "id": "Barbell_Bench_Press_-_Medium_Grip",
       "source": "free-exercise-db",
       "nameNo": "Benkpress med stang",
@@ -348,24 +350,6 @@
         "triceps"
       ],
       "sourceEquipment": "dumbbell",
-      "level": "beginner"
-    },
-    {
-      "id": "Machine_Bench_Press",
-      "source": "free-exercise-db",
-      "nameNo": "Brystpress i maskin",
-      "nameEn": "Machine Bench Press",
-      "pattern": "horizontal-push",
-      "location": "gym",
-      "bodyweight": false,
-      "primaryMuscles": [
-        "chest"
-      ],
-      "secondaryMuscles": [
-        "shoulders",
-        "triceps"
-      ],
-      "sourceEquipment": "machine",
       "level": "beginner"
     },
     {
@@ -567,25 +551,6 @@
       "level": "beginner"
     },
     {
-      "id": "Close-Grip_Front_Lat_Pulldown",
-      "source": "free-exercise-db",
-      "nameNo": "Nedtrekk med smalt grep",
-      "nameEn": "Close-Grip Front Lat Pulldown",
-      "pattern": "vertical-pull",
-      "location": "gym",
-      "bodyweight": false,
-      "primaryMuscles": [
-        "lats"
-      ],
-      "secondaryMuscles": [
-        "biceps",
-        "middle back",
-        "shoulders"
-      ],
-      "sourceEquipment": "cable",
-      "level": "beginner"
-    },
-    {
       "id": "Pullups",
       "source": "free-exercise-db",
       "nameNo": "Pullups",
@@ -606,7 +571,7 @@
     {
       "id": "Chin-Up",
       "source": "free-exercise-db",
-      "nameNo": "Chins",
+      "nameNo": "Chinups",
       "nameEn": "Chin-Up",
       "pattern": "vertical-pull",
       "location": "both",
@@ -637,23 +602,6 @@
         "forearms"
       ],
       "sourceEquipment": "dumbbell",
-      "level": "beginner"
-    },
-    {
-      "id": "Barbell_Curl",
-      "source": "free-exercise-db",
-      "nameNo": "Bicepscurl med stang",
-      "nameEn": "Barbell Curl",
-      "pattern": "biceps",
-      "location": "gym",
-      "bodyweight": false,
-      "primaryMuscles": [
-        "biceps"
-      ],
-      "secondaryMuscles": [
-        "forearms"
-      ],
-      "sourceEquipment": "barbell",
       "level": "beginner"
     },
     {
@@ -716,21 +664,6 @@
         "chest",
         "shoulders"
       ],
-      "sourceEquipment": "body only",
-      "level": "beginner"
-    },
-    {
-      "id": "Standing_Towel_Triceps_Extension",
-      "source": "free-exercise-db",
-      "nameNo": "Tricepsekstensjon med håndkle",
-      "nameEn": "Standing Towel Triceps Extension",
-      "pattern": "triceps",
-      "location": "both",
-      "bodyweight": true,
-      "primaryMuscles": [
-        "triceps"
-      ],
-      "secondaryMuscles": [],
       "sourceEquipment": "body only",
       "level": "beginner"
     },
@@ -839,6 +772,91 @@
         "lats",
         "biceps"
       ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-assisted-pull-up",
+      "source": "custom",
+      "nameNo": "Pullups med føttene på en stol",
+      "nameEn": "Assisted Pull-Up, Feet on Chair",
+      "pattern": "vertical-pull",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "middle back"
+      ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-bottle-row",
+      "source": "custom",
+      "nameNo": "Roing med flasker",
+      "nameEn": "Bottle Row",
+      "pattern": "horizontal-pull",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "lats",
+        "biceps"
+      ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-bottle-biceps-curl",
+      "source": "custom",
+      "nameNo": "Bicepscurl med flasker",
+      "nameEn": "Bottle Biceps Curl",
+      "pattern": "biceps",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearms"
+      ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-bottle-hammer-curl",
+      "source": "custom",
+      "nameNo": "Hammercurl med flasker",
+      "nameEn": "Bottle Hammer Curl",
+      "pattern": "biceps",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearms"
+      ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-bottle-skullcrusher",
+      "source": "custom",
+      "nameNo": "Skullcrusher med flasker",
+      "nameEn": "Bottle Skullcrusher",
+      "pattern": "triceps",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [],
       "sourceEquipment": null,
       "level": "beginner"
     },
