@@ -16,3 +16,7 @@
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — avgjør mock-avvik: Markløft i wireframe d, «Neste økt» i pop-up vs. Uke, startverdi i stepper, minstelengde passord
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — plassholdere i Component Patterns: konfetti, øvrige ikoner/tilbake-pil, chat-input, bekreftelsesdialog, profil-sammendrag
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — commit UX-mappa, mockups, wireframes og sporbarhetsfila på docs/ux-v1 og lag PR
+- [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — verifiser med tørrkjøring at bmad-build finner .docs/ (config.toml peker på _bmad-output og docs)
+- [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — tillatelsesliste i settings.json og beslutning om Impeccable-hook før automatisk build
+- [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — GitHub Actions (lint, test, build) og .env.example i Story 1.1
+- [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — Vercel- og Supabase-kontoer før Story 1.6, og hvem som har ANTHROPIC_API_KEY
