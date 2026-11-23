@@ -1,13 +1,12 @@
 {
-  "source": "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense)",
+  "source": "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense), pluss egne øvelser merket source: custom",
   "knownHomeGaps": [
-    "calf",
-    "vertical-push",
     "biceps"
   ],
   "exercises": [
     {
       "id": "Barbell_Squat",
+      "source": "free-exercise-db",
       "nameNo": "Knebøy med stang",
       "nameEn": "Barbell Squat",
       "pattern": "squat",
@@ -27,6 +26,7 @@
     },
     {
       "id": "Leg_Press",
+      "source": "free-exercise-db",
       "nameNo": "Beinpress",
       "nameEn": "Leg Press",
       "pattern": "squat",
@@ -45,6 +45,7 @@
     },
     {
       "id": "Goblet_Squat",
+      "source": "free-exercise-db",
       "nameNo": "Goblet-knebøy",
       "nameEn": "Goblet Squat",
       "pattern": "squat",
@@ -64,6 +65,7 @@
     },
     {
       "id": "Bodyweight_Squat",
+      "source": "free-exercise-db",
       "nameNo": "Knebøy med kroppsvekt",
       "nameEn": "Bodyweight Squat",
       "pattern": "squat",
@@ -81,6 +83,7 @@
     },
     {
       "id": "Freehand_Jump_Squat",
+      "source": "free-exercise-db",
       "nameNo": "Hoppende knebøy",
       "nameEn": "Freehand Jump Squat",
       "pattern": "squat",
@@ -99,6 +102,7 @@
     },
     {
       "id": "Romanian_Deadlift",
+      "source": "free-exercise-db",
       "nameNo": "Rumensk markløft",
       "nameEn": "Romanian Deadlift",
       "pattern": "hinge",
@@ -117,6 +121,7 @@
     },
     {
       "id": "Barbell_Deadlift",
+      "source": "free-exercise-db",
       "nameNo": "Markløft",
       "nameEn": "Barbell Deadlift",
       "pattern": "hinge",
@@ -140,6 +145,7 @@
     },
     {
       "id": "Stiff-Legged_Dumbbell_Deadlift",
+      "source": "free-exercise-db",
       "nameNo": "Strakbent markløft med manualer",
       "nameEn": "Stiff-Legged Dumbbell Deadlift",
       "pattern": "hinge",
@@ -157,6 +163,7 @@
     },
     {
       "id": "Butt_Lift_Bridge",
+      "source": "free-exercise-db",
       "nameNo": "Hoftehev (glutebro)",
       "nameEn": "Butt Lift (Bridge)",
       "pattern": "hinge",
@@ -173,6 +180,7 @@
     },
     {
       "id": "Single_Leg_Glute_Bridge",
+      "source": "free-exercise-db",
       "nameNo": "Enbens hoftehev",
       "nameEn": "Single Leg Glute Bridge",
       "pattern": "hinge",
@@ -189,6 +197,7 @@
     },
     {
       "id": "Dumbbell_Lunges",
+      "source": "free-exercise-db",
       "nameNo": "Utfall med manualer",
       "nameEn": "Dumbbell Lunges",
       "pattern": "single-leg",
@@ -207,6 +216,7 @@
     },
     {
       "id": "Split_Squat_with_Dumbbells",
+      "source": "free-exercise-db",
       "nameNo": "Splittknebøy med manualer",
       "nameEn": "Split Squat with Dumbbells",
       "pattern": "single-leg",
@@ -224,6 +234,7 @@
     },
     {
       "id": "Bodyweight_Walking_Lunge",
+      "source": "free-exercise-db",
       "nameNo": "Gående utfall",
       "nameEn": "Bodyweight Walking Lunge",
       "pattern": "single-leg",
@@ -242,6 +253,7 @@
     },
     {
       "id": "Step-up_with_Knee_Raise",
+      "source": "free-exercise-db",
       "nameNo": "Step-up med knehev",
       "nameEn": "Step-up with Knee Raise",
       "pattern": "single-leg",
@@ -259,6 +271,7 @@
     },
     {
       "id": "Standing_Calf_Raises",
+      "source": "free-exercise-db",
       "nameNo": "Stående tåhev i maskin",
       "nameEn": "Standing Calf Raises",
       "pattern": "calf",
@@ -273,6 +286,7 @@
     },
     {
       "id": "Seated_Calf_Raise",
+      "source": "free-exercise-db",
       "nameNo": "Sittende tåhev",
       "nameEn": "Seated Calf Raise",
       "pattern": "calf",
@@ -287,6 +301,7 @@
     },
     {
       "id": "Standing_Dumbbell_Calf_Raise",
+      "source": "free-exercise-db",
       "nameNo": "Tåhev med manualer",
       "nameEn": "Standing Dumbbell Calf Raise",
       "pattern": "calf",
@@ -301,6 +316,7 @@
     },
     {
       "id": "Barbell_Bench_Press_-_Medium_Grip",
+      "source": "free-exercise-db",
       "nameNo": "Benkpress med stang",
       "nameEn": "Barbell Bench Press - Medium Grip",
       "pattern": "horizontal-push",
@@ -318,6 +334,7 @@
     },
     {
       "id": "Dumbbell_Bench_Press",
+      "source": "free-exercise-db",
       "nameNo": "Benkpress med manualer",
       "nameEn": "Dumbbell Bench Press",
       "pattern": "horizontal-push",
@@ -335,6 +352,7 @@
     },
     {
       "id": "Machine_Bench_Press",
+      "source": "free-exercise-db",
       "nameNo": "Brystpress i maskin",
       "nameEn": "Machine Bench Press",
       "pattern": "horizontal-push",
@@ -352,6 +370,7 @@
     },
     {
       "id": "Pushups",
+      "source": "free-exercise-db",
       "nameNo": "Armhevinger",
       "nameEn": "Pushups",
       "pattern": "horizontal-push",
@@ -369,6 +388,7 @@
     },
     {
       "id": "Incline_Push-Up",
+      "source": "free-exercise-db",
       "nameNo": "Armhevinger med hendene hevet",
       "nameEn": "Incline Push-Up",
       "pattern": "horizontal-push",
@@ -386,6 +406,7 @@
     },
     {
       "id": "Push-Ups_With_Feet_Elevated",
+      "source": "free-exercise-db",
       "nameNo": "Armhevinger med føttene hevet",
       "nameEn": "Push-Ups With Feet Elevated",
       "pattern": "horizontal-push",
@@ -403,6 +424,7 @@
     },
     {
       "id": "Dumbbell_Shoulder_Press",
+      "source": "free-exercise-db",
       "nameNo": "Skulderpress med manualer",
       "nameEn": "Dumbbell Shoulder Press",
       "pattern": "vertical-push",
@@ -419,6 +441,7 @@
     },
     {
       "id": "Machine_Shoulder_Military_Press",
+      "source": "free-exercise-db",
       "nameNo": "Skulderpress i maskin",
       "nameEn": "Machine Shoulder (Military) Press",
       "pattern": "vertical-push",
@@ -435,6 +458,7 @@
     },
     {
       "id": "Standing_Military_Press",
+      "source": "free-exercise-db",
       "nameNo": "Stående skulderpress med stang",
       "nameEn": "Standing Military Press",
       "pattern": "vertical-push",
@@ -451,6 +475,7 @@
     },
     {
       "id": "Bent_Over_Two-Dumbbell_Row",
+      "source": "free-exercise-db",
       "nameNo": "Roing med to manualer",
       "nameEn": "Bent Over Two-Dumbbell Row",
       "pattern": "horizontal-pull",
@@ -469,6 +494,7 @@
     },
     {
       "id": "Seated_Cable_Rows",
+      "source": "free-exercise-db",
       "nameNo": "Sittende kabelro",
       "nameEn": "Seated Cable Rows",
       "pattern": "horizontal-pull",
@@ -487,6 +513,7 @@
     },
     {
       "id": "One-Arm_Dumbbell_Row",
+      "source": "free-exercise-db",
       "nameNo": "Enarmsro med manual",
       "nameEn": "One-Arm Dumbbell Row",
       "pattern": "horizontal-pull",
@@ -505,6 +532,7 @@
     },
     {
       "id": "Inverted_Row",
+      "source": "free-exercise-db",
       "nameNo": "Omvendt roing (under bord eller stang)",
       "nameEn": "Inverted Row",
       "pattern": "horizontal-pull",
@@ -521,6 +549,7 @@
     },
     {
       "id": "Bodyweight_Mid_Row",
+      "source": "free-exercise-db",
       "nameNo": "Kroppsvektsro i stang",
       "nameEn": "Bodyweight Mid Row",
       "pattern": "horizontal-pull",
@@ -538,6 +567,7 @@
     },
     {
       "id": "Wide-Grip_Lat_Pulldown",
+      "source": "free-exercise-db",
       "nameNo": "Nedtrekk med bredt grep",
       "nameEn": "Wide-Grip Lat Pulldown",
       "pattern": "vertical-pull",
@@ -556,6 +586,7 @@
     },
     {
       "id": "Close-Grip_Front_Lat_Pulldown",
+      "source": "free-exercise-db",
       "nameNo": "Nedtrekk med smalt grep",
       "nameEn": "Close-Grip Front Lat Pulldown",
       "pattern": "vertical-pull",
@@ -574,6 +605,7 @@
     },
     {
       "id": "Pullups",
+      "source": "free-exercise-db",
       "nameNo": "Pullups",
       "nameEn": "Pullups",
       "pattern": "vertical-pull",
@@ -591,6 +623,7 @@
     },
     {
       "id": "Chin-Up",
+      "source": "free-exercise-db",
       "nameNo": "Chins",
       "nameEn": "Chin-Up",
       "pattern": "vertical-pull",
@@ -609,6 +642,7 @@
     },
     {
       "id": "Dumbbell_Bicep_Curl",
+      "source": "free-exercise-db",
       "nameNo": "Bicepscurl med manualer",
       "nameEn": "Dumbbell Bicep Curl",
       "pattern": "biceps",
@@ -625,6 +659,7 @@
     },
     {
       "id": "Barbell_Curl",
+      "source": "free-exercise-db",
       "nameNo": "Bicepscurl med stang",
       "nameEn": "Barbell Curl",
       "pattern": "biceps",
@@ -641,6 +676,7 @@
     },
     {
       "id": "Hammer_Curls",
+      "source": "free-exercise-db",
       "nameNo": "Hammercurl",
       "nameEn": "Hammer Curls",
       "pattern": "biceps",
@@ -655,6 +691,7 @@
     },
     {
       "id": "Triceps_Pushdown",
+      "source": "free-exercise-db",
       "nameNo": "Tricepspress i kabel",
       "nameEn": "Triceps Pushdown",
       "pattern": "triceps",
@@ -669,6 +706,7 @@
     },
     {
       "id": "Standing_Dumbbell_Triceps_Extension",
+      "source": "free-exercise-db",
       "nameNo": "Overhead tricepsstrekk med manual",
       "nameEn": "Standing Dumbbell Triceps Extension",
       "pattern": "triceps",
@@ -683,6 +721,7 @@
     },
     {
       "id": "Bench_Dips",
+      "source": "free-exercise-db",
       "nameNo": "Dips mellom to benker",
       "nameEn": "Bench Dips",
       "pattern": "triceps",
@@ -700,6 +739,7 @@
     },
     {
       "id": "Standing_Towel_Triceps_Extension",
+      "source": "free-exercise-db",
       "nameNo": "Tricepsstrekk med håndkle",
       "nameEn": "Standing Towel Triceps Extension",
       "pattern": "triceps",
@@ -714,6 +754,7 @@
     },
     {
       "id": "Cable_Crunch",
+      "source": "free-exercise-db",
       "nameNo": "Magecrunch i kabel",
       "nameEn": "Cable Crunch",
       "pattern": "core",
@@ -728,6 +769,7 @@
     },
     {
       "id": "Plank",
+      "source": "free-exercise-db",
       "nameNo": "Planke",
       "nameEn": "Plank",
       "pattern": "core",
@@ -742,6 +784,7 @@
     },
     {
       "id": "Crunches",
+      "source": "free-exercise-db",
       "nameNo": "Crunch",
       "nameEn": "Crunches",
       "pattern": "core",
@@ -756,6 +799,7 @@
     },
     {
       "id": "Dead_Bug",
+      "source": "free-exercise-db",
       "nameNo": "Dead bug",
       "nameEn": "Dead Bug",
       "pattern": "core",
@@ -767,6 +811,72 @@
       "secondaryMuscles": [],
       "sourceEquipment": "body only",
       "level": "beginner"
+    },
+    {
+      "id": "custom-bodyweight-calf-raise",
+      "source": "custom",
+      "nameNo": "Tåhev på kroppsvekt",
+      "nameEn": "Bodyweight Calf Raise",
+      "pattern": "calf",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-single-leg-calf-raise",
+      "source": "custom",
+      "nameNo": "Enbens tåhev",
+      "nameEn": "Single-Leg Calf Raise",
+      "pattern": "calf",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-pike-push-up",
+      "source": "custom",
+      "nameNo": "Pike push-up",
+      "nameEn": "Pike Push-Up",
+      "pattern": "vertical-push",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "chest"
+      ],
+      "sourceEquipment": null,
+      "level": "intermediate"
+    },
+    {
+      "id": "custom-pike-push-up-feet-elevated",
+      "source": "custom",
+      "nameNo": "Pike push-up med føttene hevet",
+      "nameEn": "Pike Push-Up, Feet Elevated",
+      "pattern": "vertical-push",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps",
+        "chest"
+      ],
+      "sourceEquipment": null,
+      "level": "intermediate"
     }
   ]
 }

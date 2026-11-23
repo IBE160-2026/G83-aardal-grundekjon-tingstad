@@ -22,7 +22,7 @@ const PATTERNS = [
 ];
 
 // Kjente hull hjemme (Story 2.1): disse mønstrene bruker fallback i PRD Appendix A.
-const KNOWN_HOME_GAPS = new Set(["calf", "vertical-push", "biceps"]);
+const KNOWN_HOME_GAPS = new Set(["biceps"]);
 
 // location: gym = kun treningssenter, both = gym og hjemme (kroppsvekt; stang/benk/trinn
 // kan brukes til å trekke eller stå på, jf. R5).
@@ -87,6 +87,15 @@ const CURATED = [
   ["Dead_Bug", "Dead bug", "core", "both"],
 ];
 
+// Egne øvelser som Free Exercise DB ikke har (kroppsvekt, uten utstyr). Skrevet og gjennomgått av teamet.
+// [id, norsk navn, engelsk navn, mønster, primære muskler, sekundære muskler, nivå]
+const CUSTOM = [
+  ["custom-bodyweight-calf-raise", "Tåhev på kroppsvekt", "Bodyweight Calf Raise", "calf", ["calves"], [], "beginner"],
+  ["custom-single-leg-calf-raise", "Enbens tåhev", "Single-Leg Calf Raise", "calf", ["calves"], [], "beginner"],
+  ["custom-pike-push-up", "Pike push-up", "Pike Push-Up", "vertical-push", ["shoulders"], ["triceps", "chest"], "intermediate"],
+  ["custom-pike-push-up-feet-elevated", "Pike push-up med føttene hevet", "Pike Push-Up, Feet Elevated", "vertical-push", ["shoulders"], ["triceps", "chest"], "intermediate"],
+];
+
 // Utstyr i kilden som er greit for «both» (kroppsvekt, stang/benk/trinn man har tilgang til).
 const HOME_OK_EQUIPMENT = new Set(["body only", "other", null]);
 
@@ -115,6 +124,7 @@ const library = CURATED.map(([id, nameNo, pattern, location]) => {
   const bodyweight = src.equipment === "body only" || src.equipment === null;
   return {
     id,
+    source: "free-exercise-db",
     nameNo,
     nameEn: src.name,
     pattern,
@@ -126,6 +136,15 @@ const library = CURATED.map(([id, nameNo, pattern, location]) => {
     level: src.level,
   };
 }).filter(Boolean);
+
+for (const [id, nameNo, nameEn, pattern, primaryMuscles, secondaryMuscles, level] of CUSTOM) {
+  if (ids.has(id)) errors.push(`Duplikat: ${id}`);
+  ids.add(id);
+  library.push({
+    id, source: "custom", nameNo, nameEn, pattern, location: "both", bodyweight: true,
+    primaryMuscles, secondaryMuscles, sourceEquipment: null, level,
+  });
+}
 
 // Dekning: minst to øvelser per mønster for gym (alle) og hjemme (kun «both»), unntatt kjente hull.
 for (const pattern of PATTERNS) {
@@ -149,7 +168,7 @@ if (errors.length) {
 }
 
 const output = {
-  source: "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense)",
+  source: "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense), pluss egne øvelser merket source: custom",
   knownHomeGaps: [...KNOWN_HOME_GAPS],
   exercises: library,
 };
