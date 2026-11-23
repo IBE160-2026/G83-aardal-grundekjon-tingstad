@@ -18,5 +18,5 @@
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — commit UX-mappa, mockups, wireframes og sporbarhetsfila på docs/ux-v1 og lag PR
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — Zod-skjema og Vitest-dekningstest for øvelsesbiblioteket når skjelettet (Story 1.1) finnes
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — teamet må gjennomgå utvalget og norske navn i PR (Story 2.1)
-- [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — avklar «Enkelt utstyr hjemme» i biblioteket (nå bare gym eller both)
+- [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — avklar «Enkelt utstyr hjemme» i biblioteket (løst 2026-11-23: forutsettes ikke; PRD og UX-onboarding bør justeres)
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — oppdater sporbarhetstabellen og sprint-status.yaml for Story 2.1
