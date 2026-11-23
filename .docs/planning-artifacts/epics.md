@@ -218,6 +218,10 @@ So that every later story builds on the same base and the examiner can start the
 **When** a new reader opens it
 **Then** it states what the app is, prerequisites with versions, the start command, the test commands, and where the planning documents are
 
+**Given** the team builds with BMAD skills, whose `_bmad/` folder is git-ignored so each member has their own install
+**When** a new team member follows the README setup
+**Then** the README shows the three-line override for `_bmad/custom/config.user.toml` (`planning_artifacts` = `.docs/planning-artifacts`, `implementation_artifacts` = `.docs/implementation-artifacts`, `project_knowledge` = `.docs`), so the build skills find the planning documents in `.docs/`
+
 ### Story 1.2: Register, log in and log out
 
 As a new user,
