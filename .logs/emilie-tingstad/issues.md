@@ -19,6 +19,6 @@
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — Zod-skjema og Vitest-dekningstest for øvelsesbiblioteket når skjelettet (Story 1.1) finnes
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — teamet må gjennomgå utvalget og norske navn i PR (Story 2.1)
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — avklar «Enkelt utstyr hjemme» i biblioteket (løst 2026-11-23: forutsettes ikke; PRD og UX-onboarding bør justeres)
-- [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — oppdater sporbarhetstabellen og sprint-status.yaml for Story 2.1
+- [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — oppdater sporbarhetstabellen og sprint-status.yaml for Story 2.1 (løst 2026-11-23)
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — versjon 2: utvid øvelsesbiblioteket (50 er lite), vurder slot for isolasjonsøvelser som leg extension og leg curl
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — gjennomgå forslaget til norske muskelnavn (muscleNamesNo i exercises.json) (løst 2026-11-23: godkjent av Emilie)
