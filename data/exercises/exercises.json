@@ -1,0 +1,772 @@
+{
+  "source": "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense)",
+  "knownHomeGaps": [
+    "calf",
+    "vertical-push",
+    "biceps"
+  ],
+  "exercises": [
+    {
+      "id": "Barbell_Squat",
+      "nameNo": "Knebøy med stang",
+      "nameEn": "Barbell Squat",
+      "pattern": "squat",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings",
+        "lower back"
+      ],
+      "sourceEquipment": "barbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Leg_Press",
+      "nameNo": "Beinpress",
+      "nameEn": "Leg Press",
+      "pattern": "squat",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "sourceEquipment": "machine",
+      "level": "beginner"
+    },
+    {
+      "id": "Goblet_Squat",
+      "nameNo": "Goblet-knebøy",
+      "nameEn": "Goblet Squat",
+      "pattern": "squat",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings",
+        "shoulders"
+      ],
+      "sourceEquipment": "kettlebells",
+      "level": "beginner"
+    },
+    {
+      "id": "Bodyweight_Squat",
+      "nameNo": "Knebøy med kroppsvekt",
+      "nameEn": "Bodyweight Squat",
+      "pattern": "squat",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Freehand_Jump_Squat",
+      "nameNo": "Hoppende knebøy",
+      "nameEn": "Freehand Jump Squat",
+      "pattern": "squat",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "sourceEquipment": "body only",
+      "level": "intermediate"
+    },
+    {
+      "id": "Romanian_Deadlift",
+      "nameNo": "Rumensk markløft",
+      "nameEn": "Romanian Deadlift",
+      "pattern": "hinge",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "lower back"
+      ],
+      "sourceEquipment": "barbell",
+      "level": "intermediate"
+    },
+    {
+      "id": "Barbell_Deadlift",
+      "nameNo": "Markløft",
+      "nameEn": "Barbell Deadlift",
+      "pattern": "hinge",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "lower back"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "forearms",
+        "glutes",
+        "hamstrings",
+        "lats",
+        "middle back",
+        "quadriceps",
+        "traps"
+      ],
+      "sourceEquipment": "barbell",
+      "level": "intermediate"
+    },
+    {
+      "id": "Stiff-Legged_Dumbbell_Deadlift",
+      "nameNo": "Strakbent markløft med manualer",
+      "nameEn": "Stiff-Legged Dumbbell Deadlift",
+      "pattern": "hinge",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "lower back"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Butt_Lift_Bridge",
+      "nameNo": "Hoftehev (glutebro)",
+      "nameEn": "Butt Lift (Bridge)",
+      "pattern": "hinge",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "hamstrings"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Single_Leg_Glute_Bridge",
+      "nameNo": "Enbens hoftehev",
+      "nameEn": "Single Leg Glute Bridge",
+      "pattern": "hinge",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "hamstrings"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Dumbbell_Lunges",
+      "nameNo": "Utfall med manualer",
+      "nameEn": "Dumbbell Lunges",
+      "pattern": "single-leg",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Split_Squat_with_Dumbbells",
+      "nameNo": "Splittknebøy med manualer",
+      "nameEn": "Split Squat with Dumbbells",
+      "pattern": "single-leg",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Bodyweight_Walking_Lunge",
+      "nameNo": "Gående utfall",
+      "nameEn": "Bodyweight Walking Lunge",
+      "pattern": "single-leg",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "quadriceps"
+      ],
+      "secondaryMuscles": [
+        "calves",
+        "glutes",
+        "hamstrings"
+      ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "Step-up_with_Knee_Raise",
+      "nameNo": "Step-up med knehev",
+      "nameEn": "Step-up with Knee Raise",
+      "pattern": "single-leg",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "glutes"
+      ],
+      "secondaryMuscles": [
+        "hamstrings",
+        "quadriceps"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Standing_Calf_Raises",
+      "nameNo": "Stående tåhev i maskin",
+      "nameEn": "Standing Calf Raises",
+      "pattern": "calf",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "machine",
+      "level": "beginner"
+    },
+    {
+      "id": "Seated_Calf_Raise",
+      "nameNo": "Sittende tåhev",
+      "nameEn": "Seated Calf Raise",
+      "pattern": "calf",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "machine",
+      "level": "beginner"
+    },
+    {
+      "id": "Standing_Dumbbell_Calf_Raise",
+      "nameNo": "Tåhev med manualer",
+      "nameEn": "Standing Dumbbell Calf Raise",
+      "pattern": "calf",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "calves"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "dumbbell",
+      "level": "intermediate"
+    },
+    {
+      "id": "Barbell_Bench_Press_-_Medium_Grip",
+      "nameNo": "Benkpress med stang",
+      "nameEn": "Barbell Bench Press - Medium Grip",
+      "pattern": "horizontal-push",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "sourceEquipment": "barbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Dumbbell_Bench_Press",
+      "nameNo": "Benkpress med manualer",
+      "nameEn": "Dumbbell Bench Press",
+      "pattern": "horizontal-push",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Machine_Bench_Press",
+      "nameNo": "Brystpress i maskin",
+      "nameEn": "Machine Bench Press",
+      "pattern": "horizontal-push",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "sourceEquipment": "machine",
+      "level": "beginner"
+    },
+    {
+      "id": "Pushups",
+      "nameNo": "Armhevinger",
+      "nameEn": "Pushups",
+      "pattern": "horizontal-push",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Incline_Push-Up",
+      "nameNo": "Armhevinger med hendene hevet",
+      "nameEn": "Incline Push-Up",
+      "pattern": "horizontal-push",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Push-Ups_With_Feet_Elevated",
+      "nameNo": "Armhevinger med føttene hevet",
+      "nameEn": "Push-Ups With Feet Elevated",
+      "pattern": "horizontal-push",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "chest"
+      ],
+      "secondaryMuscles": [
+        "shoulders",
+        "triceps"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Dumbbell_Shoulder_Press",
+      "nameNo": "Skulderpress med manualer",
+      "nameEn": "Dumbbell Shoulder Press",
+      "pattern": "vertical-push",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "intermediate"
+    },
+    {
+      "id": "Machine_Shoulder_Military_Press",
+      "nameNo": "Skulderpress i maskin",
+      "nameEn": "Machine Shoulder (Military) Press",
+      "pattern": "vertical-push",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "sourceEquipment": "machine",
+      "level": "beginner"
+    },
+    {
+      "id": "Standing_Military_Press",
+      "nameNo": "Stående skulderpress med stang",
+      "nameEn": "Standing Military Press",
+      "pattern": "vertical-push",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "secondaryMuscles": [
+        "triceps"
+      ],
+      "sourceEquipment": "barbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Bent_Over_Two-Dumbbell_Row",
+      "nameNo": "Roing med to manualer",
+      "nameEn": "Bent Over Two-Dumbbell Row",
+      "pattern": "horizontal-pull",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats",
+        "shoulders"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Seated_Cable_Rows",
+      "nameNo": "Sittende kabelro",
+      "nameEn": "Seated Cable Rows",
+      "pattern": "horizontal-pull",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats",
+        "shoulders"
+      ],
+      "sourceEquipment": "cable",
+      "level": "beginner"
+    },
+    {
+      "id": "One-Arm_Dumbbell_Row",
+      "nameNo": "Enarmsro med manual",
+      "nameEn": "One-Arm Dumbbell Row",
+      "pattern": "horizontal-pull",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats",
+        "shoulders"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Inverted_Row",
+      "nameNo": "Omvendt roing (under bord eller stang)",
+      "nameEn": "Inverted Row",
+      "pattern": "horizontal-pull",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "lats"
+      ],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "Bodyweight_Mid_Row",
+      "nameNo": "Kroppsvektsro i stang",
+      "nameEn": "Bodyweight Mid Row",
+      "pattern": "horizontal-pull",
+      "location": "both",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "lats"
+      ],
+      "sourceEquipment": "other",
+      "level": "intermediate"
+    },
+    {
+      "id": "Wide-Grip_Lat_Pulldown",
+      "nameNo": "Nedtrekk med bredt grep",
+      "nameEn": "Wide-Grip Lat Pulldown",
+      "pattern": "vertical-pull",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "middle back",
+        "shoulders"
+      ],
+      "sourceEquipment": "cable",
+      "level": "beginner"
+    },
+    {
+      "id": "Close-Grip_Front_Lat_Pulldown",
+      "nameNo": "Nedtrekk med smalt grep",
+      "nameEn": "Close-Grip Front Lat Pulldown",
+      "pattern": "vertical-pull",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "middle back",
+        "shoulders"
+      ],
+      "sourceEquipment": "cable",
+      "level": "beginner"
+    },
+    {
+      "id": "Pullups",
+      "nameNo": "Pullups",
+      "nameEn": "Pullups",
+      "pattern": "vertical-pull",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "middle back"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Chin-Up",
+      "nameNo": "Chins",
+      "nameEn": "Chin-Up",
+      "pattern": "vertical-pull",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "lats"
+      ],
+      "secondaryMuscles": [
+        "biceps",
+        "forearms",
+        "middle back"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Dumbbell_Bicep_Curl",
+      "nameNo": "Bicepscurl med manualer",
+      "nameEn": "Dumbbell Bicep Curl",
+      "pattern": "biceps",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearms"
+      ],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Barbell_Curl",
+      "nameNo": "Bicepscurl med stang",
+      "nameEn": "Barbell Curl",
+      "pattern": "biceps",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [
+        "forearms"
+      ],
+      "sourceEquipment": "barbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Hammer_Curls",
+      "nameNo": "Hammercurl",
+      "nameEn": "Hammer Curls",
+      "pattern": "biceps",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "biceps"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Triceps_Pushdown",
+      "nameNo": "Tricepspress i kabel",
+      "nameEn": "Triceps Pushdown",
+      "pattern": "triceps",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "cable",
+      "level": "beginner"
+    },
+    {
+      "id": "Standing_Dumbbell_Triceps_Extension",
+      "nameNo": "Overhead tricepsstrekk med manual",
+      "nameEn": "Standing Dumbbell Triceps Extension",
+      "pattern": "triceps",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "dumbbell",
+      "level": "beginner"
+    },
+    {
+      "id": "Bench_Dips",
+      "nameNo": "Dips mellom to benker",
+      "nameEn": "Bench Dips",
+      "pattern": "triceps",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Standing_Towel_Triceps_Extension",
+      "nameNo": "Tricepsstrekk med håndkle",
+      "nameEn": "Standing Towel Triceps Extension",
+      "pattern": "triceps",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "triceps"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Cable_Crunch",
+      "nameNo": "Magecrunch i kabel",
+      "nameEn": "Cable Crunch",
+      "pattern": "core",
+      "location": "gym",
+      "bodyweight": false,
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "cable",
+      "level": "beginner"
+    },
+    {
+      "id": "Plank",
+      "nameNo": "Planke",
+      "nameEn": "Plank",
+      "pattern": "core",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Crunches",
+      "nameNo": "Crunch",
+      "nameEn": "Crunches",
+      "pattern": "core",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    },
+    {
+      "id": "Dead_Bug",
+      "nameNo": "Dead bug",
+      "nameEn": "Dead Bug",
+      "pattern": "core",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "abdominals"
+      ],
+      "secondaryMuscles": [],
+      "sourceEquipment": "body only",
+      "level": "beginner"
+    }
+  ]
+}
