@@ -26,3 +26,5 @@ Få ordnet øvelsesbiblioteket fra Free Exercise DB slik at det kan brukes i app
 - Avklart: «Enkelt utstyr hjemme» forutsettes ikke i biblioteket (bare `gym` eller `both`). PRD og UX (onboarding) bør justeres tilsvarende.
 - Teamet må lese gjennom de fire egne øvelsene (navn og nivå).
 - Sporbarhetstabellen (`.docs/sensorveiledning-sporbarhet.md`) og `sprint-status.yaml` er ikke oppdatert for Story 2.1.
+- Gjennomgang av utvalget (Emilie): «Sittende kabelro» → «Sittende roing med kabel»; sit-ups lagt til (Crunch tatt ut pga. maks 50); «Kroppsvektsro i stang» fjernet (avansert turnøvelse) og erstattet med egen «Omvendt roing med bøyde knær»; «tricepsstrekk» → «tricepsekstensjon»; «Dips mellom to benker» → «Dips med hendene på en stol». Leg extension og leg curl droppet i v1 (passer ikke i slotene).
+- Til neste versjon: utvide biblioteket utover 50 øvelser, evt. slot for isolasjonsøvelser (leg extension, leg curl).
