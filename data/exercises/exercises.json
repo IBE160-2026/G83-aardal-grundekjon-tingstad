@@ -495,7 +495,7 @@
     {
       "id": "Seated_Cable_Rows",
       "source": "free-exercise-db",
-      "nameNo": "Sittende kabelro",
+      "nameNo": "Sittende roing med kabel",
       "nameEn": "Seated Cable Rows",
       "pattern": "horizontal-pull",
       "location": "gym",
@@ -768,10 +768,10 @@
       "level": "beginner"
     },
     {
-      "id": "Plank",
+      "id": "Sit-Up",
       "source": "free-exercise-db",
-      "nameNo": "Planke",
-      "nameEn": "Plank",
+      "nameNo": "Sit-ups",
+      "nameEn": "Sit-Up",
       "pattern": "core",
       "location": "both",
       "bodyweight": true,
@@ -783,10 +783,10 @@
       "level": "beginner"
     },
     {
-      "id": "Crunches",
+      "id": "Plank",
       "source": "free-exercise-db",
-      "nameNo": "Crunch",
-      "nameEn": "Crunches",
+      "nameNo": "Planke",
+      "nameEn": "Plank",
       "pattern": "core",
       "location": "both",
       "bodyweight": true,

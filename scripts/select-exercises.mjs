@@ -62,7 +62,7 @@ const CURATED = [
   ["Standing_Military_Press", "Stående skulderpress med stang", "vertical-push", "gym"],
   // horizontal pull
   ["Bent_Over_Two-Dumbbell_Row", "Roing med to manualer", "horizontal-pull", "gym"],
-  ["Seated_Cable_Rows", "Sittende kabelro", "horizontal-pull", "gym"],
+  ["Seated_Cable_Rows", "Sittende roing med kabel", "horizontal-pull", "gym"],
   ["One-Arm_Dumbbell_Row", "Enarmsro med manual", "horizontal-pull", "gym"],
   ["Inverted_Row", "Omvendt roing (under bord eller stang)", "horizontal-pull", "both"],
   ["Bodyweight_Mid_Row", "Kroppsvektsro i stang", "horizontal-pull", "both"],
@@ -82,8 +82,8 @@ const CURATED = [
   ["Standing_Towel_Triceps_Extension", "Tricepsstrekk med håndkle", "triceps", "both"],
   // core
   ["Cable_Crunch", "Magecrunch i kabel", "core", "gym"],
+  ["Sit-Up", "Sit-ups", "core", "both"],
   ["Plank", "Planke", "core", "both"],
-  ["Crunches", "Crunch", "core", "both"],
   ["Dead_Bug", "Dead bug", "core", "both"],
 ];
 
