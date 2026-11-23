@@ -65,7 +65,6 @@ const CURATED = [
   ["Seated_Cable_Rows", "Sittende roing med kabel", "horizontal-pull", "gym"],
   ["One-Arm_Dumbbell_Row", "Enarmsro med manual", "horizontal-pull", "gym"],
   ["Inverted_Row", "Omvendt roing (under bord eller stang)", "horizontal-pull", "both"],
-  ["Bodyweight_Mid_Row", "Kroppsvektsro i stang", "horizontal-pull", "both"],
   // vertical pull
   ["Wide-Grip_Lat_Pulldown", "Nedtrekk med bredt grep", "vertical-pull", "gym"],
   ["Close-Grip_Front_Lat_Pulldown", "Nedtrekk med smalt grep", "vertical-pull", "gym"],
@@ -77,9 +76,9 @@ const CURATED = [
   ["Hammer_Curls", "Hammercurl", "biceps", "gym"],
   // triceps
   ["Triceps_Pushdown", "Tricepspress i kabel", "triceps", "gym"],
-  ["Standing_Dumbbell_Triceps_Extension", "Overhead tricepsstrekk med manual", "triceps", "gym"],
-  ["Bench_Dips", "Dips mellom to benker", "triceps", "both"],
-  ["Standing_Towel_Triceps_Extension", "Tricepsstrekk med håndkle", "triceps", "both"],
+  ["Standing_Dumbbell_Triceps_Extension", "Overhead tricepsekstensjon med manual", "triceps", "gym"],
+  ["Bench_Dips", "Dips med hendene på en stol", "triceps", "both"],
+  ["Standing_Towel_Triceps_Extension", "Tricepsekstensjon med håndkle", "triceps", "both"],
   // core
   ["Cable_Crunch", "Magecrunch i kabel", "core", "gym"],
   ["Sit-Up", "Sit-ups", "core", "both"],
@@ -92,6 +91,7 @@ const CURATED = [
 const CUSTOM = [
   ["custom-bodyweight-calf-raise", "Tåhev på kroppsvekt", "Bodyweight Calf Raise", "calf", ["calves"], [], "beginner"],
   ["custom-single-leg-calf-raise", "Enbens tåhev", "Single-Leg Calf Raise", "calf", ["calves"], [], "beginner"],
+  ["custom-bent-knee-inverted-row", "Omvendt roing med bøyde knær", "Bent-Knee Inverted Row", "horizontal-pull", ["middle back"], ["lats", "biceps"], "beginner"],
   ["custom-pike-push-up", "Pike push-up", "Pike Push-Up", "vertical-push", ["shoulders"], ["triceps", "chest"], "intermediate"],
   ["custom-pike-push-up-feet-elevated", "Pike push-up med føttene hevet", "Pike Push-Up, Feet Elevated", "vertical-push", ["shoulders"], ["triceps", "chest"], "intermediate"],
 ];

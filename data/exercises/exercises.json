@@ -548,24 +548,6 @@
       "level": "beginner"
     },
     {
-      "id": "Bodyweight_Mid_Row",
-      "source": "free-exercise-db",
-      "nameNo": "Kroppsvektsro i stang",
-      "nameEn": "Bodyweight Mid Row",
-      "pattern": "horizontal-pull",
-      "location": "both",
-      "bodyweight": false,
-      "primaryMuscles": [
-        "middle back"
-      ],
-      "secondaryMuscles": [
-        "biceps",
-        "lats"
-      ],
-      "sourceEquipment": "other",
-      "level": "intermediate"
-    },
-    {
       "id": "Wide-Grip_Lat_Pulldown",
       "source": "free-exercise-db",
       "nameNo": "Nedtrekk med bredt grep",
@@ -707,7 +689,7 @@
     {
       "id": "Standing_Dumbbell_Triceps_Extension",
       "source": "free-exercise-db",
-      "nameNo": "Overhead tricepsstrekk med manual",
+      "nameNo": "Overhead tricepsekstensjon med manual",
       "nameEn": "Standing Dumbbell Triceps Extension",
       "pattern": "triceps",
       "location": "gym",
@@ -722,7 +704,7 @@
     {
       "id": "Bench_Dips",
       "source": "free-exercise-db",
-      "nameNo": "Dips mellom to benker",
+      "nameNo": "Dips med hendene på en stol",
       "nameEn": "Bench Dips",
       "pattern": "triceps",
       "location": "both",
@@ -740,7 +722,7 @@
     {
       "id": "Standing_Towel_Triceps_Extension",
       "source": "free-exercise-db",
-      "nameNo": "Tricepsstrekk med håndkle",
+      "nameNo": "Tricepsekstensjon med håndkle",
       "nameEn": "Standing Towel Triceps Extension",
       "pattern": "triceps",
       "location": "both",
@@ -839,6 +821,24 @@
         "calves"
       ],
       "secondaryMuscles": [],
+      "sourceEquipment": null,
+      "level": "beginner"
+    },
+    {
+      "id": "custom-bent-knee-inverted-row",
+      "source": "custom",
+      "nameNo": "Omvendt roing med bøyde knær",
+      "nameEn": "Bent-Knee Inverted Row",
+      "pattern": "horizontal-pull",
+      "location": "both",
+      "bodyweight": true,
+      "primaryMuscles": [
+        "middle back"
+      ],
+      "secondaryMuscles": [
+        "lats",
+        "biceps"
+      ],
       "sourceEquipment": null,
       "level": "beginner"
     },

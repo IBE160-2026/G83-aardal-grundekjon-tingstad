@@ -1,7 +1,7 @@
 # Øvelsesbibliotek (Story 2.1)
 
-`exercises.json` er et kuratert utvalg på 50 øvelser: 46 fra [Free Exercise DB](https://github.com/yuhonas/free-exercise-db)
-(public domain, Unlicense) og 4 egne kroppsvektøvelser (`source: "custom"`) som databasen ikke har: tåhev, enbens tåhev
+`exercises.json` er et kuratert utvalg på 50 øvelser: 45 fra [Free Exercise DB](https://github.com/yuhonas/free-exercise-db)
+(public domain, Unlicense) og 5 egne kroppsvektøvelser (`source: "custom"`) som databasen ikke har: tåhev, enbens tåhev, omvendt roing med bøyde knær
 og to varianter av pike push-up. Vi forutsetter ikke utstyr som strikk hjemme. Vi har valgt ut øvelsene for hånd, oversatt navnene til norsk (NFR10) og
 gruppert dem etter bevegelsesmønster (PRD Appendix A).
 
