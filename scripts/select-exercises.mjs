@@ -76,7 +76,7 @@ const CURATED = [
   ["Hammer_Curls", "Hammercurl", "biceps", "gym"],
   // triceps
   ["Triceps_Pushdown", "Tricepspress i kabel", "triceps", "gym"],
-  ["Standing_Dumbbell_Triceps_Extension", "Overhead tricepsekstensjon med manual", "triceps", "gym"],
+  ["Standing_Dumbbell_Triceps_Extension", "Tricepsekstensjon over hodet med manual", "triceps", "gym"],
   ["Bench_Dips", "Dips med hendene på en stol", "triceps", "both"],
   ["Standing_Towel_Triceps_Extension", "Tricepsekstensjon med håndkle", "triceps", "both"],
   // core
