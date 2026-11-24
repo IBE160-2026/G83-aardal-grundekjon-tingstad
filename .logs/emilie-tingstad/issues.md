@@ -16,3 +16,4 @@
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — avgjør mock-avvik: Markløft i wireframe d, «Neste økt» i pop-up vs. Uke, startverdi i stepper, minstelengde passord
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — plassholdere i Component Patterns: konfetti, øvrige ikoner/tilbake-pil, chat-input, bekreftelsesdialog, profil-sammendrag
 - [ ] 2026-11-11 [ux-flex-pt](996-2026-11-09-22-00-00-ux-flex-pt.md) — commit UX-mappa, mockups, wireframes og sporbarhetsfila på docs/ux-v1 og lag PR
+- [ ] 2026-11-23 [bmad-stier](993-2026-11-23-22-00-00-bmad-stier.md) — Caroline og Knut må legge inn BMAD-stioverstyringen i _bmad/custom/config.user.toml lokalt (README fra Story 1.1)
