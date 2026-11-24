@@ -41,9 +41,9 @@ Dette er krav til hvordan dere jobber, og de bygges ikke inn i appen. De ivareta
 | Krit. | Krav fra sensorveiledningen | Hvordan det ivaretas | Status/bevis |
 |---|---|---|---|
 | 1 | BMAD-dokumenter brukes og **oppdateres**, ikke bare genereres én gang | Oppdater PRD/arkitektur ved endringer (`bmad-correct-course`); endringslogg i dokumentene | 🟨 brief + lærertilbakemelding; PRD v0.1–v1.1 med endringslogg; v1.1 via `bmad-correct-course` etter UX |
-| 1 | Kode kan spores til krav og stories | Story-ID i branch-navn, commit-meldinger og PR-titler | ⬜ |
+| 1 | Kode kan spores til krav og stories | Story-ID i branch-navn, commit-meldinger og PR-titler | 🟨 Story 2.1: branch `feat/story-2.1-ovelsesbibliotek`, commits og [PR #23](https://github.com/IBE160-2026/G83-aardal-grundekjon-tingstad/pull/23) med story-ID |
 | 1 | Jevn commit-historikk, små commits med beskrivende meldinger | Commit per avgrenset endring, gjennom hele perioden | 🟨 |
-| 1 | Branches, pull requests, issues | Én branch + PR per story; GitHub Issues for åpne punkter | 🟨 PR #2 |
+| 1 | Branches, pull requests, issues | Én branch + PR per story; GitHub Issues for åpne punkter | 🟨 PR #2, [PR #23](https://github.com/IBE160-2026/G83-aardal-grundekjon-tingstad/pull/23) (Story 2.1) |
 | 1 | Lagrede prompts og KI-økter | `.logs/<bruker>/` via `sesjonslogg` | 🟨 påbegynt |
 | 1 | Eksempler på at KI-forslag er presisert, avvist eller rettet | Egen seksjon i sesjonsloggen: «KI-forslag vi avviste/rettet» | 🟨 `.logs/knut-aardal/` (PRD v0.7), `.logs/caroline-grundekjon/` (PRD v1.1) |
 | 1 | Dokumenterte beslutninger med begrunnelse | Arkitekturdokumentet (beslutninger + begrunnelse) | 🟨 `architecture/architecture-G83-…-2026-11-16/`: 19 beslutninger i spinen (AD-1–AD-18 gjelder v1, AD-19 er utsatt til versjon 2), begrunnelser og forkastede alternativer i `.memlog.md`, kontroller i `reviews/` |
