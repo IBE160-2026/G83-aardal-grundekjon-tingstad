@@ -22,3 +22,4 @@
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — oppdater sporbarhetstabellen og sprint-status.yaml for Story 2.1 (løst 2026-11-23)
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — versjon 2: utvid øvelsesbiblioteket (50 er lite), vurder slot for isolasjonsøvelser som leg extension og leg curl
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — gjennomgå forslaget til norske muskelnavn (muscleNamesNo i exercises.json) (løst 2026-11-23: godkjent av Emilie)
+- [ ] 2026-11-23 [bmad-stier](993-2026-11-23-22-00-00-bmad-stier.md) — Caroline og Knut må legge inn BMAD-stioverstyringen i _bmad/custom/config.user.toml lokalt (README fra Story 1.1)
