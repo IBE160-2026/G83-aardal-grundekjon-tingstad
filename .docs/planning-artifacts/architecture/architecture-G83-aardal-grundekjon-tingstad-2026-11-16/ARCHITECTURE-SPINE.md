@@ -7,7 +7,7 @@ paradigm: 'Vertical slices over a shared core, with a functional-core plan engin
 scope: 'The whole Flex PT v1 (MVP) web app: accounts, onboarding, plan engine, logging and progression, coach dialogue, profile, environments'
 status: final
 created: '2026-11-16'
-updated: '2026-11-22'
+updated: '2026-11-25'
 binds: [FR1, FR2, FR3, FR4, FR5, FR6, FR7, FR8, FR9, FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, NFR1, NFR2, NFR3, NFR4, NFR5, NFR6, NFR7, NFR8, NFR9, NFR10, NFR11, E1, E2, E3, E4]
 sources:
   - ../../prd-flex-pt.md (v1.1, PR #12)
@@ -206,7 +206,7 @@ Vercel preview deployments are not connected to a database. A free Supabase proj
 | Name | Version |
 | --- | --- |
 | Node.js | 24 (LTS) |
-| TypeScript | 7.0 |
+| TypeScript | 6.0 (changed from 7.0 on 2026-11-25: `typescript-eslint` 8.74, used by `eslint-config-next`, supports only TypeScript below 6.1) |
 | Next.js | 16.4 |
 | React | 19.3 |
 | PostgreSQL | 18 |
