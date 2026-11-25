@@ -1,0 +1,55 @@
+# Local run for the team and the examiner: `docker compose up` (AD-17).
+# db becomes healthy -> migrate applies the migrations and exits -> app starts on port 3000.
+# Values can be overridden in a git-ignored .env file (see .env.example).
+
+x-database-url: &database-url postgres://flexpt:flexpt@db:5432/flexpt
+
+services:
+  db:
+    image: postgres:18
+    environment:
+      # Local development credentials only; the published app uses Supabase.
+      POSTGRES_USER: flexpt
+      POSTGRES_PASSWORD: flexpt
+      POSTGRES_DB: flexpt
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flexpt -d flexpt"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  migrate:
+    build:
+      context: .
+      target: migrate
+    environment:
+      DATABASE_URL: *database-url
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      target: app
+    environment:
+      DATABASE_URL: *database-url
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-}
+      COACH_MODE: ${COACH_MODE:-demo}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      COACH_MODEL_ID: ${COACH_MODEL_ID:-claude-haiku-5-5}
+      COACH_DAILY_LIMIT: ${COACH_DAILY_LIMIT:-20}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  db-data:
