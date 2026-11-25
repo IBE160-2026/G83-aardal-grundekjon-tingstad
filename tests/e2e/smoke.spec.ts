@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-test("the start page loads in bokmål", async ({ page }) => {
+test("the start page sends a logged-out visitor to the login screen, in bokmål", async ({
+  page,
+}) => {
   await page.goto("/");
+  await expect(page).toHaveURL(/\/logg-inn$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "nb");
-  await expect(
-    page.getByRole("heading", { level: 1, name: "Velkommen til Flex PT" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Flex PT" })).toBeVisible();
 });
 
 // Theme tokens (AD-14): data-theme wins over the system setting; no attribute follows the system.
@@ -21,7 +22,7 @@ for (const { theme, expected } of [
     page,
   }) => {
     await page.emulateMedia({ colorScheme: "dark" });
-    await page.goto("/");
+    await page.goto("/logg-inn");
     await page.evaluate((value) => {
       if (value) document.documentElement.setAttribute("data-theme", value);
       else document.documentElement.removeAttribute("data-theme");
@@ -32,6 +33,6 @@ for (const { theme, expected } of [
 
 test("without data-theme a light system gives light tokens", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
-  await page.goto("/");
+  await page.goto("/logg-inn");
   await expect(page.locator("body")).toHaveCSS("background-color", LIGHT_BACKGROUND);
 });
