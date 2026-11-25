@@ -15,6 +15,7 @@ const SOURCE_URL =
 const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../data/exercises/exercises.json");
 
 // Mønstre fra PRD Appendix A (Session slots).
+// prettier-ignore
 const PATTERNS = [
   "squat", "hinge", "single-leg", "calf",
   "horizontal-push", "vertical-push", "horizontal-pull", "vertical-pull",
@@ -27,6 +28,7 @@ const KNOWN_HOME_GAPS = new Set([]);
 // location: gym = kun treningssenter, both = gym og hjemme (kroppsvekt; stang/benk/trinn
 // kan brukes til å trekke eller stå på, jf. R5).
 // [id i kilden, norsk visningsnavn, mønster, sted]
+// prettier-ignore
 const CURATED = [
   // squat
   ["Barbell_Squat", "Knebøy med stang", "squat", "gym"],
@@ -83,6 +85,7 @@ const CURATED = [
 
 // Egne øvelser som Free Exercise DB ikke har (kroppsvekt, uten utstyr). Skrevet og gjennomgått av teamet.
 // [id, norsk navn, engelsk navn, mønster, primære muskler, sekundære muskler, nivå]
+// prettier-ignore
 const CUSTOM = [
   ["custom-bodyweight-calf-raise", "Tåhev på kroppsvekt", "Bodyweight Calf Raise", "calf", ["calves"], [], "beginner"],
   ["custom-single-leg-calf-raise", "Enbens tåhev", "Single-Leg Calf Raise", "calf", ["calves"], [], "beginner"],
@@ -139,7 +142,10 @@ const ids = new Set();
 
 const library = CURATED.map(([id, nameNo, pattern, location]) => {
   const src = byId.get(id);
-  if (!src) { errors.push(`Finnes ikke i kilden: ${id}`); return null; }
+  if (!src) {
+    errors.push(`Finnes ikke i kilden: ${id}`);
+    return null;
+  }
   if (ids.has(id)) errors.push(`Duplikat: ${id}`);
   ids.add(id);
   if (!PATTERNS.includes(pattern)) errors.push(`Ukjent mønster for ${id}: ${pattern}`);
@@ -166,8 +172,17 @@ for (const [id, nameNo, nameEn, pattern, primaryMuscles, secondaryMuscles, level
   if (ids.has(id)) errors.push(`Duplikat: ${id}`);
   ids.add(id);
   library.push({
-    id, source: "custom", nameNo, nameEn, pattern, location: "both", bodyweight: true,
-    primaryMuscles, secondaryMuscles, sourceEquipment: null, level,
+    id,
+    source: "custom",
+    nameNo,
+    nameEn,
+    pattern,
+    location: "both",
+    bodyweight: true,
+    primaryMuscles,
+    secondaryMuscles,
+    sourceEquipment: null,
+    level,
   });
 }
 
@@ -177,7 +192,10 @@ for (const pattern of PATTERNS) {
   const home = library.filter((e) => e.pattern === pattern && e.location === "both").length;
   if (all < 2) errors.push(`Gym: mønsteret ${pattern} har bare ${all} øvelse(r)`);
   if (KNOWN_HOME_GAPS.has(pattern)) {
-    if (home > 0) errors.push(`${pattern} står som kjent hull hjemme, men har ${home} øvelse(r). Fjern det fra KNOWN_HOME_GAPS`);
+    if (home > 0)
+      errors.push(
+        `${pattern} står som kjent hull hjemme, men har ${home} øvelse(r). Fjern det fra KNOWN_HOME_GAPS`,
+      );
   } else if (home < 2) {
     errors.push(`Hjemme: mønsteret ${pattern} har bare ${home} øvelse(r)`);
   }
@@ -199,7 +217,8 @@ if (errors.length) {
 }
 
 const output = {
-  source: "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense), pluss egne øvelser merket source: custom",
+  source:
+    "Free Exercise DB (https://github.com/yuhonas/free-exercise-db), public domain (Unlicense), pluss egne øvelser merket source: custom",
   knownHomeGaps: [...KNOWN_HOME_GAPS],
   muscleNamesNo: MUSCLE_NAMES_NO,
   exercises: library,
