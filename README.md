@@ -68,6 +68,8 @@ E2E_BASE_URL=http://localhost:3000 npm run test:e2e
 docker compose down
 ```
 
+GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) kjører alle sjekkene over på hver pull request og på `main`: lint, typesjekk, formatering, Vitest, Playwright mot produksjonsbygget og Playwright mot `docker compose up`.
+
 ## Mappestruktur
 
 ```text
