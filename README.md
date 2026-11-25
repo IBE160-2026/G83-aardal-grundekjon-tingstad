@@ -4,11 +4,103 @@ Gruppeprosjekt i **IBE160 Programmering med KI** ved Høgskolen i Molde, høsten
 
 Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og kvalitetssikring med KI.
 
+## Om appen
+
+**Flex PT** er en mobil-først treningsapp med en KI-coach. Appen lager en ukeplan for styrke eller løping ut fra målet ditt, lar deg logge øktene sett for sett, og justerer planen sammen med deg når uka endrer seg. Den er laget for travle folk som vil ha fremgang og struktur uten et stivt program.
+
+Status: prosjektskjelettet er på plass (Story 1.1). Innlogging, demo og selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
+
 ## Medlemmer
 
 - Knut Aardal
 - Caroline Boman Grundekjøn
 - Emilie Tingstad
+
+## Forutsetninger
+
+| Verktøy                                | Versjon              | Trengs til                  |
+| -------------------------------------- | -------------------- | --------------------------- |
+| Docker Desktop (med Docker Compose v2) | 4.x eller nyere      | Kjøre appen med én kommando |
+| Node.js                                | 24 (LTS) eller nyere | Utvikling og tester         |
+| npm                                    | 11 (følger med Node) | Utvikling og tester         |
+
+## Kjør appen
+
+```bash
+docker compose up --build
+```
+
+Compose starter `postgres:18` (med volum og healthcheck), kjører databasemigreringene i en egen tjeneste som avslutter, og starter deretter appen på <http://localhost:3000>. Coachen går i demo-modus, så ingen API-nøkkel trengs. Stopp med `Ctrl+C`, eller `docker compose down` (legg til `-v` for å slette databasen).
+
+Er port 5432 eller 3000 opptatt (for eksempel av en lokal PostgreSQL), velg andre porter i `.env`, for eksempel `DB_PORT=5433` og `APP_PORT=3001`. Bruker du en annen `DB_PORT`, må porten i `DATABASE_URL` endres tilsvarende.
+
+## Utvikling
+
+```bash
+npm ci
+cp .env.example .env           # verdiene passer til Postgres i Compose
+docker compose up -d db        # bare databasen
+npm run db:migrate             # kjør migreringene
+npm run dev                    # appen på http://localhost:3000
+```
+
+| Kommando                                  | Hva den gjør                                                               |
+| ----------------------------------------- | -------------------------------------------------------------------------- |
+| `npm run typecheck`                       | Typesjekk med TypeScript (`tsc --noEmit`)                                  |
+| `npm run lint`                            | ESLint, inkludert regelen for grenser mellom snitt (se arkitekturen, AD-1) |
+| `npm run format` / `npm run format:check` | Formaterer med Prettier / sjekker formatering                              |
+| `npm run db:generate`                     | Lager en ny migrering fra skjemaet i `src/shared/db/schema`                |
+| `npm run db:migrate`                      | Kjører migreringene mot `DATABASE_DIRECT_URL` eller `DATABASE_URL`         |
+
+## Tester
+
+```bash
+npm test                       # Vitest: datohjelperen og grenseregelen for snitt
+npx playwright install chromium  # første gang
+npm run test:e2e               # Playwright: bygger appen og kjører røyktesten
+```
+
+Samme røyktest kan kjøres mot Docker-imaget (standalone-serveren), som er det sensor starter:
+
+```bash
+docker compose up -d --build
+E2E_BASE_URL=http://localhost:3000 npm run test:e2e
+docker compose down
+```
+
+## Mappestruktur
+
+```text
+src/app/              ruter og layout, ingen forretningslogikk
+src/features/<snitt>/ account, onboarding, plan, logging, coach, profile; bare api.ts er offentlig
+src/shared/           engine (ren planmotor), db (Drizzle), auth, coach-provider, ui, lib (datoer, resultattype)
+src/seed/             demobrukere bygget gjennom snittenes api.ts
+data/                 øvelsesbibliotek og innspilte coach-svar
+tests/                engine, coach, integration, e2e og lint (bevis for grenseregelen)
+scripts/              engangsskript (utvalg av øvelser)
+```
+
+## Planleggingsdokumenter
+
+Alt planleggingsarbeid ligger i [`.docs/`](.docs/):
+
+- [Produktbrief](.docs/planning-artifacts/briefs/) og [PRD](.docs/planning-artifacts/prd-flex-pt.md)
+- [UX: DESIGN.md og EXPERIENCE.md](.docs/planning-artifacts/ux-designs/ux-G83-aardal-grundekjon-tingstad-2026-11-09/)
+- [Arkitektur](.docs/planning-artifacts/architecture/architecture-G83-aardal-grundekjon-tingstad-2026-11-16/ARCHITECTURE-SPINE.md)
+- [Epics og stories](.docs/planning-artifacts/epics.md) og [sprintstatus](.docs/implementation-artifacts/sprint-status.yaml)
+- [Sporbarhet mot sensorveiledningen](.docs/sensorveiledning-sporbarhet.md)
+- Sesjonslogger fra arbeidet med KI ligger i [`.logs/`](.logs/)
+
+### BMAD-oppsett
+
+Vi bygger med BMAD-skills. Mappa `_bmad/` er ignorert av git, så hvert medlem har sin egen installasjon. Legg disse tre linjene (under `[modules.bmm]`) i `_bmad/custom/config.user.toml`, slik at skillene finner dokumentene i `.docs/`:
+
+```toml
+[modules.bmm]
+planning_artifacts = "{project-root}/.docs/planning-artifacts"
+implementation_artifacts = "{project-root}/.docs/implementation-artifacts"
+project_knowledge = "{project-root}/.docs"
+```
 
 ## API-nøkler
 
@@ -18,10 +110,10 @@ Appen kan kjøres lokalt uten API-nøkler. Bare én ekstern tjeneste kan kreve n
 
 Coachen har to moduser, styrt av miljøvariabelen `COACH_MODE`:
 
-| Modus | Hva coachen gjør | Nøkkel |
-|---|---|---|
-| `demo` (standard) | Svarer med innspilte svar på eksempelmeldingene | Ingen |
-| `live` | Kaller Claude via det offisielle Anthropic SDK-et | `ANTHROPIC_API_KEY` |
+| Modus             | Hva coachen gjør                                  | Nøkkel              |
+| ----------------- | ------------------------------------------------- | ------------------- |
+| `demo` (standard) | Svarer med innspilte svar på eksempelmeldingene   | Ingen               |
+| `live`            | Kaller Claude via det offisielle Anthropic SDK-et | `ANTHROPIC_API_KEY` |
 
 Demobrukere («Prøv demo») bruker alltid demo-modus, uansett `COACH_MODE`.
 
