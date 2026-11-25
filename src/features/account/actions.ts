@@ -6,18 +6,18 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { getAuth } from "@/shared/auth/server";
+import { getAuth, MAX_PASSWORD_LENGTH } from "@/shared/auth/server";
+import { LOGIN_PATH } from "@/shared/auth/session";
 import { getDb } from "@/shared/db/client";
 import { user } from "@/shared/db/schema";
 import { type ActionResult, fail } from "@/shared/lib/result";
 
-import { fieldErrorsOf, loginSchema, MESSAGES, PASSWORD_MAX, registerSchema } from "./schemas";
+import { fieldErrorsOf, loginSchema, MESSAGES, registerSchema } from "./schemas";
 
 /** State of the login and registration forms: null before the first submit. */
 export type AuthFormState = ActionResult<null> | null;
 
 const HOME_PATH = "/uke";
-const LOGIN_PATH = "/logg-inn";
 
 function readCredentials(formData: FormData) {
   return { email: formData.get("email"), password: formData.get("password") };
@@ -77,7 +77,7 @@ export async function loginAction(_previous: AuthFormState, formData: FormData) 
   }
   const { email, password } = parsed.data;
   const wrongLogin = fail<null>("invalid_credentials", MESSAGES.wrongLogin);
-  if (password.length > PASSWORD_MAX) return wrongLogin;
+  if (password.length > MAX_PASSWORD_LENGTH) return wrongLogin;
 
   try {
     await getAuth().api.signInEmail({ body: { email, password }, headers: await headers() });

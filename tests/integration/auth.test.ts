@@ -12,9 +12,15 @@ import { ok } from "@/shared/lib/result";
 // Runs against the compose Postgres (`docker compose up -d db && npm run db:migrate`). Skipped
 // locally without DATABASE_URL; CI always sets it, so it always runs there.
 const DATABASE_URL = process.env.DATABASE_URL;
-// Test-only value, not a secret: Better Auth needs one to sign the session cookie.
-process.env.BETTER_AUTH_SECRET ??= "integration-test-only-not-a-secret";
-process.env.BETTER_AUTH_URL ??= "http://localhost:3000";
+if (process.env.CI && !DATABASE_URL) {
+  throw new Error(
+    "DATABASE_URL must be set in CI: the integration tests may not be skipped there.",
+  );
+}
+// Test-only value, not a secret: Better Auth needs one to sign the session cookie. `||=` also
+// replaces the empty value that a .env copied from .env.example loads.
+process.env.BETTER_AUTH_SECRET ||= "integration-test-only-not-a-secret";
+process.env.BETTER_AUTH_URL ||= "http://localhost:3000";
 
 // A cookie jar standing in for the browser: next/headers reads it and nextCookies() writes it.
 const jar = new Map<string, string>();
@@ -171,6 +177,28 @@ describe.skipIf(!DATABASE_URL)("account: register, log in, log out (Story 1.2)",
     expect(redirected).toHaveLength(1);
     expect(refused).toMatchObject([{ ok: false, code: "email_in_use" }]);
   });
+
+  it.each([
+    { email: "per@eksempel.no", password: "", field: "password", message: "Skriv passordet ditt." },
+    {
+      email: "per@eksempel",
+      password: "hemmelig1",
+      field: "email",
+      message: "Skriv en gyldig e-postadresse.",
+    },
+  ])(
+    "login rejects an invalid $field without signing in",
+    async ({ email, password, field, message }) => {
+      const result = await loginAction(null, form(email, password));
+
+      expect(result).toMatchObject({
+        ok: false,
+        code: "invalid_input",
+        fieldErrors: { [field]: message },
+      });
+      expect(hasSessionCookie()).toBe(false);
+    },
+  );
 
   it("answers an unknown email and a wrong password with the same message", async () => {
     const email = address("per");

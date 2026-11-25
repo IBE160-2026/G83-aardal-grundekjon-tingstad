@@ -129,6 +129,7 @@ test("a wrong login gives one general message", async ({ page }) => {
     page.getByRole("alert").filter({ hasText: "Feil e-post eller passord." }),
   ).toBeVisible();
   await expect(page.getByLabel("E-post")).toHaveValue(email);
+  await expect(page.getByRole("alert").locator("p")).toBeFocused();
 
   await logIn(page, newEmail(), PASSWORD);
   await expect(

@@ -1,14 +1,13 @@
 import { z } from "zod";
 
+import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "@/shared/auth/server";
+
 // Server-side validation of every account form (Story 1.2). Messages are shown under the field.
-// Keep the limits in step with shared/auth/server.ts (Better Auth enforces them too).
-export const PASSWORD_MIN = 8;
-export const PASSWORD_MAX = 128;
 
 export const MESSAGES = {
   emailInvalid: "Skriv en gyldig e-postadresse.",
-  passwordTooShort: `Passordet er for kort. Bruk minst ${PASSWORD_MIN} tegn.`,
-  passwordTooLong: `Passordet er for langt. Bruk høyst ${PASSWORD_MAX} tegn.`,
+  passwordTooShort: `Passordet er for kort. Bruk minst ${MIN_PASSWORD_LENGTH} tegn.`,
+  passwordTooLong: `Passordet er for langt. Bruk høyst ${MAX_PASSWORD_LENGTH} tegn.`,
   passwordMissing: "Skriv passordet ditt.",
   emailInUse: "Det finnes allerede en konto med denne e-postadressen.",
   wrongLogin: "Feil e-post eller passord.",
@@ -27,8 +26,8 @@ export const registerSchema = z.object({
   email,
   password: z
     .string({ error: MESSAGES.passwordTooShort })
-    .min(PASSWORD_MIN, { error: MESSAGES.passwordTooShort })
-    .max(PASSWORD_MAX, { error: MESSAGES.passwordTooLong }),
+    .min(MIN_PASSWORD_LENGTH, { error: MESSAGES.passwordTooShort })
+    .max(MAX_PASSWORD_LENGTH, { error: MESSAGES.passwordTooLong }),
 });
 
 // Login checks only the shape: whether the account exists or the password is right is answered
