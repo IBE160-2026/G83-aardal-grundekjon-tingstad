@@ -15,8 +15,25 @@ permissions:
 
 jobs:
   checks:
-    name: Lint, types, format and unit tests
+    name: Lint, types, format, unit and integration tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: flexpt
+          POSTGRES_PASSWORD: flexpt
+          POSTGRES_DB: flexpt
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U flexpt -d flexpt"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 30
+    env:
+      # Same local-only database as docker-compose.yml; the integration tests and the e2e app use it.
+      DATABASE_URL: postgres://flexpt:flexpt@localhost:5432/flexpt
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,11 +44,31 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run format:check
+      - run: npm run db:migrate
       - run: npm test
 
   e2e:
     name: Playwright against the production build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: flexpt
+          POSTGRES_PASSWORD: flexpt
+          POSTGRES_DB: flexpt
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U flexpt -d flexpt"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 30
+    env:
+      # Same local-only database as docker-compose.yml; the integration tests and the e2e app use it.
+      DATABASE_URL: postgres://flexpt:flexpt@localhost:5432/flexpt
+      # Test-only value, not a secret.
+      BETTER_AUTH_SECRET: e2e-only-not-a-secret
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,6 +77,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - run: npm run db:migrate
       - run: npm run test:e2e
       - if: failure()
         uses: actions/upload-artifact@v4
@@ -63,7 +101,7 @@ jobs:
       - name: Wait for the app on port 3000
         run: |
           docker compose ps -a
-          for i in $(seq 1 30); do curl -fs http://localhost:3000 > /dev/null && exit 0; sleep 2; done
+          for i in $(seq 1 30); do curl -fs http://localhost:3000/logg-inn > /dev/null && exit 0; sleep 2; done
           exit 1
       - run: npm run test:e2e
         env:
