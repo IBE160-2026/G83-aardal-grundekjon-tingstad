@@ -23,9 +23,13 @@
 - [x] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Kjør bmad-sprint-planning på nytt når PR-ene for startvolum, v2-glemt-passord og sprint-planning er flettet (Story 1.7 skal ut av sprint-status.yaml) (løst 2026-11-22: 26 stories, Story 1.7 fjernet)
 - [ ] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — Gruppa går gjennom og fletter PR #27 (Story 1.1)
 - [x] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — CI-workflow (GitHub Actions) for lint, typecheck, tester og e2e på hver PR (utsatt, se deferred-work.md) (løst 2026-11-25: PR #28)
-- [ ] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — Story 1.2: gjør `BETTER_AUTH_SECRET` påkrevd og herd `getDb()` (dev-reload, `server-only`)
+- [x] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — Story 1.2: gjør `BETTER_AUTH_SECRET` påkrevd og herd `getDb()` (dev-reload, `server-only`) (løst 2026-11-25)
 - [ ] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — README mangler skjermbilde (kriterium 6)
 - [ ] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — Story 2.1 står fortsatt `in-progress` i sprint-status.yaml selv om PR #23 er flettet
 - [ ] 2026-11-25 [story-1-1-prosjektskjelett](990-2026-11-25-21-19-17-story-1-1-prosjektskjelett.md) — `eslint-config-next` gir peer-advarsler med ESLint 10
 - [ ] 2026-11-25 [ci-workflow](989-2026-11-25-21-31-57-ci-workflow.md) — Gruppa fletter PR #28 og vurderer å kreve grønne sjekker på `main`
 - [ ] 2026-11-25 [ci-workflow](989-2026-11-25-21-31-57-ci-workflow.md) — Vercel-preview feiler på PR-ene; ta det i Story 1.6
+- [ ] 2026-11-25 [story-1-2-innlogging](988-2026-11-25-22-32-41-story-1-2-innlogging.md) — Begrens antall innloggings- og registreringsforsøk før publisering (Story 1.6, se deferred-work.md)
+- [ ] 2026-11-25 [story-1-2-innlogging](988-2026-11-25-22-32-41-story-1-2-innlogging.md) — Sjekk `BETTER_AUTH_URL` og innlogging på Vercel (Story 1.6)
+- [ ] 2026-11-25 [story-1-2-innlogging](988-2026-11-25-22-32-41-story-1-2-innlogging.md) — Avklar OpenRouter (foreleser) mot Anthropic-SDK (AD-9) med `bmad-correct-course` før Epic 4
+- [ ] 2026-11-25 [story-1-2-innlogging](988-2026-11-25-22-32-41-story-1-2-innlogging.md) — Designsjekk av fanetekster som brytes midt i ord ved 320 px og 200 % tekst
