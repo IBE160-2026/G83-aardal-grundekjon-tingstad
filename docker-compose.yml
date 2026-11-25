@@ -40,7 +40,9 @@ services:
     environment:
       DATABASE_URL: *database-url
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
-      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-}
+      # Local-only default so `docker compose up` works with no extra step; it is not a secret and
+      # is never used by the published app, which has its own secret set in Vercel.
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-local-dev-only-not-a-secret}
       COACH_MODE: ${COACH_MODE:-demo}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       COACH_MODEL_ID: ${COACH_MODEL_ID:-claude-haiku-5-5}

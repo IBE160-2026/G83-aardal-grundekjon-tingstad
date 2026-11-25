@@ -39,6 +39,7 @@ Er port 5432 eller 3000 opptatt (for eksempel av en lokal PostgreSQL), velg andr
 ```bash
 npm ci
 cp .env.example .env           # verdiene passer til Postgres i Compose
+                               # fyll inn BETTER_AUTH_SECRET (openssl rand -base64 32)
 docker compose up -d db        # bare databasen
 npm run db:migrate             # kjør migreringene
 npm run dev                    # appen på http://localhost:3000
@@ -54,13 +55,19 @@ npm run dev                    # appen på http://localhost:3000
 
 ## Tester
 
+Integrasjonstestene og Playwright trenger databasen fra Compose (fra Story 1.2, innlogging):
+
 ```bash
-npm test                       # Vitest: datohjelperen og grenseregelen for snitt
+docker compose up -d db        # bare databasen
+npm run db:migrate             # kjør migreringene
+npm test                       # Vitest: datohjelperen, grenseregelen og integrasjonstester mot Postgres
 npx playwright install chromium  # første gang
-npm run test:e2e               # Playwright: bygger appen og kjører røyktesten
+npm run test:e2e               # Playwright: bygger appen og tester innlogging, app-skallet og temaet
 ```
 
-Samme røyktest kan kjøres mot Docker-imaget (standalone-serveren), som er det sensor starter:
+Integrasjonstestene i `tests/integration` hoppes over når `DATABASE_URL` mangler (verken i miljøet eller i `.env`). I CI er den alltid satt, så der kjører de alltid. Playwright bruker en egen testverdi for `BETTER_AUTH_SECRET` når den ikke er satt.
+
+Samme tester kan kjøres mot Docker-imaget (standalone-serveren), som er det sensor starter:
 
 ```bash
 docker compose up -d --build
@@ -68,7 +75,7 @@ E2E_BASE_URL=http://localhost:3000 npm run test:e2e
 docker compose down
 ```
 
-GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) kjører alle sjekkene over på hver pull request og på `main`: lint, typesjekk, formatering, Vitest, Playwright mot produksjonsbygget og Playwright mot `docker compose up`.
+GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) kjører alle sjekkene over på hver pull request og på `main`: lint, typesjekk, formatering, Vitest (med en Postgres-tjeneste), Playwright mot produksjonsbygget og Playwright mot `docker compose up`.
 
 ## Mappestruktur
 
