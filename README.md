@@ -1,4 +1,4 @@
-# G83 — Blind sensur
+# G83 — Flex PT
 
 Gruppeprosjekt i **IBE160 Programmering med KI** ved Høgskolen i Molde, høsten 2026 (15 studiepoeng).
 
