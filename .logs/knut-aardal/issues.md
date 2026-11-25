@@ -1,7 +1,7 @@
 # Åpne punkter
 
 - [x] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — Confirm with the team whether deleting the PRD was intentional (restore from `e2d3bc8` if not) (løst 2026-10-31: intentional, fresh start)
-- [ ] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — `_bmad/config.toml` project_name is "blind_sensur", should probably be "flexpt"
+- [x] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — `_bmad/config.toml` project_name is "blind_sensur", should probably be "flexpt" (løst 2026-11-25: byttet lokalt, se prosjektnavn-flexpt)
 - [x] 2026-10-31 [bmad-status-and-sync](999-2026-10-31-12-44-43-bmad-status-and-sync.md) — Create a new PRD from the brief (fresh start) (løst 2026-11-09: PRD v0.7 finnes)
 - [x] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Kjør `bmad-prd` med brief + lærertilbakemelding + sporbarhetsmatrise (tabell A) som input; ta med seksjonen «Avvik fra brief» (løst 2026-11-09: PRD v0.7 seksjon 7)
 - [ ] 2026-10-31 [sensorveiledning-sporbarhet](998-2026-10-31-13-13-50-sensorveiledning-sporbarhet.md) — Bli enige i gruppa om git-arbeidsflyt (branch + PR per story, GitHub Issues)
@@ -21,3 +21,5 @@
 - [ ] 2026-11-22 [impeccable-designforslag](994-2026-11-22-19-30-30-impeccable-designforslag.md) — Vurder om Impeccables globale hook i ~/.claude/settings.json skal beholdes
 - [x] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Gruppa godkjenner at glemt passord (FR18, Story 1.7, AD-19) flyttes til versjon 2, i PR fra docs/v2-glemt-passord (løst 2026-11-22: PR #20 flettet)
 - [x] 2026-11-22 [glemt-passord-til-v2](991-2026-11-22-20-55-00-glemt-passord-til-v2.md) — Kjør bmad-sprint-planning på nytt når PR-ene for startvolum, v2-glemt-passord og sprint-planning er flettet (Story 1.7 skal ut av sprint-status.yaml) (løst 2026-11-22: 26 stories, Story 1.7 fjernet)
+- [ ] 2026-11-25 [prosjektnavn-flexpt](990-2026-11-25-20-26-47-prosjektnavn-flexpt.md) — Spør foreleser om README-overskriften «G83 — Blind sensur» kan bli «G83 — Flex PT»
+- [ ] 2026-11-25 [prosjektnavn-flexpt](990-2026-11-25-20-26-47-prosjektnavn-flexpt.md) — Caroline og Emilie bytter `project_name` til `flexpt` i sin lokale `_bmad/`-konfig
