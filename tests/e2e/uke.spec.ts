@@ -69,7 +69,13 @@ for (const key of ["A", "C"] as const) {
     const expected = expectedWeek(key);
     await startDemo(page, key);
 
-    await expect(page.getByText(`0 av ${expected.sessions.length} økter`)).toBeVisible();
+    if (expected.sessions.length === 0) {
+      // A start late in the week: no counter, and a line that the plan comes on Monday.
+      await expect(page.getByText("Ukeplanen din kommer mandag.")).toBeVisible();
+      await expect(page.getByText(/^0 av d+ økter$/)).toHaveCount(0);
+    } else {
+      await expect(page.getByText(`0 av ${expected.sessions.length} økter`)).toBeVisible();
+    }
     await expect(dayRows(page)).toHaveCount(expected.dayCount);
     // Today is the first row and is marked with text, not only a border.
     await expect(dayRows(page).first()).toContainText("(i dag)");

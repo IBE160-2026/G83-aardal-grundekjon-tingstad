@@ -79,6 +79,9 @@ export function buildDays(
   return days;
 }
 
+/** Shown when no session is left in the first week, for example a start late in the week. */
+export const NO_SESSIONS_LEFT = "Ingen økter igjen denne uka. Ukeplanen din kommer mandag.";
+
 /** The counter text: X stays 0 until logging exists (Epic 3). */
 export function progressText(done: number, total: number): string {
   return `${done} av ${total} økter`;

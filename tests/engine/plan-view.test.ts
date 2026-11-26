@@ -6,6 +6,7 @@ import {
   distanceText,
   nextSession,
   nextSessionText,
+  NO_SESSIONS_LEFT,
   progressText,
   REST_LINES,
   sessionName,
@@ -89,6 +90,10 @@ describe("counter and next session", () => {
     expect(nextSession(sessions, "2026-11-24")?.date).toBe("2026-11-26");
     expect(nextSession(sessions, "2026-11-26")).toBeNull();
     expect(nextSession([], "2026-11-23")).toBeNull();
+  });
+
+  it("tells that the plan comes on Monday when no session is left", () => {
+    expect(NO_SESSIONS_LEFT).toContain("kommer mandag");
   });
 
   it("writes «Neste økt: dag, økt»", () => {

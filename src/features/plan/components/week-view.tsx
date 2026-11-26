@@ -11,6 +11,7 @@ import {
   distanceText,
   nextSession,
   nextSessionText,
+  NO_SESSIONS_LEFT,
   progressText,
   REST_LINES,
   sessionName,
@@ -75,11 +76,15 @@ export function WeekView({ week, showWelcome }: { week: CurrentWeek; showWelcome
           Velkommen! Her ser du uka di. Trykk på en økt for å se hva som står på planen.
         </HintCard>
       ) : null}
-      <ProgressBar
-        label={progressText(0, week.sessions.length)}
-        value={0}
-        max={week.sessions.length}
-      />
+      {week.sessions.length === 0 ? (
+        <p className="text-body text-text">{NO_SESSIONS_LEFT}</p>
+      ) : (
+        <ProgressBar
+          label={progressText(0, week.sessions.length)}
+          value={0}
+          max={week.sessions.length}
+        />
+      )}
       {next ? <p className="text-body text-text">{nextSessionText(next)}</p> : null}
       <ul className="flex flex-col gap-gap-card">
         {days.map((day) => (
