@@ -8,7 +8,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 **Flex PT** er en mobil-først treningsapp med en KI-coach. Appen lager en ukeplan for styrke eller løping ut fra målet ditt, lar deg logge øktene sett for sett, og justerer planen sammen med deg når uka endrer seg. Den er laget for travle folk som vil ha fremgang og struktur uten et stivt program.
 
-Status: prosjektskjelettet, innlogging, tema, demo, sletting av konto, publisering, øvelsesbibliotek, planmotor og Uke-skjermen med ukeplanen er på plass (Story 1.1–1.6, 2.1–2.3). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
+Status: prosjektskjelettet, innlogging, tema, demo, sletting av konto, publisering, øvelsesbibliotek, planmotor, Uke-skjermen med ukeplanen og onboarding er på plass (Story 1.1–1.6, 2.1–2.4). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
 
 ## Medlemmer
 
@@ -46,6 +46,10 @@ Du trenger ingen konto for å prøve appen. Trykk **Prøv demo** under innloggin
 | D      | Løping, erfaren, mål halvmaraton, lengste tur 15 km, 4 økter i uka |
 
 Hvert valg lager en ny demobruker bare for deg (logget inn gjennom Better Auth, med tilfeldig passord som aldri vises), så besøkende deler aldri data. Merket «Demo» vises øverst så lenge du er logget inn som demobruker, og demobrukere kan ikke endre e-post eller passord. Demobrukere eldre enn 24 timer slettes når neste demobruker lages. Ingen demobrukere lages ved oppstart. Planer, logger og coach-scenarier for demoprofilene kommer med Epic 2–4.
+
+### Onboarding
+
+En ny bruker uten profil sendes fra alle appens sider til `/onboarding` (Story 2.4): ett spørsmål per skjerm, «Steg N av M» (5 for styrke, 4 for løping), og tilbake beholder svarene. Den siste knappen lagrer profilen og lager programmet og første uke, og du lander på Uke. Har du alt en profil, går du rett til Uke. Svarene rettes senere i Profil (Story 2.6).
 
 ### Ukeplanen
 

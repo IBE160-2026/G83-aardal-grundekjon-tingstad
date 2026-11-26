@@ -3,6 +3,8 @@ import { randomUUID } from "node:crypto";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
+import { completeOnboarding } from "./onboarding-helper";
+
 // Story 1.3: Lys / Mørk / Følg system on Profil, stored in a device cookie and set on <html> by
 // the server (AD-14), plus axe on the login screen and Profil in both themes (NFR8).
 // Needs the compose database: `docker compose up -d db && npm run db:migrate`.
@@ -21,7 +23,7 @@ async function registerAndOpenProfil(
   await page.getByLabel("E-post").fill(email);
   await page.getByLabel("Passord").fill(PASSWORD);
   await page.getByRole("button", { name: "Registrer" }).click();
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   await page.goto("/profil");
   return email;
 }

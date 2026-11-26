@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { getCurrentWeek, isHintDismissed, WeekView, WELCOME_HINT } from "@/features/plan/api";
-import { getProfile } from "@/features/profile/api";
 import { requireUserId } from "@/shared/auth/session";
 
 export const metadata: Metadata = { title: "Uke – Flex PT" };
@@ -12,16 +11,13 @@ export default async function WeekPage() {
   const week = await getCurrentWeek(userId, new Date());
 
   if (!week) {
-    // Without a profile there is no plan yet (onboarding comes in Story 2.4); with one, the week
-    // is not planned here yet (Story 2.5 creates the following weeks).
-    const hasProfile = (await getProfile(userId)) !== null;
+    // The week is not planned yet: the first week is made on the first visit, and the following
+    // weeks come with Story 2.5. A user without a profile never gets here (onboarding comes first).
     return (
       <>
         <h1 className="text-display text-text">Uke</h1>
         <p className="text-body text-text-muted">
-          {hasProfile
-            ? "Planen for denne uka er ikke klar ennå. Den kommer første gang du åpner en ny uke."
-            : "Planen din lages etter spørsmålene i starten. De kommer snart."}
+          Planen for denne uka er ikke klar ennå. Den kommer første gang du åpner en ny uke.
         </p>
       </>
     );

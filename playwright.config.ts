@@ -16,6 +16,9 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
+  // Server actions that make a plan (onboarding) can take a few seconds on a cold server with
+  // several workers; the default 5 s is too tight for a URL change after them.
+  expect: { timeout: 15_000 },
   reporter: process.env.CI ? "github" : "list",
   use: {
     baseURL: externalBaseUrl ?? `http://localhost:${PORT}`,

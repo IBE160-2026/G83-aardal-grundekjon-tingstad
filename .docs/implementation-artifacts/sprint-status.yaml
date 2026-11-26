@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 11-22-2026 20:09
-last_updated: 11-26-2026 21:50
+last_updated: 11-26-2026 22:50
 project: flexpt
 project_key: NOKEY
 tracking_system: file-system
@@ -47,8 +47,8 @@ development_status:
   epic-2: in-progress
   2-1-exercise-library: done
   2-2-plan-engine-generates-the-first-week: done
-  2-3-see-this-week-s-plan: review
-  2-4-onboarding: backlog
+  2-3-see-this-week-s-plan: done
+  2-4-onboarding: review
   2-5-a-new-week-starts: backlog
   2-6-edit-my-profile-and-running-goal: backlog
   2-7-the-8-week-strength-program: backlog

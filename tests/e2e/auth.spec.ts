@@ -2,6 +2,8 @@ import { randomUUID } from "node:crypto";
 
 import { expect, type Page, test } from "@playwright/test";
 
+import { completeOnboarding } from "./onboarding-helper";
+
 // Story 1.2: register, log in and log out, the app shell, and the layout floor (320 px, 200 %).
 // Needs the compose database: `docker compose up -d db && npm run db:migrate`.
 
@@ -34,7 +36,7 @@ test("register, open Profil, log out, Back shows no app content, log in again", 
   const email = newEmail();
 
   await register(page, `  ${email.toUpperCase()} `);
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   await expect(page.getByRole("heading", { level: 1, name: "Uke" })).toBeVisible();
 
   await tabBar(page).getByRole("link", { name: "Profil" }).click();
@@ -54,7 +56,7 @@ test("register, open Profil, log out, Back shows no app content, log in again", 
 
 test("the app shell shows four tabs with the active one marked", async ({ page }) => {
   await register(page, newEmail());
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
 
   const tabs = tabBar(page).getByRole("link");
   await expect(tabs).toHaveText(["Uke", "Coach", "Historikk", "Profil"]);
@@ -68,7 +70,8 @@ test("the app shell shows four tabs with the active one marked", async ({ page }
     await tabBar(page).getByRole("link", { name }).click();
     await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.getByRole("heading", { level: 1, name })).toBeVisible();
-    await expect(page.locator("main p").first()).toContainText(/snart/i);
+    // Uke shows the plan now; the other tabs are placeholders until their epics.
+    if (name !== "Uke") await expect(page.locator("main p").first()).toContainText(/snart/i);
     const active = tabBar(page).locator('[aria-current="page"]');
     await expect(active).toHaveText(name);
     // The 3 px marker above the icon is drawn only on the active tab.
@@ -86,7 +89,7 @@ test("a logged-out visitor is sent from app routes to the login screen", async (
 
 test("a logged-in user is sent from /, /logg-inn and /registrer to Uke", async ({ page }) => {
   await register(page, newEmail());
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   for (const path of ["/", "/logg-inn", "/registrer"]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/uke$/);
@@ -109,7 +112,7 @@ test("registration errors show under the field, and the typed email stays", asyn
 test("an email that is in use is refused under the field", async ({ page }) => {
   const email = newEmail();
   await register(page, email);
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   await page.context().clearCookies();
 
   await register(page, email.toUpperCase());
@@ -121,7 +124,7 @@ test("an email that is in use is refused under the field", async ({ page }) => {
 test("a wrong login gives one general message", async ({ page }) => {
   const email = newEmail();
   await register(page, email);
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   await page.context().clearCookies();
 
   await logIn(page, email, "feilpassord");
@@ -151,7 +154,7 @@ test("registration works with the keyboard only", async ({ page }) => {
   await page.keyboard.press("Tab");
   await expect(page.getByRole("button", { name: "Registrer" })).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/uke$/);
+  await expect(page).toHaveURL(/\/onboarding$/);
 });
 
 test.describe("at 320 px and 200 % text", () => {
@@ -172,7 +175,7 @@ test.describe("at 320 px and 200 % text", () => {
 
   test("Profil with the tab bar does not scroll sideways", async ({ page }) => {
     await register(page, newEmail());
-    await expect(page).toHaveURL(/\/uke$/);
+    await completeOnboarding(page);
     await page.goto("/profil");
     await enlargeText(page);
     expect(await scrollsSideways(page)).toBe(false);

@@ -3,6 +3,8 @@ import { randomUUID } from "node:crypto";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
+import { completeOnboarding } from "./onboarding-helper";
+
 // Story 1.5: «Slett konto» on Profil, the confirmation dialog and what happens after «Slett».
 // Needs the compose database: `docker compose up -d db && npm run db:migrate`.
 
@@ -16,7 +18,7 @@ async function registerAndOpenProfil(page: Page, email = newEmail()) {
   await page.getByLabel("E-post").fill(email);
   await page.getByLabel("Passord").fill(PASSWORD);
   await page.getByRole("button", { name: "Registrer" }).click();
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   await page.goto("/profil");
   await expect(page.getByRole("heading", { level: 1, name: "Profil" })).toBeVisible();
   return email;

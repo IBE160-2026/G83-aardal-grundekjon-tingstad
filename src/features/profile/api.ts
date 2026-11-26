@@ -6,5 +6,14 @@
 export { ThemePicker } from "./components/theme-picker";
 export { getTheme } from "./get-theme";
 export { getProfile, saveProfile } from "./profile";
-export { type ProfileInput, profileInputSchema } from "./schemas";
+export {
+  EQUIPMENT,
+  EXPERIENCES,
+  MAIN_FOCUSES,
+  MAX_LONGEST_RUN_KM,
+  MIN_LONGEST_RUN_KM,
+  type ProfileInput,
+  profileInputSchema,
+  RUNNING_GOALS,
+} from "./schemas";
 export { type Theme, themeAttribute } from "./theme";
