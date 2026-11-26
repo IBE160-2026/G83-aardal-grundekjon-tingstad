@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_rethrow } from "next/navigation";
 import { type ReactNode, startTransition, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/shared/ui/button";
@@ -116,7 +117,8 @@ export function OnboardingFlow() {
   const step = steps[stepIndex];
   // The last step of the flow is the plan being made: 5 for strength, 4 for running.
   const total = answers.focus === "running" ? 4 : 5;
-  const isLastQuestion = stepIndex === steps.length - 1;
+  // Before a focus is chosen the list holds only the first step, which is never the last.
+  const isLastQuestion = step !== "focus" && stepIndex === steps.length - 1;
 
   // Move focus to the heading when the step changes, so keyboard and screen reader users start at
   // the new question. Not on the first render, which would steal focus from the page load.
@@ -216,7 +218,10 @@ export function OnboardingFlow() {
             setError(result.message);
           }
         }
-      } catch {
+      } catch (caught) {
+        // The redirect to Uke is how the action says it succeeded; it can arrive as a thrown error.
+        // It is not a failure: hand it to Next, which makes the navigation.
+        unstable_rethrow(caught);
         submittingRef.current = false;
         setSubmitting(false);
         setError(UNEXPECTED);
