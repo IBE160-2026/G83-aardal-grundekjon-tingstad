@@ -35,7 +35,14 @@ omvendt roing. Øvelser med flasker er merket som kroppsvekt (`bodyweight: true`
 
 Ingen. Alle 11 mønstrene har minst to hjemmeøvelser. `knownHomeGaps` i `exercises.json` er tom, og testen i Story 2.1 skal feile hvis et nytt hull oppstår.
 
+## Skjema og test
+
+Zod-skjemaet ligger i `src/shared/engine/exercise.ts` (`exerciseSchema` og `exerciseLibrarySchema`). `tests/engine/exercises.test.ts` kjører det mot `exercises.json` og sjekker:
+
+- at hver øvelse har ID, norsk og engelsk navn, muskelgrupper, ett av de 11 mønstrene, merking (`gym` eller `both`) og `bodyweight`-flagget (vekt `null`)
+- at hjemmeøvelser (`both`) er kroppsvekt og ikke trenger annet utstyr enn kroppsvekt
+- at hvert mønster har minst to øvelser for gym og for hjemme. Mangler et mønster hjemme, må det stå i `knownHomeGaps`; alle andre hull feiler testen, og det gjør også et ført hull som ikke finnes lenger
+
 ## Ikke gjort ennå
 
-- Zod-skjema og Vitest-dekningstest (krever prosjektskjelettet fra Story 1.1).
 - «Enkelt utstyr hjemme» fra UX er ikke et eget sted i biblioteket ennå. Merkingen er `gym` eller `both`.
