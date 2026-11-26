@@ -8,7 +8,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 **Flex PT** er en mobil-først treningsapp med en KI-coach. Appen lager en ukeplan for styrke eller løping ut fra målet ditt, lar deg logge øktene sett for sett, og justerer planen sammen med deg når uka endrer seg. Den er laget for travle folk som vil ha fremgang og struktur uten et stivt program.
 
-Status: prosjektskjelettet, innlogging, tema, demo og sletting av konto er på plass (Story 1.1–1.5). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
+Status: prosjektskjelettet, innlogging, tema, demo, sletting av konto, publisering, øvelsesbibliotek, planmotor og Uke-skjermen med ukeplanen er på plass (Story 1.1–1.6, 2.1–2.3). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
 
 ## Medlemmer
 
@@ -46,6 +46,12 @@ Du trenger ingen konto for å prøve appen. Trykk **Prøv demo** under innloggin
 | D      | Løping, erfaren, mål halvmaraton, lengste tur 15 km, 4 økter i uka |
 
 Hvert valg lager en ny demobruker bare for deg (logget inn gjennom Better Auth, med tilfeldig passord som aldri vises), så besøkende deler aldri data. Merket «Demo» vises øverst så lenge du er logget inn som demobruker, og demobrukere kan ikke endre e-post eller passord. Demobrukere eldre enn 24 timer slettes når neste demobruker lages. Ingen demobrukere lages ved oppstart. Planer, logger og coach-scenarier for demoprofilene kommer med Epic 2–4.
+
+### Ukeplanen
+
+Første gang en bruker med profil åpner **Uke**, lages programmet og første uke fra planmotoren (Story 2.3): én versjon per uke, lagret i databasen, og dager før programstart planlegges ikke. Uke viser en rad per dag, hviledager med en kort støttelinje, «X av Y økter» (X er 0 til logging kommer i Epic 3) og «Neste økt» når dagen er fri. Trykk på en økt for å se øvelsene med sett og repetisjoner, eller løpetypen og distansen. En ny uke for et program som alt finnes lages først i Story 2.5.
+
+Planen bruker flere tabeller (`program`, `plan_week`, `plan_version`, `session_slot`, `version_session` og `user_hint`). **Husk å kjøre migreringene mot Supabase før en deploy som trenger dem** (se «Kjør migreringene mot Supabase»), ellers feiler Uke i den publiserte appen.
 
 ### Slette kontoen
 
