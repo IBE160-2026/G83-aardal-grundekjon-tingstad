@@ -34,3 +34,5 @@
 - [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — opprett Supabase og Vercel, sett variabler kun for Production, kjør migreringen og gi URL-en til README (løst 2026-11-26)
 - [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — verifiser registrer, logg inn og Prøv demo på publisert URL; deretter kan Story 1.6 settes til done (løst 2026-11-26)
 - [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — push grenen feat/story-1.6-publiser-appen og lag PR (løst 2026-11-26)
+- [ ] 2026-11-26 [story-2-2-planmotor](991-2026-11-26-21-20-00-story-2-2-planmotor.md) — push grenen feat/story-2.2-planmotor og lag PR
+- [ ] 2026-11-26 [story-2-2-planmotor](991-2026-11-26-21-20-00-story-2-2-planmotor.md) — oppdater PRD Appendix A: R4 (5 løpeøkter: lett, rask, rask, lett, lang) og R3 (kroppsdeler bein, push, pull)
