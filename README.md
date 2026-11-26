@@ -51,6 +51,49 @@ Hvert valg lager en ny demobruker bare for deg (logget inn gjennom Better Auth, 
 
 Under **Profil** sletter **Slett konto** kontoen for godt etter en bekreftelse («Avbryt» / «Slett»). Brukeren og alt brukeren eier (økter, profil og senere planer, logger og meldinger) slettes i databasen med `ON DELETE CASCADE`, og etterpå kan du ikke logge inn med den gamle e-posten og passordet. Valget av tema ligger i en informasjonskapsel på enheten og blir værende.
 
+## Publisert app
+
+**URL:** _fylles inn når Vercel-prosjektet er opprettet og verifisert (Story 1.6)._
+
+Appen publiseres fra `main` på Vercel, med PostgreSQL på Supabase. Merk at et gratis Supabase-prosjekt **pauses etter en uke uten bruk** og må gjenopptas (Resume project i Supabase-dashbordet) før en demonstrasjon.
+
+### Miljøvariabler i produksjon
+
+Verdiene settes bare i Vercel (Settings → Environment Variables) og Supabase, aldri i repoet. Sett dem kun for miljøet **Production**, slik at forhåndsvisninger av andre grener ikke får tilgang til databasen.
+
+| Variabel              | Verdi i produksjon                                                              |
+| --------------------- | ------------------------------------------------------------------------------- |
+| `DATABASE_URL`        | Supabase _transaction pooler_ (port 6543), med `?sslmode=require` på slutten    |
+| `DATABASE_DIRECT_URL` | Supabases direkte tilkobling (port 5432); brukes bare til migreringer           |
+| `BETTER_AUTH_SECRET`  | Egen tilfeldig verdi: `openssl rand -base64 32`                                 |
+| `BETTER_AUTH_URL`     | Den publiserte URL-en. Tom på Vercel: `VERCEL_PROJECT_PRODUCTION_URL` brukes da |
+| `COACH_MODE`          | `demo` (settes til `live` først når coachen kommer i Epic 4)                    |
+
+Koden slår av prepared statements når `DATABASE_URL` bruker port 6543 (poolen støtter dem ikke).
+
+### Kjør migreringene mot Supabase
+
+Migreringene kjøres for hånd fra din maskin, mot den direkte URL-en, før en deploy som trenger dem:
+
+```bash
+DATABASE_DIRECT_URL="<direkte tilkobling fra Supabase>" npm run db:migrate
+```
+
+Supabases direkte tilkobling kan være bare IPv6 på gratisplanen. Når den ikke kan nås fra nettverket ditt, bruk _session pooler_-URL-en (port 5432) i stedet; den fungerer for migreringer.
+
+### Sjekkliste for første publisering
+
+1. Opprett et Supabase-prosjekt. Kopier _transaction pooler_-URL-en og den direkte URL-en (Project Settings → Database).
+2. Kjør migreringene med kommandoen over.
+3. Importer GitHub-repoet i Vercel. Sett _Production Branch_ til `main`.
+4. Legg inn variablene fra tabellen over, kun for Production.
+5. Deploy. Registrer deg, logg ut, logg inn og prøv **Prøv demo** på den publiserte URL-en. Slett testkontoen etterpå.
+6. Skriv URL-en øverst i dette avsnittet.
+
+### Kjent begrensning
+
+Innlogging, registrering og «Prøv demo» har ingen grense for antall forsøk (Better Auths grense gjelder bare dets egne HTTP-endepunkter, ikke Server Actions). Det er en bevisst avgrensning i versjon 1, og den er ført i `.docs/implementation-artifacts/deferred-work.md`. Bruk ikke passord du bruker andre steder når du tester den publiserte appen.
+
 ## Utvikling
 
 ```bash
