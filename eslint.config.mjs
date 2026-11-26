@@ -79,6 +79,9 @@ const config = [
             "Import not allowed by the architecture (AD-1): slices import each other only through api.ts and along the spine's edges, and engine and lib import only lib.",
           policies: [
             { from: { element: { type: "app" } }, allow: sliceApi(ALL_SLICES) },
+            // «Prøv demo» (Story 1.4): routes call the seed, the only code that uses account and
+            // profile together.
+            { from: { element: { type: "app" } }, allow: { to: { element: { type: "seed" } } } },
             { from: { element: { type: "seed" } }, allow: sliceApi(ALL_SLICES) },
             ...ALL_SLICES.filter((slice) => SLICE_EDGES[slice].length > 0).map((slice) => ({
               from: { element: { type: "slice", captured: { slice } } },
