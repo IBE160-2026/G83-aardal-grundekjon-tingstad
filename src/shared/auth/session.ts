@@ -11,16 +11,25 @@ export const LOGIN_PATH = "/logg-inn";
 export const UNAUTHORIZED_MESSAGE = "Du må logge inn på nytt.";
 
 /**
- * The signed-in user's id, or null when there is no valid session. Cached per request, so the
- * layout and the page share one session lookup.
+ * The current session, or null. Cached per request, so the layout and the page share one
+ * session lookup.
  */
-export const getUserId = cache(async (): Promise<string | null> => {
+const getSession = cache(async () => {
   // Read the request first: it marks the page as dynamic before Better Auth is created, so
   // `next build` never needs the runtime secret or database.
   const requestHeaders = await headers();
-  const session = await getAuth().api.getSession({ headers: requestHeaders });
-  return session?.user.id ?? null;
+  return getAuth().api.getSession({ headers: requestHeaders });
 });
+
+/** The signed-in user's id, or null when there is no valid session. */
+export async function getUserId(): Promise<string | null> {
+  return (await getSession())?.user.id ?? null;
+}
+
+/** True when a demo user is signed in (Story 1.4: the «Demo» badge). */
+export async function isDemoSession(): Promise<boolean> {
+  return (await getSession())?.user.isDemo === true;
+}
 
 /** The signed-in user's id. Redirects to the login screen when there is no valid session. */
 export async function requireUserId(): Promise<string> {

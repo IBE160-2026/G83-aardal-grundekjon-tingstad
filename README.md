@@ -8,7 +8,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 **Flex PT** er en mobil-først treningsapp med en KI-coach. Appen lager en ukeplan for styrke eller løping ut fra målet ditt, lar deg logge øktene sett for sett, og justerer planen sammen med deg når uka endrer seg. Den er laget for travle folk som vil ha fremgang og struktur uten et stivt program.
 
-Status: prosjektskjelettet er på plass (Story 1.1). Innlogging, demo og selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
+Status: prosjektskjelettet, innlogging, tema og demo er på plass (Story 1.1–1.4). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
 
 ## Medlemmer
 
@@ -33,6 +33,19 @@ docker compose up --build
 Compose starter `postgres:18` (med volum og healthcheck), kjører databasemigreringene i en egen tjeneste som avslutter, og starter deretter appen på <http://localhost:3000>. Coachen går i demo-modus, så ingen API-nøkkel trengs. Stopp med `Ctrl+C`, eller `docker compose down` (legg til `-v` for å slette databasen).
 
 Er port 5432 eller 3000 opptatt (for eksempel av en lokal PostgreSQL), velg andre porter i `.env`, for eksempel `DB_PORT=5433` og `APP_PORT=3001`. Bruker du en annen `DB_PORT`, må porten i `DATABASE_URL` endres tilsvarende.
+
+### Testbrukere: «Prøv demo»
+
+Du trenger ingen konto for å prøve appen. Trykk **Prøv demo** under innloggingen og velg en av de fire testprofilene fra PRD-ens vedlegg B:
+
+| Profil | Hvem                                                               |
+| ------ | ------------------------------------------------------------------ |
+| A      | Styrke, nybegynner, helkropp, 2 økter i uka på treningssenter      |
+| B      | Styrke, erfaren, helkropp, 5 økter i uka på treningssenter         |
+| C      | Løping, nybegynner, mål 10 km, lengste tur 3 km, 3 økter i uka     |
+| D      | Løping, erfaren, mål halvmaraton, lengste tur 15 km, 4 økter i uka |
+
+Hvert valg lager en ny demobruker bare for deg (logget inn gjennom Better Auth, med tilfeldig passord som aldri vises), så besøkende deler aldri data. Merket «Demo» vises øverst så lenge du er logget inn som demobruker, og demobrukere kan ikke endre e-post eller passord. Demobrukere eldre enn 24 timer slettes når neste demobruker lages. Ingen demobrukere lages ved oppstart. Planer, logger og coach-scenarier for demoprofilene kommer med Epic 2–4.
 
 ## Utvikling
 
@@ -60,9 +73,9 @@ Integrasjonstestene og Playwright trenger databasen fra Compose (fra Story 1.2, 
 ```bash
 docker compose up -d db        # bare databasen
 npm run db:migrate             # kjør migreringene
-npm test                       # Vitest: datohjelperen, grenseregelen og integrasjonstester mot Postgres
+npm test                       # Vitest: datohjelperen, grenseregelen og integrasjonstester mot Postgres (innlogging, tema, demo)
 npx playwright install chromium  # første gang
-npm run test:e2e               # Playwright: bygger appen og tester innlogging, app-skallet og temaet
+npm run test:e2e               # Playwright: bygger appen og tester innlogging, app-skallet, temaet og demoen
 ```
 
 Integrasjonstestene i `tests/integration` hoppes over når `DATABASE_URL` mangler (verken i miljøet eller i `.env`). I CI er den alltid satt, så der kjører de alltid. Playwright bruker en egen testverdi for `BETTER_AUTH_SECRET` når den ikke er satt.

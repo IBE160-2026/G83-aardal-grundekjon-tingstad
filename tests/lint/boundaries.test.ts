@@ -81,6 +81,20 @@ describe("routes, seed and shared code", () => {
     },
   );
 
+  it("src/app may use the seed («Prøv demo»)", async () => {
+    expect(await ruleIds("src/app/page.tsx", importFrom("../seed/actions"))).toEqual([]);
+  });
+
+  it.each([
+    "src/features/account/probe.ts",
+    "src/features/profile/probe.ts",
+    "src/shared/ui/probe.ts",
+  ])("%s may not use the seed", async (path) => {
+    const depth = path.split("/").length - 2;
+    const code = importFrom(`${"../".repeat(depth)}seed/actions`);
+    expect(await ruleIds(path, code)).toEqual(["boundaries/dependencies"]);
+  });
+
   it.each(["src/shared/ui/probe.ts", "src/shared/lib/probe.ts", "src/shared/engine/probe.ts"])(
     "%s may not import a slice",
     async (path) => {

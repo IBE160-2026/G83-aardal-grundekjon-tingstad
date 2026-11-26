@@ -2,3 +2,4 @@
 // Every change is a migration made with `npm run db:generate` and committed.
 
 export * from "./auth";
+export * from "./profile";

@@ -5,4 +5,6 @@
 
 export { ThemePicker } from "./components/theme-picker";
 export { getTheme } from "./get-theme";
+export { getProfile, saveProfile } from "./profile";
+export { type ProfileInput, profileInputSchema } from "./schemas";
 export { type Theme, themeAttribute } from "./theme";
