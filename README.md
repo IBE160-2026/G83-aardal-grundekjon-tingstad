@@ -8,7 +8,7 @@ Repoet inneholder gruppens applikasjon og dokumentasjon av utvikling, testing og
 
 **Flex PT** er en mobil-først treningsapp med en KI-coach. Appen lager en ukeplan for styrke eller løping ut fra målet ditt, lar deg logge øktene sett for sett, og justerer planen sammen med deg når uka endrer seg. Den er laget for travle folk som vil ha fremgang og struktur uten et stivt program.
 
-Status: prosjektskjelettet, innlogging, tema og demo er på plass (Story 1.1–1.4). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
+Status: prosjektskjelettet, innlogging, tema, demo og sletting av konto er på plass (Story 1.1–1.5). Selve treningsflytene kommer i de neste storyene (se [epics.md](.docs/planning-artifacts/epics.md)).
 
 ## Medlemmer
 
@@ -47,6 +47,10 @@ Du trenger ingen konto for å prøve appen. Trykk **Prøv demo** under innloggin
 
 Hvert valg lager en ny demobruker bare for deg (logget inn gjennom Better Auth, med tilfeldig passord som aldri vises), så besøkende deler aldri data. Merket «Demo» vises øverst så lenge du er logget inn som demobruker, og demobrukere kan ikke endre e-post eller passord. Demobrukere eldre enn 24 timer slettes når neste demobruker lages. Ingen demobrukere lages ved oppstart. Planer, logger og coach-scenarier for demoprofilene kommer med Epic 2–4.
 
+### Slette kontoen
+
+Under **Profil** sletter **Slett konto** kontoen for godt etter en bekreftelse («Avbryt» / «Slett»). Brukeren og alt brukeren eier (økter, profil og senere planer, logger og meldinger) slettes i databasen med `ON DELETE CASCADE`, og etterpå kan du ikke logge inn med den gamle e-posten og passordet. Valget av tema ligger i en informasjonskapsel på enheten og blir værende.
+
 ## Utvikling
 
 ```bash
@@ -73,9 +77,9 @@ Integrasjonstestene og Playwright trenger databasen fra Compose (fra Story 1.2, 
 ```bash
 docker compose up -d db        # bare databasen
 npm run db:migrate             # kjør migreringene
-npm test                       # Vitest: datohjelperen, grenseregelen og integrasjonstester mot Postgres (innlogging, tema, demo)
+npm test                       # Vitest: datohjelperen, grenseregelen og integrasjonstester mot Postgres (innlogging, tema, demo, sletting av konto)
 npx playwright install chromium  # første gang
-npm run test:e2e               # Playwright: bygger appen og tester innlogging, app-skallet, temaet og demoen
+npm run test:e2e               # Playwright: bygger appen og tester innlogging, app-skallet, temaet, demoen og sletting av konto
 ```
 
 Integrasjonstestene i `tests/integration` hoppes over når `DATABASE_URL` mangler (verken i miljøet eller i `.env`). I CI er den alltid satt, så der kjører de alltid. Playwright bruker en egen testverdi for `BETTER_AUTH_SECRET` når den ikke er satt.
