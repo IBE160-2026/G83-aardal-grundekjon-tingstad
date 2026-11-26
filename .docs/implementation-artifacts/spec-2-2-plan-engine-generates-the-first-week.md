@@ -75,8 +75,8 @@ Gjennomgang gjort av hovedagenten selv (ingen underagenter startet uten ønske f
 
 | Funn | Verdikt | Bevis | Rute |
 | ---- | ------- | ----- | ---- |
-| Appendix B (profil B) har push torsdag og pull fredag, som begge trener overkropp, og R3 forbyr samme kroppsdel to dager på rad | medium | Løst ved å dele kroppsdeler i bein, push og pull for R3; profil B og validatoren passerer | patch (i spec: Always) |
-| 5 løpeøkter etter R4 gir rask fredag og lang lørdag (to harde løp på rad) | medium | Løpetypene for 5 økter satt til lett, rask, rask, lett, lang; validatoren finner ingen R3-brudd | patch (i spec: Always) |
+| R3 sier «samme kroppsdel», som kan leses som bare overkropp og underkropp | low | Motoren regner per muskelgruppe (bein, push, pull); push og pull på påfølgende dager er tillatt, og profil B passerer | tolkning (i spec: Always); PRD bør presiseres |
+| 5 løpeøkter i rekkefølgen lett, rask, lett, rask, lang gir rask fredag og lang lørdag, to harde løp på rad etter R3-ordlyden | low | Motoren bruker lett, rask, rask, lett, lang; gyldig også hvis rask ikke regnes som hard | tolkning (i spec: Always) |
 | Validatoren kan passere uten å teste noe | false | Mutasjon: endret R9-mønsteret for 5 økter, og tre tester feilet; konstanten er gjenopprettet | rejected |
 | Utvidet kontroll av R1 gjelder bare full uke | low | Delvise uker (programstart midt i uka) kan ikke trene hver muskelgruppe to ganger; følger AD-13 | rejected |
 | Ingen test mot R2 i genererte uker med full uke på 5 økter | false | `plan-validate.test.ts` kjører alle 192 kombinasjoner, også fra hver ukedag | rejected |
