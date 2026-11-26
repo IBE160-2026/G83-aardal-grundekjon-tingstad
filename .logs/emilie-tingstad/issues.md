@@ -20,7 +20,7 @@
 - [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — tillatelsesliste i settings.json og beslutning om Impeccable-hook før automatisk build
 - [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — GitHub Actions (lint, test, build) og .env.example i Story 1.1
 - [ ] 2026-11-23 [rydding-for-build](994-2026-11-23-21-40-00-rydding-for-build.md) — Vercel- og Supabase-kontoer før Story 1.6, og hvem som har ANTHROPIC_API_KEY (se også story-1-6)
-- [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — Zod-skjema og Vitest-dekningstest for øvelsesbiblioteket når skjelettet (Story 1.1) finnes
+- [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — Zod-skjema og Vitest-dekningstest for øvelsesbiblioteket når skjelettet (Story 1.1) finnes (løst 2026-11-26, PR #39)
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — teamet må gjennomgå utvalget og norske navn i PR (Story 2.1)
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — avklar «Enkelt utstyr hjemme» i biblioteket (løst 2026-11-23: forutsettes ikke; PRD og UX-onboarding bør justeres)
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — oppdater sporbarhetstabellen og sprint-status.yaml for Story 2.1 (løst 2026-11-23)
@@ -30,3 +30,4 @@
 - [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — opprett Supabase og Vercel, sett variabler kun for Production, kjør migreringen og gi URL-en til README
 - [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — verifiser registrer, logg inn og Prøv demo på publisert URL; deretter kan Story 1.6 settes til done
 - [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — push grenen feat/story-1.6-publiser-appen og lag PR
+- [ ] 2026-11-26 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — PR #39: teamet gjennomgår biblioteket og de egne hjemmeøvelsene; PR #38 og #39 kan gi triviell konflikt i sprint-status.yaml

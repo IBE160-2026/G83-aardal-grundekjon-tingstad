@@ -33,3 +33,23 @@ Få ordnet øvelsesbiblioteket fra Free Exercise DB slik at det kan brukes i app
 - Pike push-up er beholdt som intermediate; vurder om de er for avanserte for nybegynnere hjemme.
 - Runde 3: sprint-status.yaml (epic 2 og Story 2.1 → in-progress, ikke review fordi Zod/Vitest-test gjenstår) og sporbarhetstabellen (rader «Kode kan spores…» og «Branches, pull requests…», PR #23) oppdatert.
 - Funn: onboarding sier i PRD, EXPERIENCE.md og epics.md allerede bare «På treningssenter» eller «Hjemme» (Story 2.4). «Enkelt utstyr hjemme» står bare i den gamle `.memlog.md`, så det er ingenting å fjerne. Emilie foreslo evt. «Trenger ikke utstyr» som tekst for «Hjemme»; ikke endret, venter på beslutning.
+
+## 2026-11-26 kl. 20:15 — Emilie Tingstad
+
+### Oppgave
+Automatkjøre «frem til 2.1» etter Story 1.6. Siden ingen stories ligger mellom 1.6 og 2.1, ble det tolket som å lukke 1.6 og fullføre 2.1 (Zod-skjema og Vitest-dekningstest).
+
+### Plan
+- Story 1.6 lukket på `docs/story-1.6-ferdig` (PR #38).
+- Ny gren `feat/story-2.1-zod-dekningstest` fra `origin/main`, siden PR #23 (selve biblioteket) allerede var merget og den gamle grenen ble stående med 84 commits foran.
+
+### Resultat
+- `src/shared/engine/exercise.ts`: `exerciseSchema`, `exerciseLibrarySchema`, `patternGaps`. `tests/engine/exercises.test.ts`: skjema, bodyweight-regel, hjemmeutstyr og dekning per mønster for gym og hjemme med `knownHomeGaps`. Lint, typecheck, format og Vitest (engine + lint, 85 tester) grønne.
+- README i `data/exercises/`, sprint-status (`2-1-exercise-library: review`) og sporbarhet (testrad) oppdatert.
+- PR #39: https://github.com/IBE160-2026/G83-aardal-grundekjon-tingstad/pull/39
+- Zod/Vitest-punktet fra 2026-11-23 er løst. Sporbarhet og sprint-status for 2.1 var allerede oppdatert.
+
+### Åpne punkter
+- Teamet må gjennomgå utvalget og de norske navnene i PR #39 (akseptkriterium i Story 2.1), og lese de egne hjemmeøvelsene.
+- PR #38 og #39 endrer begge `sprint-status.yaml` (`last_updated`); den andre som merges kan få en triviell konflikt.
+- Den gamle lokale grenen `feat/story-2.1-ovelsesbibliotek` kan slettes etter at #39 er merget.
