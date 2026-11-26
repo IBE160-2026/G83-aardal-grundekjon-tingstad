@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { programWeek, toOsloDate, weekStart } from "@/shared/lib/dates";
+import { addDays, isoWeekday, programWeek, toOsloDate, weekStart } from "@/shared/lib/dates";
 
 describe("toOsloDate and weekStart", () => {
   it("handles an ordinary weekday", () => {
@@ -65,5 +65,30 @@ describe("programWeek", () => {
 
   it("throws when the moment is before the program's first week", () => {
     expect(() => programWeek(new Date("2026-11-22T12:00:00Z"), "2026-11-26")).toThrow(RangeError);
+  });
+});
+
+describe("addDays and isoWeekday", () => {
+  it("adds days across month, year and leap-day boundaries", () => {
+    expect(addDays("2026-11-30", 1)).toBe("2026-12-01");
+    expect(addDays("2026-12-31", 1)).toBe("2027-01-01");
+    expect(addDays("2028-02-28", 1)).toBe("2028-02-29");
+    expect(addDays("2026-11-23", -1)).toBe("2026-11-22");
+    expect(addDays("2026-11-23", 0)).toBe("2026-11-23");
+  });
+
+  it("numbers weekdays from Monday = 1 to Sunday = 7", () => {
+    expect(isoWeekday("2026-11-23")).toBe(1);
+    expect(isoWeekday("2026-11-25")).toBe(3);
+    expect(isoWeekday("2026-11-29")).toBe(7);
+    expect(isoWeekday("1970-01-01")).toBe(4);
+  });
+
+  it("agrees with weekStart: Monday is weekday 1", () => {
+    expect(isoWeekday(weekStart("2026-11-29"))).toBe(1);
+  });
+
+  it("rejects an invalid date", () => {
+    expect(() => addDays("2026-02-30", 1)).toThrow(RangeError);
   });
 });
