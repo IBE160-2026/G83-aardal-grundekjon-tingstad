@@ -75,7 +75,11 @@ test("«Slett» pressed twice deletes the account once and lands on login for go
   await expect(page.getByText("Noe gikk galt")).toHaveCount(0);
 
   // Back does not show Profil any more.
+  // Wait for where Back lands first, so the negative check cannot pass before it renders.
   await page.goBack();
+  await page.waitForLoadState();
+  await expect(page).toHaveURL(/\/logg-inn$/);
+  await expect(page.getByRole("button", { name: "Logg inn" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Profil" })).toHaveCount(0);
 
   // The old email and password no longer work.

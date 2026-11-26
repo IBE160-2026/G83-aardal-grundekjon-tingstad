@@ -57,10 +57,10 @@ export function Dialog({ open, onClose, title, description, children }: DialogPr
       ref={ref}
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      onCancel={(event) => {
-        // Escape: let React state close it, so `open` stays the single source of truth.
-        event.preventDefault();
-        onClose();
+      // Escape closes the native dialog (also when the browser skips `cancel`, as Chrome does on a
+      // repeated Escape); `close` tells the parent, so `open` always matches what is on screen.
+      onClose={() => {
+        if (open) onClose();
       }}
       onKeyDown={trapTab}
       className="m-auto w-[calc(100%-2*var(--spacing-margin-screen))] max-w-content rounded-xl border-0 bg-surface p-6 text-text backdrop:bg-background/60"

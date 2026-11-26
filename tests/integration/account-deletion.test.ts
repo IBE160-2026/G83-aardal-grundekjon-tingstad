@@ -4,7 +4,9 @@ import { eq, like, sql } from "drizzle-orm";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { deleteAccountAction, loginAction, registerAction } from "@/features/account/api";
+import { MESSAGES } from "@/features/account/schemas";
 import { saveProfile } from "@/features/profile/api";
+import { startDemo } from "@/seed/demo";
 import { getAuth } from "@/shared/auth/server";
 import * as dbClient from "@/shared/db/client";
 import { getDb } from "@/shared/db/client";
@@ -130,14 +132,29 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
   });
 
   it("covers every table that references the user, and each one cascades", async () => {
-    const rows = await getDb().execute<{ table_name: string; on_delete: string }>(sql`
-      select conrelid::regclass::text as table_name, confdeltype as on_delete
+    const rows = await getDb().execute<{ table_name: string }>(sql`
+      select distinct conrelid::regclass::text as table_name
       from pg_constraint
       where contype = 'f' and confrelid = '"user"'::regclass`);
     const tables = rows.map((row) => row.table_name.replaceAll('"', "")).sort();
 
     expect(tables).toEqual(Object.keys(USER_OWNED_TABLES).sort());
-    expect(rows.filter((row) => row.on_delete !== "c")).toEqual([]);
+  });
+
+  it("every foreign key on the way down from the user cascades, also through other tables", async () => {
+    // Walks the foreign keys from "user" to the tables that hang off user-owned tables, so a later
+    // table like sets → session log → plan cannot block or survive the user DELETE.
+    const notCascading = await getDb().execute<{ fk: string }>(sql`
+      with recursive owned(table_oid) as (
+        select '"user"'::regclass::oid
+        union
+        select c.conrelid from pg_constraint c join owned o on c.confrelid = o.table_oid
+        where c.contype = 'f'
+      )
+      select c.conname as fk from pg_constraint c join owned o on c.confrelid = o.table_oid
+      where c.contype = 'f' and c.confdeltype <> 'c'`);
+
+    expect(notCascading.map((row) => row.fk)).toEqual([]);
   });
 
   it("«Slett» deletes the user and every row they own, ends the session and goes to login", async () => {
@@ -149,6 +166,25 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
     expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
     expect(await currentSession()).toBeNull();
     expect([...jar.keys()].filter((name) => name.includes("session_token"))).toEqual([]);
+  });
+
+  it("keeps the theme cookie: it belongs to the device, not the account", async () => {
+    await signedInUser();
+    jar.set("theme", "dark");
+
+    await redirectOf(deleteAccountAction());
+
+    expect(jar.get("theme")).toBe("dark");
+  });
+
+  it("a demo user can delete their account as well", async () => {
+    jar.clear();
+    const id = await startDemo("C", new Date());
+    expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+
+    expect(await redirectOf(deleteAccountAction())).toBe("/logg-inn");
+
+    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
   });
 
   it("the deleted user can no longer log in", async () => {
@@ -196,16 +232,18 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
           : Reflect.get(target, property, receiver),
     });
     const spy = vi.spyOn(dbClient, "getDb").mockReturnValue(failing);
-    vi.spyOn(console, "error").mockImplementationOnce(() => undefined);
+    const logged = vi.spyOn(console, "error").mockImplementation(() => undefined);
 
     try {
       expect(await deleteAccountAction()).toEqual({
         ok: false,
         code: "unexpected",
-        message: "Noe gikk galt. Prøv igjen om litt.",
+        message: MESSAGES.unexpected,
       });
+      expect(logged).toHaveBeenCalled();
     } finally {
       spy.mockRestore();
+      logged.mockRestore();
     }
     expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
     expect((await currentSession())?.user.id).toBe(id);

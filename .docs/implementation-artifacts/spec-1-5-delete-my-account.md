@@ -2,7 +2,7 @@
 title: 'Story 1.5: Delete my account'
 type: 'feature'
 created: '2026-11-26'
-status: 'in-progress'
+status: 'in-review'
 baseline_commit: '2f83d16422673f05716af52978f07bcea7f08ca9'
 route: 'dispatch'
 review_loop_iteration: 0
@@ -60,14 +60,14 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/shared/ui/button.tsx` -- `destructive` variant -- DESIGN.md button-destructive
-- [ ] `src/shared/ui/dialog.tsx` -- client `Dialog` (open, onClose, title, description, children): `showModal()`/`close()`, `aria-labelledby`/`aria-describedby`, Tab/Shift+Tab wrap inside, `cancel` event → `onClose`, focus first focusable on open, `::backdrop` scrim -- shared modal pattern (UX-DR13)
-- [ ] `src/features/account/actions.ts` -- `deleteAccountAction(): Promise<ActionResult<null>>`: no user → redirect login; delete row (catch → `fail("unexpected")`); signOut (ignore `APIError`); revalidate; redirect login
-- [ ] `src/features/account/components/delete-account-button.tsx` + `api.ts` -- trigger + dialog; «Slett» form via `useActionState`, pending → `aria-disabled`; error under the text in the dialog (`role="alert"`); buttons wrap at 320 px / 200 %
-- [ ] `src/app/(app)/profil/page.tsx` -- render it last
-- [ ] `tests/integration/account-deletion.test.ts` -- matrix rows (delete, log in afterwards, double press, other user, DB failure via `vi.spyOn` on the db) + a guard querying `pg_constraint` for every FK to `"user"`: each is `ON DELETE CASCADE` and its table is in the test's covered list
-- [ ] `tests/e2e/account-deletion.spec.ts` -- dialog text and buttons; focus on «Avbryt», Tab wraps, Escape and «Avbryt» return focus to «Slett konto»; «Slett» (double-click) lands on login and login then fails; axe with the dialog open in light and dark; 320 px no sideways scroll
-- [ ] `README.md`, `.docs/sensorveiledning-sporbarhet.md` -- mention account deletion; update rows 20, 22, 24, 26, 29
+- [x] `src/shared/ui/button.tsx` -- `destructive` variant -- DESIGN.md button-destructive
+- [x] `src/shared/ui/dialog.tsx` -- client `Dialog` (open, onClose, title, description, children): `showModal()`/`close()`, `aria-labelledby`/`aria-describedby`, Tab/Shift+Tab wrap inside, `cancel` event → `onClose`, focus first focusable on open, `::backdrop` scrim -- shared modal pattern (UX-DR13)
+- [x] `src/features/account/actions.ts` -- `deleteAccountAction(): Promise<ActionResult<null>>`: no user → redirect login; delete row (catch → `fail("unexpected")`); signOut (ignore `APIError`); revalidate; redirect login
+- [x] `src/features/account/components/delete-account-button.tsx` + `api.ts` -- trigger + dialog; «Slett» form via `useActionState`, pending → `aria-disabled`; error under the text in the dialog (`role="alert"`); buttons wrap at 320 px / 200 %
+- [x] `src/app/(app)/profil/page.tsx` -- render it last
+- [x] `tests/integration/account-deletion.test.ts` -- matrix rows (delete, log in afterwards, double press, other user, DB failure via `vi.spyOn` on the db) + a guard querying `pg_constraint` for every FK to `"user"`: each is `ON DELETE CASCADE` and its table is in the test's covered list
+- [x] `tests/e2e/account-deletion.spec.ts` -- dialog text and buttons; focus on «Avbryt», Tab wraps, Escape and «Avbryt» return focus to «Slett konto»; «Slett» (double-click) lands on login and login then fails; axe with the dialog open in light and dark; 320 px no sideways scroll
+- [x] `README.md`, `.docs/sensorveiledning-sporbarhet.md` -- mention account deletion; update rows 20, 22, 24, 26, 29
 
 **Acceptance Criteria:**
 - Given a signed-in user on Profil, when I open the dialog and press «Slett», then I land on «Logg inn» and pressing Back does not show Profil.
@@ -75,9 +75,41 @@ context:
 
 ## Implementation Notes
 
+- `actions.ts`: `logoutAction` and `deleteAccountAction` share a private `endSession()` (signOut, `APIError` tolerated). `deleteAccountAction` calls it also when there is no session, so a stale cookie is cleared on a re-post.
+- `Dialog` restores focus to `document.activeElement` captured at open (not a ref passed in), so any opener works; the effect cleanup closes the native dialog, so unmounting while open (the redirect after «Slett») is safe.
+- Integration test DB failure: `vi.spyOn(dbClient, "getDb")` returns a Proxy whose `delete().where()` rejects; Better Auth keeps its own adapter reference, so the session lookup still works.
+- The guard test lists `USER_OWNED_TABLES = { session, account, profile }` and compares it to `pg_constraint` (`confdeltype = 'c'`); `verification` has no FK to `user`.
+- The "message shown in the dialog" half of the DB-failure row is covered by code (`role="alert"` in `delete-account-button.tsx`) and the action's result in the integration test, not by an e2e test: a server-action DB failure cannot be injected into the production build.
+- Verified locally with `DATABASE_URL=postgres://flexpt:flexpt@localhost:5432/flexpt` (no `.env` in this checkout): lint, typecheck, format:check clean; Vitest 132/132; Playwright 41/41.
+
 ## Spec Change Log
 
 ## Review Triage Log
+
+Pass 1 (2026-11-26): Blind Hunter (BH), Edge Case Hunter (EC), Verification Gap (VG).
+
+| # | Finding | Verdict | Evidence | Route |
+|---|---------|---------|----------|-------|
+| EC1 / EC-claim1 / BH11 | `Dialog` syncs `open` only from `cancel`; Chrome closes a modal natively on a repeated Escape without `cancel`, leaving `open` true so «Slett konto» cannot reopen it | medium | `onCancel` + `preventDefault` was the only handler; no `close` listener | patch: drive `onClose` from the native `close` event |
+| VG1 / BH2 | E2E "Back does not show Profil" can pass before Back renders | medium | Only a negative `toHaveCount(0)` after `goBack()` | patch: wait for load, URL `/logg-inn` and «Logg inn» first |
+| EC9 / EC-claim2 / BH1 | Cascade guard checks only direct FKs to `user`; a nested table (sets → log → plan) with RESTRICT would block deletion unseen | medium | `confrelid = '"user"'` only | patch: recursive `pg_constraint` walk requiring `confdeltype = 'c'` |
+| BH5 | Demo users may delete (spec Always) but no test | low | No test calls `deleteAccountAction` for a demo user | patch: integration test |
+| VG-other2 / BH6 | Theme cookie survival promised in spec and README, untested | low | Jar never sets `theme` | patch: integration test |
+| EC10 / BH-small b | `console.error` spy never restored | low | `mockImplementationOnce` without restore | patch |
+| BH-small c | Test hard-codes the unexpected message | low | String literal instead of `MESSAGES.unexpected` | patch |
+| BH-small a | `?? null` in the `useActionState` wrapper is dead | low | Action returns `ActionResult` or redirects | patch |
+| BH8 | Traceability rows «Konsistent visuelt uttrykk» and «Tilpasning til skjermstørrelser» not updated | low | Rows 27 and 30 unchanged | patch |
+| VG2 / BH-last | Dialog error message (`role="alert"`) has no test | medium | No component-test harness; a DB failure cannot be injected into the production build | defer |
+| VG-other1 / EC2 / BH3 | Old error message still shown after closing and reopening the dialog | low | `useActionState` result never reset; only after a DB failure, and the fix restructures the component | reject |
+| EC3 / BH4 | «Avbryt»/Escape while «Slett» is pending closes the dialog but deletion continues | low | Needs a cancel after pressing «Slett» during a sub-second request; fix adds guards | reject |
+| EC4 / EC-claim3 | DB down during `getUserId` gives an error page, not the dialog message | low | With the DB down every app page fails; the matrix row is a failing DELETE; fix adds a guard | reject |
+| EC5 / BH7 | `endSession` throwing after a committed delete gives an error page | false | Better Auth `signOut` catches its own session lookup and delete errors (`sign-out.mjs`) and always clears the cookie; `APIError` is already tolerated | reject |
+| EC6 | «Slett konto» does nothing without JS | low | Spec does not require no-JS; fix needs a confirmation route | reject |
+| EC7 | Shift+Tab from the dialog itself can leave it | low | Only after clicking non-focusable text; outside content is inert under `showModal()` | reject |
+| EC8 | Guard breaks for a table with two FKs to `user` | low | No such table planned (coach messages have one `user_id`); now uses `distinct` | reject |
+| BH9 | Spec `in-review` vs sprint-status `in-progress` | false | Step 5 moves the sprint status | reject |
+| BH10 | Spec Design Notes snippet names `COVERED_TABLES` | low | Fix edits this build's spec | reject |
+| BH12 | `Dialog.description` should be an optional `ReactNode` for Epic 3 | low | Speculative; Epic 3 can widen it when it needs to | reject |
 
 ## Design Notes
 

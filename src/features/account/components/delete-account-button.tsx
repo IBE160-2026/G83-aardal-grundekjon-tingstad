@@ -15,10 +15,9 @@ const SPLIT_BUTTON = "flex-1 basis-[8rem]";
  */
 export function DeleteAccountButton() {
   const [open, setOpen] = useState(false);
-  const [state, formAction, pending] = useActionState(
-    async () => (await deleteAccountAction()) ?? null,
-    null,
-  );
+  const [state, formAction, pending] = useActionState<Awaited<
+    ReturnType<typeof deleteAccountAction>
+  > | null>(() => deleteAccountAction(), null);
   const error = state && !state.ok ? state.message : null;
 
   return (
