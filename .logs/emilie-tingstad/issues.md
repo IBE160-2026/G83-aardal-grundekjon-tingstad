@@ -27,6 +27,6 @@
 - [ ] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — versjon 2: utvid øvelsesbiblioteket (50 er lite), vurder slot for isolasjonsøvelser som leg extension og leg curl
 - [x] 2026-11-23 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — gjennomgå forslaget til norske muskelnavn (muscleNamesNo i exercises.json) (løst 2026-11-23: godkjent av Emilie)
 - [ ] 2026-11-23 [bmad-stier](993-2026-11-23-22-00-00-bmad-stier.md) — Caroline og Knut må legge inn BMAD-stioverstyringen i _bmad/custom/config.user.toml lokalt (README fra Story 1.1)
-- [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — opprett Supabase og Vercel, sett variabler kun for Production, kjør migreringen og gi URL-en til README
-- [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — verifiser registrer, logg inn og Prøv demo på publisert URL; deretter kan Story 1.6 settes til done
-- [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — push grenen feat/story-1.6-publiser-appen og lag PR
+- [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — opprett Supabase og Vercel, sett variabler kun for Production, kjør migreringen og gi URL-en til README (løst 2026-11-26)
+- [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — verifiser registrer, logg inn og Prøv demo på publisert URL; deretter kan Story 1.6 settes til done (løst 2026-11-26)
+- [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — push grenen feat/story-1.6-publiser-appen og lag PR (løst 2026-11-26)
