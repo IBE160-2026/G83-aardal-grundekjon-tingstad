@@ -1,0 +1,213 @@
+import { randomUUID } from "node:crypto";
+
+import { eq, like, sql } from "drizzle-orm";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { deleteAccountAction, loginAction, registerAction } from "@/features/account/api";
+import { saveProfile } from "@/features/profile/api";
+import { getAuth } from "@/shared/auth/server";
+import * as dbClient from "@/shared/db/client";
+import { getDb } from "@/shared/db/client";
+import { account, profile, session, user } from "@/shared/db/schema";
+
+// Story 1.5: «Slett» deletes the signed-in user and everything they own (FR16, NFR2, NFR9).
+// Runs against the compose Postgres (`docker compose up -d db && npm run db:migrate`); skipped
+// without DATABASE_URL.
+//
+// EVERY LATER STORY THAT ADDS A USER-OWNED TABLE EXTENDS THIS TEST: add the table to
+// USER_OWNED_TABLES (with its user id column) and give the user a row in it in `signedInUser`.
+// The guard test below fails until you do.
+const DATABASE_URL = process.env.DATABASE_URL;
+if (process.env.CI && !DATABASE_URL) {
+  throw new Error(
+    "DATABASE_URL must be set in CI: the integration tests may not be skipped there.",
+  );
+}
+process.env.BETTER_AUTH_SECRET ||= "integration-test-only-not-a-secret";
+process.env.BETTER_AUTH_URL ||= "http://localhost:3000";
+
+// A cookie jar standing in for the browser: next/headers reads it and nextCookies() writes it.
+const jar = new Map<string, string>();
+const requestHeaders = () =>
+  new Headers({ cookie: [...jar].map(([name, value]) => `${name}=${value}`).join("; ") });
+
+vi.mock("next/headers", () => ({
+  headers: async () => requestHeaders(),
+  cookies: async () => ({
+    get: (name: string) => (jar.has(name) ? { name, value: jar.get(name) } : undefined),
+    getAll: () => [...jar].map(([name, value]) => ({ name, value })),
+    has: (name: string) => jar.has(name),
+    set: (name: string, value: string, options?: { maxAge?: number }) => {
+      if (options?.maxAge === 0 || value === "") jar.delete(name);
+      else jar.set(name, value);
+    },
+    delete: (name: string) => jar.delete(name),
+  }),
+}));
+
+class RedirectError extends Error {
+  constructor(readonly url: string) {
+    super(`redirect to ${url}`);
+  }
+}
+
+vi.mock("next/navigation", () => ({
+  redirect: (url: string) => {
+    throw new RedirectError(url);
+  },
+}));
+
+vi.mock("next/cache", () => ({ revalidatePath: () => undefined }));
+
+/** Waits for an action that should end in a redirect, and returns where it went. */
+async function redirectOf(run: Promise<unknown>): Promise<string> {
+  const error = await run.then(
+    () => null,
+    (reason: unknown) => reason,
+  );
+  if (!(error instanceof RedirectError)) {
+    throw new Error(`expected a redirect, got ${JSON.stringify(error)}`);
+  }
+  return error.url;
+}
+
+/** Every table with a foreign key to "user", and the column holding the user id. */
+const USER_OWNED_TABLES = {
+  session: session.userId,
+  account: account.userId,
+  profile: profile.userId,
+} as const;
+
+const DOMAIN = `run-${randomUUID().slice(0, 8)}.flexpt.test`;
+const PASSWORD = "hemmelig1";
+
+function credentials(email: string, password = PASSWORD): FormData {
+  const data = new FormData();
+  data.set("email", email);
+  data.set("password", password);
+  return data;
+}
+
+describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
+  /** The rows left for a user: in "user" and in every user-owned table. */
+  async function rowsOf(userId: string): Promise<Record<string, number>> {
+    const db = getDb();
+    const counts: Record<string, number> = {
+      user: (await db.select().from(user).where(eq(user.id, userId))).length,
+    };
+    for (const [name, column] of Object.entries(USER_OWNED_TABLES)) {
+      counts[name] = (await db.select().from(column.table).where(eq(column, userId))).length;
+    }
+    return counts;
+  }
+
+  /** Registers in a fresh browser, gives the user a row in every user-owned table, returns the id. */
+  async function signedInUser(): Promise<{ id: string; email: string }> {
+    jar.clear();
+    const email = `delete-${randomUUID().slice(0, 8)}@${DOMAIN}`;
+    expect(await redirectOf(registerAction(null, credentials(email)))).toBe("/uke");
+    const signedIn = await getAuth().api.getSession({ headers: requestHeaders() });
+    const id = signedIn!.user.id;
+    // session and account come from the sign-up; profile is added here.
+    await saveProfile(id, {
+      focus: "strength",
+      experience: "beginner",
+      mainFocus: "full_body",
+      sessionsPerWeek: 2,
+      equipment: "gym",
+    });
+    return { id, email };
+  }
+
+  const currentSession = () => getAuth().api.getSession({ headers: requestHeaders() });
+
+  beforeEach(() => jar.clear());
+
+  afterAll(async () => {
+    await getDb()
+      .delete(user)
+      .where(like(user.email, `%@${DOMAIN}`));
+  });
+
+  it("covers every table that references the user, and each one cascades", async () => {
+    const rows = await getDb().execute<{ table_name: string; on_delete: string }>(sql`
+      select conrelid::regclass::text as table_name, confdeltype as on_delete
+      from pg_constraint
+      where contype = 'f' and confrelid = '"user"'::regclass`);
+    const tables = rows.map((row) => row.table_name.replaceAll('"', "")).sort();
+
+    expect(tables).toEqual(Object.keys(USER_OWNED_TABLES).sort());
+    expect(rows.filter((row) => row.on_delete !== "c")).toEqual([]);
+  });
+
+  it("«Slett» deletes the user and every row they own, ends the session and goes to login", async () => {
+    const { id } = await signedInUser();
+    expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+
+    expect(await redirectOf(deleteAccountAction())).toBe("/logg-inn");
+
+    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
+    expect(await currentSession()).toBeNull();
+    expect([...jar.keys()].filter((name) => name.includes("session_token"))).toEqual([]);
+  });
+
+  it("the deleted user can no longer log in", async () => {
+    const { email } = await signedInUser();
+    await redirectOf(deleteAccountAction());
+
+    expect(await loginAction(null, credentials(email))).toMatchObject({
+      ok: false,
+      code: "invalid_credentials",
+    });
+    expect(await currentSession()).toBeNull();
+  });
+
+  it("pressing «Slett» twice gives one deletion and two redirects to login", async () => {
+    const { id } = await signedInUser();
+
+    const [first, second] = await Promise.all([
+      redirectOf(deleteAccountAction()),
+      redirectOf(deleteAccountAction()),
+    ]);
+    expect([first, second]).toEqual(["/logg-inn", "/logg-inn"]);
+    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
+
+    // A later re-post without a session also just goes to login.
+    expect(await redirectOf(deleteAccountAction())).toBe("/logg-inn");
+  });
+
+  it("deletes only the signed-in user, never another one", async () => {
+    const other = await signedInUser();
+    const { id } = await signedInUser();
+
+    await redirectOf(deleteAccountAction());
+
+    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
+    expect(await rowsOf(other.id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+  });
+
+  it("a database failure deletes nothing, keeps the session and returns an error", async () => {
+    const { id } = await signedInUser();
+    const realDb = getDb();
+    const failing = new Proxy(realDb, {
+      get: (target, property, receiver) =>
+        property === "delete"
+          ? () => ({ where: () => Promise.reject(new Error("database down")) })
+          : Reflect.get(target, property, receiver),
+    });
+    const spy = vi.spyOn(dbClient, "getDb").mockReturnValue(failing);
+    vi.spyOn(console, "error").mockImplementationOnce(() => undefined);
+
+    try {
+      expect(await deleteAccountAction()).toEqual({
+        ok: false,
+        code: "unexpected",
+        message: "Noe gikk galt. Prøv igjen om litt.",
+      });
+    } finally {
+      spy.mockRestore();
+    }
+    expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+    expect((await currentSession())?.user.id).toBe(id);
+  });
+});
