@@ -39,3 +39,6 @@
 - [ ] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — kjør db:migrate mot Supabase før redeploy av Story 2.3 (migrering 0003)
 - [ ] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — push grenen feat/story-2.3-ukeplan og lag PR
 - [x] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — tom første uke for nye brukere fredag–søndag viser nå «kommer mandag» (løst 2026-11-26)
+- [ ] 2026-11-26 [story-2-4-onboarding](989-2026-11-26-22-55-00-story-2-4-onboarding.md) — push grenen feat/story-2.4-onboarding og lag PR
+- [ ] 2026-11-26 [story-2-4-onboarding](989-2026-11-26-22-55-00-story-2-4-onboarding.md) — finn årsaken til at første plan etter onboarding av og til tar over 5 s under belastning
+- [ ] 2026-11-26 [story-2-4-onboarding](989-2026-11-26-22-55-00-story-2-4-onboarding.md) — løping lagres med experience beginner siden onboarding ikke spør; revurder i Story 2.6
