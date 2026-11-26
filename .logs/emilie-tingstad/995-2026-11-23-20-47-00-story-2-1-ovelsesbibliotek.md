@@ -53,3 +53,5 @@ Automatkjøre «frem til 2.1» etter Story 1.6. Siden ingen stories ligger mello
 - Teamet må gjennomgå utvalget og de norske navnene i PR #39 (akseptkriterium i Story 2.1), og lese de egne hjemmeøvelsene.
 - PR #38 og #39 endrer begge `sprint-status.yaml` (`last_updated`); den andre som merges kan få en triviell konflikt.
 - Den gamle lokale grenen `feat/story-2.1-ovelsesbibliotek` kan slettes etter at #39 er merget.
+
+Oppdatering kl. 20:30: teamet har gjennomgått biblioteket (utvalg, norske navn og egne hjemmeøvelser). Konflikten i `sprint-status.yaml` er unngått ved at PR #38 ikke lenger endrer `last_updated`. Retrospektivet for epic 1 hoppes over (Emilies beslutning).
