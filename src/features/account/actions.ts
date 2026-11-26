@@ -7,7 +7,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { getAuth, MAX_PASSWORD_LENGTH } from "@/shared/auth/server";
-import { LOGIN_PATH } from "@/shared/auth/session";
+import { getUserId, LOGIN_PATH } from "@/shared/auth/session";
 import { getDb } from "@/shared/db/client";
 import { user } from "@/shared/db/schema";
 import { type ActionResult, fail } from "@/shared/lib/result";
@@ -89,14 +89,40 @@ export async function loginAction(_previous: AuthFormState, formData: FormData) 
   redirect(HOME_PATH);
 }
 
-/** Ends the session, clears cached app pages and goes to the login screen. */
-export async function logoutAction(): Promise<void> {
+/** Ends the session (and its cookie). No valid session to end means already logged out. */
+async function endSession(): Promise<void> {
   try {
     await getAuth().api.signOut({ headers: await headers() });
   } catch (error) {
-    // No valid session to end: the user is already logged out.
     if (!isAPIError(error)) throw error;
   }
+}
+
+/** Ends the session, clears cached app pages and goes to the login screen. */
+export async function logoutAction(): Promise<void> {
+  await endSession();
+  revalidatePath("/", "layout");
+  redirect(LOGIN_PATH);
+}
+
+/**
+ * Deletes the signed-in user for good (Story 1.5, FR16) and goes to the login screen. The user id
+ * comes only from the session, so nobody can delete another user. One DELETE on the user row:
+ * sessions, accounts, the profile and every later user-owned table go with it (ON DELETE CASCADE).
+ * Without a session (a second press, or already deleted) it just goes to the login screen.
+ */
+export async function deleteAccountAction(): Promise<ActionResult<null>> {
+  const userId = await getUserId();
+  if (userId) {
+    try {
+      await getDb().delete(user).where(eq(user.id, userId));
+    } catch (error) {
+      console.error("Account deletion failed", error);
+      return fail<null>("unexpected", MESSAGES.unexpected);
+    }
+  }
+  // The session row is gone with the user; this clears the cookie.
+  await endSession();
   revalidatePath("/", "layout");
   redirect(LOGIN_PATH);
 }
