@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { LogoutButton } from "@/features/account/api";
+import { DeleteAccountButton, LogoutButton } from "@/features/account/api";
 import { getTheme, ThemePicker } from "@/features/profile/api";
 import { requireUserId } from "@/shared/auth/session";
 
@@ -15,6 +15,7 @@ export default async function ProfilePage() {
       <ThemePicker theme={theme} />
       <div className="flex-1" />
       <LogoutButton />
+      <DeleteAccountButton />
     </>
   );
 }
