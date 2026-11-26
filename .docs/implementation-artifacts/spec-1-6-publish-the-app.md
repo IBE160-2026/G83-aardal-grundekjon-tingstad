@@ -2,7 +2,7 @@
 title: 'Story 1.6: Publish the app'
 type: 'feature'
 created: '2026-11-26'
-status: 'in-review'
+status: 'done'
 baseline_commit: 'eddd111fc545f4e36bd048b292d5113a0ce21498'
 route: 'dispatch'
 review_loop_iteration: 0

@@ -31,3 +31,6 @@
 - [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — verifiser registrer, logg inn og Prøv demo på publisert URL; deretter kan Story 1.6 settes til done
 - [ ] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — push grenen feat/story-1.6-publiser-appen og lag PR
 - [x] 2026-11-26 [story-2-1-ovelsesbibliotek](995-2026-11-23-20-47-00-story-2-1-ovelsesbibliotek.md) — PR #39: teamet gjennomgår biblioteket og de egne hjemmeøvelsene; PR #38 og #39 kan gi triviell konflikt i sprint-status.yaml (løst 2026-11-26: biblioteket gjennomgått, konflikten unngått)
+- [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — opprett Supabase og Vercel, sett variabler kun for Production, kjør migreringen og gi URL-en til README (løst 2026-11-26)
+- [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — verifiser registrer, logg inn og Prøv demo på publisert URL; deretter kan Story 1.6 settes til done (løst 2026-11-26)
+- [x] 2026-11-26 [story-1-6-publiser-appen](992-2026-11-26-18-44-00-story-1-6-publiser-appen.md) — push grenen feat/story-1.6-publiser-appen og lag PR (løst 2026-11-26)
