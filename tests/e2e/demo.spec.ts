@@ -3,6 +3,8 @@ import { randomUUID } from "node:crypto";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
+import { completeOnboarding } from "./onboarding-helper";
+
 // Story 1.4: «Prøv demo» on the login screen, the profile picker A–D, and the «Demo» badge.
 // The demo users are created by pressing the button, which runs the same seed code (AD-16).
 // Needs the compose database: `docker compose up -d db && npm run db:migrate`.
@@ -96,7 +98,7 @@ test("a registered user has no Demo badge", async ({ page }) => {
   await page.getByLabel("E-post").fill(`e2e-${randomUUID().slice(0, 12)}@flexpt.test`);
   await page.getByLabel("Passord").fill("hemmelig1");
   await page.getByRole("button", { name: "Registrer" }).click();
-  await expect(page).toHaveURL(/\/uke$/);
+  await completeOnboarding(page);
   await expect(badge(page)).toHaveCount(0);
 
   await page.goto("/profil");
