@@ -5,12 +5,24 @@ import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { deleteAccountAction, loginAction, registerAction } from "@/features/account/api";
 import { MESSAGES } from "@/features/account/schemas";
+import { ensureCurrentWeek } from "@/features/plan/api";
 import { saveProfile } from "@/features/profile/api";
 import { startDemo } from "@/seed/demo";
 import { getAuth } from "@/shared/auth/server";
 import * as dbClient from "@/shared/db/client";
 import { getDb } from "@/shared/db/client";
-import { account, profile, session, user } from "@/shared/db/schema";
+import {
+  account,
+  planVersion,
+  planWeek,
+  profile,
+  program,
+  session,
+  sessionSlot,
+  user,
+  userHint,
+  versionSession,
+} from "@/shared/db/schema";
 
 // Story 1.5: «Slett» deletes the signed-in user and everything they own (FR16, NFR2, NFR9).
 // Runs against the compose Postgres (`docker compose up -d db && npm run db:migrate`); skipped
@@ -78,7 +90,39 @@ const USER_OWNED_TABLES = {
   session: session.userId,
   account: account.userId,
   profile: profile.userId,
+  program: program.userId,
+  plan_week: planWeek.userId,
+  plan_version: planVersion.userId,
+  session_slot: sessionSlot.userId,
+  version_session: versionSession.userId,
+  user_hint: userHint.userId,
 } as const;
+
+// A user with a profile and a plan for Monday 2026-11-23: profile A has two sessions (Tue, Thu).
+const PLAN_DAY = new Date("2026-11-23T10:00:00Z");
+const WITH_PLAN = {
+  user: 1,
+  session: 1,
+  account: 1,
+  profile: 1,
+  program: 1,
+  plan_week: 1,
+  plan_version: 1,
+  session_slot: 2,
+  version_session: 2,
+  user_hint: 1,
+};
+// A demo user has a profile but no plan yet; every plan table is empty.
+const DEMO_ONLY = {
+  ...WITH_PLAN,
+  program: 0,
+  plan_week: 0,
+  plan_version: 0,
+  session_slot: 0,
+  version_session: 0,
+  user_hint: 0,
+};
+const NOTHING = Object.fromEntries(Object.keys(WITH_PLAN).map((name) => [name, 0]));
 
 const DOMAIN = `run-${randomUUID().slice(0, 8)}.flexpt.test`;
 const PASSWORD = "hemmelig1";
@@ -118,6 +162,9 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
       sessionsPerWeek: 2,
       equipment: "gym",
     });
+    // The plan tables and a closed hint: program, week, version, two slots and their sessions.
+    await ensureCurrentWeek(id, PLAN_DAY);
+    await getDb().insert(userHint).values({ userId: id, hintKey: "welcome" });
     return { id, email };
   }
 
@@ -159,11 +206,11 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
 
   it("«Slett» deletes the user and every row they own, ends the session and goes to login", async () => {
     const { id } = await signedInUser();
-    expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+    expect(await rowsOf(id)).toEqual(WITH_PLAN);
 
     expect(await redirectOf(deleteAccountAction())).toBe("/logg-inn");
 
-    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
+    expect(await rowsOf(id)).toEqual(NOTHING);
     expect(await currentSession()).toBeNull();
     expect([...jar.keys()].filter((name) => name.includes("session_token"))).toEqual([]);
   });
@@ -180,11 +227,14 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
   it("a demo user can delete their account as well", async () => {
     jar.clear();
     const id = await startDemo("C", new Date());
-    expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+    expect(await rowsOf(id)).toEqual(DEMO_ONLY);
+    // After the first Uke visit the demo user has a plan too, and that goes with the account.
+    await ensureCurrentWeek(id, PLAN_DAY);
+    expect((await rowsOf(id)).plan_week).toBe(1);
 
     expect(await redirectOf(deleteAccountAction())).toBe("/logg-inn");
 
-    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
+    expect(await rowsOf(id)).toEqual(NOTHING);
   });
 
   it("the deleted user can no longer log in", async () => {
@@ -206,7 +256,7 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
       redirectOf(deleteAccountAction()),
     ]);
     expect([first, second]).toEqual(["/logg-inn", "/logg-inn"]);
-    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
+    expect(await rowsOf(id)).toEqual(NOTHING);
 
     // A later re-post without a session also just goes to login.
     expect(await redirectOf(deleteAccountAction())).toBe("/logg-inn");
@@ -218,8 +268,8 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
 
     await redirectOf(deleteAccountAction());
 
-    expect(await rowsOf(id)).toEqual({ user: 0, session: 0, account: 0, profile: 0 });
-    expect(await rowsOf(other.id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+    expect(await rowsOf(id)).toEqual(NOTHING);
+    expect(await rowsOf(other.id)).toEqual(WITH_PLAN);
   });
 
   it("a database failure deletes nothing, keeps the session and returns an error", async () => {
@@ -245,7 +295,7 @@ describe.skipIf(!DATABASE_URL)("deleting the account (Story 1.5)", () => {
       spy.mockRestore();
       logged.mockRestore();
     }
-    expect(await rowsOf(id)).toEqual({ user: 1, session: 1, account: 1, profile: 1 });
+    expect(await rowsOf(id)).toEqual(WITH_PLAN);
     expect((await currentSession())?.user.id).toBe(id);
   });
 });
