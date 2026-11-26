@@ -2,7 +2,7 @@
 title: 'Story 1.5: Delete my account'
 type: 'feature'
 created: '2026-11-26'
-status: 'in-review'
+status: 'done'
 baseline_commit: '2f83d16422673f05716af52978f07bcea7f08ca9'
 route: 'dispatch'
 review_loop_iteration: 0
