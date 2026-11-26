@@ -4,11 +4,11 @@
 
 - source_spec: `.docs/implementation-artifacts/spec-1-2-register-log-in-and-log-out.md`
   summary: Limit login and registration attempts (for example 5 failures per email and IP in 15 minutes, «For mange forsøk. Prøv igjen om litt.») before the app is published in Story 1.6.
-  evidence: Better Auth runs its rate limiter only in its HTTP router (`onRequestRateLimit` in `better-auth/dist/api/index.mjs`); Story 1.2 calls `auth.api.*` from Server Actions, so password guessing is unlimited. Deferred by Knut on 2026-11-25 as a documented tradeoff.
+  evidence: Better Auth runs its rate limiter only in its HTTP router (`onRequestRateLimit` in `better-auth/dist/api/index.mjs`); Story 1.2 calls `auth.api.*` from Server Actions, so password guessing is unlimited. Deferred by Knut on 2026-11-25 as a documented tradeoff. Not built in Story 1.6 (decision 2026-11-26): kept as a known limit in the README.
 
-- source_spec: `.docs/implementation-artifacts/spec-1-2-register-log-in-and-log-out.md`
-  summary: Check that Better Auth gets a correct base URL on Vercel (set `BETTER_AUTH_URL`, or confirm it is inferred) in Story 1.6.
-  evidence: Unverified (maybe-false). `createAuth()` passes `process.env.BETTER_AUTH_URL` unchecked; it is set locally, in compose and in Playwright, but nothing covers the published app. Settle by registering and logging in on the published URL.
+- source_spec: `.docs/implementation-artifacts/spec-1-6-publish-the-app.md`
+  summary: Confirm on the published URL that registration and login work with the Better Auth base URL from `resolveBaseUrl` (Story 1.6 added the fallback to `VERCEL_PROJECT_PRODUCTION_URL`).
+  evidence: The code path is unit-tested, but only the published app proves it. Settled by the manual check in Story 1.6.
 
 - source_spec: `.docs/implementation-artifacts/spec-1-4-try-the-demo.md`
   summary: Limit how many demo users can be created (per IP, or a global cap) before the app is published in Story 1.6, alongside the login rate limit.
