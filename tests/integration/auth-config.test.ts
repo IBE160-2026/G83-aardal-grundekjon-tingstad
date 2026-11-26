@@ -1,6 +1,31 @@
 import { afterEach, describe, expect, it } from "vitest";
 
-import { getAuth } from "@/shared/auth/server";
+import { getAuth, resolveBaseUrl } from "@/shared/auth/server";
+
+describe("resolveBaseUrl", () => {
+  it("uses BETTER_AUTH_URL when it is set", () => {
+    expect(
+      resolveBaseUrl({
+        BETTER_AUTH_URL: "https://flexpt.example",
+        VERCEL_PROJECT_PRODUCTION_URL: "app.vercel.app",
+      }),
+    ).toBe("https://flexpt.example");
+  });
+
+  it("falls back to Vercel's production host with https", () => {
+    expect(resolveBaseUrl({ VERCEL_PROJECT_PRODUCTION_URL: "app.vercel.app" })).toBe(
+      "https://app.vercel.app",
+    );
+  });
+
+  it("is undefined locally, so Better Auth infers it", () => {
+    expect(resolveBaseUrl({})).toBeUndefined();
+  });
+
+  it("treats an empty BETTER_AUTH_URL as not set", () => {
+    expect(resolveBaseUrl({ BETTER_AUTH_URL: "" })).toBeUndefined();
+  });
+});
 
 // No database needed: the secret check runs before Better Auth or the DB client is created.
 const cache = globalThis as typeof globalThis & { flexptAuth?: unknown };

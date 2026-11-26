@@ -28,6 +28,17 @@ const rejectDemoCredentialChanges = createAuthMiddleware(async (ctx) => {
   }
 });
 
+/**
+ * The public base URL Better Auth builds links and checks origins against: `BETTER_AUTH_URL` when
+ * set, else Vercel's production host (`VERCEL_PROJECT_PRODUCTION_URL`, no scheme), else undefined
+ * so Better Auth infers it from the request (local development).
+ */
+export function resolveBaseUrl(env: Record<string, string | undefined>): string | undefined {
+  if (env.BETTER_AUTH_URL) return env.BETTER_AUTH_URL;
+  if (env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  return undefined;
+}
+
 function createAuth() {
   const secret = process.env.BETTER_AUTH_SECRET;
   if (!secret) {
@@ -37,7 +48,7 @@ function createAuth() {
   }
   return betterAuth({
     secret,
-    baseURL: process.env.BETTER_AUTH_URL,
+    baseURL: resolveBaseUrl(process.env),
     database: drizzleAdapter(getDb(), { provider: "pg", schema }),
     emailAndPassword: {
       enabled: true,
