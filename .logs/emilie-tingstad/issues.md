@@ -38,4 +38,4 @@
 - [ ] 2026-11-26 [story-2-2-planmotor](991-2026-11-26-21-20-00-story-2-2-planmotor.md) — presiser R3 i PRD Appendix A: muskelgrupper (bein, push, pull) i stedet for overkropp og underkropp, og avgjør om rask kort tur er en hard økt
 - [ ] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — kjør db:migrate mot Supabase før redeploy av Story 2.3 (migrering 0003)
 - [ ] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — push grenen feat/story-2.3-ukeplan og lag PR
-- [ ] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — tom første uke for nye brukere fredag–søndag (profil med få økter): vurder egen tekst
+- [x] 2026-11-26 [story-2-3-ukeplan](990-2026-11-26-21-55-00-story-2-3-ukeplan.md) — tom første uke for nye brukere fredag–søndag viser nå «kommer mandag» (løst 2026-11-26)
