@@ -2,7 +2,7 @@
 title: 'Story 2.2: Plan engine generates the first week'
 type: 'feature'
 created: '2026-11-26'
-status: 'in-review'
+status: 'done'
 baseline_commit: '10a49fc76d8bba15d0dbe42e9ae149b8ac5f13c5'
 route: 'dispatch'
 review_loop_iteration: 0
