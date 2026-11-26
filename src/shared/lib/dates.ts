@@ -34,6 +34,17 @@ export function weekStart(date: CalendarDate): CalendarDate {
   return fromDayNumber(days - daysSinceMonday);
 }
 
+/** Returns the calendar date `days` after the given date (negative `days` go back). */
+export function addDays(date: CalendarDate, days: number): CalendarDate {
+  return fromDayNumber(toDayNumber(date) + days);
+}
+
+/** Returns the ISO weekday of a calendar date: 1 = Monday … 7 = Sunday. */
+export function isoWeekday(date: CalendarDate): number {
+  // 1970-01-01 was a Thursday (4).
+  return ((((toDayNumber(date) + 3) % 7) + 7) % 7) + 1;
+}
+
 /**
  * Returns the program week (counted from 1) that contains the moment.
  * Weeks are counted from the `week_start` of the program's start date, so a program
