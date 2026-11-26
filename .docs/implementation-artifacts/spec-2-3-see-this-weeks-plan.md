@@ -2,7 +2,7 @@
 title: 'Story 2.3: See this week''s plan'
 type: 'feature'
 created: '2026-11-26'
-status: 'in-review'
+status: 'done'
 baseline_commit: '05dadb9eb70df1381303e124bc26104ba9355806'
 route: 'dispatch'
 review_loop_iteration: 0
