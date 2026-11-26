@@ -53,7 +53,7 @@ Under **Profil** sletter **Slett konto** kontoen for godt etter en bekreftelse (
 
 ## Publisert app
 
-**URL:** <https://g83-aardal-grundekjon-tingstad.vercel.app/>
+**URL:** <https://flexpt.vercel.app/>
 
 Appen publiseres fra `main` på Vercel, med PostgreSQL på Supabase. Merk at et gratis Supabase-prosjekt **pauses etter en uke uten bruk** og må gjenopptas (Resume project i Supabase-dashbordet) før en demonstrasjon.
 
