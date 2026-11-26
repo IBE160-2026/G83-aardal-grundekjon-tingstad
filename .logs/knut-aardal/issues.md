@@ -34,5 +34,6 @@
 - [ ] 2026-11-25 [story-1-2-innlogging](988-2026-11-25-22-32-41-story-1-2-innlogging.md) — Avklar OpenRouter (foreleser) mot Anthropic-SDK (AD-9) med `bmad-correct-course` før Epic 4
 - [ ] 2026-11-25 [story-1-2-innlogging](988-2026-11-25-22-32-41-story-1-2-innlogging.md) — Designsjekk av fanetekster som brytes midt i ord ved 320 px og 200 % tekst
 - [ ] 2026-11-26 [story-1-4-demo](986-2026-11-26-09-14-11-story-1-4-demo.md) — Begrens antall demobrukere som kan opprettes før publisering (Story 1.6, se deferred-work.md)
-- [ ] 2026-11-26 [story-1-4-demo](986-2026-11-26-09-14-11-story-1-4-demo.md) — Story 1.5: kaskadeslette-testen må dekke `profile`-tabellen
+- [x] 2026-11-26 [story-1-4-demo](986-2026-11-26-09-14-11-story-1-4-demo.md) — Story 1.5: kaskadeslette-testen må dekke `profile`-tabellen (løst 2026-11-26: Story 1.5, `tests/integration/account-deletion.test.ts`)
 - [ ] 2026-11-26 [story-1-4-demo](986-2026-11-26-09-14-11-story-1-4-demo.md) — `npm test` hopper stille over integrasjonstestene uten lokal `.env`; gi tydelig melding eller dokumenter bedre
+- [ ] 2026-11-26 [story-1-5-slett-konto](985-2026-11-26-09-47-02-story-1-5-slett-konto.md) — Test at feilmeldingen ved mislykket kontosletting vises i dialogen (se deferred-work.md)
